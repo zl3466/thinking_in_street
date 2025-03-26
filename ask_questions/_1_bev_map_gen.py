@@ -1,4 +1,8 @@
+import sys
 import time
+import os
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from utils import *
 
@@ -15,8 +19,9 @@ def check_uploaded_file(file_path):
         print(f"The images have been uploaded and are still valid on Gemini: {file_path}")
 
 
-
 idx2letter = ["A", "B", "C", "D"]
+
+
 def main():
     data_dir = "../data/long_route_random_single"
     map_list = os.listdir(data_dir)
@@ -60,7 +65,7 @@ def main():
 
     ''' ================== Inference ================== '''
     ''' upload images to model and ask questions '''
-    results, _ = analyze_street_view(map_root_dir, question_list, out_dir=map_root_dir, parse=False)
+    results, _ = analyze_street_view(map_root_dir, question_list, out_dir=map_root_dir)
 
     ''' ================== save questions and answers in md and json ================== '''
     ''' the json could be used later for auto eval? '''

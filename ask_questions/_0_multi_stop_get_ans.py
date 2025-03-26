@@ -1,11 +1,6 @@
-import itertools
-import json
+import sys
 import os
-import random
-import re
-import urllib.parse
-
-import requests
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from google import genai
 from bs4 import BeautifulSoup
 import ast

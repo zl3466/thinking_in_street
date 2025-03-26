@@ -1,6 +1,7 @@
-import json
-import re
+import sys
+import os
 
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import random

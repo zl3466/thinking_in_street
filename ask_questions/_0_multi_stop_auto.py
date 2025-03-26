@@ -1,7 +1,10 @@
 import json
 import os
+import sys
 import re
 import time
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from model.gemini import GeminiModel
 from model.gpt4v import GPT4VModel
