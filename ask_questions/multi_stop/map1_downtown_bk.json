@@ -1,0 +1,41 @@
+{
+  "Q":  [
+    "AT&T",
+    "GoodWill",
+    "Brooklyn Cancer Center"
+  ],
+  "GT":  [
+    "AT&T Store, 476-478 Fulton St, Brooklyn, NY 11201",
+    "Goodwill NYNJ Store & Donation Center, 258 Livingston St, Brooklyn, NY 11201",
+    "The Brooklyn Cancer Center, 86 Fleet Pl, Brooklyn, NY 11201"
+  ],
+  "GT_optimal":  [
+    "Goodwill NYNJ Store & Donation Center, 258 Livingston St, Brooklyn, NY 11201",
+    "AT&T Store, 476-478 Fulton St, Brooklyn, NY 11201",
+    "The Brooklyn Cancer Center, 86 Fleet Pl, Brooklyn, NY 11201"
+  ],
+  "walk_nav_template": "go a few step to the [?] intersection before the small square and turn [?], then go forward until Myrtle Ave and turn [?], pass one large intersection and one small intersection on Myrtle Ave and the Brooklyn Cancer Center will be on the [?] side; to Proceed to Goodwill, turn [?] onto Fleet Pl, go forward until Flatbush Ave to turn [?]. On Flatbush Ave, pass two intersections and turn [?] onto Livingston St, go forward on Livingston St for two blocks and turn [?], the Goodwill will be on your [?]",
+  "walk_nav_choices": [
+    "left, right, left, left, right, left, left, left, right",
+    "left, left, right, right, right, left, right, left, right",
+    "left, right, right, left, right, right, right, left, left",
+    "right, right, right, left, right, left, right, right, right"
+  ],
+  "walk_nav_ans": 1,
+  "drive_nav_template": "From the AT&T drive a short distance to the intersection before the small square and turn [?] onto Albee Square W, then go one block forward till Willoughby St to turn [?]. Drive forward and turn [?] onto Flatbush Ave, continue till DeKalb Ave to turn [?]. Keep going across Fulton St and onto Bond St, then at the intersection turn [?] onto Livingston St. The Goodwill will be on the [?]. To continue to Brooklyn Cancer Center, continue driving on Livingston St to cross two lights and turn [?] onto Hoyt st. Pass one block on Hoyt then turn [?] onto Schermerhorn St. Continue three blocks on Schermerhorn St and turn [?] back onto Flatbush Ave. Keep driving straight on Flatbush Ave untill at a small intersection with Fleet Pl, turn [?] onto Fleet Pl. Continue forward on Fleet Pl until before the intersection with Myrtle Ave, the Brooklyn Cancer Center will be on the [?].",
+  "drive_nav_choices": [
+    "right, left, left, right, left, left, right, left, right, left, left",
+    "left, right, right, right, right, left, left, left, left, right, left",
+    "right, right, left, right, right, right, left, right, right, left, left",
+    "right, left, left, right, right, right, right, right, right, right, right"
+  ],
+  "drive_nav_ans": 1,
+  "optimal_nav_choices": [
+    "Goodwill, AT&T, Brooklyn Cancer Center",
+    "AT&T, Goodwill, Brooklyn Cancer Center",
+    "Brooklyn Cancer Center, AT&T, Goodwill",
+    "Goodwill, Brooklyn Cancer Center, AT&T"
+  ],
+  "optimal_nav_ans": 0
+}
+

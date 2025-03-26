@@ -1,0 +1,41 @@
+{
+  "Q":  [
+    "the Marquis Theatre",
+    "a Chipotle",
+    "the Grace Building"
+  ],
+  "GT":  [
+    "Marquis Theatre, 210 W 46th St, New York, NY 10036",
+    "Chipotle Mexican Grill, 129 W 48th St, New York, NY 10020",
+    "Grace Building, W. R. Grace Building, 1114 6th Ave, New York, NY 10110"
+  ],
+  "GT_optimal":  [
+    "Grace Building, W. R. Grace Building, 1114 6th Ave, New York, NY 10110",
+    "Marquis Theatre, 210 W 46th St, New York, NY 10036",
+    "Chipotle Mexican Grill, 129 W 48th St, New York, NY 10020"
+  ],
+  "walk_nav_template": "go to the [?] hand side till the first intersection and turn [?]. Walk two blocks till 48th st and turn [?]. Walk forward a few more steps and the Chipotle will be on the [?] side. Continue forward until reaching the 6th Ave, turn [?]. Walk forward on 6th Ave for 6 blocks and turn [?]. The Grace building will be on the [?]",
+  "walk_nav_choices": [
+    "left, left, right, left, right, left, left",
+    "left, right, left, left, right, left, left",
+    "right, right, left, right, right, left, right",
+    "right, right, right, left, right, right, right"
+  ],
+  "walk_nav_ans": 0,
+  "drive_nav_template": "go to the [?] hand side, pass one intersection till the 6th Ave and turn [?]. Drive three blocks forward until reaching 49th st and turn [?]. Drive another block till 7th Ave and turn [?]. Drive forward till 48th st and turn [?]. The Chipotle will be on the [?] side of the road. To continue to Grace Building, continue forward on 48th St till at the second intersection on 5th Ave, turn [?]. Drive forward on 5th Ave for 7 blocks till 41st St to turn [?]. Drive forward until reaching Madison Ave and turn [?]. Drive forward on Madison Ave till 42nd St and turn [?]. Continue driving forward to cross one intersection on 42nd St, then the Grace building will be on the [?] side",
+  "drive_nav_choices": [
+    "left, left, left, left, right, left, right, left, left, left, right",
+    "left, right, left, left, right, left, right, left, left, left, left",
+    "right, right, left, right, right, right, left, left, right, left, right",
+    "right, right, right, left, right, right, left, right, right, left, right"
+  ],
+  "drive_nav_ans": 0,
+  "optimal_nav_choices": [
+    "Grace, Chipotle, Marquis",
+    "Marquis, Grace, Chipotle",
+    "Chipotle, Grace, Marquis",
+    "Grace, Marquis, Chipotle"
+  ],
+  "optimal_nav_ans": 3
+}
+

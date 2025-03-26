@@ -1,0 +1,211 @@
+{
+    "direction_driving": {
+        "gt": 1,
+        "choices": [
+            [
+                "left",
+                "right",
+                "left",
+                "right",
+                "right"
+            ],
+            [
+                "left",
+                "right",
+                "left",
+                "left",
+                "right"
+            ],
+            [
+                "left",
+                "right",
+                "left",
+                "left",
+                "right"
+            ],
+            [
+                "left",
+                "left",
+                "left",
+                "right",
+                "right"
+            ]
+        ]
+    },
+    "direction_walking": {
+        "gt": 2,
+        "choices": [
+            [
+                "left",
+                "left",
+                "left",
+                "left",
+                "right",
+                "right",
+                "right",
+                "left",
+                "right",
+                "left",
+                "left"
+            ],
+            [
+                "right",
+                "left",
+                "left",
+                "left",
+                "left",
+                "right",
+                "left",
+                "right",
+                "left",
+                "right",
+                "left"
+            ],
+            [
+                "right",
+                "right",
+                "left",
+                "right",
+                "left",
+                "left",
+                "right",
+                "right",
+                "left",
+                "right",
+                "right"
+            ],
+            [
+                "left",
+                "left",
+                "right",
+                "left",
+                "left",
+                "left",
+                "right",
+                "right",
+                "right",
+                "left",
+                "left"
+            ]
+        ]
+    },
+    "distance_driving": {
+        "gt": 1,
+        "choices": [
+            [
+                "0.1 mi",
+                "0.4 mi",
+                "0.1 mi",
+                "0.3 mi",
+                "0.2 mi"
+            ],
+            [
+                "0.3 mi",
+                "0.1 mi",
+                "0.2 mi",
+                "0.3 mi",
+                "0.1 mi"
+            ],
+            [
+                "0.1 mi",
+                "0.4 mi",
+                "0.4 mi",
+                "0.1 mi",
+                "0.2 mi"
+            ],
+            [
+                "0.2 mi",
+                "0.1 mi",
+                "0.4 mi",
+                "0.2 mi",
+                "0.3 mi"
+            ]
+        ]
+    },
+    "distance_walking": {
+        "gt": 1,
+        "choices": [
+            [
+                "1.0 mi",
+                "112.4 ft",
+                "568.3 ft",
+                "1.0 mi",
+                "527.9 ft",
+                "1.0 mi",
+                "0.6 mi",
+                "595.8 ft",
+                "363.6 ft",
+                "0.1 mi",
+                "0.3 mi",
+                "0.2 mi"
+            ],
+            [
+                "0.3 mi",
+                "72 ft",
+                "167 ft",
+                "75 ft",
+                "151 ft",
+                "36 ft",
+                "108 ft",
+                "489 ft",
+                "404 ft",
+                "20 ft",
+                "256 ft",
+                "171 ft"
+            ],
+            [
+                "0.6 mi",
+                "39.2 ft",
+                "709.2 ft",
+                "0.5 mi",
+                "128.8 ft",
+                "1.0 mi",
+                "0.2 mi",
+                "663.9 ft",
+                "776.3 ft",
+                "0.1 mi",
+                "0.1 mi",
+                "0.0 mi"
+            ],
+            [
+                "0.4 mi",
+                "533.2 ft",
+                "609.3 ft",
+                "0.7 mi",
+                "238.8 ft",
+                "0.1 mi",
+                "0.6 mi",
+                "497.4 ft",
+                "75.8 ft",
+                "0.9 mi",
+                "1.0 mi",
+                "0.1 mi"
+            ]
+        ]
+    },
+    "optimal_route": {
+        "gt": 2,
+        "choices": [
+            [
+                "Tom's, 2880 Broadway, New York, NY 10025",
+                "Barnard College, 3009 Broadway, New York, NY 10027",
+                "Morningside Park, Morningside Dr, New York, NY 10026"
+            ],
+            [
+                "Morningside Park, Morningside Dr, New York, NY 10026",
+                "Barnard College, 3009 Broadway, New York, NY 10027",
+                "Tom's, 2880 Broadway, New York, NY 10025"
+            ],
+            [
+                "Barnard College, 3009 Broadway, New York, NY 10027",
+                "Tom's, 2880 Broadway, New York, NY 10025",
+                "Morningside Park, Morningside Dr, New York, NY 10026"
+            ],
+            [
+                "Morningside Park, Morningside Dr, New York, NY 10026",
+                "Tom's, 2880 Broadway, New York, NY 10025",
+                "Barnard College, 3009 Broadway, New York, NY 10027"
+            ]
+        ]
+    }
+}

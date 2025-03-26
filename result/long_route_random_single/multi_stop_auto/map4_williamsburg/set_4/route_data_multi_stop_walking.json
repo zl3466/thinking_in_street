@@ -1,0 +1,1406 @@
+{
+  "map": "map4_williamsburg",
+  "ans": "B",
+  "frames": [
+    {
+      "coordinates": {
+        "lat": 40.71954,
+        "lng": -73.95579
+      },
+      "heading": 38.71693288763049,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.719614285714286,
+        "lng": -73.95571142857142
+      },
+      "heading": 38.716901676731595,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71968857142857,
+        "lng": -73.95563285714286
+      },
+      "heading": 38.71687047335507,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.719762857142854,
+        "lng": -73.95555428571429
+      },
+      "heading": 38.71683926537679,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.719837142857145,
+        "lng": -73.95547571428571
+      },
+      "heading": 38.716808066901706,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71991142857143,
+        "lng": -73.95539714285714
+      },
+      "heading": 38.716776859036145,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71998571428571,
+        "lng": -73.95531857142858
+      },
+      "heading": 38.716745661087316,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72006,
+        "lng": -73.95524
+      },
+      "heading": 26.02626458229619,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72006,
+        "lng": -73.95524
+      },
+      "heading": 13.335783503505063,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72006,
+        "lng": -73.95524
+      },
+      "heading": 0.6453024247139396,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72006,
+        "lng": -73.95524
+      },
+      "heading": 347.9548213459228,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72006,
+        "lng": -73.95524
+      },
+      "heading": 335.2643402671317,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72006,
+        "lng": -73.95524
+      },
+      "heading": 322.5738591883406,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72006,
+        "lng": -73.95524
+      },
+      "heading": 309.8833781095494,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72006,
+        "lng": -73.95524
+      },
+      "heading": 309.8833781095494,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.720116999999995,
+        "lng": -73.95533
+      },
+      "heading": 309.8834022506313,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.720174,
+        "lng": -73.95542
+      },
+      "heading": 309.883426385473,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.720231,
+        "lng": -73.95551
+      },
+      "heading": 309.88345052739345,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.720288,
+        "lng": -73.9556
+      },
+      "heading": 309.88347467104416,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.720344999999995,
+        "lng": -73.95569
+      },
+      "heading": 309.88349881390815,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.720402,
+        "lng": -73.95578
+      },
+      "heading": 309.88352295525124,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.720459,
+        "lng": -73.95587
+      },
+      "heading": 309.8835470935004,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.720515999999996,
+        "lng": -73.95596
+      },
+      "heading": 309.8835712365211,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.720573,
+        "lng": -73.95605
+      },
+      "heading": 309.88359537959406,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72063,
+        "lng": -73.95614
+      },
+      "heading": 313.3031311119457,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72068,
+        "lng": -73.95621
+      },
+      "heading": 307.68087348225373,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72074,
+        "lng": -73.9563125
+      },
+      "heading": 307.68089846361653,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.7208,
+        "lng": -73.95641499999999
+      },
+      "heading": 307.6809234479765,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72086,
+        "lng": -73.9565175
+      },
+      "heading": 307.6809484319293,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72092,
+        "lng": -73.95662
+      },
+      "heading": 309.33991629101723,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.720978571428574,
+        "lng": -73.95671428571428
+      },
+      "heading": 309.3399410036666,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72103714285714,
+        "lng": -73.95680857142857
+      },
+      "heading": 309.3399657285281,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72109571428572,
+        "lng": -73.95690285714285
+      },
+      "heading": 309.3399904397628,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.721154285714285,
+        "lng": -73.95699714285715
+      },
+      "heading": 309.34001516320967,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72121285714286,
+        "lng": -73.95709142857143
+      },
+      "heading": 309.34003987608054,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72127142857143,
+        "lng": -73.95718571428571
+      },
+      "heading": 309.34006459963814,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72133,
+        "lng": -73.95728
+      },
+      "heading": 310.88898109007084,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.7214,
+        "lng": -73.95738666666666
+      },
+      "heading": 310.8890109053624,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72147,
+        "lng": -73.95749333333333
+      },
+      "heading": 310.88904072508006,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72154,
+        "lng": -73.9576
+      },
+      "heading": 308.3677311980594,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.7215925,
+        "lng": -73.95768749999999
+      },
+      "heading": 308.36775318697545,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.721644999999995,
+        "lng": -73.957775
+      },
+      "heading": 308.36777518336885,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.7216975,
+        "lng": -73.9578625
+      },
+      "heading": 308.36779717642855,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72175,
+        "lng": -73.95795
+      },
+      "heading": 321.3084641984484,
+      "movement": "right"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72175,
+        "lng": -73.95795
+      },
+      "heading": 334.2491312204682,
+      "movement": "right"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72175,
+        "lng": -73.95795
+      },
+      "heading": 347.18979824248805,
+      "movement": "right"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72175,
+        "lng": -73.95795
+      },
+      "heading": 0.13046526450790452,
+      "movement": "right"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72175,
+        "lng": -73.95795
+      },
+      "heading": 13.0711322865277,
+      "movement": "right"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72175,
+        "lng": -73.95795
+      },
+      "heading": 26.011799308547552,
+      "movement": "right"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72175,
+        "lng": -73.95795
+      },
+      "heading": 38.952466330567404,
+      "movement": "right"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72175,
+        "lng": -73.95795
+      },
+      "heading": 38.952466330567404,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.721824999999995,
+        "lng": -73.95787
+      },
+      "heading": 38.95243476358996,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.7219,
+        "lng": -73.95779
+      },
+      "heading": 51.64735604492735,
+      "movement": "right"
+    },
+    {
+      "coordinates": {
+        "lat": 40.7219,
+        "lng": -73.95779
+      },
+      "heading": 64.34227732626474,
+      "movement": "right"
+    },
+    {
+      "coordinates": {
+        "lat": 40.7219,
+        "lng": -73.95779
+      },
+      "heading": 77.03719860760214,
+      "movement": "right"
+    },
+    {
+      "coordinates": {
+        "lat": 40.7219,
+        "lng": -73.95779
+      },
+      "heading": 89.73211988893951,
+      "movement": "right"
+    },
+    {
+      "coordinates": {
+        "lat": 40.7219,
+        "lng": -73.95779
+      },
+      "heading": 102.42704117027691,
+      "movement": "right"
+    },
+    {
+      "coordinates": {
+        "lat": 40.7219,
+        "lng": -73.95779
+      },
+      "heading": 115.1219624516143,
+      "movement": "right"
+    },
+    {
+      "coordinates": {
+        "lat": 40.7219,
+        "lng": -73.95779
+      },
+      "heading": 127.81688373295168,
+      "movement": "right"
+    },
+    {
+      "coordinates": {
+        "lat": 40.7219,
+        "lng": -73.95779
+      },
+      "heading": 127.81688373295168,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.7218,
+        "lng": -73.95762
+      },
+      "heading": 114.95974879766717,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.7218,
+        "lng": -73.95762
+      },
+      "heading": 102.10261386238267,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.7218,
+        "lng": -73.95762
+      },
+      "heading": 89.24547892709816,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.7218,
+        "lng": -73.95762
+      },
+      "heading": 76.38834399181364,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.7218,
+        "lng": -73.95762
+      },
+      "heading": 63.53120905652912,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.7218,
+        "lng": -73.95762
+      },
+      "heading": 50.67407412124463,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.7218,
+        "lng": -73.95762
+      },
+      "heading": 37.81693918596011,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.7218,
+        "lng": -73.95762
+      },
+      "heading": 24.959804250675603,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.7218,
+        "lng": -73.95762
+      },
+      "heading": 12.102669315391083,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.7218,
+        "lng": -73.95762
+      },
+      "heading": 359.24553438010656,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.7218,
+        "lng": -73.95762
+      },
+      "heading": 346.3883994448221,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.7218,
+        "lng": -73.95762
+      },
+      "heading": 333.53126450953755,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.7218,
+        "lng": -73.95762
+      },
+      "heading": 320.674129574253,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.7218,
+        "lng": -73.95762
+      },
+      "heading": 307.81699463896854,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.7218,
+        "lng": -73.95762
+      },
+      "heading": 307.81699463896854,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.7219,
+        "lng": -73.95779
+      },
+      "heading": 309.0758363315116,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72198,
+        "lng": -73.95792
+      },
+      "heading": 296.201067325051,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72198,
+        "lng": -73.95792
+      },
+      "heading": 283.3262983185903,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72198,
+        "lng": -73.95792
+      },
+      "heading": 270.4515293121297,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72198,
+        "lng": -73.95792
+      },
+      "heading": 257.5767603056691,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72198,
+        "lng": -73.95792
+      },
+      "heading": 244.70199129920846,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72198,
+        "lng": -73.95792
+      },
+      "heading": 231.82722229274782,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72198,
+        "lng": -73.95792
+      },
+      "heading": 218.9524532862872,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72198,
+        "lng": -73.95792
+      },
+      "heading": 218.9524532862872,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.721905,
+        "lng": -73.958
+      },
+      "heading": 218.95248484733503,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72183,
+        "lng": -73.95808
+      },
+      "heading": 217.1579885924094,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.7218,
+        "lng": -73.95811
+      },
+      "heading": 218.68727837098038,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72172428571429,
+        "lng": -73.95819
+      },
+      "heading": 218.6873101690623,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.721648571428574,
+        "lng": -73.95827
+      },
+      "heading": 218.68734196824147,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72157285714286,
+        "lng": -73.95835
+      },
+      "heading": 218.6873737706149,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72149714285714,
+        "lng": -73.95843
+      },
+      "heading": 218.68740556519424,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.721421428571425,
+        "lng": -73.95851
+      },
+      "heading": 218.68743736531647,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72134571428571,
+        "lng": -73.95859
+      },
+      "heading": 218.68746916418735,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72127,
+        "lng": -73.95867
+      },
+      "heading": 225.29989895309214,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72124,
+        "lng": -73.95871
+      },
+      "heading": 217.15824905898427,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72118,
+        "lng": -73.95877
+      },
+      "heading": 218.9147106286529,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72110333333333,
+        "lng": -73.95885166666667
+      },
+      "heading": 218.91474287006318,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72102666666667,
+        "lng": -73.95893333333333
+      },
+      "heading": 218.91477512708957,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72095,
+        "lng": -73.959015
+      },
+      "heading": 218.91480738579102,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72087333333333,
+        "lng": -73.95909666666667
+      },
+      "heading": 218.91483963945777,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.720796666666665,
+        "lng": -73.95917833333334
+      },
+      "heading": 218.9148718962458,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72072,
+        "lng": -73.95926
+      },
+      "heading": 225.30013563736782,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72069,
+        "lng": -73.9593
+      },
+      "heading": 221.48364090078093,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72063,
+        "lng": -73.95937
+      },
+      "heading": 207.6557606005206,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72063,
+        "lng": -73.95937
+      },
+      "heading": 193.82788030026032,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72063,
+        "lng": -73.95937
+      },
+      "heading": 180.0,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72063,
+        "lng": -73.95937
+      },
+      "heading": 180.0,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72061,
+        "lng": -73.95937
+      },
+      "heading": 193.1293422190349,
+      "movement": "right"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72061,
+        "lng": -73.95937
+      },
+      "heading": 206.2586844380698,
+      "movement": "right"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72061,
+        "lng": -73.95937
+      },
+      "heading": 219.3880266571047,
+      "movement": "right"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72061,
+        "lng": -73.95937
+      },
+      "heading": 219.3880266571047,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.720530000000004,
+        "lng": -73.95945666666667
+      },
+      "heading": 219.38806042968716,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72045,
+        "lng": -73.95954333333334
+      },
+      "heading": 219.388094198401,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72037,
+        "lng": -73.95963
+      },
+      "heading": 221.16983874733245,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.720283333333334,
+        "lng": -73.95973000000001
+      },
+      "heading": 221.16987570900193,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.720196666666666,
+        "lng": -73.95983
+      },
+      "heading": 221.169912677789,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72011,
+        "lng": -73.95993
+      },
+      "heading": 200.7543509881944,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72011,
+        "lng": -73.95993
+      },
+      "heading": 200.7543509881944,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72007,
+        "lng": -73.95995
+      },
+      "heading": 220.1013652321437,
+      "movement": "right"
+    },
+    {
+      "coordinates": {
+        "lat": 40.72007,
+        "lng": -73.95995
+      },
+      "heading": 220.1013652321437,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.719995,
+        "lng": -73.96003333333334
+      },
+      "heading": 220.101397036116,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71992,
+        "lng": -73.96011666666666
+      },
+      "heading": 220.1014288462354,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.719845,
+        "lng": -73.9602
+      },
+      "heading": 220.10146065436126,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71977,
+        "lng": -73.96028333333334
+      },
+      "heading": 220.10149245019792,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.719695,
+        "lng": -73.96036666666666
+      },
+      "heading": 220.10152426439285,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71962,
+        "lng": -73.96045
+      },
+      "heading": 217.15894165704717,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71952,
+        "lng": -73.96055
+      },
+      "heading": 218.91540898803495,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71944333333334,
+        "lng": -73.96063166666667
+      },
+      "heading": 218.91544123789612,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.719366666666666,
+        "lng": -73.96071333333333
+      },
+      "heading": 218.91547349640288,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71929,
+        "lng": -73.96079499999999
+      },
+      "heading": 218.9155057481441,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.719213333333336,
+        "lng": -73.96087666666666
+      },
+      "heading": 218.9155380030067,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.719136666666664,
+        "lng": -73.96095833333334
+      },
+      "heading": 218.915570250511,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71906,
+        "lng": -73.96104
+      },
+      "heading": 231.8424465021188,
+      "movement": "right"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71906,
+        "lng": -73.96104
+      },
+      "heading": 244.7693227537266,
+      "movement": "right"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71906,
+        "lng": -73.96104
+      },
+      "heading": 257.69619900533445,
+      "movement": "right"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71906,
+        "lng": -73.96104
+      },
+      "heading": 270.62307525694223,
+      "movement": "right"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71906,
+        "lng": -73.96104
+      },
+      "heading": 283.54995150855007,
+      "movement": "right"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71906,
+        "lng": -73.96104
+      },
+      "heading": 296.47682776015785,
+      "movement": "right"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71906,
+        "lng": -73.96104
+      },
+      "heading": 309.4037040117657,
+      "movement": "right"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71906,
+        "lng": -73.96104
+      },
+      "heading": 309.4037040117657,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.719115,
+        "lng": -73.96112833333333
+      },
+      "heading": 309.4037272377669,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71917,
+        "lng": -73.96121666666666
+      },
+      "heading": 309.40375044762675,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.719224999999994,
+        "lng": -73.961305
+      },
+      "heading": 309.4037736761786,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71928,
+        "lng": -73.96139333333333
+      },
+      "heading": 309.4037968942311,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.719335,
+        "lng": -73.96148166666666
+      },
+      "heading": 309.4038201090822,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71939,
+        "lng": -73.96157
+      },
+      "heading": 309.69110067434394,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71944571428571,
+        "lng": -73.96165857142857
+      },
+      "heading": 309.6911242509054,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71950142857143,
+        "lng": -73.96174714285713
+      },
+      "heading": 309.69114781216854,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71955714285714,
+        "lng": -73.96183571428571
+      },
+      "heading": 309.69117137508914,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.719612857142856,
+        "lng": -73.96192428571429
+      },
+      "heading": 309.69119494614864,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71966857142857,
+        "lng": -73.96201285714287
+      },
+      "heading": 309.69121851725816,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.719724285714285,
+        "lng": -73.96210142857143
+      },
+      "heading": 309.6912420762842,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71978,
+        "lng": -73.96219
+      },
+      "heading": 296.4608302268462,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71978,
+        "lng": -73.96219
+      },
+      "heading": 283.2304183774083,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71978,
+        "lng": -73.96219
+      },
+      "heading": 270.0000065279703,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71978,
+        "lng": -73.96219
+      },
+      "heading": 270.0000065279703,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71978,
+        "lng": -73.96221
+      },
+      "heading": 284.89985029675466,
+      "movement": "right"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71978,
+        "lng": -73.96221
+      },
+      "heading": 299.79969406553903,
+      "movement": "right"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71978,
+        "lng": -73.96221
+      },
+      "heading": 314.6995378343234,
+      "movement": "right"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71978,
+        "lng": -73.96221
+      },
+      "heading": 314.6995378343234,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71987,
+        "lng": -73.96233
+      },
+      "heading": 328.44274475758664,
+      "movement": "right"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71987,
+        "lng": -73.96233
+      },
+      "heading": 342.1859516808499,
+      "movement": "right"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71987,
+        "lng": -73.96233
+      },
+      "heading": 355.9291586041131,
+      "movement": "right"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71987,
+        "lng": -73.96233
+      },
+      "heading": 9.672365527376314,
+      "movement": "right"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71987,
+        "lng": -73.96233
+      },
+      "heading": 23.41557245063956,
+      "movement": "right"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71987,
+        "lng": -73.96233
+      },
+      "heading": 37.1587793739028,
+      "movement": "right"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71987,
+        "lng": -73.96233
+      },
+      "heading": 37.1587793739028,
+      "movement": "forward"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71988,
+        "lng": -73.96232
+      },
+      "heading": 23.766563752220424,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71988,
+        "lng": -73.96232
+      },
+      "heading": 10.374348130538046,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71988,
+        "lng": -73.96232
+      },
+      "heading": 356.98213250885567,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71988,
+        "lng": -73.96232
+      },
+      "heading": 343.5899168871733,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71988,
+        "lng": -73.96232
+      },
+      "heading": 330.1977012654909,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71988,
+        "lng": -73.96232
+      },
+      "heading": 316.80548564380854,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71988,
+        "lng": -73.96232
+      },
+      "heading": 303.41327002212614,
+      "movement": "left"
+    },
+    {
+      "coordinates": {
+        "lat": 40.71988,
+        "lng": -73.96232
+      },
+      "heading": 303.41327002212614,
+      "movement": "forward"
+    }
+  ]
+}

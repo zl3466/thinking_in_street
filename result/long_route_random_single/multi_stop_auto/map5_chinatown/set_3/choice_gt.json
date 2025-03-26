@@ -1,0 +1,207 @@
+{
+    "direction_driving": {
+        "gt": 2,
+        "choices": [
+            [
+                "right",
+                "right",
+                "left",
+                "left",
+                "left",
+                "right",
+                "right"
+            ],
+            [
+                "right",
+                "left",
+                "right",
+                "left",
+                "right",
+                "right",
+                "right"
+            ],
+            [
+                "left",
+                "right",
+                "right",
+                "right",
+                "right",
+                "right",
+                "left"
+            ],
+            [
+                "right",
+                "left",
+                "right",
+                "left",
+                "right",
+                "left",
+                "right"
+            ]
+        ]
+    },
+    "direction_walking": {
+        "gt": 3,
+        "choices": [
+            [
+                "right",
+                "left",
+                "right",
+                "right",
+                "right",
+                "right",
+                "left",
+                "right",
+                "left"
+            ],
+            [
+                "left",
+                "right",
+                "left",
+                "left",
+                "left",
+                "left",
+                "left",
+                "left",
+                "left"
+            ],
+            [
+                "right",
+                "right",
+                "right",
+                "right",
+                "left",
+                "right",
+                "right",
+                "right",
+                "right"
+            ],
+            [
+                "left",
+                "right",
+                "left",
+                "right",
+                "left",
+                "right",
+                "right",
+                "right",
+                "right"
+            ]
+        ]
+    },
+    "distance_driving": {
+        "gt": 0,
+        "choices": [
+            [
+                "36 ft",
+                "0.2 mi",
+                "0.1 mi",
+                "0.2 mi",
+                "30 ft",
+                "344 ft",
+                "16 ft"
+            ],
+            [
+                "497.1 ft",
+                "218.3 ft",
+                "255.2 ft",
+                "0.2 mi",
+                "330.2 ft",
+                "556.1 ft",
+                "287.0 ft"
+            ],
+            [
+                "83.1 ft",
+                "231.6 ft",
+                "390.4 ft",
+                "0.3 mi",
+                "537.8 ft",
+                "221.8 ft",
+                "539.5 ft"
+            ],
+            [
+                "320.7 ft",
+                "130.3 ft",
+                "313.6 ft",
+                "0.1 mi",
+                "234.2 ft",
+                "343.3 ft",
+                "83.7 ft"
+            ]
+        ]
+    },
+    "distance_walking": {
+        "gt": 1,
+        "choices": [
+            [
+                "210.0 ft",
+                "428.1 ft",
+                "621.0 ft",
+                "21.3 ft",
+                "355.3 ft",
+                "556.0 ft",
+                "10.1 ft",
+                "67.3 ft",
+                "637.9 ft"
+            ],
+            [
+                "335 ft",
+                "66 ft",
+                "138 ft",
+                "39 ft",
+                "43 ft",
+                "95 ft",
+                "95 ft",
+                "256 ft",
+                "16 ft"
+            ],
+            [
+                "642.6 ft",
+                "481.7 ft",
+                "210.3 ft",
+                "177.9 ft",
+                "350.8 ft",
+                "408.5 ft",
+                "284.0 ft",
+                "34.4 ft",
+                "262.9 ft"
+            ],
+            [
+                "488.9 ft",
+                "406.6 ft",
+                "47.6 ft",
+                "166.0 ft",
+                "74.8 ft",
+                "453.3 ft",
+                "181.6 ft",
+                "7.6 ft",
+                "277.7 ft"
+            ]
+        ]
+    },
+    "optimal_route": {
+        "gt": 2,
+        "choices": [
+            [
+                "Citi, 164 Canal St, New York, NY 10013",
+                "New York Jewelers Exchange, 70-72, 74 Bowery, New York, NY 10013",
+                "Popeyes Louisiana Kitchen, 125 Canal St, New York, NY 10002"
+            ],
+            [
+                "Popeyes Louisiana Kitchen, 125 Canal St, New York, NY 10002",
+                "Citi, 164 Canal St, New York, NY 10013",
+                "New York Jewelers Exchange, 70-72, 74 Bowery, New York, NY 10013"
+            ],
+            [
+                "Popeyes Louisiana Kitchen, 125 Canal St, New York, NY 10002",
+                "New York Jewelers Exchange, 70-72, 74 Bowery, New York, NY 10013",
+                "Citi, 164 Canal St, New York, NY 10013"
+            ],
+            [
+                "New York Jewelers Exchange, 70-72, 74 Bowery, New York, NY 10013",
+                "Citi, 164 Canal St, New York, NY 10013",
+                "Popeyes Louisiana Kitchen, 125 Canal St, New York, NY 10002"
+            ]
+        ]
+    }
+}

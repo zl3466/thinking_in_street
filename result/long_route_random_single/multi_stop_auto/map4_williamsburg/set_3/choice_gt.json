@@ -1,0 +1,171 @@
+{
+    "direction_driving": {
+        "gt": 1,
+        "choices": [
+            [
+                "left",
+                "right",
+                "right",
+                "left",
+                "right",
+                "right"
+            ],
+            [
+                "right",
+                "right",
+                "left",
+                "right",
+                "left",
+                "left"
+            ],
+            [
+                "left",
+                "left",
+                "left",
+                "left",
+                "right",
+                "left"
+            ],
+            [
+                "left",
+                "right",
+                "left",
+                "left",
+                "left",
+                "right"
+            ]
+        ]
+    },
+    "direction_walking": {
+        "gt": 1,
+        "choices": [
+            [
+                "right",
+                "left",
+                "left",
+                "right",
+                "left"
+            ],
+            [
+                "right",
+                "right",
+                "left",
+                "right",
+                "right"
+            ],
+            [
+                "left",
+                "left",
+                "left",
+                "right",
+                "right"
+            ],
+            [
+                "left",
+                "right",
+                "right",
+                "left",
+                "left"
+            ]
+        ]
+    },
+    "distance_driving": {
+        "gt": 0,
+        "choices": [
+            [
+                "0.2 mi",
+                "492 ft",
+                "36 ft",
+                "0.2 mi",
+                "0.5 mi",
+                "407 ft",
+                "171 ft"
+            ],
+            [
+                "0.8 mi",
+                "0.8 mi",
+                "0.2 mi",
+                "943.6 ft",
+                "136.0 ft",
+                "347.1 ft",
+                "0.5 mi"
+            ],
+            [
+                "0.7 mi",
+                "0.0 mi",
+                "0.8 mi",
+                "519.1 ft",
+                "185.9 ft",
+                "946.0 ft",
+                "0.4 mi"
+            ],
+            [
+                "0.3 mi",
+                "0.3 mi",
+                "0.7 mi",
+                "467.2 ft",
+                "571.3 ft",
+                "429.2 ft",
+                "0.3 mi"
+            ]
+        ]
+    },
+    "distance_walking": {
+        "gt": 3,
+        "choices": [
+            [
+                "0.2 mi",
+                "770.2 ft",
+                "0.1 mi",
+                "0.1 mi",
+                "765.6 ft"
+            ],
+            [
+                "0.5 mi",
+                "847.6 ft",
+                "0.3 mi",
+                "0.2 mi",
+                "190.4 ft"
+            ],
+            [
+                "0.6 mi",
+                "680.6 ft",
+                "0.4 mi",
+                "0.5 mi",
+                "561.0 ft"
+            ],
+            [
+                "0.2 mi",
+                "492 ft",
+                "36 ft",
+                "0.3 mi",
+                "0.4 mi"
+            ]
+        ]
+    },
+    "optimal_route": {
+        "gt": 0,
+        "choices": [
+            [
+                "Transfiguration of Our Lord Russian Orthodox Cathedral, 228 N 12th St, Brooklyn, NY 11211",
+                "Arlo Williamsburg, 96 Wythe Ave, Brooklyn, NY 11249",
+                "CVS, 27 N 6th St, Brooklyn, NY 11249"
+            ],
+            [
+                "Arlo Williamsburg, 96 Wythe Ave, Brooklyn, NY 11249",
+                "CVS, 27 N 6th St, Brooklyn, NY 11249",
+                "Transfiguration of Our Lord Russian Orthodox Cathedral, 228 N 12th St, Brooklyn, NY 11211"
+            ],
+            [
+                "CVS, 27 N 6th St, Brooklyn, NY 11249",
+                "Arlo Williamsburg, 96 Wythe Ave, Brooklyn, NY 11249",
+                "Transfiguration of Our Lord Russian Orthodox Cathedral, 228 N 12th St, Brooklyn, NY 11211"
+            ],
+            [
+                "CVS, 27 N 6th St, Brooklyn, NY 11249",
+                "Transfiguration of Our Lord Russian Orthodox Cathedral, 228 N 12th St, Brooklyn, NY 11211",
+                "Arlo Williamsburg, 96 Wythe Ave, Brooklyn, NY 11249"
+            ]
+        ]
+    }
+}

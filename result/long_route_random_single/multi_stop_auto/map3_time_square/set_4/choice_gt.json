@@ -1,0 +1,171 @@
+{
+    "direction_driving": {
+        "gt": 0,
+        "choices": [
+            [
+                "right",
+                "right",
+                "left",
+                "right",
+                "right",
+                "right"
+            ],
+            [
+                "left",
+                "left",
+                "right",
+                "right",
+                "left",
+                "left"
+            ],
+            [
+                "left",
+                "left",
+                "left",
+                "right",
+                "right",
+                "right"
+            ],
+            [
+                "right",
+                "left",
+                "left",
+                "left",
+                "right",
+                "right"
+            ]
+        ]
+    },
+    "direction_walking": {
+        "gt": 1,
+        "choices": [
+            [
+                "right",
+                "left",
+                "right",
+                "right"
+            ],
+            [
+                "left",
+                "right",
+                "left",
+                "right"
+            ],
+            [
+                "left",
+                "right",
+                "left",
+                "left"
+            ],
+            [
+                "right",
+                "left",
+                "right",
+                "left"
+            ]
+        ]
+    },
+    "distance_driving": {
+        "gt": 3,
+        "choices": [
+            [
+                "0.1 mi",
+                "0.1 mi",
+                "0.1 mi",
+                "20.0 ft",
+                "254.5 ft",
+                "0.1 mi"
+            ],
+            [
+                "0.1 mi",
+                "0.1 mi",
+                "0.1 mi",
+                "341.3 ft",
+                "782.2 ft",
+                "0.1 mi"
+            ],
+            [
+                "0.1 mi",
+                "0.1 mi",
+                "0.1 mi",
+                "94.4 ft",
+                "594.8 ft",
+                "0.1 mi"
+            ],
+            [
+                "0.1 mi",
+                "0.1 mi",
+                "0.1 mi",
+                "115 ft",
+                "0.1 mi",
+                "489 ft"
+            ]
+        ]
+    },
+    "distance_walking": {
+        "gt": 0,
+        "choices": [
+            [
+                "148 ft",
+                "0.1 mi",
+                "135 ft",
+                "79 ft",
+                "79 ft",
+                "135 ft",
+                "0.1 mi"
+            ],
+            [
+                "0.1 mi",
+                "19.1 ft",
+                "160.0 ft",
+                "0.1 mi",
+                "186.7 ft",
+                "201.1 ft",
+                "0.1 mi"
+            ],
+            [
+                "0.1 mi",
+                "131.2 ft",
+                "148.1 ft",
+                "0.1 mi",
+                "134.0 ft",
+                "57.3 ft",
+                "0.1 mi"
+            ],
+            [
+                "0.1 mi",
+                "100.7 ft",
+                "33.9 ft",
+                "0.1 mi",
+                "76.5 ft",
+                "216.5 ft",
+                "0.1 mi"
+            ]
+        ]
+    },
+    "optimal_route": {
+        "gt": 2,
+        "choices": [
+            [
+                "New York Marriott Marquis, 1535 Broadway, New York, NY 10036",
+                "M&M'S New York, 1600 Broadway, New York, NY 10019",
+                "Marquis Theatre, 210 W 46th St, New York, NY 10036"
+            ],
+            [
+                "M&M'S New York, 1600 Broadway, New York, NY 10019",
+                "New York Marriott Marquis, 1535 Broadway, New York, NY 10036",
+                "Marquis Theatre, 210 W 46th St, New York, NY 10036"
+            ],
+            [
+                "M&M'S New York, 1600 Broadway, New York, NY 10019",
+                "Marquis Theatre, 210 W 46th St, New York, NY 10036",
+                "New York Marriott Marquis, 1535 Broadway, New York, NY 10036"
+            ],
+            [
+                "New York Marriott Marquis, 1535 Broadway, New York, NY 10036",
+                "Marquis Theatre, 210 W 46th St, New York, NY 10036",
+                "M&M'S New York, 1600 Broadway, New York, NY 10019"
+            ]
+        ]
+    }
+}

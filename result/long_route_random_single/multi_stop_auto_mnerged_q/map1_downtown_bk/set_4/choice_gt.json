@@ -1,0 +1,259 @@
+{
+    "direction_driving": {
+        "gt": 3,
+        "choices": [
+            [
+                "left",
+                "left",
+                "left",
+                "left",
+                "left",
+                "right",
+                "right",
+                "right",
+                "right",
+                "left",
+                "right",
+                "right",
+                "right",
+                "right"
+            ],
+            [
+                "right",
+                "right",
+                "left",
+                "left",
+                "left",
+                "left",
+                "right",
+                "right",
+                "right",
+                "right",
+                "left",
+                "left",
+                "left",
+                "left"
+            ],
+            [
+                "left",
+                "left",
+                "left",
+                "left",
+                "right",
+                "left",
+                "left",
+                "left",
+                "right",
+                "right",
+                "left",
+                "left",
+                "left",
+                "right"
+            ],
+            [
+                "left",
+                "right",
+                "right",
+                "right",
+                "right",
+                "right",
+                "left",
+                "right",
+                "left",
+                "right",
+                "right",
+                "right",
+                "right",
+                "left"
+            ]
+        ]
+    },
+    "direction_walking": {
+        "gt": 1,
+        "choices": [
+            [
+                "right",
+                "left",
+                "left",
+                "right",
+                "right",
+                "right",
+                "left"
+            ],
+            [
+                "left",
+                "left",
+                "right",
+                "left",
+                "right",
+                "left",
+                "right"
+            ],
+            [
+                "left",
+                "right",
+                "left",
+                "left",
+                "left",
+                "right",
+                "right"
+            ],
+            [
+                "right",
+                "right",
+                "left",
+                "left",
+                "left",
+                "left",
+                "right"
+            ]
+        ]
+    },
+    "distance_driving": {
+        "gt": 1,
+        "choices": [
+            [
+                "91.7 ft",
+                "0.3 mi",
+                "277.0 ft",
+                "0.1 mi",
+                "0.0 mi",
+                "0.2 mi",
+                "0.2 mi",
+                "0.2 mi",
+                "166.7 ft",
+                "197.6 ft",
+                "0.0 mi",
+                "0.1 mi",
+                "0.2 mi",
+                "17.8 ft",
+                "171.6 ft",
+                "0.2 mi"
+            ],
+            [
+                "23 ft",
+                "30 ft",
+                "0.2 mi",
+                "0.2 mi",
+                "0.2 mi",
+                "213 ft",
+                "0.2 mi",
+                "220 ft",
+                "52 ft",
+                "0.1 mi",
+                "220 ft",
+                "0.1 mi",
+                "0.2 mi",
+                "0.1 mi",
+                "0.1 mi",
+                "0.1 mi"
+            ],
+            [
+                "72.8 ft",
+                "0.0 mi",
+                "178.0 ft",
+                "0.1 mi",
+                "0.2 mi",
+                "0.2 mi",
+                "0.3 mi",
+                "0.2 mi",
+                "42.8 ft",
+                "350.5 ft",
+                "0.3 mi",
+                "0.0 mi",
+                "0.2 mi",
+                "20.6 ft",
+                "124.7 ft",
+                "0.1 mi"
+            ],
+            [
+                "211.3 ft",
+                "0.2 mi",
+                "62.5 ft",
+                "0.1 mi",
+                "0.2 mi",
+                "0.3 mi",
+                "0.1 mi",
+                "0.3 mi",
+                "252.2 ft",
+                "328.2 ft",
+                "0.1 mi",
+                "0.3 mi",
+                "0.2 mi",
+                "39.4 ft",
+                "160.9 ft",
+                "0.0 mi"
+            ]
+        ]
+    },
+    "distance_walking": {
+        "gt": 2,
+        "choices": [
+            [
+                "0.0 mi",
+                "527.1 ft",
+                "0.2 mi",
+                "717.2 ft",
+                "0.1 mi",
+                "0.2 mi",
+                "0.4 mi",
+                "0.1 mi"
+            ],
+            [
+                "0.0 mi",
+                "353.3 ft",
+                "0.4 mi",
+                "838.7 ft",
+                "0.3 mi",
+                "0.1 mi",
+                "0.3 mi",
+                "0.3 mi"
+            ],
+            [
+                "72 ft",
+                "0.1 mi",
+                "0.3 mi",
+                "52 ft",
+                "49 ft",
+                "118 ft",
+                "476 ft",
+                "0.2 mi"
+            ],
+            [
+                "0.3 mi",
+                "211.9 ft",
+                "0.1 mi",
+                "335.5 ft",
+                "0.3 mi",
+                "0.4 mi",
+                "0.1 mi",
+                "0.0 mi"
+            ]
+        ]
+    },
+    "optimal_route": {
+        "gt": 2,
+        "choices": [
+            [
+                "AT&T Store, 476-478 Fulton St, Brooklyn, NY 11201",
+                "The Brooklyn Cancer Center, 86 Fleet Pl, Brooklyn, NY 11201",
+                "New York Marriott at the Brooklyn Bridge, Adams Street, Brooklyn, NY"
+            ],
+            [
+                "New York Marriott at the Brooklyn Bridge, Adams Street, Brooklyn, NY",
+                "AT&T Store, 476-478 Fulton St, Brooklyn, NY 11201",
+                "The Brooklyn Cancer Center, 86 Fleet Pl, Brooklyn, NY 11201"
+            ],
+            [
+                "The Brooklyn Cancer Center, 86 Fleet Pl, Brooklyn, NY 11201",
+                "AT&T Store, 476-478 Fulton St, Brooklyn, NY 11201",
+                "New York Marriott at the Brooklyn Bridge, Adams Street, Brooklyn, NY"
+            ],
+            [
+                "The Brooklyn Cancer Center, 86 Fleet Pl, Brooklyn, NY 11201",
+                "AT&T Store, 476-478 Fulton St, Brooklyn, NY 11201",
+                "New York Marriott at the Brooklyn Bridge, Adams Street, Brooklyn, NY"
+            ]
+        ]
+    }
+}

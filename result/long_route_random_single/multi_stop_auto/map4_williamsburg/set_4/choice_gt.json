@@ -1,0 +1,175 @@
+{
+    "direction_driving": {
+        "gt": 3,
+        "choices": [
+            [
+                "left",
+                "left",
+                "right",
+                "left",
+                "right"
+            ],
+            [
+                "right",
+                "left",
+                "left",
+                "left",
+                "left"
+            ],
+            [
+                "left",
+                "right",
+                "left",
+                "left",
+                "left"
+            ],
+            [
+                "left",
+                "left",
+                "left",
+                "right",
+                "right"
+            ]
+        ]
+    },
+    "direction_walking": {
+        "gt": 1,
+        "choices": [
+            [
+                "left",
+                "left",
+                "right",
+                "right",
+                "right",
+                "left",
+                "left"
+            ],
+            [
+                "left",
+                "right",
+                "right",
+                "left",
+                "left",
+                "right",
+                "right"
+            ],
+            [
+                "right",
+                "left",
+                "right",
+                "right",
+                "right",
+                "left",
+                "right"
+            ],
+            [
+                "right",
+                "right",
+                "left",
+                "right",
+                "left",
+                "right",
+                "left"
+            ]
+        ]
+    },
+    "distance_driving": {
+        "gt": 3,
+        "choices": [
+            [
+                "62.8 ft",
+                "761.3 ft",
+                "0.3 mi",
+                "0.4 mi",
+                "727.7 ft"
+            ],
+            [
+                "209.1 ft",
+                "669.1 ft",
+                "0.3 mi",
+                "0.2 mi",
+                "101.4 ft"
+            ],
+            [
+                "552.6 ft",
+                "714.6 ft",
+                "0.4 mi",
+                "0.3 mi",
+                "775.2 ft"
+            ],
+            [
+                "482 ft",
+                "0.2 mi",
+                "151 ft",
+                "0.3 mi",
+                "492 ft"
+            ]
+        ]
+    },
+    "distance_walking": {
+        "gt": 1,
+        "choices": [
+            [
+                "403.6 ft",
+                "145.6 ft",
+                "332.5 ft",
+                "129.3 ft",
+                "0.3 mi",
+                "743.8 ft",
+                "0.3 mi"
+            ],
+            [
+                "223 ft",
+                "0.2 mi",
+                "92 ft",
+                "79 ft",
+                "79 ft",
+                "0.3 mi",
+                "492 ft"
+            ],
+            [
+                "502.2 ft",
+                "154.4 ft",
+                "848.0 ft",
+                "302.9 ft",
+                "0.2 mi",
+                "637.0 ft",
+                "0.3 mi"
+            ],
+            [
+                "490.4 ft",
+                "314.0 ft",
+                "40.4 ft",
+                "434.1 ft",
+                "0.3 mi",
+                "284.0 ft",
+                "0.3 mi"
+            ]
+        ]
+    },
+    "optimal_route": {
+        "gt": 2,
+        "choices": [
+            [
+                "Brooklyn Bowl, 61 Wythe Ave, Brooklyn, NY 11249",
+                "Mugs Ale House, 125 Bedford Ave, Brooklyn, NY 11211",
+                "CVS, 27 N 6th St, Brooklyn, NY 11249"
+            ],
+            [
+                "CVS, 27 N 6th St, Brooklyn, NY 11249",
+                "Mugs Ale House, 125 Bedford Ave, Brooklyn, NY 11211",
+                "Brooklyn Bowl, 61 Wythe Ave, Brooklyn, NY 11249"
+            ],
+            [
+                "Mugs Ale House, 125 Bedford Ave, Brooklyn, NY 11211",
+                "Brooklyn Bowl, 61 Wythe Ave, Brooklyn, NY 11249",
+                "CVS, 27 N 6th St, Brooklyn, NY 11249"
+            ],
+            [
+                "Mugs Ale House, 125 Bedford Ave, Brooklyn, NY 11211",
+                "Brooklyn Bowl, 61 Wythe Ave, Brooklyn, NY 11249",
+                "CVS, 27 N 6th St, Brooklyn, NY 11249"
+            ]
+        ]
+    }
+}

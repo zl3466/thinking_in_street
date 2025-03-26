@@ -1,0 +1,235 @@
+{
+    "direction_driving": {
+        "gt": 1,
+        "choices": [
+            [
+                "right",
+                "left",
+                "right",
+                "left",
+                "right",
+                "left",
+                "right",
+                "right",
+                "left"
+            ],
+            [
+                "left",
+                "left",
+                "right",
+                "left",
+                "left",
+                "left",
+                "right",
+                "right",
+                "right"
+            ],
+            [
+                "left",
+                "right",
+                "right",
+                "right",
+                "right",
+                "left",
+                "left",
+                "right",
+                "left"
+            ],
+            [
+                "right",
+                "left",
+                "left",
+                "right",
+                "left",
+                "right",
+                "right",
+                "left",
+                "right"
+            ]
+        ]
+    },
+    "direction_walking": {
+        "gt": 1,
+        "choices": [
+            [
+                "right",
+                "right",
+                "right",
+                "left",
+                "right",
+                "left",
+                "left",
+                "left",
+                "right"
+            ],
+            [
+                "right",
+                "left",
+                "right",
+                "left",
+                "right",
+                "left",
+                "right",
+                "right",
+                "right"
+            ],
+            [
+                "left",
+                "right",
+                "right",
+                "left",
+                "right",
+                "left",
+                "left",
+                "right",
+                "left"
+            ],
+            [
+                "right",
+                "left",
+                "left",
+                "right",
+                "left",
+                "right",
+                "right",
+                "left",
+                "right"
+            ]
+        ]
+    },
+    "distance_driving": {
+        "gt": 3,
+        "choices": [
+            [
+                "81.9 ft",
+                "223.7 ft",
+                "0.0 mi",
+                "0.3 mi",
+                "0.6 mi",
+                "557.8 ft",
+                "48.7 ft",
+                "259.2 ft",
+                "186.7 ft",
+                "784.5 ft"
+            ],
+            [
+                "32.2 ft",
+                "161.4 ft",
+                "0.0 mi",
+                "0.2 mi",
+                "0.3 mi",
+                "466.9 ft",
+                "797.2 ft",
+                "433.4 ft",
+                "43.6 ft",
+                "6.7 ft"
+            ],
+            [
+                "368.1 ft",
+                "287.8 ft",
+                "0.1 mi",
+                "0.2 mi",
+                "0.5 mi",
+                "672.8 ft",
+                "445.3 ft",
+                "415.3 ft",
+                "484.2 ft",
+                "687.3 ft"
+            ],
+            [
+                "171 ft",
+                "0.4 mi",
+                "0.4 mi",
+                "0.1 mi",
+                "49 ft",
+                "440 ft",
+                "0.3 mi",
+                "308 ft",
+                "0.1 mi",
+                "89 ft"
+            ]
+        ]
+    },
+    "distance_walking": {
+        "gt": 2,
+        "choices": [
+            [
+                "607.1 ft",
+                "726.9 ft",
+                "0.2 mi",
+                "0.0 mi",
+                "210.8 ft",
+                "599.5 ft",
+                "582.2 ft",
+                "704.6 ft",
+                "0.1 mi",
+                "532.2 ft",
+                "0.0 mi"
+            ],
+            [
+                "246.3 ft",
+                "826.4 ft",
+                "0.2 mi",
+                "0.3 mi",
+                "316.9 ft",
+                "891.4 ft",
+                "455.7 ft",
+                "667.1 ft",
+                "0.0 mi",
+                "631.9 ft",
+                "0.2 mi"
+            ],
+            [
+                "459 ft",
+                "486 ft",
+                "49 ft",
+                "118 ft",
+                "476 ft",
+                "0.2 mi",
+                "0.1 mi",
+                "0.1 mi",
+                "121 ft",
+                "0.1 mi",
+                "89 ft"
+            ],
+            [
+                "851.9 ft",
+                "850.4 ft",
+                "0.2 mi",
+                "0.0 mi",
+                "826.0 ft",
+                "298.2 ft",
+                "541.4 ft",
+                "712.5 ft",
+                "0.2 mi",
+                "882.1 ft",
+                "0.2 mi"
+            ]
+        ]
+    },
+    "optimal_route": {
+        "gt": 2,
+        "choices": [
+            [
+                "Kung Fu Tea, 40 Hoyt St, Brooklyn, NY 11201",
+                "IHOP, 253 Livingston St, Brooklyn, NY 11201",
+                "The Brooklyn Cancer Center, 86 Fleet Pl, Brooklyn, NY 11201"
+            ],
+            [
+                "IHOP, 253 Livingston St, Brooklyn, NY 11201",
+                "Kung Fu Tea, 40 Hoyt St, Brooklyn, NY 11201",
+                "The Brooklyn Cancer Center, 86 Fleet Pl, Brooklyn, NY 11201"
+            ],
+            [
+                "The Brooklyn Cancer Center, 86 Fleet Pl, Brooklyn, NY 11201",
+                "IHOP, 253 Livingston St, Brooklyn, NY 11201",
+                "Kung Fu Tea, 40 Hoyt St, Brooklyn, NY 11201"
+            ],
+            [
+                "The Brooklyn Cancer Center, 86 Fleet Pl, Brooklyn, NY 11201",
+                "IHOP, 253 Livingston St, Brooklyn, NY 11201",
+                "Kung Fu Tea, 40 Hoyt St, Brooklyn, NY 11201"
+            ]
+        ]
+    }
+}

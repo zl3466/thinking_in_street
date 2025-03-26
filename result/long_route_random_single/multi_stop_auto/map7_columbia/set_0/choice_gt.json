@@ -1,0 +1,191 @@
+{
+    "direction_driving": {
+        "gt": 2,
+        "choices": [
+            [
+                "left",
+                "right",
+                "left",
+                "left"
+            ],
+            [
+                "left",
+                "left",
+                "left",
+                "left"
+            ],
+            [
+                "left",
+                "right",
+                "left",
+                "left"
+            ],
+            [
+                "left",
+                "left",
+                "left",
+                "right"
+            ]
+        ]
+    },
+    "direction_walking": {
+        "gt": 1,
+        "choices": [
+            [
+                "left",
+                "right",
+                "right",
+                "left",
+                "left",
+                "right",
+                "right",
+                "right",
+                "left",
+                "right"
+            ],
+            [
+                "right",
+                "left",
+                "left",
+                "right",
+                "left",
+                "right",
+                "left",
+                "right",
+                "left",
+                "right"
+            ],
+            [
+                "right",
+                "right",
+                "right",
+                "left",
+                "right",
+                "right",
+                "left",
+                "left",
+                "right",
+                "right"
+            ],
+            [
+                "left",
+                "right",
+                "right",
+                "right",
+                "right",
+                "left",
+                "left",
+                "right",
+                "left",
+                "left"
+            ]
+        ]
+    },
+    "distance_driving": {
+        "gt": 2,
+        "choices": [
+            [
+                "0.5 mi",
+                "0.0 mi",
+                "0.4 mi",
+                "0.2 mi"
+            ],
+            [
+                "0.6 mi",
+                "0.2 mi",
+                "0.4 mi",
+                "0.0 mi"
+            ],
+            [
+                "0.2 mi",
+                "0.3 mi",
+                "0.4 mi",
+                "0.2 mi"
+            ],
+            [
+                "0.5 mi",
+                "0.2 mi",
+                "0.3 mi",
+                "0.2 mi"
+            ]
+        ]
+    },
+    "distance_walking": {
+        "gt": 0,
+        "choices": [
+            [
+                "0.2 mi",
+                "16 ft",
+                "39 ft",
+                "16 ft",
+                "0.3 mi",
+                "52 ft",
+                "0.1 mi",
+                "0.3 mi",
+                "0.1 mi",
+                "272 ft"
+            ],
+            [
+                "188.1 ft",
+                "0.4 mi",
+                "0.1 mi",
+                "298.1 ft",
+                "74.1 ft",
+                "473.3 ft",
+                "0.4 mi",
+                "213.1 ft",
+                "342.0 ft",
+                "0.0 mi"
+            ],
+            [
+                "175.5 ft",
+                "0.4 mi",
+                "0.1 mi",
+                "241.0 ft",
+                "377.8 ft",
+                "280.4 ft",
+                "0.2 mi",
+                "387.0 ft",
+                "443.6 ft",
+                "0.5 mi"
+            ],
+            [
+                "252.8 ft",
+                "0.1 mi",
+                "0.2 mi",
+                "200.4 ft",
+                "48.0 ft",
+                "138.9 ft",
+                "0.4 mi",
+                "410.6 ft",
+                "275.9 ft",
+                "0.4 mi"
+            ]
+        ]
+    },
+    "optimal_route": {
+        "gt": 3,
+        "choices": [
+            [
+                "Cathedral of St. John the Divine, 1047 Amsterdam Ave, New York, NY 10025",
+                "Columbia University",
+                "General Grant National Memorial, W 122nd St &, Riverside Dr, New York, NY 10027"
+            ],
+            [
+                "Columbia University",
+                "Cathedral of St. John the Divine, 1047 Amsterdam Ave, New York, NY 10025",
+                "General Grant National Memorial, W 122nd St &, Riverside Dr, New York, NY 10027"
+            ],
+            [
+                "General Grant National Memorial, W 122nd St &, Riverside Dr, New York, NY 10027",
+                "Cathedral of St. John the Divine, 1047 Amsterdam Ave, New York, NY 10025",
+                "Columbia University"
+            ],
+            [
+                "Cathedral of St. John the Divine, 1047 Amsterdam Ave, New York, NY 10025",
+                "Columbia University",
+                "General Grant National Memorial, W 122nd St &, Riverside Dr, New York, NY 10027"
+            ]
+        ]
+    }
+}

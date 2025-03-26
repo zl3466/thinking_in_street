@@ -1,0 +1,179 @@
+{
+    "direction_driving": {
+        "gt": 1,
+        "choices": [
+            [
+                "right",
+                "right",
+                "right",
+                "left",
+                "right",
+                "left",
+                "right",
+                "left"
+            ],
+            [
+                "left",
+                "left",
+                "left",
+                "left",
+                "left",
+                "right",
+                "right",
+                "right"
+            ],
+            [
+                "left",
+                "left",
+                "right",
+                "right",
+                "left",
+                "left",
+                "left",
+                "left"
+            ],
+            [
+                "left",
+                "left",
+                "right",
+                "right",
+                "right",
+                "left",
+                "right",
+                "right"
+            ]
+        ]
+    },
+    "direction_walking": {
+        "gt": 2,
+        "choices": [
+            [
+                "left",
+                "left",
+                "right",
+                "right"
+            ],
+            [
+                "right",
+                "left",
+                "left",
+                "right"
+            ],
+            [
+                "right",
+                "left",
+                "right",
+                "right"
+            ],
+            [
+                "right",
+                "right",
+                "right",
+                "right"
+            ]
+        ]
+    },
+    "distance_driving": {
+        "gt": 0,
+        "choices": [
+            [
+                "174 ft",
+                "253 ft",
+                "0.1 mi",
+                "249 ft",
+                "292 ft",
+                "0.1 mi",
+                "249 ft",
+                "0.2 mi"
+            ],
+            [
+                "0.1 mi",
+                "101.2 ft",
+                "217.7 ft",
+                "0.3 mi",
+                "320.0 ft",
+                "0.0 mi",
+                "0.2 mi",
+                "381.2 ft"
+            ],
+            [
+                "0.2 mi",
+                "112.2 ft",
+                "284.4 ft",
+                "0.2 mi",
+                "349.4 ft",
+                "0.2 mi",
+                "0.2 mi",
+                "71.0 ft"
+            ],
+            [
+                "0.0 mi",
+                "87.2 ft",
+                "56.7 ft",
+                "0.2 mi",
+                "122.7 ft",
+                "0.0 mi",
+                "0.3 mi",
+                "105.4 ft"
+            ]
+        ]
+    },
+    "distance_walking": {
+        "gt": 1,
+        "choices": [
+            [
+                "398.5 ft",
+                "261.6 ft",
+                "96.7 ft",
+                "73.4 ft",
+                "95.6 ft"
+            ],
+            [
+                "174 ft",
+                "236 ft",
+                "292 ft",
+                "249 ft",
+                "276 ft"
+            ],
+            [
+                "321.7 ft",
+                "257.3 ft",
+                "352.8 ft",
+                "355.1 ft",
+                "210.3 ft"
+            ],
+            [
+                "56.7 ft",
+                "267.5 ft",
+                "321.1 ft",
+                "334.4 ft",
+                "212.9 ft"
+            ]
+        ]
+    },
+    "optimal_route": {
+        "gt": 3,
+        "choices": [
+            [
+                "DIOR New York Soho, 105 Greene St, New York, NY 10012",
+                "BALENCIAGA, 110 Greene St, New York, NY 10012",
+                "UGG Soho, 79 Mercer St, New York, NY 10012"
+            ],
+            [
+                "BALENCIAGA, 110 Greene St, New York, NY 10012",
+                "UGG Soho, 79 Mercer St, New York, NY 10012",
+                "DIOR New York Soho, 105 Greene St, New York, NY 10012"
+            ],
+            [
+                "DIOR New York Soho, 105 Greene St, New York, NY 10012",
+                "UGG Soho, 79 Mercer St, New York, NY 10012",
+                "BALENCIAGA, 110 Greene St, New York, NY 10012"
+            ],
+            [
+                "UGG Soho, 79 Mercer St, New York, NY 10012",
+                "DIOR New York Soho, 105 Greene St, New York, NY 10012",
+                "BALENCIAGA, 110 Greene St, New York, NY 10012"
+            ]
+        ]
+    }
+}

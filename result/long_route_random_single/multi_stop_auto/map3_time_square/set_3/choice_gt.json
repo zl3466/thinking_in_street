@@ -1,0 +1,159 @@
+{
+    "direction_driving": {
+        "gt": 3,
+        "choices": [
+            [
+                "right",
+                "right",
+                "left",
+                "left",
+                "left",
+                "right"
+            ],
+            [
+                "left",
+                "right",
+                "right",
+                "right",
+                "left",
+                "right"
+            ],
+            [
+                "left",
+                "right",
+                "left",
+                "right",
+                "right",
+                "right"
+            ],
+            [
+                "left",
+                "right",
+                "left",
+                "left",
+                "right",
+                "left"
+            ]
+        ]
+    },
+    "direction_walking": {
+        "gt": 2,
+        "choices": [
+            [
+                "left",
+                "right",
+                "right",
+                "right"
+            ],
+            [
+                "left",
+                "right",
+                "left",
+                "left"
+            ],
+            [
+                "right",
+                "right",
+                "left",
+                "right"
+            ],
+            [
+                "left",
+                "right",
+                "left",
+                "right"
+            ]
+        ]
+    },
+    "distance_driving": {
+        "gt": 2,
+        "choices": [
+            [
+                "199.3 ft",
+                "126.2 ft",
+                "0.3 mi",
+                "0.1 mi",
+                "0.2 mi",
+                "130.7 ft"
+            ],
+            [
+                "431.5 ft",
+                "372.8 ft",
+                "0.3 mi",
+                "0.1 mi",
+                "0.3 mi",
+                "479.0 ft"
+            ],
+            [
+                "128 ft",
+                "135 ft",
+                "0.3 mi",
+                "0.2 mi",
+                "0.1 mi",
+                "364 ft"
+            ],
+            [
+                "221.1 ft",
+                "294.2 ft",
+                "0.5 mi",
+                "0.1 mi",
+                "0.4 mi",
+                "42.4 ft"
+            ]
+        ]
+    },
+    "distance_walking": {
+        "gt": 0,
+        "choices": [
+            [
+                "128 ft",
+                "20 ft",
+                "0.2 mi",
+                "0.2 mi"
+            ],
+            [
+                "0.2 mi",
+                "0.2 mi",
+                "191.4 ft",
+                "0.2 mi"
+            ],
+            [
+                "0.2 mi",
+                "0.2 mi",
+                "58.8 ft",
+                "0.2 mi"
+            ],
+            [
+                "0.2 mi",
+                "0.2 mi",
+                "168.5 ft",
+                "0.2 mi"
+            ]
+        ]
+    },
+    "optimal_route": {
+        "gt": 2,
+        "choices": [
+            [
+                "Marquis Theatre, 210 W 46th St, New York, NY 10036",
+                "Times Square, Manhattan, NY 10036",
+                "Grace Building, W. R. Grace Building, 1114 6th Ave, New York, NY 10110"
+            ],
+            [
+                "Grace Building, W. R. Grace Building, 1114 6th Ave, New York, NY 10110",
+                "Marquis Theatre, 210 W 46th St, New York, NY 10036",
+                "Times Square, Manhattan, NY 10036"
+            ],
+            [
+                "Marquis Theatre, 210 W 46th St, New York, NY 10036",
+                "Times Square, Manhattan, NY 10036",
+                "Grace Building, W. R. Grace Building, 1114 6th Ave, New York, NY 10110"
+            ],
+            [
+                "Times Square, Manhattan, NY 10036",
+                "Grace Building, W. R. Grace Building, 1114 6th Ave, New York, NY 10110",
+                "Marquis Theatre, 210 W 46th St, New York, NY 10036"
+            ]
+        ]
+    }
+}

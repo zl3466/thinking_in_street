@@ -1,0 +1,87 @@
+{
+    "RMSE_delta_heading": 0,
+    "RMSE_displacement": 0,
+    "frames": [
+        {
+            "prev": "frame_01852_40.68823_-73.98409_115.6.jpg",
+            "curr": "frame_01851_40.68819_-73.98398_103.0.jpg",
+            "inferred_delta_heading": -5.0,
+            "delta_heading_gt": -12.650460428558034,
+            "inferred_displacement": 12.0,
+            "displacement_gt": 10.304844886710859,
+            "movement": "left"
+        },
+        {
+            "prev": "frame_01851_40.68819_-73.98398_103.0.jpg",
+            "curr": "frame_01850_40.68819_-73.98398_90.3.jpg",
+            "inferred_delta_heading": -3.0,
+            "delta_heading_gt": -12.650460428558034,
+            "inferred_displacement": 8.0,
+            "displacement_gt": 0.0,
+            "movement": "left"
+        },
+        {
+            "prev": "frame_01850_40.68819_-73.98398_90.3.jpg",
+            "curr": "frame_01849_40.68819_-73.98398_77.7.jpg",
+            "inferred_delta_heading": -2.0,
+            "delta_heading_gt": -12.650460428558034,
+            "inferred_displacement": 7.0,
+            "displacement_gt": 0.0,
+            "movement": "left"
+        },
+        {
+            "prev": "frame_01849_40.68819_-73.98398_77.7.jpg",
+            "curr": "frame_01848_40.68819_-73.98398_65.0.jpg",
+            "inferred_delta_heading": -1.0,
+            "delta_heading_gt": -12.650460428558048,
+            "inferred_displacement": 6.0,
+            "displacement_gt": 0.0,
+            "movement": "left"
+        },
+        {
+            "prev": "frame_01848_40.68819_-73.98398_65.0.jpg",
+            "curr": "frame_01847_40.68819_-73.98398_52.4.jpg",
+            "inferred_delta_heading": -1.0,
+            "delta_heading_gt": -12.650460428558041,
+            "inferred_displacement": 5.0,
+            "displacement_gt": 0.0,
+            "movement": "left"
+        },
+        {
+            "prev": "frame_01847_40.68819_-73.98398_52.4.jpg",
+            "curr": "frame_01846_40.68819_-73.98398_39.7.jpg",
+            "inferred_delta_heading": -2.0,
+            "delta_heading_gt": -12.650460428558027,
+            "inferred_displacement": 5.0,
+            "displacement_gt": 0.0,
+            "movement": "left"
+        },
+        {
+            "prev": "frame_01846_40.68819_-73.98398_39.7.jpg",
+            "curr": "frame_01845_40.68819_-73.98398_27.1.jpg",
+            "inferred_delta_heading": -1.0,
+            "delta_heading_gt": -12.650460428558048,
+            "inferred_displacement": 4.0,
+            "displacement_gt": 0.0,
+            "movement": "left"
+        },
+        {
+            "prev": "frame_01845_40.68819_-73.98398_27.1.jpg",
+            "curr": "frame_01844_40.68819_-73.98398_27.1.jpg",
+            "inferred_delta_heading": -1.0,
+            "delta_heading_gt": 0.0,
+            "inferred_displacement": 4.0,
+            "displacement_gt": 0.0,
+            "movement": "forward"
+        },
+        {
+            "prev": "frame_01844_40.68819_-73.98398_27.1.jpg",
+            "curr": "frame_01843_40.68828_-73.98392_27.1.jpg",
+            "inferred_delta_heading": -140.0,
+            "delta_heading_gt": -3.2054262078418105e-05,
+            "inferred_displacement": 15.0,
+            "displacement_gt": 11.4822384337746,
+            "movement": "forward"
+        }
+    ]
+}

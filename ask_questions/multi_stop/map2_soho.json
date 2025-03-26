@@ -1,0 +1,41 @@
+{
+  "Q":  [
+    "Converse store",
+    "Dior store",
+    "UGG store"
+  ],
+  "GT":  [
+    "Converse Flagship Store, 560 Broadway, New York, NY 10012",
+    "DIOR New York Soho, 105 Greene St, New York, NY 10012",
+    "UGG Soho, 79 Mercer St, New York, NY 10012"
+  ],
+  "GT_optimal":  [
+    "UGG Soho, 79 Mercer St, New York, NY 10012",
+    "DIOR New York Soho, 105 Greene St, New York, NY 10012",
+    "Converse Flagship Store, 560 Broadway, New York, NY 10012"
+  ],
+  "walk_nav_template": "go to your [?] until at the first intersection, turn left onto Prince St. Walk forward until the intersection across Greene St, turn [?] onto Greene St. Keep walking forward and the Dior shop will be on your [?]. To Continue to UGG Soho, go forward on Greene St until intersection with Spring St, then turn [?] onto Spring St. Go forward until the intersection with Mercer St, turn [?] onto Mercer St and the UGG store will be on the [?] side of the road.",
+  "walk_nav_choices": [
+    "right, left, right, right, left, left",
+    "left, left, right, left, right, right",
+    "right, right, left, right, left, right",
+    "left, right, right, right, left, right"
+  ],
+  "walk_nav_ans": 1,
+  "drive_nav_template": "drive forward until the intersection with Broome St, turn [?] on to Broome St. Drive forward on Broome St until intersection with Greene St, turn [?] onto Greene St. Continue forward on Greene St until passing the intersection with Spring St, then the Dior shop will be on the [?] of the street. TO continue to UGG, keep driving forward on Green St until intersection with Houston St., turn [?] onto Houston St. Then drive forward on Houston St until intersection with Mercer St, turn [?] onto Mercer St. Finally drive forward on Mercer St until crossing the intersection with Spring St. The UGG shop would then be on the [?] side of the street.",
+  "drive_nav_choices": [
+    "right, left, left, right, left, left",
+    "left, left, right, left, right, left",
+    "right, right, left, right, right, right",
+    "right, left, right, right, right, right"
+  ],
+  "drive_nav_ans": 2,
+  "optimal_nav_choices": [
+    "Converse store, Dior store, UGG store",
+    "UGG store, Converse store, Dior store",
+    "Dior store, Converse store, UGG store",
+    "UGG store, Dior store, Converse store"
+  ],
+  "optimal_nav_ans": 3
+}
+

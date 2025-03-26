@@ -1,0 +1,151 @@
+{
+    "direction_driving": {
+        "gt": 3,
+        "choices": [
+            [
+                "left",
+                "left",
+                "right",
+                "right",
+                "left"
+            ],
+            [
+                "left",
+                "right",
+                "left",
+                "right",
+                "right"
+            ],
+            [
+                "left",
+                "left",
+                "right",
+                "right",
+                "right"
+            ],
+            [
+                "right",
+                "left",
+                "right",
+                "right",
+                "left"
+            ]
+        ]
+    },
+    "direction_walking": {
+        "gt": 2,
+        "choices": [
+            [
+                "left",
+                "right",
+                "right",
+                "right"
+            ],
+            [
+                "right",
+                "right",
+                "left",
+                "left"
+            ],
+            [
+                "left",
+                "right",
+                "left",
+                "right"
+            ],
+            [
+                "left",
+                "left",
+                "right",
+                "left"
+            ]
+        ]
+    },
+    "distance_driving": {
+        "gt": 0,
+        "choices": [
+            [
+                "282 ft",
+                "344 ft",
+                "0.3 mi",
+                "259 ft",
+                "223 ft"
+            ],
+            [
+                "146.1 ft",
+                "162.7 ft",
+                "1.0 mi",
+                "0.7 mi",
+                "0.5 mi"
+            ],
+            [
+                "401.1 ft",
+                "311.1 ft",
+                "0.5 mi",
+                "0.8 mi",
+                "0.7 mi"
+            ],
+            [
+                "143.1 ft",
+                "453.3 ft",
+                "0.8 mi",
+                "0.1 mi",
+                "0.4 mi"
+            ]
+        ]
+    },
+    "distance_walking": {
+        "gt": 2,
+        "choices": [
+            [
+                "380.3 ft",
+                "0.2 mi",
+                "296.4 ft",
+                "83.1 ft"
+            ],
+            [
+                "81.5 ft",
+                "0.2 mi",
+                "169.2 ft",
+                "415.4 ft"
+            ],
+            [
+                "79 ft",
+                "269 ft",
+                "0.2 mi",
+                "0.2 mi"
+            ],
+            [
+                "82.2 ft",
+                "0.2 mi",
+                "152.7 ft",
+                "87.2 ft"
+            ]
+        ]
+    },
+    "optimal_route": {
+        "gt": 3,
+        "choices": [
+            [
+                "Brooklyn Bowl, 61 Wythe Ave, Brooklyn, NY 11249",
+                "Spectrum Store, 177 N 7th St, Brooklyn, NY 11211",
+                "Arlo Williamsburg, 96 Wythe Ave, Brooklyn, NY 11249"
+            ],
+            [
+                "Brooklyn Bowl, 61 Wythe Ave, Brooklyn, NY 11249",
+                "Arlo Williamsburg, 96 Wythe Ave, Brooklyn, NY 11249",
+                "Spectrum Store, 177 N 7th St, Brooklyn, NY 11211"
+            ],
+            [
+                "Arlo Williamsburg, 96 Wythe Ave, Brooklyn, NY 11249",
+                "Brooklyn Bowl, 61 Wythe Ave, Brooklyn, NY 11249",
+                "Spectrum Store, 177 N 7th St, Brooklyn, NY 11211"
+            ],
+            [
+                "Brooklyn Bowl, 61 Wythe Ave, Brooklyn, NY 11249",
+                "Arlo Williamsburg, 96 Wythe Ave, Brooklyn, NY 11249",
+                "Spectrum Store, 177 N 7th St, Brooklyn, NY 11211"
+            ]
+        ]
+    }
+}

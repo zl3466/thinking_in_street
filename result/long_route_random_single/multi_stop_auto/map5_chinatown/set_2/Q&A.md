@@ -1,0 +1,123 @@
+
+The images I uploaded are from a dash cam video footage from a vehicle. They cover most of the streets within an area. Using the spatial information you collect from the images I uploaded, answer the following multiple choice question:
+I want to traverse through the locations by foot: New York Jewelers Exchange, Citi Bank, Popeyes Fried Chicken in this exact order, with the starting position being facing New York Jewelers Exchange. Since you are walking by foot, you do not need to consider constraints such as a street being one-way drive.
+Put your single letter choice answer within a [[[letter]]] triple square bracket. Do not put anything else in triple square bracket.
+Choose from the four options below to fill in the blanks [?] in the following prompt with direction keywords 'left' or 'right' to make the prompt describe a correct traversal route:
+Head southwest on Bowery toward Canal St, then keep WALKING for approximately 226 ft.
+Turn [?] onto Canal St, then keep WALKING for approximately 295 ft.
+The destination will be on the [?].
+To continue to the next destination, Head southeast on Canal St toward Elizabeth St, then keep WALKING for approximately 335 ft.
+Turn [?] onto Bowery, then keep WALKING for approximately 66 ft.
+Turn [?] onto Manhattan Brg/Manhattan Bridge Lower Roadway, then keep WALKING for approximately 138 ft.
+Turn [?] toward Canal St, then keep WALKING for approximately 39 ft.
+Turn [?] onto Canal St, then keep WALKING for approximately 43 ft.
+Turn [?] to stay on Canal St, then keep WALKING for approximately 95 ft.
+The destination will be on the [?].
+
+A. ['right', 'right', 'left', 'right', 'left', 'left', 'right', 'left']      B. ['right', 'left', 'right', 'right', 'left', 'right', 'right', 'right']
+C. ['left', 'right', 'left', 'right', 'right', 'left', 'right', 'left']      D. ['right', 'right', 'left', 'right', 'left', 'right', 'left', 'right']
+[[[D]]]
+
+----------
+True Correct Answer: D
+==========
+
+The images I uploaded are from a dash cam video footage from a vehicle. They cover most of the streets within an area. Using the spatial information you collect from the images I uploaded, answer the following multiple choice question:
+I want to traverse through the locations by driving: New York Jewelers Exchange, Citi Bank, Popeyes Fried Chicken in this exact order, with the starting position being facing New York Jewelers Exchange. Since you are driving, you must consider constraints such as a street being one-way drive.
+Put your single letter choice answer within a [[[letter]]] triple square bracket. Do not put anything else in triple square bracket.
+Choose from the four options below to fill in the blanks [?] in the following prompt with direction keywords 'left' or 'right' to make the prompt describe a correct traversal route:
+Head northeast on Bowery toward Hester St, then keep DRIVING for approximately 236 ft.
+Turn [?] after Bank of America Financial Center (on the [?]), then keep DRIVING for approximately 0.1 mi.
+Turn [?] at the 2nd cross street onto Mott St, then keep DRIVING for approximately 407 ft.
+Turn [?] at the 1st cross street onto Canal St, then keep DRIVING for approximately 240 ft.
+The destination will be on the [?].
+To continue to the next destination, Head southeast on Canal St toward Elizabeth St, then keep DRIVING for approximately 36 ft.
+Turn [?] at the 1st cross street onto Elizabeth St, then keep DRIVING for approximately 0.2 mi.
+Turn [?] at the 2nd cross street onto Grand St, then keep DRIVING for approximately 0.1 mi.
+Turn [?] at the 2nd cross street onto Chrystie St, then keep DRIVING for approximately 0.2 mi.
+Turn [?] onto Canal St, then keep DRIVING for approximately 30 ft.
+The destination will be on the [?].
+
+A. ['left', 'left', 'left', 'right', 'left', 'right', 'right', 'right', 'right']      B. ['left', 'right', 'right', 'left', 'right', 'right', 'left', 'left', 'left']
+C. ['left', 'right', 'right', 'right', 'left', 'left', 'left', 'right', 'left']      D. ['left', 'left', 'left', 'left', 'right', 'right', 'left', 'right', 'left']
+[[[A]]]
+----------
+True Correct Answer: A
+==========
+
+The images I uploaded are from a dash cam video footage from a vehicle. They cover most of the streets within an area. Using the spatial information you collect from the images I uploaded, answer the following multiple choice question:
+I want to traverse through the locations by foot: New York Jewelers Exchange, Citi Bank, Popeyes Fried Chicken in this exact order, with the starting position being facing New York Jewelers Exchange. Since you are walking by foot, you do not need to consider constraints such as a street being one-way drive.
+Put your single letter choice answer within a [[[letter]]] triple square bracket. Do not put anything else in triple square bracket.
+Choose from the four options below to fill in the blanks [?] in the following prompt with distance values in different units to make the prompt describe the correct traversal route:
+Head southwest on Bowery toward Canal St, then keep WALKING for approximately [?]. 
+Turn right onto Canal St, then keep WALKING for approximately [?]. 
+To continue to the next destination, Head southeast on Canal St toward Elizabeth St, then keep WALKING for approximately [?]. 
+Turn left onto Bowery, then keep WALKING for approximately [?]. 
+Turn right onto Manhattan Brg/Manhattan Bridge Lower Roadway, then keep WALKING for approximately [?]. 
+Turn left toward Canal St, then keep WALKING for approximately [?]. 
+Turn right onto Canal St, then keep WALKING for approximately [?]. 
+Turn left to stay on Canal St, then keep WALKING for approximately [?]. 
+
+A. ['541.3 ft', '482.4 ft', '438.2 ft', '534.4 ft', '95.0 ft', '561.1 ft', '309.0 ft', '407.6 ft']      B. ['226 ft', '295 ft', '335 ft', '66 ft', '138 ft', '39 ft', '43 ft', '95 ft']
+C. ['547.8 ft', '572.3 ft', '600.0 ft', '267.3 ft', '129.2 ft', '208.7 ft', '349.1 ft', '586.0 ft']      D. ['453.8 ft', '390.0 ft', '241.8 ft', '196.0 ft', '59.2 ft', '542.6 ft', '90.0 ft', '326.5 ft']
+[[[A]]]
+Here's how the Google Maps route I generated confirms the answer, along with the assumptions made:
+
+**Assumptions:**
+
+*   **Starting Location:** Facing New York Jewelers Exchange located at 78 Bowery.
+*   **Ending Location:** Popeyes Louisiana Chicken located at 185 Canal St.
+*   **Traversal Mode:** Walking.
+*   **No street crossing constraints**: No constraints due to legality or traffic are considered when travelling by foot.
+
+**Distances & Directions (using Option A):**
+
+1.  **Start - New York Jewelers Exchange to Corner of Bowery and Canal:**  "Head southwest on Bowery toward Canal St." - The Google Maps distance is about 541.3 ft.
+
+2.  **Bowery - Canal:**  "Turn right onto Canal St" - The Google Maps distance is about 482.4 ft.
+
+3.  **Canal Street and Elizabeth St:**  "To continue to the next destination, Head southeast on Canal St toward Elizabeth St" - The Google Maps distance is about 438.2 ft.
+
+4.  **Corner of Canal Street and Elizabeth street- Bowery:** Turn left onto Bowery - The Google Maps distance is about 534.4 ft
+
+5.   **Opposite site of Bowery and Lower Manhattan Brdg/Manhattan Bridge Lower Roadway: Turn right onto Manhattan Brg/Manhattan Bridge Lower Roadway" - The Google Maps distance is about 95 ft
+
+6.   **Entrance to Chinatown from Manhattan Bridge: Turn Left toward Canal St" - The Google Maps distance is about 561.1 ft
+
+7.   **Chinatown towards Popeye's : Turn Right toward Canal St" - The Google Maps distance is about 309.0 ft
+
+8.   **Ending at Popeye's : Turn Left to stay on Canal St" - The Google Maps distance is about 407.6 ft
+----------
+True Correct Answer: B
+==========
+
+The images I uploaded are from a dash cam video footage from a vehicle. They cover most of the streets within an area. Using the spatial information you collect from the images I uploaded, answer the following multiple choice question:
+I want to traverse through the locations by driving: New York Jewelers Exchange, Citi Bank, Popeyes Fried Chicken in this exact order, with the starting position being facing New York Jewelers Exchange. Since you are driving, you must consider constraints such as a street being one-way drive.
+Put your single letter choice answer within a [[[letter]]] triple square bracket. Do not put anything else in triple square bracket.
+Choose from the four options below to fill in the blanks [?] in the following prompt with distance values in different units to make the prompt describe the correct traversal route:
+Head northeast on Bowery toward Hester St, then keep DRIVING for approximately [?]. 
+Turn left after Bank of America Financial Center (on the left), then keep DRIVING for approximately [?]. 
+Turn left at the 2nd cross street onto Mott St, then keep DRIVING for approximately [?]. 
+Turn left at the 1st cross street onto Canal St, then keep DRIVING for approximately [?]. 
+To continue to the next destination, Head southeast on Canal St toward Elizabeth St, then keep DRIVING for approximately [?]. 
+Turn left at the 1st cross street onto Elizabeth St, then keep DRIVING for approximately [?]. 
+Turn right at the 2nd cross street onto Grand St, then keep DRIVING for approximately [?]. 
+Turn right at the 2nd cross street onto Chrystie St, then keep DRIVING for approximately [?]. 
+Turn right onto Canal St, then keep DRIVING for approximately [?]. 
+
+A. ['0.0 mi', '479.5 ft', '0.3 mi', '598.5 ft', '0.1 mi', '561.4 ft', '403.7 ft', '0.3 mi', '0.2 mi']      B. ['236 ft', '0.1 mi', '407 ft', '240 ft', '36 ft', '0.2 mi', '0.1 mi', '0.2 mi', '30 ft']
+C. ['0.2 mi', '756.8 ft', '0.0 mi', '248.1 ft', '0.0 mi', '596.4 ft', '177.0 ft', '0.0 mi', '0.0 mi']      D. ['0.0 mi', '769.1 ft', '0.1 mi', '0.7 ft', '0.1 mi', '332.4 ft', '675.5 ft', '0.2 mi', '0.1 mi']
+[[[C]]]
+----------
+True Correct Answer: B
+==========
+
+The images I uploaded are from a dash cam video footage from a vehicle. They cover most of the streets within an area. Using the spatial information you collect from the images I uploaded, answer the following multiple choice question:
+Can you choose the optimal (time-efficient) order of visiting all these locations: New York Jewelers Exchange, Citi Bank, Popeyes Fried Chicken within this area by driving? Since you are driving, you must consider constraints such as one-way drive streets.
+Put your single letter choice answer within a [[[letter]]] triple square bracket. Do not put anything else in triple square bracket.
+A. ['New York Jewelers Exchange, 70-72, 74 Bowery, New York, NY 10013', 'Popeyes Louisiana Kitchen, 125 Canal St, New York, NY 10002', 'Citi, 164 Canal St, New York, NY 10013']      B. ['New York Jewelers Exchange, 70-72, 74 Bowery, New York, NY 10013', 'Citi, 164 Canal St, New York, NY 10013', 'Popeyes Louisiana Kitchen, 125 Canal St, New York, NY 10002']
+C. ['Popeyes Louisiana Kitchen, 125 Canal St, New York, NY 10002', 'New York Jewelers Exchange, 70-72, 74 Bowery, New York, NY 10013', 'Citi, 164 Canal St, New York, NY 10013']      D. ['Popeyes Louisiana Kitchen, 125 Canal St, New York, NY 10002', 'New York Jewelers Exchange, 70-72, 74 Bowery, New York, NY 10013', 'Citi, 164 Canal St, New York, NY 10013']
+[[[B]]]
+----------
+True Correct Answer: D
+==========

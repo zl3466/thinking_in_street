@@ -1,0 +1,143 @@
+{
+    "direction_driving": {
+        "gt": 3,
+        "choices": [
+            [
+                "right",
+                "right",
+                "left",
+                "left"
+            ],
+            [
+                "left",
+                "right",
+                "right",
+                "right"
+            ],
+            [
+                "right",
+                "left",
+                "right",
+                "right"
+            ],
+            [
+                "right",
+                "right",
+                "right",
+                "right"
+            ]
+        ]
+    },
+    "direction_walking": {
+        "gt": 0,
+        "choices": [
+            [
+                "right",
+                "right",
+                "right",
+                "right"
+            ],
+            [
+                "left",
+                "right",
+                "left",
+                "right"
+            ],
+            [
+                "left",
+                "left",
+                "left",
+                "left"
+            ],
+            [
+                "left",
+                "right",
+                "right",
+                "left"
+            ]
+        ]
+    },
+    "distance_driving": {
+        "gt": 1,
+        "choices": [
+            [
+                "0.0 mi",
+                "0.2 mi",
+                "0.1 mi",
+                "0.1 mi"
+            ],
+            [
+                "0.1 mi",
+                "0.2 mi",
+                "0.1 mi",
+                "0.2 mi"
+            ],
+            [
+                "0.1 mi",
+                "0.2 mi",
+                "0.1 mi",
+                "0.1 mi"
+            ],
+            [
+                "0.1 mi",
+                "0.2 mi",
+                "0.0 mi",
+                "0.1 mi"
+            ]
+        ]
+    },
+    "distance_walking": {
+        "gt": 0,
+        "choices": [
+            [
+                "0.1 mi",
+                "98 ft",
+                "0.1 mi",
+                "62 ft"
+            ],
+            [
+                "115.8 ft",
+                "0.1 mi",
+                "0.1 mi",
+                "48.7 ft"
+            ],
+            [
+                "90.1 ft",
+                "0.1 mi",
+                "0.1 mi",
+                "56.7 ft"
+            ],
+            [
+                "121.8 ft",
+                "0.1 mi",
+                "0.1 mi",
+                "36.8 ft"
+            ]
+        ]
+    },
+    "optimal_route": {
+        "gt": 2,
+        "choices": [
+            [
+                "Blink Fitness East Village, 98 Avenue A, New York, NY 10009",
+                "McDonald's, 102 1st Ave., New York, NY 10009",
+                "Key Food Urban Marketplace, 52 Avenue A, New York, NY 10009"
+            ],
+            [
+                "McDonald's, 102 1st Ave., New York, NY 10009",
+                "Key Food Urban Marketplace, 52 Avenue A, New York, NY 10009",
+                "Blink Fitness East Village, 98 Avenue A, New York, NY 10009"
+            ],
+            [
+                "McDonald's, 102 1st Ave., New York, NY 10009",
+                "Blink Fitness East Village, 98 Avenue A, New York, NY 10009",
+                "Key Food Urban Marketplace, 52 Avenue A, New York, NY 10009"
+            ],
+            [
+                "Blink Fitness East Village, 98 Avenue A, New York, NY 10009",
+                "Key Food Urban Marketplace, 52 Avenue A, New York, NY 10009",
+                "McDonald's, 102 1st Ave., New York, NY 10009"
+            ]
+        ]
+    }
+}

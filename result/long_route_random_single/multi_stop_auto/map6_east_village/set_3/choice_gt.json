@@ -1,0 +1,159 @@
+{
+    "direction_driving": {
+        "gt": 2,
+        "choices": [
+            [
+                "right",
+                "right",
+                "left",
+                "right",
+                "left"
+            ],
+            [
+                "right",
+                "right",
+                "right",
+                "right",
+                "right"
+            ],
+            [
+                "left",
+                "left",
+                "left",
+                "right",
+                "left"
+            ],
+            [
+                "left",
+                "left",
+                "left",
+                "right",
+                "left"
+            ]
+        ]
+    },
+    "direction_walking": {
+        "gt": 0,
+        "choices": [
+            [
+                "left",
+                "right",
+                "right",
+                "right",
+                "right"
+            ],
+            [
+                "right",
+                "left",
+                "left",
+                "right",
+                "left"
+            ],
+            [
+                "left",
+                "right",
+                "right",
+                "right",
+                "right"
+            ],
+            [
+                "left",
+                "right",
+                "left",
+                "left",
+                "right"
+            ]
+        ]
+    },
+    "distance_driving": {
+        "gt": 1,
+        "choices": [
+            [
+                "0.3 mi",
+                "0.1 mi",
+                "0.2 mi",
+                "0.2 mi",
+                "0.2 mi"
+            ],
+            [
+                "0.2 mi",
+                "0.1 mi",
+                "292 ft",
+                "203 ft",
+                "36 ft"
+            ],
+            [
+                "0.1 mi",
+                "0.3 mi",
+                "0.1 mi",
+                "0.2 mi",
+                "0.2 mi"
+            ],
+            [
+                "0.1 mi",
+                "0.2 mi",
+                "0.3 mi",
+                "0.1 mi",
+                "0.2 mi"
+            ]
+        ]
+    },
+    "distance_walking": {
+        "gt": 3,
+        "choices": [
+            [
+                "161.6 ft",
+                "94.5 ft",
+                "180.7 ft",
+                "0.1 mi",
+                "0.1 mi"
+            ],
+            [
+                "367.2 ft",
+                "173.3 ft",
+                "32.5 ft",
+                "0.1 mi",
+                "0.1 mi"
+            ],
+            [
+                "316.3 ft",
+                "265.5 ft",
+                "33.6 ft",
+                "0.1 mi",
+                "0.1 mi"
+            ],
+            [
+                "180 ft",
+                "0.1 mi",
+                "0.1 mi",
+                "203 ft",
+                "36 ft"
+            ]
+        ]
+    },
+    "optimal_route": {
+        "gt": 2,
+        "choices": [
+            [
+                "Citizens, 143 2nd Ave, New York, NY 10003",
+                "McDonald's, 102 1st Ave., New York, NY 10009",
+                "Chase Bank, 156 2nd Ave, New York, NY 10003"
+            ],
+            [
+                "Chase Bank, 156 2nd Ave, New York, NY 10003",
+                "Citizens, 143 2nd Ave, New York, NY 10003",
+                "McDonald's, 102 1st Ave., New York, NY 10009"
+            ],
+            [
+                "McDonald's, 102 1st Ave., New York, NY 10009",
+                "Chase Bank, 156 2nd Ave, New York, NY 10003",
+                "Citizens, 143 2nd Ave, New York, NY 10003"
+            ],
+            [
+                "McDonald's, 102 1st Ave., New York, NY 10009",
+                "Citizens, 143 2nd Ave, New York, NY 10003",
+                "Chase Bank, 156 2nd Ave, New York, NY 10003"
+            ]
+        ]
+    }
+}

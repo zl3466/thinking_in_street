@@ -1,0 +1,41 @@
+{
+  "Q":  [
+    "a Spectrum store",
+    "a Russian round-top Cathedral",
+    "a CVS store"
+  ],
+  "GT":  [
+    "Spectrum Store, 177 N 7th St, Brooklyn, NY 11211",
+    "Transfiguration of Our Lord Russian Orthodox Cathedral, 228 N 12th St, Brooklyn, NY 11211",
+    "CVS, 27 N 6th St, Brooklyn, NY 11249"
+  ],
+  "GT_optimal":  [
+    "CVS, 27 N 6th St, Brooklyn, NY 11249",
+    "Spectrum Store, 177 N 7th St, Brooklyn, NY 11211",
+    "Transfiguration of Our Lord Russian Orthodox Cathedral, 228 N 12th St, Brooklyn, NY 11211"
+  ],
+  "walk_nav_template": "go to your [left] until intersection with Driggs Ave, turn [left] onto Driggs Ave. Walk forward until intersection with 12th St, the Cathedral will be on the [right] size of Driggs Ave. To continue to the CVS, turn around on Driggs Ave and go forward until intersection with the 6th st, then turn [right] onto 6th St and walk forward until crossing intersection with Kent Ave. The CVS will then be on your [right] side.",
+  "walk_nav_choices": [
+    "left, left, right, right, left",
+    "left, left, right, right, right",
+    "left, right, left, right, right",
+    "right, right, left, right, left"
+  ],
+  "walk_nav_ans": 1,
+  "drive_nav_template": "drive forward on 8th St until the intersection with Bedford Ave, then turn [?] on to Bedford St. Drive forward on Bedford St until intersection with 11th St, turn [?] onto 11th St. Continue forward on 11th St until the intersection with Union Ave, turn [?] onto Union Ave. Keep driving forward onto 12th St until before intersection with Driggs Ave, then the Cathedral will be on the [left] side of 12th St. To continue to the CVS, turn [left] onto Driggs Ave and keep driving forward until intersection with 6th St. Then turn [right] onto 6th St and drive all the way forward until passing the intersection with Kent Ave. Then the CVS will be on your [right] side",
+  "drive_nav_choices": [
+    "left, right, left, right, left, left, right",
+    "left, left, right, right, right, left, right",
+    "right, left, left, right, left, right, left",
+    "right, right, left, left, left, right, right"
+  ],
+  "drive_nav_ans": 3,
+  "optimal_nav_choices": [
+    "Spectrum, CVS, Cathedral",
+    "CVS, Spectrum, Cathedral",
+    "Spectrum, Cathedral, CVS",
+    "Cathedral, Spectrum, CVS"
+  ],
+  "optimal_nav_ans": 1
+}
+

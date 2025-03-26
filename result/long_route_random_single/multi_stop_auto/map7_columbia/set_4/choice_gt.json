@@ -1,0 +1,175 @@
+{
+    "direction_driving": {
+        "gt": 2,
+        "choices": [
+            [
+                "right",
+                "right",
+                "right",
+                "left",
+                "right",
+                "right"
+            ],
+            [
+                "left",
+                "left",
+                "left",
+                "right",
+                "left",
+                "left"
+            ],
+            [
+                "right",
+                "left",
+                "right",
+                "right",
+                "right",
+                "right"
+            ],
+            [
+                "left",
+                "right",
+                "right",
+                "right",
+                "left",
+                "right"
+            ]
+        ]
+    },
+    "direction_walking": {
+        "gt": 3,
+        "choices": [
+            [
+                "left",
+                "left",
+                "right",
+                "left",
+                "left",
+                "right"
+            ],
+            [
+                "left",
+                "right",
+                "left",
+                "left",
+                "left",
+                "left"
+            ],
+            [
+                "right",
+                "right",
+                "left",
+                "left",
+                "left",
+                "right"
+            ],
+            [
+                "left",
+                "right",
+                "right",
+                "left",
+                "right",
+                "right"
+            ]
+        ]
+    },
+    "distance_driving": {
+        "gt": 2,
+        "choices": [
+            [
+                "728.0 ft",
+                "0.4 mi",
+                "0.4 mi",
+                "903.9 ft",
+                "29.2 ft",
+                "0.3 mi"
+            ],
+            [
+                "619.8 ft",
+                "0.4 mi",
+                "0.0 mi",
+                "335.1 ft",
+                "597.8 ft",
+                "0.1 mi"
+            ],
+            [
+                "0.1 mi",
+                "0.1 mi",
+                "381 ft",
+                "0.3 mi",
+                "0.3 mi",
+                "0.1 mi"
+            ],
+            [
+                "642.5 ft",
+                "0.4 mi",
+                "0.2 mi",
+                "887.6 ft",
+                "591.0 ft",
+                "0.3 mi"
+            ]
+        ]
+    },
+    "distance_walking": {
+        "gt": 0,
+        "choices": [
+            [
+                "0.1 mi",
+                "0.2 mi",
+                "0.2 mi",
+                "259 ft",
+                "0.2 mi",
+                "318 ft"
+            ],
+            [
+                "222.9 ft",
+                "0.2 mi",
+                "205.0 ft",
+                "261.7 ft",
+                "0.1 mi",
+                "361.6 ft"
+            ],
+            [
+                "240.7 ft",
+                "0.2 mi",
+                "216.7 ft",
+                "306.4 ft",
+                "0.3 mi",
+                "230.7 ft"
+            ],
+            [
+                "361.6 ft",
+                "0.0 mi",
+                "351.7 ft",
+                "279.1 ft",
+                "0.0 mi",
+                "367.5 ft"
+            ]
+        ]
+    },
+    "optimal_route": {
+        "gt": 2,
+        "choices": [
+            [
+                "Morningside Park, Morningside Dr, New York, NY 10026",
+                "Tom's, 2880 Broadway, New York, NY 10025",
+                "Cathedral of St. John the Divine, 1047 Amsterdam Ave, New York, NY 10025"
+            ],
+            [
+                "Tom's, 2880 Broadway, New York, NY 10025",
+                "Cathedral of St. John the Divine, 1047 Amsterdam Ave, New York, NY 10025",
+                "Morningside Park, Morningside Dr, New York, NY 10026"
+            ],
+            [
+                "Morningside Park, Morningside Dr, New York, NY 10026",
+                "Cathedral of St. John the Divine, 1047 Amsterdam Ave, New York, NY 10025",
+                "Tom's, 2880 Broadway, New York, NY 10025"
+            ],
+            [
+                "Cathedral of St. John the Divine, 1047 Amsterdam Ave, New York, NY 10025",
+                "Tom's, 2880 Broadway, New York, NY 10025",
+                "Morningside Park, Morningside Dr, New York, NY 10026"
+            ]
+        ]
+    }
+}

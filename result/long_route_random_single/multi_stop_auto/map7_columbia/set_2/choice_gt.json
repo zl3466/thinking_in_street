@@ -1,0 +1,207 @@
+{
+    "direction_driving": {
+        "gt": 1,
+        "choices": [
+            [
+                "right",
+                "left",
+                "right",
+                "left",
+                "right",
+                "right"
+            ],
+            [
+                "right",
+                "left",
+                "left",
+                "left",
+                "right",
+                "left"
+            ],
+            [
+                "right",
+                "left",
+                "right",
+                "left",
+                "left",
+                "left"
+            ],
+            [
+                "right",
+                "left",
+                "right",
+                "right",
+                "left",
+                "right"
+            ]
+        ]
+    },
+    "direction_walking": {
+        "gt": 2,
+        "choices": [
+            [
+                "right",
+                "left",
+                "right",
+                "left",
+                "right",
+                "right",
+                "left",
+                "left",
+                "right"
+            ],
+            [
+                "left",
+                "left",
+                "right",
+                "left",
+                "left",
+                "right",
+                "right",
+                "left",
+                "left"
+            ],
+            [
+                "right",
+                "left",
+                "right",
+                "left",
+                "left",
+                "right",
+                "left",
+                "right",
+                "right"
+            ],
+            [
+                "right",
+                "left",
+                "left",
+                "right",
+                "right",
+                "left",
+                "left",
+                "left",
+                "left"
+            ]
+        ]
+    },
+    "distance_driving": {
+        "gt": 2,
+        "choices": [
+            [
+                "0.3 mi",
+                "0.4 mi",
+                "1244.4 ft",
+                "0.2 mi",
+                "412.4 ft",
+                "247.0 ft",
+                "1016.0 ft"
+            ],
+            [
+                "0.5 mi",
+                "0.4 mi",
+                "848.7 ft",
+                "0.3 mi",
+                "1451.0 ft",
+                "821.9 ft",
+                "659.4 ft"
+            ],
+            [
+                "0.2 mi",
+                "0.2 mi",
+                "0.2 mi",
+                "384 ft",
+                "0.3 mi",
+                "0.4 mi",
+                "0.2 mi"
+            ],
+            [
+                "0.3 mi",
+                "0.3 mi",
+                "1156.0 ft",
+                "0.3 mi",
+                "268.2 ft",
+                "1406.3 ft",
+                "257.8 ft"
+            ]
+        ]
+    },
+    "distance_walking": {
+        "gt": 0,
+        "choices": [
+            [
+                "10 ft",
+                "240 ft",
+                "315 ft",
+                "0.2 mi",
+                "0.2 mi",
+                "0.1 mi",
+                "0.1 mi",
+                "69 ft",
+                "269 ft",
+                "0.3 mi"
+            ],
+            [
+                "0.1 mi",
+                "547.3 ft",
+                "0.1 mi",
+                "204.1 ft",
+                "563.4 ft",
+                "597.3 ft",
+                "255.0 ft",
+                "0.3 mi",
+                "0.3 mi",
+                "550.9 ft"
+            ],
+            [
+                "0.1 mi",
+                "24.1 ft",
+                "0.3 mi",
+                "548.3 ft",
+                "115.4 ft",
+                "100.9 ft",
+                "45.3 ft",
+                "0.0 mi",
+                "0.0 mi",
+                "14.1 ft"
+            ],
+            [
+                "0.1 mi",
+                "308.7 ft",
+                "0.4 mi",
+                "318.9 ft",
+                "288.6 ft",
+                "126.6 ft",
+                "11.3 ft",
+                "0.3 mi",
+                "0.2 mi",
+                "329.7 ft"
+            ]
+        ]
+    },
+    "optimal_route": {
+        "gt": 1,
+        "choices": [
+            [
+                "Morningside Park, Morningside Dr, New York, NY 10026",
+                "General Grant National Memorial, W 122nd St &, Riverside Dr, New York, NY 10027",
+                "Columbia University"
+            ],
+            [
+                "General Grant National Memorial, W 122nd St &, Riverside Dr, New York, NY 10027",
+                "Columbia University",
+                "Morningside Park, Morningside Dr, New York, NY 10026"
+            ],
+            [
+                "General Grant National Memorial, W 122nd St &, Riverside Dr, New York, NY 10027",
+                "Columbia University",
+                "Morningside Park, Morningside Dr, New York, NY 10026"
+            ],
+            [
+                "Columbia University",
+                "Morningside Park, Morningside Dr, New York, NY 10026",
+                "General Grant National Memorial, W 122nd St &, Riverside Dr, New York, NY 10027"
+            ]
+        ]
+    }
+}

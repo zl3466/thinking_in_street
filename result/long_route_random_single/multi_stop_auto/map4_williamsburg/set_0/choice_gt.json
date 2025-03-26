@@ -1,0 +1,183 @@
+{
+    "direction_driving": {
+        "gt": 3,
+        "choices": [
+            [
+                "right",
+                "left",
+                "right",
+                "left",
+                "left",
+                "right",
+                "right"
+            ],
+            [
+                "right",
+                "right",
+                "right",
+                "left",
+                "left",
+                "right",
+                "right"
+            ],
+            [
+                "left",
+                "left",
+                "left",
+                "right",
+                "right",
+                "right",
+                "left"
+            ],
+            [
+                "left",
+                "right",
+                "right",
+                "left",
+                "left",
+                "right",
+                "right"
+            ]
+        ]
+    },
+    "direction_walking": {
+        "gt": 3,
+        "choices": [
+            [
+                "right",
+                "right",
+                "right",
+                "right",
+                "right",
+                "right"
+            ],
+            [
+                "left",
+                "right",
+                "left",
+                "left",
+                "right",
+                "right"
+            ],
+            [
+                "right",
+                "left",
+                "left",
+                "right",
+                "right",
+                "right"
+            ],
+            [
+                "left",
+                "left",
+                "right",
+                "left",
+                "right",
+                "right"
+            ]
+        ]
+    },
+    "distance_driving": {
+        "gt": 3,
+        "choices": [
+            [
+                "66.2 ft",
+                "0.2 mi",
+                "321.0 ft",
+                "0.3 mi",
+                "860.4 ft",
+                "0.1 mi",
+                "588.5 ft"
+            ],
+            [
+                "77.5 ft",
+                "0.5 mi",
+                "687.9 ft",
+                "0.4 mi",
+                "46.1 ft",
+                "0.3 mi",
+                "567.3 ft"
+            ],
+            [
+                "871.3 ft",
+                "0.3 mi",
+                "227.5 ft",
+                "0.1 mi",
+                "403.3 ft",
+                "0.3 mi",
+                "591.6 ft"
+            ],
+            [
+                "108 ft",
+                "0.3 mi",
+                "0.1 mi",
+                "223 ft",
+                "0.2 mi",
+                "0.1 mi",
+                "492 ft"
+            ]
+        ]
+    },
+    "distance_walking": {
+        "gt": 1,
+        "choices": [
+            [
+                "89.6 ft",
+                "0.3 mi",
+                "333.6 ft",
+                "178.6 ft",
+                "6.0 ft",
+                "137.6 ft"
+            ],
+            [
+                "79 ft",
+                "0.2 mi",
+                "0.2 mi",
+                "236 ft",
+                "262 ft",
+                "0.3 mi"
+            ],
+            [
+                "197.4 ft",
+                "0.4 mi",
+                "297.4 ft",
+                "167.9 ft",
+                "396.4 ft",
+                "188.9 ft"
+            ],
+            [
+                "324.6 ft",
+                "0.2 mi",
+                "307.0 ft",
+                "196.4 ft",
+                "11.8 ft",
+                "370.9 ft"
+            ]
+        ]
+    },
+    "optimal_route": {
+        "gt": 1,
+        "choices": [
+            [
+                "Spectrum Store, 177 N 7th St, Brooklyn, NY 11211",
+                "CVS, 27 N 6th St, Brooklyn, NY 11249",
+                "Brooklyn Bowl, 61 Wythe Ave, Brooklyn, NY 11249"
+            ],
+            [
+                "Spectrum Store, 177 N 7th St, Brooklyn, NY 11211",
+                "Brooklyn Bowl, 61 Wythe Ave, Brooklyn, NY 11249",
+                "CVS, 27 N 6th St, Brooklyn, NY 11249"
+            ],
+            [
+                "CVS, 27 N 6th St, Brooklyn, NY 11249",
+                "Spectrum Store, 177 N 7th St, Brooklyn, NY 11211",
+                "Brooklyn Bowl, 61 Wythe Ave, Brooklyn, NY 11249"
+            ],
+            [
+                "CVS, 27 N 6th St, Brooklyn, NY 11249",
+                "Brooklyn Bowl, 61 Wythe Ave, Brooklyn, NY 11249",
+                "Spectrum Store, 177 N 7th St, Brooklyn, NY 11211"
+            ]
+        ]
+    }
+}

@@ -1,0 +1,95 @@
+
+The images I uploaded are from a dash cam video footage from a vehicle. They cover most of the streets within an area. Using the spatial information you collect from the images I uploaded, answer the following multiple choice question:
+I want to traverse through the locations by foot: Columbia University, General Grant National Memorial, Morningside Park in this exact order, with the starting position being facing Columbia University. Since you are walking by foot, you do not need to consider constraints such as a street being one-way drive.
+Put your single letter choice answer within a [[[letter]]] triple square bracket. Do not put anything else in triple square bracket.
+Choose from the four options below to fill in the blanks [?] in the following prompt with direction keywords 'left' or 'right' to make the prompt describe a correct traversal route:
+Head west toward Claremont Ave, then keep WALKING for approximately 10 ft.
+Turn [?] onto Claremont Ave, then keep WALKING for approximately 240 ft.
+Turn [?] onto W 120th St, then keep WALKING for approximately 315 ft.
+Turn [?] onto Riverside Dr, then keep WALKING for approximately 0.2 mi.
+To continue to the next destination, Head south on Riverside Dr, then keep WALKING for approximately 0.2 mi.
+Turn [?] onto W 120th St, then keep WALKING for approximately 0.1 mi.
+Turn [?] onto Broadway, then keep WALKING for approximately 0.1 mi.
+Turn [?] onto W 122nd St/Seminary Row, then keep WALKING for approximately 69 ft.
+Turn [?] onto Broadway, then keep WALKING for approximately 269 ft.
+Turn [?] onto W 123rd St, then keep WALKING for approximately 0.3 mi.
+The destination will be on the [?].
+
+A. ['right', 'left', 'right', 'left', 'right', 'right', 'left', 'left', 'right']      B. ['left', 'left', 'right', 'left', 'left', 'right', 'right', 'left', 'left']
+C. ['right', 'left', 'right', 'left', 'left', 'right', 'left', 'right', 'right']      D. ['right', 'left', 'left', 'right', 'right', 'left', 'left', 'left', 'left']
+[[[A]]]
+----------
+True Correct Answer: C
+==========
+
+The images I uploaded are from a dash cam video footage from a vehicle. They cover most of the streets within an area. Using the spatial information you collect from the images I uploaded, answer the following multiple choice question:
+I want to traverse through the locations by driving: Columbia University, General Grant National Memorial, Morningside Park in this exact order, with the starting position being facing Columbia University. Since you are driving, you must consider constraints such as a street being one-way drive.
+Put your single letter choice answer within a [[[letter]]] triple square bracket. Do not put anything else in triple square bracket.
+Choose from the four options below to fill in the blanks [?] in the following prompt with direction keywords 'left' or 'right' to make the prompt describe a correct traversal route:
+Head northwest on W 120th St toward Broadway, then keep DRIVING for approximately 0.2 mi.
+Turn [?] onto Riverside Dr, then keep DRIVING for approximately 0.2 mi.
+The destination will be on the [?].
+To continue to the next destination, Head northeast on Riverside Dr, then keep DRIVING for approximately 0.2 mi.
+Turn [?] onto Riverside Dr Viaduct, then keep DRIVING for approximately 384 ft.
+Merge onto Riverside Dr, then keep DRIVING for approximately 0.3 mi.
+Turn [?] onto W 120th St, then keep DRIVING for approximately 0.4 mi.
+Turn [?] onto Morningside Dr, then keep DRIVING for approximately 0.2 mi.
+The destination will be on the [?].
+
+A. ['right', 'left', 'right', 'left', 'right', 'right']      B. ['right', 'left', 'left', 'left', 'right', 'left']
+C. ['right', 'left', 'right', 'left', 'left', 'left']      D. ['right', 'left', 'right', 'right', 'left', 'right']
+[[[A]]]
+----------
+True Correct Answer: B
+==========
+
+The images I uploaded are from a dash cam video footage from a vehicle. They cover most of the streets within an area. Using the spatial information you collect from the images I uploaded, answer the following multiple choice question:
+I want to traverse through the locations by foot: Columbia University, General Grant National Memorial, Morningside Park in this exact order, with the starting position being facing Columbia University. Since you are walking by foot, you do not need to consider constraints such as a street being one-way drive.
+Put your single letter choice answer within a [[[letter]]] triple square bracket. Do not put anything else in triple square bracket.
+Choose from the four options below to fill in the blanks [?] in the following prompt with distance values in different units to make the prompt describe the correct traversal route:
+Head west toward Claremont Ave, then keep WALKING for approximately [?]. 
+Turn right onto Claremont Ave, then keep WALKING for approximately [?]. 
+Turn left onto W 120th St, then keep WALKING for approximately [?]. 
+Turn right onto Riverside Dr, then keep WALKING for approximately [?]. 
+To continue to the next destination, Head south on Riverside Dr, then keep WALKING for approximately [?]. 
+Turn left onto W 120th St, then keep WALKING for approximately [?]. 
+Turn left onto Broadway, then keep WALKING for approximately [?]. 
+Turn right onto W 122nd St/Seminary Row, then keep WALKING for approximately [?]. 
+Turn left onto Broadway, then keep WALKING for approximately [?]. 
+Turn right onto W 123rd St, then keep WALKING for approximately [?]. 
+
+A. ['10 ft', '240 ft', '315 ft', '0.2 mi', '0.2 mi', '0.1 mi', '0.1 mi', '69 ft', '269 ft', '0.3 mi']      B. ['0.1 mi', '547.3 ft', '0.1 mi', '204.1 ft', '563.4 ft', '597.3 ft', '255.0 ft', '0.3 mi', '0.3 mi', '550.9 ft']
+C. ['0.1 mi', '24.1 ft', '0.3 mi', '548.3 ft', '115.4 ft', '100.9 ft', '45.3 ft', '0.0 mi', '0.0 mi', '14.1 ft']      D. ['0.1 mi', '308.7 ft', '0.4 mi', '318.9 ft', '288.6 ft', '126.6 ft', '11.3 ft', '0.3 mi', '0.2 mi', '329.7 ft']
+[[[A]]]
+----------
+True Correct Answer: A
+==========
+
+The images I uploaded are from a dash cam video footage from a vehicle. They cover most of the streets within an area. Using the spatial information you collect from the images I uploaded, answer the following multiple choice question:
+I want to traverse through the locations by driving: Columbia University, General Grant National Memorial, Morningside Park in this exact order, with the starting position being facing Columbia University. Since you are driving, you must consider constraints such as a street being one-way drive.
+Put your single letter choice answer within a [[[letter]]] triple square bracket. Do not put anything else in triple square bracket.
+Choose from the four options below to fill in the blanks [?] in the following prompt with distance values in different units to make the prompt describe the correct traversal route:
+Head northwest on W 120th St toward Broadway, then keep DRIVING for approximately [?]. 
+Turn right onto Riverside Dr, then keep DRIVING for approximately [?]. 
+To continue to the next destination, Head northeast on Riverside Dr, then keep DRIVING for approximately [?]. 
+Turn left onto Riverside Dr Viaduct, then keep DRIVING for approximately [?]. 
+Merge onto Riverside Dr, then keep DRIVING for approximately [?]. 
+Turn left onto W 120th St, then keep DRIVING for approximately [?]. 
+Turn right onto Morningside Dr, then keep DRIVING for approximately [?]. 
+
+A. ['0.3 mi', '0.4 mi', '1244.4 ft', '0.2 mi', '412.4 ft', '247.0 ft', '1016.0 ft']      B. ['0.5 mi', '0.4 mi', '848.7 ft', '0.3 mi', '1451.0 ft', '821.9 ft', '659.4 ft']
+C. ['0.2 mi', '0.2 mi', '0.2 mi', '384 ft', '0.3 mi', '0.4 mi', '0.2 mi']      D. ['0.3 mi', '0.3 mi', '1156.0 ft', '0.3 mi', '268.2 ft', '1406.3 ft', '257.8 ft']
+[[[A]]]
+----------
+True Correct Answer: C
+==========
+
+The images I uploaded are from a dash cam video footage from a vehicle. They cover most of the streets within an area. Using the spatial information you collect from the images I uploaded, answer the following multiple choice question:
+Can you choose the optimal (time-efficient) order of visiting all these locations: Columbia University, General Grant National Memorial, Morningside Park within this area by driving? Since you are driving, you must consider constraints such as one-way drive streets.
+Put your single letter choice answer within a [[[letter]]] triple square bracket. Do not put anything else in triple square bracket.
+A. ['Morningside Park, Morningside Dr, New York, NY 10026', 'General Grant National Memorial, W 122nd St &, Riverside Dr, New York, NY 10027', 'Columbia University']      B. ['General Grant National Memorial, W 122nd St &, Riverside Dr, New York, NY 10027', 'Columbia University', 'Morningside Park, Morningside Dr, New York, NY 10026']
+C. ['General Grant National Memorial, W 122nd St &, Riverside Dr, New York, NY 10027', 'Columbia University', 'Morningside Park, Morningside Dr, New York, NY 10026']      D. ['Columbia University', 'Morningside Park, Morningside Dr, New York, NY 10026', 'General Grant National Memorial, W 122nd St &, Riverside Dr, New York, NY 10027']
+[[[D]]]
+----------
+True Correct Answer: B
+==========

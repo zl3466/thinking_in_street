@@ -1,0 +1,3552 @@
+{
+    "map1_downtown_bk": {
+        "set_0": {
+            "model_answers": [
+                [
+                    "right",
+                    "right",
+                    "right",
+                    "right"
+                ],
+                [
+                    "C"
+                ],
+                [
+                    "D"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "A"
+                ]
+            ],
+            "gt_answers": [
+                [
+                    "C"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "C"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "A"
+                ]
+            ],
+            "model_choice": [
+                [],
+                [
+                    "left",
+                    "right",
+                    "left",
+                    "right",
+                    "right",
+                    "right",
+                    "right",
+                    "left",
+                    "right"
+                ],
+                [
+                    "499.8 ft",
+                    "0.0 mi",
+                    "0.2 mi",
+                    "0.0 mi"
+                ],
+                [
+                    "0.1 mi",
+                    "0.1 mi",
+                    "0.1 mi",
+                    "0.1 mi",
+                    "0.1 mi",
+                    "0.1 mi",
+                    "187.5 ft",
+                    "0.1 mi",
+                    "297.5 ft"
+                ],
+                [
+                    "Kung Fu Tea, 40 Hoyt St, Brooklyn, NY 11201",
+                    "IHOP, 253 Livingston St, Brooklyn, NY 11201",
+                    "AT&T Store, 476-478 Fulton St, Brooklyn, NY 11201"
+                ]
+            ],
+            "gt_choice": [
+                [
+                    "left",
+                    "right",
+                    "right",
+                    "right"
+                ],
+                [
+                    "left",
+                    "left",
+                    "left",
+                    "right",
+                    "right",
+                    "left",
+                    "left",
+                    "left",
+                    "right"
+                ],
+                [
+                    "433 ft",
+                    "459 ft",
+                    "79 ft",
+                    "0.1 mi"
+                ],
+                [
+                    "52 ft",
+                    "0.1 mi",
+                    "0.1 mi",
+                    "0.1 mi",
+                    "459 ft",
+                    "171 ft",
+                    "0.1 mi",
+                    "249 ft",
+                    "89 ft"
+                ],
+                [
+                    "Kung Fu Tea, 40 Hoyt St, Brooklyn, NY 11201",
+                    "IHOP, 253 Livingston St, Brooklyn, NY 11201",
+                    "AT&T Store, 476-478 Fulton St, Brooklyn, NY 11201"
+                ]
+            ],
+            "mse": [
+                [
+                    362114.06,
+                    388.95,
+                    374.75
+                ],
+                [
+                    66226.61111111111,
+                    464.55555555555554,
+                    348.0
+                ]
+            ]
+        },
+        "set_1": {
+            "model_answers": [
+                [
+                    "A"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "D"
+                ]
+            ],
+            "gt_answers": [
+                [
+                    "C"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "D"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "B"
+                ]
+            ],
+            "model_choice": [
+                [
+                    "right",
+                    "left",
+                    "right",
+                    "right",
+                    "left",
+                    "left",
+                    "left"
+                ],
+                [
+                    "right",
+                    "right",
+                    "right",
+                    "left",
+                    "right",
+                    "left",
+                    "right",
+                    "right",
+                    "right",
+                    "right",
+                    "left"
+                ],
+                [
+                    "85.3 ft",
+                    "152.2 ft",
+                    "700.9 ft",
+                    "188.0 ft",
+                    "537.2 ft",
+                    "0.0 mi",
+                    "0.5 mi",
+                    "860.9 ft"
+                ],
+                [
+                    "242.4 ft",
+                    "0.3 mi",
+                    "0.1 mi",
+                    "351.7 ft",
+                    "376.9 ft",
+                    "281.2 ft",
+                    "0.2 mi",
+                    "0.1 mi",
+                    "487.9 ft",
+                    "250.0 ft",
+                    "0.1 mi"
+                ],
+                [
+                    "AT&T Store, 476-478 Fulton St, Brooklyn, NY 11201",
+                    "IHOP, 253 Livingston St, Brooklyn, NY 11201",
+                    "The Brooklyn Cancer Center, 86 Fleet Pl, Brooklyn, NY 11201"
+                ]
+            ],
+            "gt_choice": [
+                [
+                    "left",
+                    "left",
+                    "right",
+                    "left",
+                    "right",
+                    "left",
+                    "right"
+                ],
+                [
+                    "right",
+                    "right",
+                    "right",
+                    "left",
+                    "right",
+                    "left",
+                    "right",
+                    "right",
+                    "right",
+                    "right",
+                    "left"
+                ],
+                [
+                    "89 ft",
+                    "374 ft",
+                    "240 ft",
+                    "52 ft",
+                    "49 ft",
+                    "118 ft",
+                    "476 ft",
+                    "0.2 mi"
+                ],
+                [
+                    "259 ft",
+                    "377 ft",
+                    "105 ft",
+                    "52 ft",
+                    "0.1 mi",
+                    "220 ft",
+                    "0.1 mi",
+                    "0.2 mi",
+                    "0.1 mi",
+                    "0.1 mi",
+                    "0.1 mi"
+                ],
+                [
+                    "The Brooklyn Cancer Center, 86 Fleet Pl, Brooklyn, NY 11201",
+                    "IHOP, 253 Livingston St, Brooklyn, NY 11201",
+                    "AT&T Store, 476-478 Fulton St, Brooklyn, NY 11201"
+                ]
+            ],
+            "mse": [
+                [
+                    656669.62375,
+                    645.5625,
+                    306.75
+                ],
+                [
+                    217173.66454545452,
+                    564.9181818181818,
+                    428.09090909090907
+                ]
+            ]
+        },
+        "set_2": {
+            "model_answers": [],
+            "gt_answers": [],
+            "model_choice": [],
+            "gt_choice": [],
+            "mse": []
+        },
+        "set_3": {
+            "model_answers": [
+                [
+                    "C"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "C"
+                ]
+            ],
+            "gt_answers": [
+                [
+                    "B"
+                ],
+                [
+                    "C"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "A"
+                ]
+            ],
+            "model_choice": [
+                [
+                    "left",
+                    "right",
+                    "left",
+                    "left",
+                    "left",
+                    "right",
+                    "right"
+                ],
+                [
+                    "left",
+                    "right",
+                    "right",
+                    "left",
+                    "right",
+                    "left",
+                    "right",
+                    "right",
+                    "right",
+                    "right",
+                    "left"
+                ],
+                [
+                    "89 ft",
+                    "374 ft",
+                    "240 ft",
+                    "52 ft",
+                    "49 ft",
+                    "118 ft",
+                    "476 ft",
+                    "0.2 mi"
+                ],
+                [
+                    "259 ft",
+                    "377 ft",
+                    "105 ft",
+                    "52 ft",
+                    "0.1 mi",
+                    "220 ft",
+                    "0.1 mi",
+                    "0.2 mi",
+                    "0.1 mi",
+                    "0.1 mi",
+                    "0.1 mi"
+                ],
+                [
+                    "The Brooklyn Cancer Center, 86 Fleet Pl, Brooklyn, NY 11201",
+                    "AT&T Store, 476-478 Fulton St, Brooklyn, NY 11201",
+                    "IHOP, 253 Livingston St, Brooklyn, NY 11201"
+                ]
+            ],
+            "gt_choice": [
+                [
+                    "left",
+                    "left",
+                    "right",
+                    "left",
+                    "right",
+                    "left",
+                    "right"
+                ],
+                [
+                    "right",
+                    "right",
+                    "right",
+                    "left",
+                    "right",
+                    "left",
+                    "right",
+                    "right",
+                    "right",
+                    "right",
+                    "left"
+                ],
+                [
+                    "89 ft",
+                    "374 ft",
+                    "240 ft",
+                    "52 ft",
+                    "49 ft",
+                    "118 ft",
+                    "476 ft",
+                    "0.2 mi"
+                ],
+                [
+                    "259 ft",
+                    "377 ft",
+                    "105 ft",
+                    "52 ft",
+                    "0.1 mi",
+                    "220 ft",
+                    "0.1 mi",
+                    "0.2 mi",
+                    "0.1 mi",
+                    "0.1 mi",
+                    "0.1 mi"
+                ],
+                [
+                    "The Brooklyn Cancer Center, 86 Fleet Pl, Brooklyn, NY 11201",
+                    "IHOP, 253 Livingston St, Brooklyn, NY 11201",
+                    "AT&T Store, 476-478 Fulton St, Brooklyn, NY 11201"
+                ]
+            ],
+            "mse": [
+                [
+                    0.0,
+                    306.75,
+                    306.75
+                ],
+                [
+                    0.0,
+                    428.09090909090907,
+                    428.09090909090907
+                ]
+            ]
+        },
+        "set_4": {
+            "model_answers": [
+                [
+                    "D"
+                ],
+                [
+                    "D"
+                ],
+                [],
+                [],
+                [
+                    "A"
+                ]
+            ],
+            "gt_answers": [
+                [
+                    "B"
+                ],
+                [
+                    "D"
+                ],
+                [
+                    "C"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "A"
+                ]
+            ],
+            "model_choice": [
+                [
+                    "right",
+                    "right",
+                    "left",
+                    "right",
+                    "right",
+                    "right"
+                ],
+                [
+                    "left",
+                    "right",
+                    "right",
+                    "right",
+                    "right",
+                    "right",
+                    "right",
+                    "right",
+                    "right",
+                    "right"
+                ],
+                [],
+                [],
+                [
+                    "IHOP, 253 Livingston St, Brooklyn, NY 11201",
+                    "AT&T Store, 476-478 Fulton St, Brooklyn, NY 11201",
+                    "New York Marriott at the Brooklyn Bridge, Adams Street, Brooklyn, NY"
+                ]
+            ],
+            "gt_choice": [
+                [
+                    "right",
+                    "right",
+                    "right",
+                    "right",
+                    "right",
+                    "right"
+                ],
+                [
+                    "left",
+                    "right",
+                    "right",
+                    "right",
+                    "right",
+                    "right",
+                    "right",
+                    "right",
+                    "right",
+                    "right"
+                ],
+                [
+                    "240 ft",
+                    "374 ft",
+                    "89 ft",
+                    "0.3 mi",
+                    "413 ft",
+                    "0.1 mi",
+                    "72 ft"
+                ],
+                [
+                    "52 ft",
+                    "0.1 mi",
+                    "220 ft",
+                    "0.2 mi",
+                    "308 ft",
+                    "0.1 mi",
+                    "89 ft",
+                    "0.3 mi",
+                    "0.1 mi",
+                    "364 ft",
+                    "72 ft"
+                ],
+                [
+                    "IHOP, 253 Livingston St, Brooklyn, NY 11201",
+                    "AT&T Store, 476-478 Fulton St, Brooklyn, NY 11201",
+                    "New York Marriott at the Brooklyn Bridge, Adams Street, Brooklyn, NY"
+                ]
+            ],
+            "mse": []
+        }
+    },
+    "map2_soho": {
+        "set_0": {
+            "model_answers": [
+                [
+                    "A"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "D"
+                ],
+                [
+                    "D"
+                ],
+                [
+                    "D"
+                ]
+            ],
+            "gt_answers": [
+                [
+                    "A"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "C"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "A"
+                ]
+            ],
+            "model_choice": [
+                [
+                    "right",
+                    "left",
+                    "right"
+                ],
+                [
+                    "right",
+                    "right",
+                    "left",
+                    "left"
+                ],
+                [
+                    "0.2 mi",
+                    "477.9 ft",
+                    "399.9 ft",
+                    "235.0 ft"
+                ],
+                [
+                    "0.2 mi",
+                    "264.1 ft",
+                    "0.3 mi",
+                    "0.2 mi",
+                    "0.1 mi"
+                ],
+                [
+                    "BALENCIAGA, 110 Greene St, New York, NY 10012",
+                    "DIOR New York Soho, 105 Greene St, New York, NY 10012",
+                    "MoMA Design Store, 81 Spring St A, New York, NY 10012"
+                ]
+            ],
+            "gt_choice": [
+                [
+                    "right",
+                    "left",
+                    "right"
+                ],
+                [
+                    "right",
+                    "right",
+                    "left",
+                    "left"
+                ],
+                [
+                    "236 ft",
+                    "174 ft",
+                    "351 ft",
+                    "0.1 mi"
+                ],
+                [
+                    "59 ft",
+                    "0.1 mi",
+                    "0.1 mi",
+                    "0.2 mi",
+                    "233 ft"
+                ],
+                [
+                    "DIOR New York Soho, 105 Greene St, New York, NY 10012",
+                    "BALENCIAGA, 110 Greene St, New York, NY 10012",
+                    "MoMA Design Store, 81 Spring St A, New York, NY 10012"
+                ]
+            ],
+            "mse": [
+                [
+                    213248.85499999998,
+                    542.2,
+                    322.25
+                ],
+                [
+                    453162.642,
+                    897.6200000000001,
+                    480.8
+                ]
+            ]
+        },
+        "set_1": {
+            "model_answers": [
+                [
+                    "D"
+                ],
+                [
+                    "C"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "A"
+                ]
+            ],
+            "gt_answers": [
+                [
+                    "D"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "C"
+                ],
+                [
+                    "B"
+                ]
+            ],
+            "model_choice": [
+                [
+                    "left",
+                    "right",
+                    "left",
+                    "right",
+                    "right"
+                ],
+                [
+                    "right",
+                    "left",
+                    "left",
+                    "left",
+                    "left",
+                    "right"
+                ],
+                [
+                    "499 ft",
+                    "276 ft",
+                    "276 ft",
+                    "249 ft",
+                    "351 ft"
+                ],
+                [
+                    "0.1 mi",
+                    "375.2 ft",
+                    "0.3 mi",
+                    "0.3 mi",
+                    "188.1 ft",
+                    "190.7 ft"
+                ],
+                [
+                    "MoMA Design Store, 81 Spring St A, New York, NY 10012",
+                    "UGG Soho, 79 Mercer St, New York, NY 10012",
+                    "BALENCIAGA, 110 Greene St, New York, NY 10012"
+                ]
+            ],
+            "gt_choice": [
+                [
+                    "left",
+                    "right",
+                    "left",
+                    "right",
+                    "right"
+                ],
+                [
+                    "left",
+                    "left",
+                    "right",
+                    "right",
+                    "right",
+                    "right"
+                ],
+                [
+                    "499 ft",
+                    "276 ft",
+                    "276 ft",
+                    "249 ft",
+                    "351 ft"
+                ],
+                [
+                    "492 ft",
+                    "0.1 mi",
+                    "0.2 mi",
+                    "259 ft",
+                    "253 ft",
+                    "0.2 mi"
+                ],
+                [
+                    "MoMA Design Store, 81 Spring St A, New York, NY 10012",
+                    "UGG Soho, 79 Mercer St, New York, NY 10012",
+                    "BALENCIAGA, 110 Greene St, New York, NY 10012"
+                ]
+            ],
+            "mse": [
+                [
+                    0.0,
+                    330.2,
+                    330.2
+                ],
+                [
+                    468668.1566666667,
+                    741.6666666666666,
+                    607.3333333333334
+                ]
+            ]
+        },
+        "set_2": {
+            "model_answers": [
+                [
+                    "D"
+                ],
+                [
+                    "D"
+                ],
+                [
+                    "C"
+                ],
+                [
+                    "D"
+                ],
+                [
+                    "D"
+                ]
+            ],
+            "gt_answers": [
+                [
+                    "C"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "C"
+                ],
+                [
+                    "C"
+                ],
+                [
+                    "B"
+                ]
+            ],
+            "model_choice": [
+                [
+                    "right",
+                    "right",
+                    "left",
+                    "right",
+                    "right",
+                    "left"
+                ],
+                [
+                    "left",
+                    "right",
+                    "left",
+                    "right",
+                    "right",
+                    "right"
+                ],
+                [
+                    "236 ft",
+                    "0.1 mi",
+                    "131 ft",
+                    "131 ft",
+                    "0.1 mi",
+                    "174 ft"
+                ],
+                [
+                    "0.1 mi",
+                    "0.1 mi",
+                    "0.1 mi",
+                    "0.1 mi",
+                    "0.3 mi",
+                    "0.1 mi"
+                ],
+                [
+                    "Converse Flagship Store, 560 Broadway, New York, NY 10012",
+                    "DIOR New York Soho, 105 Greene St, New York, NY 10012",
+                    "BALENCIAGA, 110 Greene St, New York, NY 10012"
+                ]
+            ],
+            "gt_choice": [
+                [
+                    "right",
+                    "right",
+                    "right",
+                    "left",
+                    "left",
+                    "right"
+                ],
+                [
+                    "right",
+                    "right",
+                    "left",
+                    "right",
+                    "right",
+                    "right"
+                ],
+                [
+                    "236 ft",
+                    "0.1 mi",
+                    "131 ft",
+                    "131 ft",
+                    "0.1 mi",
+                    "174 ft"
+                ],
+                [
+                    "0.1 mi",
+                    "0.1 mi",
+                    "0.1 mi",
+                    "0.2 mi",
+                    "0.1 mi",
+                    "0.2 mi"
+                ],
+                [
+                    "DIOR New York Soho, 105 Greene St, New York, NY 10012",
+                    "BALENCIAGA, 110 Greene St, New York, NY 10012",
+                    "Converse Flagship Store, 560 Broadway, New York, NY 10012"
+                ]
+            ],
+            "mse": [
+                [
+                    0.0,
+                    288.0,
+                    288.0
+                ],
+                [
+                    278784.0,
+                    704.0,
+                    704.0
+                ]
+            ]
+        },
+        "set_3": {
+            "model_answers": [
+                [
+                    "C"
+                ],
+                [
+                    "D"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "C"
+                ],
+                [
+                    "C"
+                ]
+            ],
+            "gt_answers": [
+                [
+                    "C"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "D"
+                ]
+            ],
+            "model_choice": [
+                [
+                    "right",
+                    "left",
+                    "right",
+                    "right"
+                ],
+                [
+                    "right",
+                    "left",
+                    "left"
+                ],
+                [
+                    "236 ft",
+                    "174 ft",
+                    "351 ft",
+                    "249 ft",
+                    "276 ft"
+                ],
+                [
+                    "185.2 ft",
+                    "0.3 mi",
+                    "0.0 mi",
+                    "0.3 mi"
+                ],
+                [
+                    "UGG Soho, 79 Mercer St, New York, NY 10012",
+                    "DIOR New York Soho, 105 Greene St, New York, NY 10012",
+                    "BALENCIAGA, 110 Greene St, New York, NY 10012"
+                ]
+            ],
+            "gt_choice": [
+                [
+                    "right",
+                    "left",
+                    "right",
+                    "right"
+                ],
+                [
+                    "right",
+                    "right",
+                    "right"
+                ],
+                [
+                    "236 ft",
+                    "174 ft",
+                    "351 ft",
+                    "249 ft",
+                    "276 ft"
+                ],
+                [
+                    "59 ft",
+                    "0.1 mi",
+                    "249 ft",
+                    "0.2 mi"
+                ],
+                [
+                    "UGG Soho, 79 Mercer St, New York, NY 10012",
+                    "DIOR New York Soho, 105 Greene St, New York, NY 10012",
+                    "BALENCIAGA, 110 Greene St, New York, NY 10012"
+                ]
+            ],
+            "mse": [
+                [
+                    0.0,
+                    257.2,
+                    257.2
+                ],
+                [
+                    367961.86,
+                    838.3,
+                    473.0
+                ]
+            ]
+        },
+        "set_4": {
+            "model_answers": [
+                [
+                    "A"
+                ],
+                [
+                    "C"
+                ],
+                [
+                    "D"
+                ],
+                [
+                    "D"
+                ],
+                [
+                    "D"
+                ]
+            ],
+            "gt_answers": [
+                [
+                    "A"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "D"
+                ]
+            ],
+            "model_choice": [
+                [
+                    "left",
+                    "left",
+                    "right",
+                    "right"
+                ],
+                [
+                    "right",
+                    "left",
+                    "right",
+                    "left",
+                    "right",
+                    "right",
+                    "right",
+                    "left",
+                    "right",
+                    "left"
+                ],
+                [
+                    "0.2 mi",
+                    "196.5 ft",
+                    "0.3 mi",
+                    "165.8 ft"
+                ],
+                [
+                    "0.1 mi",
+                    "324.5 ft",
+                    "0.3 mi",
+                    "199.0 ft",
+                    "68.9 ft",
+                    "0.2 mi",
+                    "0.3 mi",
+                    "189.9 ft",
+                    "0.1 mi",
+                    "0.2 mi"
+                ],
+                [
+                    "Converse Flagship Store, 560 Broadway, New York, NY 10012",
+                    "Bloomingdale's, 504 Broadway, New York, NY 10012",
+                    "UGG Soho, 79 Mercer St, New York, NY 10012"
+                ]
+            ],
+            "gt_choice": [
+                [
+                    "left",
+                    "left",
+                    "right",
+                    "right"
+                ],
+                [
+                    "right",
+                    "right",
+                    "right",
+                    "right",
+                    "left",
+                    "left",
+                    "left",
+                    "left",
+                    "left",
+                    "left"
+                ],
+                [
+                    "259 ft",
+                    "262 ft",
+                    "213 ft",
+                    "0.1 mi"
+                ],
+                [
+                    "259 ft",
+                    "253 ft",
+                    "0.1 mi",
+                    "0.1 mi",
+                    "325 ft",
+                    "0.1 mi",
+                    "262 ft",
+                    "0.3 mi",
+                    "269 ft",
+                    "131 ft"
+                ],
+                [
+                    "Converse Flagship Store, 560 Broadway, New York, NY 10012",
+                    "Bloomingdale's, 504 Broadway, New York, NY 10012",
+                    "UGG Soho, 79 Mercer St, New York, NY 10012"
+                ]
+            ],
+            "mse": [
+                [
+                    662582.2725,
+                    750.575,
+                    315.5
+                ],
+                [
+                    625912.627,
+                    711.8299999999999,
+                    466.7
+                ]
+            ]
+        }
+    },
+    "map3_time_square": {
+        "set_0": {
+            "model_answers": [
+                [
+                    "A"
+                ],
+                [
+                    "A",
+                    "left",
+                    "left",
+                    "left",
+                    "right"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "D"
+                ]
+            ],
+            "gt_answers": [
+                [
+                    "D"
+                ],
+                [
+                    "D"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "D"
+                ]
+            ],
+            "model_choice": [
+                [
+                    "right",
+                    "right",
+                    "left"
+                ],
+                [
+                    "left",
+                    "left",
+                    "left",
+                    "right",
+                    "left"
+                ],
+                [
+                    "331.8 ft",
+                    "172.5 ft",
+                    "0.1 mi",
+                    "0.0 mi"
+                ],
+                [
+                    "0.2 mi",
+                    "536.8 ft",
+                    "223.5 ft",
+                    "394.0 ft",
+                    "0.1 mi"
+                ],
+                [
+                    "Times Square, Manhattan, NY 10036",
+                    "M&M'S New York, 1600 Broadway, New York, NY 10019",
+                    "Chipotle Mexican Grill, 129 W 48th St, New York, NY 10020"
+                ]
+            ],
+            "gt_choice": [
+                [
+                    "right",
+                    "left",
+                    "right"
+                ],
+                [
+                    "left",
+                    "left",
+                    "left",
+                    "left",
+                    "left"
+                ],
+                [
+                    "79 ft",
+                    "0.1 mi",
+                    "456 ft",
+                    "240 ft"
+                ],
+                [
+                    "0.1 mi",
+                    "446 ft",
+                    "262 ft",
+                    "0.2 mi",
+                    "0.1 mi"
+                ],
+                [
+                    "Times Square, Manhattan, NY 10036",
+                    "M&M'S New York, 1600 Broadway, New York, NY 10019",
+                    "Chipotle Mexican Grill, 129 W 48th St, New York, NY 10020"
+                ]
+            ],
+            "mse": [
+                [
+                    63268.0225,
+                    258.075,
+                    325.75
+                ],
+                [
+                    145350.978,
+                    547.6600000000001,
+                    564.0
+                ]
+            ]
+        },
+        "set_1": {
+            "model_answers": [
+                [
+                    "C"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "C"
+                ],
+                [
+                    "C"
+                ],
+                [
+                    "C"
+                ]
+            ],
+            "gt_answers": [
+                [
+                    "C"
+                ],
+                [
+                    "D"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "C"
+                ],
+                [
+                    "A"
+                ]
+            ],
+            "model_choice": [
+                [
+                    "right",
+                    "left",
+                    "right"
+                ],
+                [
+                    "right",
+                    "left",
+                    "left",
+                    "right",
+                    "left",
+                    "right"
+                ],
+                [
+                    "131.3 ft",
+                    "0.1 mi",
+                    "0.0 mi",
+                    "0.1 mi",
+                    "121.2 ft"
+                ],
+                [
+                    "128 ft",
+                    "135 ft",
+                    "259 ft",
+                    "0.2 mi",
+                    "0.1 mi",
+                    "0.1 mi"
+                ],
+                [
+                    "M&M'S New York, 1600 Broadway, New York, NY 10019",
+                    "Times Square, Manhattan, NY 10036",
+                    "Marquis Theatre, 210 W 46th St, New York, NY 10036"
+                ]
+            ],
+            "gt_choice": [
+                [
+                    "right",
+                    "left",
+                    "right"
+                ],
+                [
+                    "left",
+                    "right",
+                    "right",
+                    "right",
+                    "right",
+                    "left"
+                ],
+                [
+                    "128 ft",
+                    "20 ft",
+                    "0.1 mi",
+                    "135 ft",
+                    "79 ft"
+                ],
+                [
+                    "128 ft",
+                    "135 ft",
+                    "259 ft",
+                    "0.2 mi",
+                    "0.1 mi",
+                    "0.1 mi"
+                ],
+                [
+                    "M&M'S New York, 1600 Broadway, New York, NY 10019",
+                    "Times Square, Manhattan, NY 10036",
+                    "Marquis Theatre, 210 W 46th St, New York, NY 10036"
+                ]
+            ],
+            "mse": [
+                [
+                    138617.74599999998,
+                    261.7,
+                    178.0
+                ],
+                [
+                    0.0,
+                    439.0,
+                    439.0
+                ]
+            ]
+        },
+        "set_2": {
+            "model_answers": [
+                [
+                    "D"
+                ],
+                [
+                    "C"
+                ],
+                [
+                    "A",
+                    "A"
+                ],
+                [
+                    "D"
+                ],
+                [
+                    "C"
+                ]
+            ],
+            "gt_answers": [
+                [
+                    "C"
+                ],
+                [
+                    "D"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "C"
+                ],
+                [
+                    "C"
+                ]
+            ],
+            "model_choice": [
+                [
+                    "left",
+                    "left",
+                    "right",
+                    "left"
+                ],
+                [
+                    "right",
+                    "left",
+                    "left",
+                    "right",
+                    "right",
+                    "right",
+                    "left",
+                    "left"
+                ],
+                [
+                    "0.2 mi",
+                    "0.2 mi",
+                    "0.2 mi",
+                    "276 ft"
+                ],
+                [
+                    "0.2 mi",
+                    "487.1 ft",
+                    "0.4 mi",
+                    "152.5 ft",
+                    "0.3 mi",
+                    "0.1 mi",
+                    "182.6 ft",
+                    "358.1 ft"
+                ],
+                [
+                    "New York Marriott Marquis, 1535 Broadway, New York, NY 10036",
+                    "Times Square, Manhattan, NY 10036",
+                    "Grace Building, W. R. Grace Building, 1114 6th Ave, New York, NY 10110"
+                ]
+            ],
+            "gt_choice": [
+                [
+                    "left",
+                    "right",
+                    "right",
+                    "right"
+                ],
+                [
+                    "right",
+                    "left",
+                    "left",
+                    "right",
+                    "left",
+                    "right",
+                    "left",
+                    "right"
+                ],
+                [
+                    "0.2 mi",
+                    "0.2 mi",
+                    "0.2 mi",
+                    "276 ft"
+                ],
+                [
+                    "240 ft",
+                    "0.3 mi",
+                    "0.2 mi",
+                    "0.1 mi",
+                    "364 ft",
+                    "364 ft",
+                    "282 ft",
+                    "0.1 mi"
+                ],
+                [
+                    "New York Marriott Marquis, 1535 Broadway, New York, NY 10036",
+                    "Times Square, Manhattan, NY 10036",
+                    "Grace Building, W. R. Grace Building, 1114 6th Ave, New York, NY 10110"
+                ]
+            ],
+            "mse": [
+                [
+                    0.0,
+                    861.0,
+                    861.0
+                ],
+                [
+                    584903.02875,
+                    807.5375000000001,
+                    618.25
+                ]
+            ]
+        },
+        "set_3": {
+            "model_answers": [
+                [
+                    "B"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "D"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "B"
+                ]
+            ],
+            "gt_answers": [
+                [
+                    "B"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "D"
+                ]
+            ],
+            "model_choice": [
+                [
+                    "right",
+                    "right",
+                    "left",
+                    "right"
+                ],
+                [
+                    "left",
+                    "left",
+                    "left",
+                    "right",
+                    "right",
+                    "right"
+                ],
+                [
+                    "246.2 ft",
+                    "269.5 ft",
+                    "0.2 mi",
+                    "0.1 mi"
+                ],
+                [
+                    "364 ft",
+                    "282 ft",
+                    "0.1 mi",
+                    "0.2 mi",
+                    "0.1 mi",
+                    "0.1 mi"
+                ],
+                [
+                    "Grace Building, W. R. Grace Building, 1114 6th Ave, New York, NY 10110",
+                    "Marquis Theatre, 210 W 46th St, New York, NY 10036",
+                    "Times Square, Manhattan, NY 10036"
+                ]
+            ],
+            "gt_choice": [
+                [
+                    "right",
+                    "right",
+                    "left",
+                    "right"
+                ],
+                [
+                    "right",
+                    "left",
+                    "right",
+                    "right",
+                    "right",
+                    "right"
+                ],
+                [
+                    "0.2 mi",
+                    "276 ft",
+                    "0.1 mi",
+                    "259 ft"
+                ],
+                [
+                    "364 ft",
+                    "282 ft",
+                    "0.1 mi",
+                    "0.2 mi",
+                    "0.1 mi",
+                    "0.1 mi"
+                ],
+                [
+                    "Marquis Theatre, 210 W 46th St, New York, NY 10036",
+                    "Times Square, Manhattan, NY 10036",
+                    "Grace Building, W. R. Grace Building, 1114 6th Ave, New York, NY 10110"
+                ]
+            ],
+            "mse": [
+                [
+                    251740.82249999998,
+                    524.925,
+                    529.75
+                ],
+                [
+                    0.0,
+                    547.6666666666666,
+                    547.6666666666666
+                ]
+            ]
+        },
+        "set_4": {
+            "model_answers": [
+                [
+                    "C"
+                ],
+                [
+                    "right",
+                    "left",
+                    "left",
+                    "right",
+                    "left",
+                    "right",
+                    "left",
+                    "left",
+                    "left",
+                    "left",
+                    "right",
+                    "A"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "B"
+                ]
+            ],
+            "gt_answers": [
+                [
+                    "A"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "C"
+                ]
+            ],
+            "model_choice": [
+                [
+                    "right",
+                    "right",
+                    "left",
+                    "left",
+                    "right",
+                    "right"
+                ],
+                [],
+                [
+                    "259 ft",
+                    "0.2 mi",
+                    "0.2 mi",
+                    "364 ft",
+                    "0.3 mi",
+                    "446 ft"
+                ],
+                [
+                    "0.4 mi",
+                    "145.6 ft",
+                    "449.8 ft",
+                    "0.0 mi",
+                    "0.3 mi",
+                    "581.2 ft",
+                    "0.1 mi",
+                    "0.4 mi",
+                    "92.9 ft",
+                    "223.0 ft"
+                ],
+                [
+                    "Marquis Theatre, 210 W 46th St, New York, NY 10036",
+                    "Chipotle Mexican Grill, 129 W 48th St, New York, NY 10020",
+                    "Grace Building, W. R. Grace Building, 1114 6th Ave, New York, NY 10110"
+                ]
+            ],
+            "gt_choice": [
+                [
+                    "right",
+                    "left",
+                    "right",
+                    "right",
+                    "left",
+                    "right"
+                ],
+                [
+                    "right",
+                    "left",
+                    "left",
+                    "right",
+                    "left",
+                    "right",
+                    "left",
+                    "left",
+                    "left",
+                    "left"
+                ],
+                [
+                    "259 ft",
+                    "0.2 mi",
+                    "0.2 mi",
+                    "364 ft",
+                    "0.3 mi",
+                    "446 ft"
+                ],
+                [
+                    "262 ft",
+                    "0.3 mi",
+                    "0.2 mi",
+                    "0.1 mi",
+                    "364 ft",
+                    "364 ft",
+                    "0.3 mi",
+                    "0.2 mi",
+                    "266 ft",
+                    "456 ft"
+                ],
+                [
+                    "Grace Building, W. R. Grace Building, 1114 6th Ave, New York, NY 10110",
+                    "Marquis Theatre, 210 W 46th St, New York, NY 10036",
+                    "Chipotle Mexican Grill, 129 W 48th St, New York, NY 10020"
+                ]
+            ],
+            "mse": [
+                [
+                    0.0,
+                    794.1666666666666,
+                    794.1666666666666
+                ],
+                [
+                    998785.7449999999,
+                    782.8499999999999,
+                    752.0
+                ]
+            ]
+        }
+    },
+    "map4_williamsburg": {
+        "set_0": {
+            "model_answers": [
+                [
+                    "D"
+                ],
+                [
+                    "C"
+                ],
+                [
+                    "D"
+                ],
+                [
+                    "D"
+                ],
+                [
+                    "C"
+                ]
+            ],
+            "gt_answers": [
+                [
+                    "B"
+                ],
+                [
+                    "C"
+                ],
+                [
+                    "D"
+                ],
+                [
+                    "D"
+                ],
+                [
+                    "D"
+                ]
+            ],
+            "model_choice": [
+                [
+                    "left",
+                    "left",
+                    "left",
+                    "left",
+                    "right"
+                ],
+                [
+                    "left",
+                    "right",
+                    "right",
+                    "right",
+                    "left",
+                    "right",
+                    "left",
+                    "left",
+                    "right"
+                ],
+                [
+                    "0.3 mi",
+                    "262 ft",
+                    "236 ft",
+                    "0.2 mi",
+                    "0.2 mi"
+                ],
+                [
+                    "144 ft",
+                    "0.1 mi",
+                    "0.4 mi",
+                    "259 ft",
+                    "223 ft",
+                    "0.1 mi",
+                    "0.2 mi",
+                    "0.1 mi",
+                    "436 ft"
+                ],
+                [
+                    "CVS, 27 N 6th St, Brooklyn, NY 11249",
+                    "Arlo Williamsburg, 96 Wythe Ave, Brooklyn, NY 11249",
+                    "Spectrum Store, 177 N 7th St, Brooklyn, NY 11211"
+                ]
+            ],
+            "gt_choice": [
+                [
+                    "left",
+                    "right",
+                    "right",
+                    "right",
+                    "right"
+                ],
+                [
+                    "left",
+                    "right",
+                    "right",
+                    "right",
+                    "left",
+                    "right",
+                    "left",
+                    "left",
+                    "right"
+                ],
+                [
+                    "0.3 mi",
+                    "262 ft",
+                    "236 ft",
+                    "0.2 mi",
+                    "0.2 mi"
+                ],
+                [
+                    "144 ft",
+                    "0.1 mi",
+                    "0.4 mi",
+                    "259 ft",
+                    "223 ft",
+                    "0.1 mi",
+                    "0.2 mi",
+                    "0.1 mi",
+                    "436 ft"
+                ],
+                [
+                    "CVS, 27 N 6th St, Brooklyn, NY 11249",
+                    "Arlo Williamsburg, 96 Wythe Ave, Brooklyn, NY 11249",
+                    "Spectrum Store, 177 N 7th St, Brooklyn, NY 11211"
+                ]
+            ],
+            "mse": [
+                [
+                    0.0,
+                    838.8,
+                    838.8
+                ],
+                [
+                    0.0,
+                    646.0,
+                    646.0
+                ]
+            ]
+        },
+        "set_1": {
+            "model_answers": [
+                [
+                    "B"
+                ],
+                [
+                    "D"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "D"
+                ],
+                [
+                    "C"
+                ]
+            ],
+            "gt_answers": [
+                [
+                    "B"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "A"
+                ]
+            ],
+            "model_choice": [
+                [
+                    "left",
+                    "right",
+                    "right",
+                    "left",
+                    "left",
+                    "right"
+                ],
+                [
+                    "right",
+                    "left",
+                    "right",
+                    "right"
+                ],
+                [
+                    "223.6 ft",
+                    "270.3 ft",
+                    "106.4 ft",
+                    "31.8 ft",
+                    "10.3 ft",
+                    "0.8 mi"
+                ],
+                [
+                    "0.2 mi",
+                    "89.6 ft",
+                    "0.4 mi",
+                    "0.2 mi"
+                ],
+                [
+                    "Brooklyn Bowl, 61 Wythe Ave, Brooklyn, NY 11249",
+                    "Arlo Williamsburg, 96 Wythe Ave, Brooklyn, NY 11249",
+                    "Mugs Ale House, 125 Bedford Ave, Brooklyn, NY 11211"
+                ]
+            ],
+            "gt_choice": [
+                [
+                    "left",
+                    "right",
+                    "right",
+                    "left",
+                    "left",
+                    "right"
+                ],
+                [
+                    "left",
+                    "left",
+                    "left",
+                    "right"
+                ],
+                [
+                    "223 ft",
+                    "0.2 mi",
+                    "92 ft",
+                    "79 ft",
+                    "79 ft",
+                    "269 ft"
+                ],
+                [
+                    "482 ft",
+                    "0.2 mi",
+                    "151 ft",
+                    "282 ft"
+                ],
+                [
+                    "Mugs Ale House, 125 Bedford Ave, Brooklyn, NY 11211",
+                    "Brooklyn Bowl, 61 Wythe Ave, Brooklyn, NY 11249",
+                    "Arlo Williamsburg, 96 Wythe Ave, Brooklyn, NY 11249"
+                ]
+            ],
+            "mse": [
+                [
+                    2711084.1233333335,
+                    811.0666666666666,
+                    299.6666666666667
+                ],
+                [
+                    1427000.49,
+                    1078.4,
+                    492.75
+                ]
+            ]
+        },
+        "set_2": {
+            "model_answers": [
+                [
+                    "B"
+                ],
+                [
+                    "C"
+                ],
+                [
+                    "C"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "B"
+                ]
+            ],
+            "gt_answers": [
+                [
+                    "A"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "C"
+                ],
+                [
+                    "C"
+                ],
+                [
+                    "C"
+                ]
+            ],
+            "model_choice": [
+                [
+                    "right",
+                    "right",
+                    "left",
+                    "right",
+                    "right",
+                    "left",
+                    "left"
+                ],
+                [
+                    "left",
+                    "right",
+                    "right",
+                    "left",
+                    "right",
+                    "right",
+                    "right"
+                ],
+                [
+                    "492 ft",
+                    "0.3 mi",
+                    "79 ft",
+                    "79 ft",
+                    "92 ft",
+                    "0.2 mi",
+                    "223 ft"
+                ],
+                [
+                    "0.1 mi",
+                    "639.7 ft",
+                    "649.7 ft",
+                    "587.8 ft",
+                    "537.5 ft",
+                    "0.1 mi",
+                    "0.3 mi"
+                ],
+                [
+                    "Brooklyn Bowl, 61 Wythe Ave, Brooklyn, NY 11249",
+                    "CVS, 27 N 6th St, Brooklyn, NY 11249",
+                    "Mugs Ale House, 125 Bedford Ave, Brooklyn, NY 11211"
+                ]
+            ],
+            "gt_choice": [
+                [
+                    "left",
+                    "right",
+                    "left",
+                    "left",
+                    "left",
+                    "right",
+                    "right"
+                ],
+                [
+                    "left",
+                    "right",
+                    "right",
+                    "left",
+                    "left",
+                    "left",
+                    "right"
+                ],
+                [
+                    "492 ft",
+                    "0.3 mi",
+                    "79 ft",
+                    "79 ft",
+                    "92 ft",
+                    "0.2 mi",
+                    "223 ft"
+                ],
+                [
+                    "144 ft",
+                    "0.3 mi",
+                    "459 ft",
+                    "413 ft",
+                    "0.1 mi",
+                    "0.2 mi",
+                    "299 ft"
+                ],
+                [
+                    "Mugs Ale House, 125 Bedford Ave, Brooklyn, NY 11211",
+                    "Brooklyn Bowl, 61 Wythe Ave, Brooklyn, NY 11249",
+                    "CVS, 27 N 6th St, Brooklyn, NY 11249"
+                ]
+            ],
+            "mse": [
+                [
+                    0.0,
+                    515.0,
+                    515.0
+                ],
+                [
+                    433739.8957142857,
+                    722.1,
+                    640.4285714285714
+                ]
+            ]
+        },
+        "set_3": {
+            "model_answers": [
+                [
+                    "left",
+                    "left",
+                    "right",
+                    "left",
+                    "right",
+                    "A"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "D"
+                ]
+            ],
+            "gt_answers": [
+                [
+                    "D"
+                ],
+                [
+                    "D"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "D"
+                ],
+                [
+                    "B"
+                ]
+            ],
+            "model_choice": [
+                [],
+                [
+                    "right",
+                    "left",
+                    "right",
+                    "left",
+                    "right"
+                ],
+                [
+                    "492 ft",
+                    "0.3 mi",
+                    "79 ft",
+                    "79 ft",
+                    "269 ft"
+                ],
+                [
+                    "0.3 mi",
+                    "0.5 mi",
+                    "175.5 ft",
+                    "640.2 ft",
+                    "0.2 mi"
+                ],
+                [
+                    "Arlo Williamsburg, 96 Wythe Ave, Brooklyn, NY 11249",
+                    "Brooklyn Bowl, 61 Wythe Ave, Brooklyn, NY 11249",
+                    "CVS, 27 N 6th St, Brooklyn, NY 11249"
+                ]
+            ],
+            "gt_choice": [
+                [
+                    "left",
+                    "right",
+                    "left",
+                    "left",
+                    "right"
+                ],
+                [
+                    "left",
+                    "right",
+                    "right",
+                    "left",
+                    "right"
+                ],
+                [
+                    "492 ft",
+                    "0.3 mi",
+                    "79 ft",
+                    "79 ft",
+                    "269 ft"
+                ],
+                [
+                    "144 ft",
+                    "0.3 mi",
+                    "459 ft",
+                    "413 ft",
+                    "282 ft"
+                ],
+                [
+                    "Brooklyn Bowl, 61 Wythe Ave, Brooklyn, NY 11249",
+                    "Arlo Williamsburg, 96 Wythe Ave, Brooklyn, NY 11249",
+                    "CVS, 27 N 6th St, Brooklyn, NY 11249"
+                ]
+            ],
+            "mse": [
+                [
+                    0.0,
+                    500.6,
+                    500.6
+                ],
+                [
+                    783960.818,
+                    1219.1399999999999,
+                    576.4
+                ]
+            ]
+        },
+        "set_4": {
+            "model_answers": [
+                [
+                    "D"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "C"
+                ]
+            ],
+            "gt_answers": [
+                [
+                    "D"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "B"
+                ]
+            ],
+            "model_choice": [
+                [
+                    "right",
+                    "right",
+                    "right",
+                    "right",
+                    "left"
+                ],
+                [
+                    "left",
+                    "left",
+                    "right",
+                    "right",
+                    "right",
+                    "right",
+                    "right",
+                    "left"
+                ],
+                [
+                    "39 ft",
+                    "0.2 mi",
+                    "85 ft",
+                    "269 ft",
+                    "79 ft"
+                ],
+                [
+                    "482 ft",
+                    "0.2 mi",
+                    "436 ft",
+                    "85 ft",
+                    "453 ft",
+                    "0.1 mi",
+                    "459 ft",
+                    "413 ft"
+                ],
+                [
+                    "Mugs Ale House, 125 Bedford Ave, Brooklyn, NY 11211",
+                    "Arlo Williamsburg, 96 Wythe Ave, Brooklyn, NY 11249",
+                    "Brooklyn Bowl, 61 Wythe Ave, Brooklyn, NY 11249"
+                ]
+            ],
+            "gt_choice": [
+                [
+                    "right",
+                    "right",
+                    "right",
+                    "right",
+                    "left"
+                ],
+                [
+                    "left",
+                    "left",
+                    "right",
+                    "right",
+                    "right",
+                    "right",
+                    "right",
+                    "left"
+                ],
+                [
+                    "39 ft",
+                    "0.2 mi",
+                    "85 ft",
+                    "269 ft",
+                    "79 ft"
+                ],
+                [
+                    "482 ft",
+                    "0.2 mi",
+                    "436 ft",
+                    "85 ft",
+                    "453 ft",
+                    "0.1 mi",
+                    "459 ft",
+                    "413 ft"
+                ],
+                [
+                    "Mugs Ale House, 125 Bedford Ave, Brooklyn, NY 11211",
+                    "Brooklyn Bowl, 61 Wythe Ave, Brooklyn, NY 11249",
+                    "Arlo Williamsburg, 96 Wythe Ave, Brooklyn, NY 11249"
+                ]
+            ],
+            "mse": [
+                [
+                    0.0,
+                    305.6,
+                    305.6
+                ],
+                [
+                    0.0,
+                    489.0,
+                    489.0
+                ]
+            ]
+        }
+    },
+    "map5_chinatown": {
+        "set_0": {
+            "model_answers": [
+                [
+                    "A",
+                    "left",
+                    "right",
+                    "left",
+                    "right"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "D"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "B"
+                ]
+            ],
+            "gt_answers": [
+                [
+                    "A"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "D"
+                ],
+                [
+                    "B"
+                ]
+            ],
+            "model_choice": [
+                [
+                    "left",
+                    "right",
+                    "left",
+                    "right"
+                ],
+                [
+                    "left",
+                    "right",
+                    "right",
+                    "left",
+                    "right",
+                    "right",
+                    "right",
+                    "left",
+                    "right",
+                    "right"
+                ],
+                [
+                    "235.8 ft",
+                    "322.4 ft",
+                    "0.4 mi",
+                    "0.0 mi"
+                ],
+                [
+                    "886.4 ft",
+                    "650.9 ft",
+                    "57.8 ft",
+                    "0.2 mi",
+                    "442.4 ft",
+                    "882.3 ft",
+                    "619.3 ft",
+                    "760.7 ft",
+                    "0.1 mi",
+                    "0.3 mi"
+                ],
+                [
+                    "Citi, 164 Canal St, New York, NY 10013",
+                    "Chase Bank, 231 Grand St, New York, NY 10013",
+                    "New York Jewelers Exchange, 70-72, 74 Bowery, New York, NY 10013"
+                ]
+            ],
+            "gt_choice": [
+                [
+                    "left",
+                    "right",
+                    "left",
+                    "right"
+                ],
+                [
+                    "left",
+                    "right",
+                    "right",
+                    "right",
+                    "left",
+                    "right",
+                    "left",
+                    "right",
+                    "right",
+                    "right"
+                ],
+                [
+                    "295 ft",
+                    "226 ft",
+                    "0.1 mi",
+                    "89 ft"
+                ],
+                [
+                    "36 ft",
+                    "0.2 mi",
+                    "0.1 mi",
+                    "463 ft",
+                    "299 ft",
+                    "236 ft",
+                    "236 ft",
+                    "272 ft",
+                    "472 ft",
+                    "180 ft"
+                ],
+                [
+                    "Citi, 164 Canal St, New York, NY 10013",
+                    "Chase Bank, 231 Grand St, New York, NY 10013",
+                    "New York Jewelers Exchange, 70-72, 74 Bowery, New York, NY 10013"
+                ]
+            ],
+            "mse": [
+                [
+                    632443.65,
+                    667.55,
+                    284.5
+                ],
+                [
+                    425838.904,
+                    746.78,
+                    377.8
+                ]
+            ]
+        },
+        "set_1": {
+            "model_answers": [
+                [
+                    "B"
+                ],
+                [
+                    "C"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "D"
+                ],
+                [
+                    "C"
+                ]
+            ],
+            "gt_answers": [
+                [
+                    "B"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "C"
+                ],
+                [
+                    "A"
+                ]
+            ],
+            "model_choice": [
+                [
+                    "right",
+                    "left",
+                    "right",
+                    "right"
+                ],
+                [
+                    "left",
+                    "right",
+                    "right",
+                    "right",
+                    "left",
+                    "right",
+                    "left",
+                    "right"
+                ],
+                [
+                    "390 ft",
+                    "0.2 mi",
+                    "446 ft",
+                    "36 ft"
+                ],
+                [
+                    "0.1 mi",
+                    "0.1 mi",
+                    "609.1 ft",
+                    "0.1 mi",
+                    "860.2 ft",
+                    "0.1 mi",
+                    "0.2 mi",
+                    "727.8 ft",
+                    "0.1 mi"
+                ],
+                [
+                    "Citi, 164 Canal St, New York, NY 10013",
+                    "ANJ Convenience, 84 Hester St, New York, NY 10002",
+                    "Pace High School, 100 Hester St, New York, NY 10002"
+                ]
+            ],
+            "gt_choice": [
+                [
+                    "right",
+                    "left",
+                    "right",
+                    "right"
+                ],
+                [
+                    "right",
+                    "right",
+                    "right",
+                    "left",
+                    "right",
+                    "right",
+                    "right",
+                    "right"
+                ],
+                [
+                    "390 ft",
+                    "0.2 mi",
+                    "446 ft",
+                    "36 ft"
+                ],
+                [
+                    "390 ft",
+                    "33 ft",
+                    "0.1 mi",
+                    "128 ft",
+                    "0.2 mi",
+                    "407 ft",
+                    "295 ft",
+                    "0.2 mi",
+                    "456 ft"
+                ],
+                [
+                    "Citi, 164 Canal St, New York, NY 10013",
+                    "Pace High School, 100 Hester St, New York, NY 10002",
+                    "ANJ Convenience, 84 Hester St, New York, NY 10002"
+                ]
+            ],
+            "mse": [
+                [
+                    0.0,
+                    482.0,
+                    482.0
+                ],
+                [
+                    130627.23222222223,
+                    654.7888888888889,
+                    483.22222222222223
+                ]
+            ]
+        },
+        "set_2": {
+            "model_answers": [
+                [
+                    "B"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "B"
+                ]
+            ],
+            "gt_answers": [
+                [
+                    "A"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "B"
+                ]
+            ],
+            "model_choice": [
+                [
+                    "right",
+                    "right",
+                    "left",
+                    "left",
+                    "left"
+                ],
+                [
+                    "left",
+                    "left",
+                    "left",
+                    "right",
+                    "left",
+                    "left",
+                    "right",
+                    "left",
+                    "right",
+                    "right",
+                    "right",
+                    "left",
+                    "right"
+                ],
+                [
+                    "0.2 mi",
+                    "446 ft",
+                    "36 ft",
+                    "295 ft",
+                    "226 ft"
+                ],
+                [
+                    "197 ft",
+                    "459 ft",
+                    "482 ft",
+                    "463 ft",
+                    "0.2 mi",
+                    "407 ft",
+                    "240 ft",
+                    "36 ft",
+                    "0.2 mi",
+                    "0.1 mi",
+                    "463 ft",
+                    "299 ft",
+                    "236 ft"
+                ],
+                [
+                    "Pace High School, 100 Hester St, New York, NY 10002",
+                    "New York Jewelers Exchange, 70-72, 74 Bowery, New York, NY 10013",
+                    "Citi, 164 Canal St, New York, NY 10013"
+                ]
+            ],
+            "gt_choice": [
+                [
+                    "left",
+                    "right",
+                    "right",
+                    "left",
+                    "right"
+                ],
+                [
+                    "left",
+                    "left",
+                    "left",
+                    "right",
+                    "left",
+                    "left",
+                    "right",
+                    "left",
+                    "right",
+                    "right",
+                    "right",
+                    "left",
+                    "right"
+                ],
+                [
+                    "0.2 mi",
+                    "446 ft",
+                    "36 ft",
+                    "295 ft",
+                    "226 ft"
+                ],
+                [
+                    "197 ft",
+                    "459 ft",
+                    "482 ft",
+                    "463 ft",
+                    "0.2 mi",
+                    "407 ft",
+                    "240 ft",
+                    "36 ft",
+                    "0.2 mi",
+                    "0.1 mi",
+                    "463 ft",
+                    "299 ft",
+                    "236 ft"
+                ],
+                [
+                    "Pace High School, 100 Hester St, New York, NY 10002",
+                    "New York Jewelers Exchange, 70-72, 74 Bowery, New York, NY 10013",
+                    "Citi, 164 Canal St, New York, NY 10013"
+                ]
+            ],
+            "mse": [
+                [
+                    0.0,
+                    411.8,
+                    411.8
+                ],
+                [
+                    0.0,
+                    455.53846153846155,
+                    455.53846153846155
+                ]
+            ]
+        },
+        "set_3": {
+            "model_answers": [
+                [
+                    "D"
+                ],
+                [
+                    "_**right**_",
+                    "_**left**_",
+                    "right",
+                    "right",
+                    "left",
+                    "_**right**_",
+                    "left",
+                    "right",
+                    "left",
+                    "left",
+                    "right",
+                    "right",
+                    "right",
+                    "B"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "C"
+                ]
+            ],
+            "gt_answers": [
+                [
+                    "B"
+                ],
+                [
+                    "D"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "A"
+                ]
+            ],
+            "model_choice": [
+                [
+                    "left",
+                    "right",
+                    "left",
+                    "right",
+                    "right",
+                    "right",
+                    "left",
+                    "left",
+                    "left"
+                ],
+                [],
+                [
+                    "0.2 mi",
+                    "446 ft",
+                    "36 ft",
+                    "335 ft",
+                    "66 ft",
+                    "138 ft",
+                    "39 ft",
+                    "43 ft",
+                    "95 ft"
+                ],
+                [
+                    "33 ft",
+                    "0.1 mi",
+                    "128 ft",
+                    "0.2 mi",
+                    "407 ft",
+                    "295 ft",
+                    "0.2 mi",
+                    "456 ft",
+                    "36 ft",
+                    "0.2 mi",
+                    "0.1 mi",
+                    "0.2 mi",
+                    "30 ft"
+                ],
+                [
+                    "Citi, 164 Canal St, New York, NY 10013",
+                    "Popeyes Louisiana Kitchen, 125 Canal St, New York, NY 10002",
+                    "ANJ Convenience, 84 Hester St, New York, NY 10002"
+                ]
+            ],
+            "gt_choice": [
+                [
+                    "left",
+                    "right",
+                    "right",
+                    "left",
+                    "right",
+                    "left",
+                    "right",
+                    "left",
+                    "right"
+                ],
+                [
+                    "right",
+                    "right",
+                    "left",
+                    "right",
+                    "right",
+                    "right",
+                    "right",
+                    "left",
+                    "right",
+                    "right",
+                    "right",
+                    "right"
+                ],
+                [
+                    "0.2 mi",
+                    "446 ft",
+                    "36 ft",
+                    "335 ft",
+                    "66 ft",
+                    "138 ft",
+                    "39 ft",
+                    "43 ft",
+                    "95 ft"
+                ],
+                [
+                    "33 ft",
+                    "0.1 mi",
+                    "128 ft",
+                    "0.2 mi",
+                    "407 ft",
+                    "295 ft",
+                    "0.2 mi",
+                    "456 ft",
+                    "36 ft",
+                    "0.2 mi",
+                    "0.1 mi",
+                    "0.2 mi",
+                    "30 ft"
+                ],
+                [
+                    "Popeyes Louisiana Kitchen, 125 Canal St, New York, NY 10002",
+                    "Citi, 164 Canal St, New York, NY 10013",
+                    "ANJ Convenience, 84 Hester St, New York, NY 10002"
+                ]
+            ],
+            "mse": [
+                [
+                    0.0,
+                    250.44444444444446,
+                    250.44444444444446
+                ],
+                [
+                    0.0,
+                    512.6923076923077,
+                    512.6923076923077
+                ]
+            ]
+        },
+        "set_4": {
+            "model_answers": [
+                [
+                    "B"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "A",
+                    "A"
+                ],
+                [
+                    "D"
+                ]
+            ],
+            "gt_answers": [
+                [
+                    "A"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "C"
+                ]
+            ],
+            "model_choice": [
+                [
+                    "left",
+                    "right",
+                    "right",
+                    "right",
+                    "left",
+                    "left"
+                ],
+                [
+                    "left",
+                    "right",
+                    "left",
+                    "right",
+                    "left",
+                    "right",
+                    "left"
+                ],
+                [
+                    "0.1 mi",
+                    "395.7 ft",
+                    "43.6 ft",
+                    "178.7 ft",
+                    "163.8 ft",
+                    "0.1 mi"
+                ],
+                [
+                    "236 ft",
+                    "272 ft",
+                    "472 ft",
+                    "180 ft",
+                    "381 ft",
+                    "0.2 mi",
+                    "30 ft"
+                ],
+                [
+                    "New York Jewelers Exchange, 70-72, 74 Bowery, New York, NY 10013",
+                    "Popeyes Louisiana Kitchen, 125 Canal St, New York, NY 10002",
+                    "Chase Bank, 231 Grand St, New York, NY 10013"
+                ]
+            ],
+            "gt_choice": [
+                [
+                    "left",
+                    "right",
+                    "right",
+                    "left",
+                    "left",
+                    "right"
+                ],
+                [
+                    "left",
+                    "right",
+                    "right",
+                    "right",
+                    "right",
+                    "right",
+                    "right"
+                ],
+                [
+                    "0.1 mi",
+                    "89 ft",
+                    "89 ft",
+                    "0.1 mi",
+                    "256 ft",
+                    "95 ft"
+                ],
+                [
+                    "236 ft",
+                    "272 ft",
+                    "472 ft",
+                    "180 ft",
+                    "381 ft",
+                    "0.2 mi",
+                    "30 ft"
+                ],
+                [
+                    "Popeyes Louisiana Kitchen, 125 Canal St, New York, NY 10002",
+                    "New York Jewelers Exchange, 70-72, 74 Bowery, New York, NY 10013",
+                    "Chase Bank, 231 Grand St, New York, NY 10013"
+                ]
+            ],
+            "mse": [
+                [
+                    69021.06333333334,
+                    306.3,
+                    264.1666666666667
+                ],
+                [
+                    0.0,
+                    375.2857142857143,
+                    375.2857142857143
+                ]
+            ]
+        }
+    },
+    "map6_east_village": {
+        "set_0": {
+            "model_answers": [
+                [
+                    "A"
+                ],
+                [
+                    "D"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "D"
+                ]
+            ],
+            "gt_answers": [
+                [
+                    "A"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "B"
+                ]
+            ],
+            "model_choice": [
+                [
+                    "right",
+                    "left",
+                    "right",
+                    "right",
+                    "right",
+                    "right",
+                    "left",
+                    "right",
+                    "left",
+                    "right",
+                    "left",
+                    "left",
+                    "right",
+                    "left",
+                    "right",
+                    "right"
+                ],
+                [
+                    "right",
+                    "right",
+                    "left",
+                    "left",
+                    "left",
+                    "right",
+                    "left",
+                    "right",
+                    "left"
+                ],
+                [
+                    "524.0 ft",
+                    "0.3 mi",
+                    "227.3 ft",
+                    "0.4 mi",
+                    "0.4 mi",
+                    "0.3 mi",
+                    "173.4 ft",
+                    "0.2 mi",
+                    "0.3 mi",
+                    "106.1 ft",
+                    "0.3 mi",
+                    "502.7 ft",
+                    "0.2 mi",
+                    "0.2 mi",
+                    "0.3 mi",
+                    "0.2 mi"
+                ],
+                [
+                    "0.1 mi",
+                    "0.1 mi",
+                    "0.6 mi",
+                    "0.1 mi",
+                    "46 ft",
+                    "0.3 mi",
+                    "0.4 mi",
+                    "0.1 mi",
+                    "292 ft"
+                ],
+                [
+                    "Lower East Side People's FCU, 37 Avenue B, New York, NY 10009",
+                    "Citizens, 143 2nd Ave, New York, NY 10003",
+                    "Chase Bank, 156 2nd Ave, New York, NY 10003"
+                ]
+            ],
+            "gt_choice": [
+                [
+                    "right",
+                    "left",
+                    "right",
+                    "right",
+                    "right",
+                    "right",
+                    "left",
+                    "right",
+                    "left",
+                    "right",
+                    "left",
+                    "left",
+                    "right",
+                    "left",
+                    "right",
+                    "right"
+                ],
+                [
+                    "left",
+                    "left",
+                    "right",
+                    "left",
+                    "right",
+                    "right",
+                    "left",
+                    "left",
+                    "left"
+                ],
+                [
+                    "0.3 mi",
+                    "180 ft",
+                    "13 ft",
+                    "358 ft",
+                    "344 ft",
+                    "0.2 mi",
+                    "0.2 mi",
+                    "30 ft",
+                    "217 ft",
+                    "23 ft",
+                    "75 ft",
+                    "358 ft",
+                    "59 ft",
+                    "135 ft",
+                    "0.3 mi",
+                    "203 ft"
+                ],
+                [
+                    "0.1 mi",
+                    "0.1 mi",
+                    "0.6 mi",
+                    "0.1 mi",
+                    "46 ft",
+                    "0.3 mi",
+                    "0.4 mi",
+                    "0.1 mi",
+                    "292 ft"
+                ],
+                [
+                    "Lower East Side People's FCU, 37 Avenue B, New York, NY 10009",
+                    "Chase Bank, 156 2nd Ave, New York, NY 10003",
+                    "Citizens, 143 2nd Ave, New York, NY 10003"
+                ]
+            ],
+            "mse": [
+                [
+                    1137312.246875,
+                    1118.84375,
+                    454.6875
+                ],
+                [
+                    0.0,
+                    1034.888888888889,
+                    1034.888888888889
+                ]
+            ]
+        },
+        "set_1": {
+            "model_answers": [
+                [
+                    "B"
+                ],
+                [
+                    "C"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "B"
+                ]
+            ],
+            "gt_answers": [
+                [
+                    "A"
+                ],
+                [
+                    "C"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "D"
+                ]
+            ],
+            "model_choice": [
+                [
+                    "left",
+                    "right",
+                    "right",
+                    "right",
+                    "right",
+                    "right"
+                ],
+                [
+                    "left",
+                    "left",
+                    "right",
+                    "right",
+                    "right",
+                    "left"
+                ],
+                [
+                    "0.1 mi",
+                    "0.1 mi",
+                    "180 ft",
+                    "322 ft",
+                    "0.1 mi",
+                    "292 ft"
+                ],
+                [
+                    "0.3 mi",
+                    "0.0 mi",
+                    "599.8 ft",
+                    "0.2 mi",
+                    "0.1 mi",
+                    "0.1 mi"
+                ],
+                [
+                    "Key Food Urban Marketplace, 52 Avenue A, New York, NY 10009",
+                    "McDonald's, 102 1st Ave., New York, NY 10009",
+                    "Chase Bank, 156 2nd Ave, New York, NY 10003"
+                ]
+            ],
+            "gt_choice": [
+                [
+                    "left",
+                    "right",
+                    "right",
+                    "left",
+                    "right",
+                    "right"
+                ],
+                [
+                    "left",
+                    "left",
+                    "right",
+                    "right",
+                    "right",
+                    "left"
+                ],
+                [
+                    "0.1 mi",
+                    "0.1 mi",
+                    "180 ft",
+                    "322 ft",
+                    "0.1 mi",
+                    "292 ft"
+                ],
+                [
+                    "0.2 mi",
+                    "0.1 mi",
+                    "62 ft",
+                    "436 ft",
+                    "0.1 mi",
+                    "0.2 mi"
+                ],
+                [
+                    "Chase Bank, 156 2nd Ave, New York, NY 10003",
+                    "McDonald's, 102 1st Ave., New York, NY 10009",
+                    "Key Food Urban Marketplace, 52 Avenue A, New York, NY 10009"
+                ]
+            ],
+            "mse": [
+                [
+                    0.0,
+                    396.3333333333333,
+                    396.3333333333333
+                ],
+                [
+                    251663.4733333333,
+                    715.9666666666667,
+                    611.0
+                ]
+            ]
+        },
+        "set_2": {
+            "model_answers": [],
+            "gt_answers": [],
+            "model_choice": [],
+            "gt_choice": [],
+            "mse": []
+        },
+        "set_3": {
+            "model_answers": [
+                [
+                    "C"
+                ],
+                [],
+                [
+                    "A"
+                ],
+                [
+                    "D"
+                ],
+                [
+                    "D"
+                ]
+            ],
+            "gt_answers": [
+                [
+                    "D"
+                ],
+                [
+                    "B"
+                ],
+                [
+                    "C"
+                ],
+                [
+                    "A"
+                ],
+                [
+                    "B"
+                ]
+            ],
+            "model_choice": [
+                [
+                    "right",
+                    "left",
+                    "right",
+                    "right"
+                ],
+                [],
+                [
+                    "280.3 ft",
+                    "313.0 ft",
+                    "263.5 ft",
+                    "0.1 mi"
+                ],
+                [
+                    "0.2 mi",
+                    "0.0 mi",
+                    "185.0 ft",
+                    "1415.5 ft"
+                ],
+                [
+                    "Key Food Urban Marketplace, 52 Avenue A, New York, NY 10009",
+                    "Blink Fitness East Village, 98 Avenue A, New York, NY 10009",
+                    "McDonald's, 102 1st Ave., New York, NY 10009"
+                ]
+            ],
+            "gt_choice": [
+                [
+                    "left",
+                    "right",
+                    "right",
+                    "right"
+                ],
+                [
+                    "right",
+                    "right",
+                    "left",
+                    "right"
+                ],
+                [
+                    "322 ft",
+                    "0.1 mi",
+                    "292 ft",
+                    "0.1 mi"
+                ],
+                [
+                    "436 ft",
+                    "0.1 mi",
+                    "0.2 mi",
+                    "0.1 mi"
+                ],
+                [
+                    "McDonald's, 102 1st Ave., New York, NY 10009",
+                    "Blink Fitness East Village, 98 Avenue A, New York, NY 10009",
+                    "Key Food Urban Marketplace, 52 Avenue A, New York, NY 10009"
+                ]
+            ],
+            "mse": [
+                [
+                    12194.035,
+                    346.2,
+                    417.5
+                ],
+                [
+                    552370.3125,
+                    664.125,
+                    637.0
+                ]
+            ]
+        },
+        "set_4": {
+            "model_answers": [],
+            "gt_answers": [],
+            "model_choice": [],
+            "gt_choice": [],
+            "mse": []
+        }
+    }
+}
