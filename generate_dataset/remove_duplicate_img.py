@@ -6,11 +6,11 @@ from collections import defaultdict, deque
 import json
 
 # Define paths
-source_folder = "C:/Users/ROG_ZL/Documents/github/thingking_in_street_new/data/long_route_random_single/map7_columbia/frames"  # Folder containing images
-duplicate_folder = "C:/Users/ROG_ZL/Documents/github/thingking_in_street_new/data/long_route_random_single/map7_columbia/frames_duplicate"  # Folder to move duplicates
+source_folder = "/home/zl3466/Documents/github/thinking_in_street/data/long_route_random_single/map9_5th_ave/frames"  # Folder containing images
+duplicate_folder = "/home/zl3466/Documents/github/thinking_in_street/data/long_route_random_single/map9_5th_ave/frames_duplicate"  # Folder to move duplicates
 
 # Define paths
-json_file_path = "C:/Users/ROG_ZL/Documents/github/thingking_in_street_new/data/long_route_random_single/map7_columbia/route_data.json"
+json_file_path = "/home/zl3466/Documents/github/thinking_in_street/data/long_route_random_single/map9_5th_ave/route_data.json"
 
 # Ensure duplicate folder exists
 os.makedirs(duplicate_folder, exist_ok=True)

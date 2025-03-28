@@ -1,5 +1,6 @@
 import sys
 import os
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from google import genai
 from bs4 import BeautifulSoup
@@ -10,9 +11,11 @@ from utils import *
 client = genai.Client(api_key="GEMINI_API_KEY")
 GOOGLE_MAPS_API_KEY = os.environ.get("GOOGLE_MAPS_API_KEY")
 
+
 def extract_model_answers(text):
     pattern = r"\[\[\[(.*?)\]\]\]"  # Non-greedy match inside [[[...]]]
     return re.findall(pattern, text)
+
 
 def extract_gt_answers(text):
     pattern = r"^-+\s*True Correct Answer:\s*([A-Z])\s*=+"  # Captures a single uppercase letter
@@ -38,6 +41,7 @@ def convert_to_feet(value):
         return num * 5280
     return num  # Already in feet
 
+
 def mean_squared_error(list1, list2):
     # print(list1, list2)
     """Compute MSE between two lists of distance values."""
@@ -51,6 +55,7 @@ def mean_squared_error(list1, list2):
     avg2 = sum(feet2) / len(feet2)
     return mse, avg1, avg2
 
+
 # Example Usage
 result_dir = "C:/Users/ROG_ZL/Documents/github/thingking_in_street_new/result/long_route_random_single_V1"
 map_list = os.listdir(result_dir)
@@ -61,7 +66,8 @@ for map_name in map_list:
     final_results[map_name] = {}
     for set_name in set_list:
         print(f"\nmap: {map_name}, set: {set_name}")
-        final_results[map_name][set_name] = {"model_answers": [], "gt_answers": [], "model_choice": [], "gt_choice": [], "mse": []}
+        final_results[map_name][set_name] = {"model_answers": [], "gt_answers": [], "model_choice": [], "gt_choice": [],
+                                             "mse": []}
         qna_json_file = f"{result_dir}/{map_name}/multi_stop_auto/{set_name}/Q&A.json"
         if not os.path.exists(qna_json_file):
             print("Analysis failed for this set. Continuing...")
@@ -101,7 +107,6 @@ for map_name in map_list:
 
             if model_ans_flag and gt_ans_flag:
                 if all(" ft" in item or " mi" in item for item in choices[gt_answers[0]]):
-
                     mse, model_avg, gt_avg = mean_squared_error(choices[model_answers[0]], choices[gt_answers[0]])
                     final_results[map_name][set_name]["mse"].append([mse, model_avg, gt_avg])
             print(f"mse | model_avg | gt_avg: {[mse, model_avg, gt_avg]}")

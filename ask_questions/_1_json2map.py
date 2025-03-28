@@ -95,7 +95,7 @@ def visualize_city_map(data, grid_size=(10, 10), cmap_name='tab10'):
     plt.show()
 
 
-txt_path = "C:/Users/ROG_ZL/Documents/github/thingking_in_street_new/data/long_route_random_single/map2_soho/bev_map/Q&A.json"
+txt_path = "../data/long_route_random_single/map2_soho/bev_map/Q&A.json"
 full_response_txt = json.load(open(txt_path))
 # print(full_response_txt[0])
 json_data = parse_json_from_response(full_response_txt[0])
