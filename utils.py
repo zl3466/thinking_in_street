@@ -2,6 +2,7 @@ import os
 import math
 import re
 import subprocess
+import time
 
 import requests
 import polyline
@@ -276,6 +277,49 @@ def get_directions(origin, destination, api_key, mode="driving", way_points=None
     return route, route["overview_polyline"]["points"], distance, duration
 
 
+def get_coord(location, api_key):
+    base_url = "https://maps.googleapis.com/maps/api/geocode/json"
+    params = {
+        "address": location,
+        "key": api_key
+    }
+    response = requests.get(base_url, params=params)
+    data = response.json()
+
+    if data["status"] == "OK":
+        coordinates = data["results"][0]["geometry"]["location"]
+        lat = coordinates["lat"]
+        lng = coordinates["lng"]
+        print(f"Latitude: {lat}, Longitude: {lng}")
+        # wait for 1 second to avoid exceeding api limit request per second
+        time.sleep(1)
+        return [lat, lng]
+    else:
+        raise RuntimeError(f"Failed to get location coord: {location} {data.get('error_message', data['status'])}")
+
+
+def normalize_coords(coords):
+    """ Normalize a list of [lat, lng] coordinates to [x, y] in meters. """
+    origin = coords[0]  # Take the first coordinate as the origin
+    normalized_coords = [[0, 0]]  # Origin point at [0, 0]
+
+    for coord in coords[1:]:
+        lat = coord[0]
+        lng = coord[1]
+        # Calculate the x (longitude) distance
+        x = geodesic((origin[0], origin[1]), (origin[0], lng)).meters
+        # Adjust the sign based on longitude difference
+        x *= -1 if lng < origin[1] else 1
+
+        # Calculate the y (latitude) distance
+        y = geodesic((origin[0], origin[1]), (lat, origin[1])).meters
+        # Adjust the sign based on latitude difference
+        y *= -1 if lat < origin[0] else 1
+
+        normalized_coords.append([x, y])
+
+    return normalized_coords
+
 def compute_bearing(lat1, lng1, lat2, lng2):
     lat1_r, lng1_r = map(math.radians, [lat1, lng1])
     lat2_r, lng2_r = map(math.radians, [lat2, lng2])
@@ -497,8 +541,6 @@ def analyze_street_view(image_directory, question_list, out_dir, surround=False,
 
 
 
-
-
 def get_active_project_id():
     """Retrieve the active Google Cloud project ID from gcloud configuration."""
     try:
@@ -510,43 +552,6 @@ def get_active_project_id():
         return None
 
 
-def check_gemini_quota_with_api_key(api_key):
-    """Check Gemini API quota usage using API key and active project."""
-
-    project_id = get_active_project_id()
-    if not project_id:
-        print("Project ID not found. Please ensure you are authenticated.")
-        return
-
-    # The URL for the Google Service Usage API for Vertex AI
-    quota_url = f"https://serviceusage.googleapis.com/v1/projects/{project_id}/services/aiplatform.googleapis.com"
-
-    # The headers with the API Key for authentication
-    headers = {
-        'Authorization': f'Bearer {api_key}'
-    }
-
-    # Make the request to fetch quota information
-    response = requests.get(quota_url, headers=headers)
-
-    if response.status_code == 200:
-        data = response.json()
-
-        if 'quota' in data:
-            for quota in data['quota']['limits']:
-                metric_name = quota['metric']
-                limit = quota['effectiveLimit']
-                usage = quota.get('usage', 0)  # Get usage (default to 0 if missing)
-
-                if limit and usage:
-                    usage_percentage = (usage / limit) * 100
-                    print(f"{metric_name}: {usage}/{limit} ({usage_percentage:.2f}%)")
-
-                    if usage_percentage > 90:
-                        print(f"⚠️ WARNING: {metric_name} is over 90% usage!")
-    else:
-        print(f"Error: {response.status_code}, {response.text}")
-
 
 def parse_json_from_response(response_text):
     json_match = re.search(r'```json\n(.*?)\n```', response_text, re.DOTALL)
@@ -555,4 +560,6 @@ def parse_json_from_response(response_text):
         json_data_str = json_match.group(1)
         data = json.loads(json_data_str)
     return data
+
+
 

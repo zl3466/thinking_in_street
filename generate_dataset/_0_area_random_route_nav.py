@@ -1,4 +1,7 @@
 from collections import deque
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from utils import *
 
 seen_hashes = deque(maxlen=6)
@@ -8,49 +11,52 @@ load_dotenv()
 GOOGLE_MAPS_API_KEY = os.environ.get("GOOGLE_MAPS_API_KEY")
 street_view_resolution = "640x400"
 
-map_dict = {"map1_downtown_bk": [[40.689981, -73.983547],
-                                 [40.691480, -73.987365],
-                                 [40.694969, -73.987166],
-                                 [40.694847, -73.984001],
-                                 [40.689973, -73.981591]],
-            "map2_soho": [[40.725781, -74.000906],
-                          [40.724238, -73.997790],
-                          [40.721791, -73.999872],
-                          [40.722941, -74.002176]],
-            "map3_time_square": [[40.759789, -73.987923],
-                                 [40.757398, -73.982247],
-                                 [40.753548, -73.985047],
-                                 [40.755979, -73.990729]],
-            "map4_williamsburg": [[40.723086, -73.958733],
-                                  [40.718807, -73.952433],
-                                  [40.717360, -73.954000],
-                                  [40.721422, -73.960540]],
-            "map5_chinatown": [[40.719086, -73.996479],
-                               [40.717375, -73.991236],
-                               [40.715121, -73.992582],
-                               [40.716862, -73.997730]],
-            "map6_east_village": [[40.730019, -73.983533],
-                                  [40.727108, -73.976643],
-                                  [40.722283, -73.980152],
-                                  [40.725184, -73.987054]],
-            "map7_columbia": [[40.812647, -73.963045],
-                              [40.810089, -73.957187],
-                              [40.803999, -73.960341],
-                              [40.806979, -73.967411]],
-            "map8_flushing": [[40.760266, -73.835000],
-                              [40.754724, -73.833031],
-                              [40.758193, -73.823212],
-                              [40.762980, -73.825329]],
-            "map9_upper_east": [[40.781542, -73.960439],
-                                [40.778815, -73.953956],
-                                [40.774293, -73.957269],
-                                [40.777025, -73.963758]],
-            "map10_5th_ave": [[40.761754, -73.979080],
-                              [40.759035, -73.972485],
-                              [40.755255, -73.975237],
-                              [40.758044, -73.981795]],
+map_dict = {
+    "New York": {
+        "map1_downtown_bk": [[40.689981, -73.983547],
+                             [40.691480, -73.987365],
+                             [40.694969, -73.987166],
+                             [40.694847, -73.984001],
+                             [40.689973, -73.981591]],
+        "map2_soho": [[40.725781, -74.000906],
+                      [40.724238, -73.997790],
+                      [40.721791, -73.999872],
+                      [40.722941, -74.002176]],
+        "map3_time_square": [[40.759789, -73.987923],
+                             [40.757398, -73.982247],
+                             [40.753548, -73.985047],
+                             [40.755979, -73.990729]],
+        "map4_williamsburg": [[40.723086, -73.958733],
+                              [40.718807, -73.952433],
+                              [40.717360, -73.954000],
+                              [40.721422, -73.960540]],
+        "map5_chinatown": [[40.719086, -73.996479],
+                           [40.717375, -73.991236],
+                           [40.715121, -73.992582],
+                           [40.716862, -73.997730]],
+        "map6_east_village": [[40.730019, -73.983533],
+                              [40.727108, -73.976643],
+                              [40.722283, -73.980152],
+                              [40.725184, -73.987054]],
+        "map7_columbia": [[40.812647, -73.963045],
+                          [40.810089, -73.957187],
+                          [40.803999, -73.960341],
+                          [40.806979, -73.967411]],
+        "map8_flushing": [[40.760266, -73.835000],
+                          [40.754724, -73.833031],
+                          [40.758193, -73.823212],
+                          [40.762980, -73.825329]],
+        "map9_5th_ave": [[40.761754, -73.979080],
+                         [40.759035, -73.972485],
+                         [40.755255, -73.975237],
+                         [40.758044, -73.981795]],
+        "map10_wall_st": [[40.709314, -74.011930],
+                          [40.705239, -74.004732],
+                          [40.703235, -74.007993],
+                          [40.704799, -74.014982]]
 
-            }
+    }
+}
 
 
 # Base directories
@@ -384,7 +390,7 @@ def fetch_street_view_image(lat, lng, heading, api_key,
     metadata_response = requests.get(metadata_url, params=metadata_params)
     if (metadata_response.status_code != 200 or
             metadata_response.json().get("status") != "OK"):
-        print(f"No Street View imagery at location: {lat}, {lng}")
+        print(f"No Street View imagery at location: {lat}, {lng}, {metadata_response.json().get('error_message', metadata_response.json()['status'])}")
         return None
 
     # If imagery is available, fetch it
@@ -466,32 +472,29 @@ def main():
     # print(map_order_dict.keys())
     # map_name = "map1_downtown_bk"
     # map_name = "map6_east_village"
-    for map_name in ["map8_flushing", "map9_upper_east", "map10_5th_ave"]:
+    city_name = "New York"
+    for map_name in ["map10_wall_st"]:
         # TODO: manually specify here if you want to generate surround-view image or singular image
         surround = False
 
         if surround:
-            BASE_DATA_DIR = "C:/Users/ROG_ZL/Documents/github/thingking_in_street_new/data/long_route_random_surround"
+            BASE_DATA_DIR = "../data/long_route_random_surround"
         else:
-            BASE_DATA_DIR = "C:/Users/ROG_ZL/Documents/github/thingking_in_street_new/data/long_route_random_single"
+            BASE_DATA_DIR = "../data/long_route_random_single"
 
         # for map_name in map_dict.keys():
 
-        area_corner_list = map_dict[map_name]
+        area_corner_list = map_dict[city_name][map_name]
         print(f"processing map {map_name}")
 
         # grid coord params
         grid_size = 30
-        heading_list = [0, 90, 180, 270]
-
-        # location_folder = get_location_folder_name(map_name)
-
         data_dir = f"{BASE_DATA_DIR}/{map_name}"
         os.makedirs(data_dir, exist_ok=True)
 
         ''' ============= get route ============= '''
         area_corner_arr = np.array(area_corner_list)
-        area_grid_pts = area2grid(GOOGLE_MAPS_API_KEY, area_corner_arr, grid_size, use_portion=0.2, max_num_waypoint=20)
+        area_grid_pts = area2grid(GOOGLE_MAPS_API_KEY, area_corner_arr, grid_size, use_portion=0.2, max_num_waypoint=16)
         all_positions_and_headings, distance, duration = get_routes_from_pts(area_grid_pts,
                                                                              route_file_out=f"{BASE_DATA_DIR}/{map_name}/route_map.html")
 
@@ -557,7 +560,7 @@ def main():
         # save a list of locations that the model can see from the footage for upcoming tasks
         question_list = ["The images I uploaded are from a dash cam video footage from a vehicle. They cover most of "
                          "the streets within an area.\n"
-                         " Give me 8 landmarks you can confidently see in this footage"]
+                         " Give me 10 landmarks you can confidently see in this footage"]
         results = analyze_street_view(data_dir, question_list, out_dir=data_dir)
         if results:
             with open(f"{data_dir}/seen_landmarks.json", 'w') as f:

@@ -1,4 +1,4 @@
-from area_random_route_nav import *
+from _0_area_random_route_nav import *
 
 roud_data_dir = "C:/Users/ROG_ZL/Documents/github/thingking_in_street_new/data/long_route_random_single/map1_downtown_bk/route_data.json"
 

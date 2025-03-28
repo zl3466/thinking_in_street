@@ -479,20 +479,3 @@ D. ['right', 'right', 'right', 'right']
 def is_ft_mi_list(lst):
     # Check if the list contains strings with exactly "ft" or "mi" as part of their value
     return all(" ft" in item or " mi" in item for item in lst)
-
-# Example lists
-list1 = ['left', 'left', 'left', 'left', 'left']
-list2 = ["49 ft", "0.1 mi", "0.1 mi", "259 ft", "0.1 mi", "459 ft", "171 ft", "0.1 mi", "249 ft", "89 ft"]
-
-print(is_ft_mi_list(list1))  # False (this is a list of directions)
-print(is_ft_mi_list(list2))  # True (this is a list with 'ft' and 'mi' values)
-#     "0.1 mi", "31.0 ft", "0.1 mi", "353.7 ft", "0.1 mi",
-#     "126.2 ft", "25.3 ft", "0.1 mi", "0.1 mi", "443.3 ft"
-# ]
-#
-# mse = mean_squared_error(list1, list2)
-# print(f"MSE: {mse:.2f} feet²")
-
-# # Replace with your Gemini API key
-# api_key = os.getenv("GEMINI_API_KEY")
-# check_gemini_quota_with_api_key(api_key)
