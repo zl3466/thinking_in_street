@@ -561,5 +561,36 @@ def parse_json_from_response(response_text):
         data = json.loads(json_data_str)
     return data
 
+def get_coord_from_route_data(route_data):
+    result = []
+    for frame in route_data["frames"]:
+        coord = frame["coordinates"]
+        lat = coord["lat"]
+        lng = coord["lng"]
+        result.append([lat, lng])
+
+    return result
 
 
+def coord_to_meter(coord, origin=[0, 0]):
+    """
+    Convert an individual [lat, lng] coordinate to [x, y] meters from the origin.
+
+    Args:
+        coord: The coordinate as [lat, lng].
+        origin: The origin coordinate as [lat, lng].
+
+    Returns:
+        A list [x, y] representing the coordinate in meters from the origin.
+    """
+    # Calculate x distance (longitude difference)
+    x = geodesic((origin[0], origin[1]), (origin[0], coord[1])).meters
+    if coord[1] < origin[1]:
+        x = -x  # Adjust sign for west
+
+    # Calculate y distance (latitude difference)
+    y = geodesic((origin[0], origin[1]), (coord[0], origin[1])).meters
+    if coord[0] < origin[0]:
+        y = -y  # Adjust sign for south
+
+    return [x, y]

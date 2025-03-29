@@ -13,7 +13,7 @@ street_view_resolution = "640x400"
 
 map_dict = {
     "New York": {
-        "map1_downtown_bk": [[40.689981, -73.983547],
+        "map1_downtown_bk_new": [[40.689981, -73.983547],
                              [40.691480, -73.987365],
                              [40.694969, -73.987166],
                              [40.694847, -73.984001],
@@ -473,7 +473,7 @@ def main():
     # map_name = "map1_downtown_bk"
     # map_name = "map6_east_village"
     city_name = "New York"
-    for map_name in ["map10_wall_st"]:
+    for map_name in ["map1_downtown_bk_new"]:
         # TODO: manually specify here if you want to generate surround-view image or singular image
         surround = False
 
