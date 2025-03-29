@@ -385,7 +385,7 @@ def generate_video_from_img(folder_dir, out_dir, frame_rate=5, reverse=True):
     video_width = sample_img.shape[1]
     video_height = sample_img.shape[0]
 
-    fourcc = cv2.VideoWriter_fourcc(*'avc1')
+    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
     out0 = cv2.VideoWriter(out_dir, fourcc, frame_rate, (video_width, video_height))
 
     for i in tqdm(range(len(img_list)), desc=f"{out_dir}"):
@@ -594,3 +594,5 @@ def coord_to_meter(coord, origin=[0, 0]):
         y = -y  # Adjust sign for south
 
     return [x, y]
+
+

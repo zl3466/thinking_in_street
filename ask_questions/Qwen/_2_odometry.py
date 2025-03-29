@@ -1,7 +1,7 @@
 import sys
 import os
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 from utils import *
 
 def generate_ranges(total_length, clip_size=20):
@@ -15,9 +15,8 @@ def generate_ranges(total_length, clip_size=20):
 
 
 def main():
-    data_dir = "../data/long_route_random_single"
-    result_dir = "../result/long_route_random_single"
-    question_dir = f"../ask_questions/distance_estimation"
+    data_dir = "../../data/long_route_random_single"
+    result_dir = "../../result/long_route_random_single"
     map_list = os.listdir(data_dir)
 
     # map_name = "map1_downtown_bk"

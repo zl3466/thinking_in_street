@@ -338,31 +338,6 @@ def generate_turn_headings(old_heading, new_heading, step=30):
     return turn_frames
 
 
-def generate_video_from_img(folder_dir, out_dir, frame_rate=5, reverse=True):
-    if not os.path.exists(folder_dir) or len(os.listdir(folder_dir)) == 0:
-        print(f"input image folder {folder_dir} is empty or does not exist")
-        return False
-    img_list = os.listdir(folder_dir)
-
-    img_list = sorted(img_list, reverse=(not reverse))
-    sample_img = cv2.imread(f"{folder_dir}/{img_list[0]}")
-    sample_img = cv2.resize(sample_img, dsize=(sample_img.shape[1], sample_img.shape[0]), interpolation=cv2.INTER_CUBIC)
-
-    video_width = sample_img.shape[1]
-    video_height = sample_img.shape[0]
-
-    fourcc = cv2.VideoWriter_fourcc(*'avc1')
-    out0 = cv2.VideoWriter(out_dir, fourcc, frame_rate, (video_width, video_height))
-
-    for i in tqdm(range(len(img_list)), desc=f"{out_dir}"):
-        img_filename = img_list[i]
-        img_dir = f"{folder_dir}/{img_filename}"
-        img = cv2.imread(img_dir)
-        img = cv2.resize(img, dsize=(sample_img.shape[1], sample_img.shape[0]), interpolation=cv2.INTER_CUBIC)
-        out0.write(img)
-    return True
-
-
 def get_image_hash(image_data):
     """Generate a hash of the image content."""
     return hashlib.md5(image_data).hexdigest()

@@ -2,7 +2,7 @@ import ast
 import sys
 import os
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 from utils import *
 
 
@@ -83,8 +83,8 @@ def eval_heading_displacement(response_path, frame_data, out_dir):
         json.dump(results, f, indent=4)
 
 
-data_dir = "../data/long_route_random_single"
-result_dir = "../result/long_route_random_single"
+data_dir = "../../data/long_route_random_single"
+result_dir = "../../result/long_route_random_single"
 map_list = os.listdir(data_dir)
 for map_name in map_list:
     if map_name != "map1_downtown_bk":
