@@ -1,9 +1,13 @@
 import ast
 import sys
 import os
+import numpy as np
+import json
+
+from geopy.distance import geodesic
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
-from utils import *
+from utils.qwen_utils import *
 
 
 def calculate_heading(lat1, lon1, lat2, lon2):
@@ -29,7 +33,7 @@ def calculate_heading(lat1, lon1, lat2, lon2):
 
 def eval_heading_displacement(response_path, frame_data, out_dir):
     full_response_txt = json.load(open(response_path))
-    json_data = parse_json_from_response(list(full_response_txt.values())[0])
+    json_data = parse_json_from_response(list(full_response_txt.values())[0][0])
     inferred_heading = json_data["delta_heading"]
     inferred_displacement = json_data["displacement"]
 
@@ -84,7 +88,7 @@ def eval_heading_displacement(response_path, frame_data, out_dir):
 
 
 data_dir = "../../data/long_route_random_single"
-result_dir = "../../result/long_route_random_single"
+result_dir = "../../result/long_route_random_single/qwen"
 map_list = os.listdir(data_dir)
 for map_name in map_list:
     if map_name != "map1_downtown_bk":
@@ -96,6 +100,7 @@ for map_name in map_list:
 
     if os.path.exists(f"{out_dir}/batches"):
         batch_list = os.listdir(f"{out_dir}/batches")
+        batch_list.sort(key=lambda f: int(''.join(filter(str.isdigit, f))))
     else:
         batch_list = []
 

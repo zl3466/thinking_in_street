@@ -2,7 +2,7 @@ import sys
 import os
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
-from utils import *
+from utils.qwen_utils import *
 
 def generate_ranges(total_length, clip_size=20):
     ranges = []
@@ -16,7 +16,7 @@ def generate_ranges(total_length, clip_size=20):
 
 def main():
     data_dir = "../../data/long_route_random_single"
-    result_dir = "../../result/long_route_random_single"
+    result_dir = "../../result/long_route_random_single/qwen"
     map_list = os.listdir(data_dir)
 
     # map_name = "map1_downtown_bk"
@@ -34,8 +34,8 @@ def main():
         os.makedirs(out_dir, exist_ok=True)
 
         # total_length = len(os.listdir(f"{map_root_dir}/frames"))
-        total_length = 50
-        clip_length = 10
+        total_length = 30
+        clip_length = 3
         batches = generate_ranges(total_length, clip_length)
 
         question_list = [
@@ -51,8 +51,8 @@ def main():
             f"For displacement, give your answer values in meter unit.\n"
             f"Finally, present your response in json format:\n"
             f"```json {{"
-            f"\"delta_heading\": [degree1, degree2, ... degree{clip_length-1}],\n"
-            f"\"displacement\": [displacement1, displacement2, ... displacement{clip_length-1}]\n"
+            f"\"delta_heading\": [degree1, ... degree{clip_length-1}],\n"
+            f"\"displacement\": [displacement1, ... displacement{clip_length-1}]\n"
             f"}}```\n"
             f"Make sure you have {clip_length-1} int or float elements in both the direction list and displacement list.\n"
             f"The delta headings and displacements can't be all the same\n\n"
@@ -60,8 +60,7 @@ def main():
 
         ''' ================== Inference ================== '''
         ''' upload images to model and ask questions '''
-        results, image_paths = analyze_street_view(map_root_dir, question_list,
-                                                   out_dir=map_root_dir, batches=batches, total_length=total_length)
+        results, image_paths = analyze_street_view_qwen(image_directory=map_root_dir, question_list=question_list, total_length=total_length, batches=batches)
 
         ''' ================== save questions and answers in md and json ================== '''
         ''' the json could be used later for auto eval? '''
@@ -94,8 +93,6 @@ def main():
                             file.write(f"{ans}")
                         with open(f"{out_dir}/batches/batch_{batches[i]}/Q&A.json", 'w') as f:
                             json.dump({question: ans}, f, indent=4)
-
-
 
         ''' ================== save questions and answers in md and json ================== '''
 

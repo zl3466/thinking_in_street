@@ -18,14 +18,12 @@ import numpy as np
 from geopy.distance import geodesic
 import random
 import folium
-from folium.plugins import HeatMap
-from collections import Counter
-from googleapiclient.discovery import build
-from google.auth import default
 from config import LLM_PROVIDER
 from model.gemini import GeminiModel
 from model.gpt4v import GPT4VModel
 from model.claude import ClaudeModel
+
+
 
 # AIzaSyAiLHN0SsxnsYjj3ycy8jv12JUUbIPkBkw
 GOOGLE_MAPS_API_KEY = os.environ.get("GOOGLE_MAPS_API_KEY")
@@ -538,7 +536,6 @@ def analyze_street_view(image_directory, question_list, out_dir, surround=False,
     except Exception as e:
         print(f"Error during analysis: {str(e)}")
         return None
-
 
 
 def get_active_project_id():
