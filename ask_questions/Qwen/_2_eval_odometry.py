@@ -85,6 +85,7 @@ def eval_heading_displacement(response_path, frame_data, out_dir):
 
     with open(f"{out_dir}/odometry_result.json", 'w') as f:
         json.dump(results, f, indent=4)
+    return rmse_delta_heading, rmse_displacement
 
 
 data_dir = "../../data/long_route_random_single"
@@ -98,21 +99,42 @@ for map_name in map_list:
     map_root_dir = f"{data_dir}/{map_name}"
     out_dir = f"{result_dir}/odometry/{map_name}"
 
-    if os.path.exists(f"{out_dir}/batches"):
-        batch_list = os.listdir(f"{out_dir}/batches")
-        batch_list.sort(key=lambda f: int(''.join(filter(str.isdigit, f))))
-    else:
-        batch_list = []
+    batch_folders = os.listdir(out_dir)
+    for batch_folder in batch_folders:
+        clip_size = batch_folder.split("_")[1]
+        total_size = batch_folder.split("_")[2]
+        print(f"{clip_size} image batches, total {total_size} images")
 
-    gt_route_path = f"{map_root_dir}/route_data.json"
-    gt_route_data_full = json.load(open(gt_route_path))
-    gt_frame_data_full = gt_route_data_full["frames"]
-    if len(batch_list) != 0:
-        for batch_name in batch_list:
-            response_path = f"{out_dir}/batches/{batch_name}/Q&A.json"
-            batch_idx_pair = ast.literal_eval(batch_name.split("_")[-1])
-            print(batch_idx_pair)
-            gt_route_data = gt_frame_data_full[batch_idx_pair[0]:batch_idx_pair[1]]
-            eval_heading_displacement(response_path, gt_route_data, f"{out_dir}/batches/{batch_name}")
+        batch_list = [f for f in os.listdir(f"{out_dir}/{batch_folder}") if
+                      os.path.isdir(f"{out_dir}/{batch_folder}/{f}")]
+        batch_list.sort(key=lambda f: int(''.join(filter(str.isdigit, f))))
+
+    # if os.path.exists(f"{out_dir}/batches"):
+    #     batch_list = os.listdir(f"{out_dir}/batches")
+    #     batch_list.sort(key=lambda f: int(''.join(filter(str.isdigit, f))))
+    # else:
+    #     batch_list = []
+
+        gt_route_path = f"{map_root_dir}/route_data.json"
+        gt_route_data_full = json.load(open(gt_route_path))
+        gt_frame_data_full = gt_route_data_full["frames"]
+
+        total_rmse_heading = []
+        total_rmse_disp = []
+        if len(batch_list) != 0:
+            for batch_name in batch_list:
+                response_path = f"{out_dir}/{batch_folder}/{batch_name}/Q&A.json"
+                batch_idx_pair = ast.literal_eval(batch_name.split("_")[-1])
+                # print(batch_idx_pair)
+                gt_route_data = gt_frame_data_full[batch_idx_pair[0]:batch_idx_pair[1]]
+                rmse_heading, rmse_disp = eval_heading_displacement(response_path, gt_route_data, f"{out_dir}/{batch_folder}/{batch_name}")
+
+                total_rmse_heading.append(rmse_heading)
+                total_rmse_disp.append(rmse_disp)
+
+        with open(f"{out_dir}/{batch_folder}/total_odometry_result.json", 'w') as f:
+            json.dump({"heading": total_rmse_heading, "displacement": total_rmse_disp}, f, indent=4)
+
+        print(f"Avg RMSE heading: {np.mean(np.array(total_rmse_heading))}, Avg RMSE displacement: {np.mean(np.array(total_rmse_disp))}\n")
 
 

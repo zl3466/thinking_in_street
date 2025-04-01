@@ -2,9 +2,17 @@ import os
 import re
 import math
 import json
-
+import numpy as np
 from transformers import Qwen2_5_VLForConditionalGeneration, AutoProcessor
 from qwen_vl_utils import process_vision_info
+
+
+class NumpyEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, np.ndarray):
+            return obj.tolist()  # convert numpy array to list
+        return super(NumpyEncoder, self).default(obj)
+
 
 
 def ask_qwen(model, processor, messages):
@@ -67,7 +75,7 @@ def analyze_street_view_qwen(image_directory, question_list, surround=False, tot
         model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
             "Qwen/Qwen2.5-VL-7B-Instruct", torch_dtype="auto", device_map="auto"
         )
-        processor = AutoProcessor.from_pretrained("Qwen/Qwen2.5-VL-3B-Instruct", min_pixels=min_pixels,
+        processor = AutoProcessor.from_pretrained("Qwen/Qwen2.5-VL-7B-Instruct", min_pixels=min_pixels,
                                               max_pixels=max_pixels)
 
         result = {}
@@ -75,7 +83,6 @@ def analyze_street_view_qwen(image_directory, question_list, surround=False, tot
             ''' process images in img_paths by batches '''
             for batch_idx_pair in batches:
                 filelist = image_paths[batch_idx_pair[0]:batch_idx_pair[1]]
-                print(filelist)
                 for q_idx in range(len(question_list)):
                     question = question_list[q_idx]
                     print(
@@ -86,6 +93,7 @@ def analyze_street_view_qwen(image_directory, question_list, surround=False, tot
                         content.append({"type": "image", "image": img_path})
                     content.append({"type": "text",
                                     "text": question})
+                    print(f"asking question with {len(content) - 1} images")
 
                     messages = [
                         {
