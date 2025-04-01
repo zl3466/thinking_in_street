@@ -11,6 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import ast
 import math
 import os
 import sys
@@ -127,6 +128,9 @@ def accuracy_reward(completions, solution, **kwargs):
         average_fmeasure = (scores['rouge1'].fmeasure + scores['rouge2'].fmeasure + scores['rougeL'].fmeasure) / 3
         return average_fmeasure
 
+    def sigmoid(x, a=1, b=0):
+        return 1 / (1 + math.exp(a * (-x - b)))
+
     question_type = kwargs['problem_type'][0]
 
     contents = [completion[0]["content"] for completion in completions]
@@ -167,6 +171,18 @@ def accuracy_reward(completions, solution, **kwargs):
                 rel_diff = (abs(out_number - gt_number) + 1e-9) / (abs(gt_number) + 1e-9)
                 rel_diff = min(1.0, max(0.0, rel_diff))
                 reward = 1 - rel_diff
+            elif question_type == "list":
+                output_ans_list = ast.literal_eval(output_ans)
+                gt_list = ast.literal_eval(gt_ans)
+                if len(output_ans_list) != len(gt_list):
+                    reward = 0.0
+                else:
+                    ''' reward = 2 * sigmoid(rmse) -> range(0, 1). Use a = 0.2 to get steep sigmoid '''
+                    squared_diffs = [(p - gt) ** 2 for p, gt in zip(output_ans_list, gt_list)]
+                    rmse = math.sqrt(sum(squared_diffs) / len(squared_diffs))
+                    reward = 2 * (1 - sigmoid(rmse, a=0.2, b=0))
+                    ''' we ensure a minimum reward of 0.1 if the number of elements in the list is correct '''
+                    reward = max(0.1, reward)
             else:
                 reward = 0.0
         except Exception as e:
@@ -192,6 +208,36 @@ def format_reward(completions, **kwargs):
     completion_contents = [completion[0]["content"] for completion in completions]
     matches = [re.fullmatch(pattern, content, re.DOTALL) for content in completion_contents]
     return [1.0 if match else 0.0 for match in matches]
+def format_reward_list(completions, **kwargs):
+    if kwargs['problem_type'][0] != "list":
+        """Reward function that checks if the completion has a specific format."""
+        pattern = r"<think>.*?</think>\s*<answer>.*?</answer>"
+        completion_contents = [completion[0]["content"] for completion in completions]
+        matches = [re.fullmatch(pattern, content, re.DOTALL) for content in completion_contents]
+        return [1.0 if match else 0.0 for match in matches]
+    else:
+        """
+        Reward function for list answers.
+        First we chech if answer has the <answer></anwswer> tag, reward=0.5
+        Then we check if the answer tag contains a list
+        """
+        pattern = r"<answer>.*?</answer>"
+        completion_contents = [completion[0]["content"] for completion in completions]
+        all_rewards = []
+        for content in completion_contents:
+            match = re.fullmatch(pattern, content, re.DOTALL)
+            if match:
+                reward = 0.5
+                list_pattern = r"<answer>\[.*?\]</answer>"
+                list_match = re.fullmatch(list_pattern, content, re.DOTALL)
+                if list_match:
+                    reward = 1.0
+            else:
+                reward = 0
+
+            all_rewards.append(reward)
+        return all_rewards
+
 
 
 def quaternion_to_yaw(q):
