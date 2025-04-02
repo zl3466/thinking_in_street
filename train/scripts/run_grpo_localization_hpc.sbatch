@@ -1,10 +1,15 @@
-export DEBUG_MODE="true" # Enable Debug if you want to see the rollout of model during RL
-export LOG_PATH="./debug_log_2b.txt"
-
-# For resume training:  --resume_from_checkpoint Model_Path \
-# Set temporal to choose between T-GRPO and GRPO, and len_control to enable or disable the length control reward.
-
-# Qwen/Qwen2.5-VL-7B-Instruct
+#!/bin/bash
+#
+#SBATCH --job-name=thinking_in_street_grpo
+#SBATCH --output=/scratch/zl3466/github/thinking_in_street/train_result/localization_grpo_test.out
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=16GB
+#SBATCH --time=3:00:00
+#SBATCH --gres=gpu:2
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=zl3466@nyu.edu
 
 module purge;
 module load anaconda3/2020.07;

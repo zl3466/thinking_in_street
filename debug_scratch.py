@@ -4,6 +4,27 @@ import re
 
 import numpy as np
 
+import transformers
+
+print("success")
+
+from transformers import (
+    AriaForConditionalGeneration,
+    AriaProcessor,
+    AutoModelForCausalLM,
+    AutoModelForSequenceClassification,
+    AutoProcessor,
+    AutoTokenizer,
+    GenerationConfig,
+    PreTrainedModel,
+    PreTrainedTokenizerBase,
+    Qwen2VLForConditionalGeneration,
+    Qwen2_5_VLForConditionalGeneration,
+    Trainer,
+    TrainerCallback,
+    is_wandb_available,
+)
+print("success2")
 
 def sigmoid(x, a=1, b=0):
     return 1 / (1 + math.exp(a*(-x-b)))
@@ -85,11 +106,11 @@ def format_reward(completions, **kwargs):
     return all_rewards
 
 
-completions = [
-    [{"content": "<answer>[1, 2, 3]</answer>"}],      # Valid list
-    [{"content": "<answer>42</answer>"}],              # Not a list
-    [{"content": "<answer>[]</answer>"}],               # Empty list
-    [{"content": "<answer>['a', 'b', 'c']</answer>"}], # Valid list of strings
-    [{"content": "No answer tag"}]                     # No answer tag
-]
-print(format_reward(completions))
+# completions = [
+#     [{"content": "<answer>[1, 2, 3]</answer>"}],      # Valid list
+#     [{"content": "<answer>42</answer>"}],              # Not a list
+#     [{"content": "<answer>[]</answer>"}],               # Empty list
+#     [{"content": "<answer>['a', 'b', 'c']</answer>"}], # Valid list of strings
+#     [{"content": "No answer tag"}]                     # No answer tag
+# ]
+# print(format_reward(completions))

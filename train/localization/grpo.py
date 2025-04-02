@@ -25,13 +25,8 @@ from datetime import datetime
 from dataclasses import dataclass, field
 from typing import Optional
 
-from datasets import load_dataset, load_from_disk
-from transformers import Qwen2VLForConditionalGeneration
-
 from trainer import Qwen2VLGRPOTrainer, Qwen2VLGRPOVLLMTrainerModified
 from trl import GRPOConfig, GRPOTrainer, ModelConfig, ScriptArguments, TrlParser, get_peft_config
-
-from datasets import Dataset, DatasetDict
 
 from rouge_score import rouge_scorer
 from nuscenes.nuscenes import LidarPointCloud, NuScenes
@@ -485,19 +480,20 @@ def main(script_args, training_args, model_args):
     for i in range(80):
         scene_idx_list.append(i)
 
-    root_path = "/home/zl3466/Downloads/NuScenes"
-    out_path = f"/home/zl3466/Documents/github/thinking_in_street/train_result/scene_{scene_idx_list[0]}-{scene_idx_list[-1]}_cam_{num_cam}"
+    root_path = script_args.dataset_name
+    out_path = f"../../train_result/scene_{scene_idx_list[0]}-{scene_idx_list[-1]}_cam_{num_cam}"
 
     train_data_path = f"{root_path}/train"
     test_data_path = f"{root_path}/test"
 
     train_out_path = f"{out_path}/train"
     test_out_path = f"{out_path}/test"
+    
 
-    # nusc_train = NuScenes(version="v1.0-trainval", dataroot=train_data_path, verbose=True)
-    # nusc_test = NuScenes(version="v1.0-test", dataroot=test_data_path, verbose=True)
-    nusc_train = None
-    nusc_test = None
+    nusc_train = NuScenes(version="v1.0-trainval", dataroot=train_data_path, verbose=True)
+    nusc_test = NuScenes(version="v1.0-test", dataroot=test_data_path, verbose=True)
+    # nusc_train = None
+    # nusc_test = None
     train_example_list = []
     for scene_idx in scene_idx_list:
         scene_out_path = f"{train_out_path}/scene_{scene_idx}"
@@ -555,8 +551,8 @@ def main(script_args, training_args, model_args):
 
     # Save and push to hub
     trainer.save_model(training_args.output_dir)
-    if training_args.push_to_hub:
-        trainer.push_to_hub(dataset_name=script_args.dataset_name)
+    # if training_args.push_to_hub:
+    #     trainer.push_to_hub(dataset_name=script_args.dataset_name)
 
 
 if __name__ == "__main__":
