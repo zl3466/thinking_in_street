@@ -1,0 +1,11 @@
+[2025-04-02 12:03:32,776] [INFO] [real_accelerator.py:239:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+Traceback (most recent call last):
+  File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 561, in <module>
+    main(script_args, training_args, model_args)
+  File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 493, in main
+    nusc_train = NuScenes(version="v1.0-trainval", dataroot=train_data_path, verbose=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/nuscenes/nuscenes.py", line 62, in __init__
+    assert osp.exists(self.table_root), 'Database version not found: {}'.format(self.table_root)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Database version not found: /scratch/zl3466/dataset/NuScenes/train/v1.0-trainval
