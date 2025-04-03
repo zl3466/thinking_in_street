@@ -1,0 +1,354 @@
+  0%|                                                                                                                                                                                                                        | 0/231 [00:00<?, ?it/s]
+video inputs in processor:  {'pixel_values_videos': tensor([[ 0.0617,  0.1201, -0.0405,  ...,  0.1124,  0.1124,  0.1409],
+        [ 0.2661,  0.2953,  0.3099,  ..., -0.0298, -0.4706, -0.7266],
+        [ 0.4267,  0.3975,  0.2661,  ..., -0.0156, -0.0440,  0.0271],
+        ...,
+        [-1.0039, -1.0039, -0.9748,  ..., -0.7123, -0.6981, -0.7123],
+        [-0.9748, -0.9456, -0.9456,  ..., -0.6128, -0.5986, -0.6412],
+        [-1.0331, -1.0185, -0.9456,  ..., -0.7408, -0.7692, -0.7408]]), 'video_grid_thw': tensor([[ 8, 32, 60]])}
+torch.Size([15360, 1176])
+tensor([[ 8, 32, 60]])
+["<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\n<|vision_start|><|video_pad|><|vision_end|>I uploaded 16 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with right turn being positive degrees and left turn being negative degrees.\nKeep all degree values in one list. You should have 15 values in the list.\n\nPlease think about this question as if you were a human pondering deeply. Engage in an internal dialogue using expressions such as 'let me think', 'wait', 'Hmm', 'oh, I see', 'let's break it down', etc, or other natural language thought expressions It's encouraged to include self-reflection or verification in the reasoning process. Provide your detailed reasoning between the <think> </think> tags, and then give your final answer between the <answer> </answer> tags. Please provide the list answer (e.g., [val, val, val, ...]) within the <answer> </answer> tags.<|im_end|>\n<|im_start|>assistant\n"]
+<built-in method size of Tensor object at 0x14de13a694f0>
+tensor([[[[125, 132, 140],
+          [129, 136, 144],
+          [133, 140, 148],
+          ...,
+          [ 97, 103,  93],
+          [113, 119, 109],
+          [129, 135, 125]],
+
+         [[126, 133, 141],
+          [128, 135, 143],
+          [130, 137, 145],
+          ...,
+          [118, 124, 114],
+          [129, 135, 125],
+          [136, 142, 132]],
+
+         [[128, 135, 143],
+          [129, 136, 144],
+          [129, 136, 144],
+          ...,
+          [145, 151, 141],
+          [146, 151, 144],
+          [141, 146, 139]],
+
+         ...,
+
+         [[ 19,  24,  18],
+          [ 48,  53,  47],
+          [ 46,  51,  45],
+          ...,
+          [ 59,  64,  68],
+          [ 59,  64,  68],
+          [ 59,  64,  68]],
+
+         [[ 20,  25,  19],
+          [ 49,  54,  48],
+          [ 47,  52,  46],
+          ...,
+          [ 59,  64,  68],
+          [ 59,  64,  68],
+          [ 59,  64,  68]],
+
+         [[ 21,  26,  20],
+          [ 51,  56,  50],
+          [ 49,  54,  48],
+          ...,
+          [ 60,  65,  69],
+          [ 59,  64,  68],
+          [ 59,  64,  68]]],
+
+
+        [[[114, 119, 122],
+          [115, 120, 123],
+          [117, 122, 125],
+          ...,
+          [ 62,  67,  63],
+          [ 59,  63,  62],
+          [ 56,  60,  59]],
+
+         [[114, 119, 122],
+          [115, 120, 123],
+          [116, 121, 124],
+          ...,
+          [ 62,  67,  63],
+          [ 59,  63,  62],
+          [ 54,  58,  57]],
+
+         [[114, 119, 122],
+          [115, 120, 123],
+          [116, 121, 124],
+          ...,
+          [ 62,  67,  63],
+          [ 57,  61,  60],
+          [ 52,  56,  55]],
+
+         ...,
+
+         [[ 15,  21,  17],
+          [ 30,  37,  30],
+          [ 32,  39,  32],
+          ...,
+          [ 65,  69,  68],
+          [ 65,  69,  68],
+          [ 68,  72,  71]],
+
+         [[ 14,  20,  16],
+          [ 29,  36,  29],
+          [ 31,  38,  31],
+          ...,
+          [ 65,  69,  68],
+          [ 65,  69,  68],
+          [ 68,  72,  71]],
+
+         [[ 12,  18,  14],
+          [ 28,  35,  28],
+          [ 30,  37,  30],
+          ...,
+          [ 65,  69,  68],
+          [ 65,  69,  68],
+          [ 68,  72,  71]]],
+
+
+        [[[ 62,  68,  64],
+          [ 56,  62,  58],
+          [ 47,  53,  49],
+          ...,
+          [ 35,  39,  38],
+          [ 37,  41,  40],
+          [ 37,  42,  38]],
+
+         [[ 54,  60,  56],
+          [ 49,  55,  51],
+          [ 42,  48,  44],
+          ...,
+          [ 37,  41,  40],
+          [ 38,  43,  39],
+          [ 38,  43,  39]],
+
+         [[ 46,  52,  48],
+          [ 42,  48,  44],
+          [ 38,  44,  40],
+          ...,
+          [ 38,  42,  41],
+          [ 37,  42,  38],
+          [ 37,  42,  38]],
+
+         ...,
+
+         [[ 15,  21,  19],
+          [ 33,  39,  37],
+          [ 31,  37,  35],
+          ...,
+          [179, 185, 183],
+          [179, 185, 183],
+          [179, 185, 183]],
+
+         [[ 15,  21,  19],
+          [ 33,  39,  37],
+          [ 31,  37,  35],
+          ...,
+          [179, 185, 183],
+          [179, 185, 183],
+          [179, 185, 183]],
+
+         [[ 15,  21,  19],
+          [ 33,  39,  37],
+          [ 30,  36,  34],
+          ...,
+          [179, 185, 183],
+          [179, 185, 183],
+          [179, 185, 183]]],
+
+
+        ...,
+
+
+        [[[ 54,  58,  57],
+          [ 53,  57,  56],
+          [ 52,  56,  55],
+          ...,
+          [ 31,  29,  32],
+          [ 31,  29,  32],
+          [ 33,  31,  34]],
+
+         [[ 51,  55,  54],
+          [ 50,  54,  53],
+          [ 49,  53,  52],
+          ...,
+          [ 35,  33,  36],
+          [ 35,  33,  36],
+          [ 36,  34,  37]],
+
+         [[ 50,  54,  53],
+          [ 49,  53,  52],
+          [ 47,  51,  50],
+          ...,
+          [ 34,  32,  33],
+          [ 36,  32,  33],
+          [ 37,  33,  34]],
+
+         ...,
+
+         [[ 10,  23,  14],
+          [ 15,  28,  19],
+          [ 19,  32,  22],
+          ...,
+          [ 58,  62,  61],
+          [ 58,  62,  61],
+          [ 59,  63,  62]],
+
+         [[  9,  22,  13],
+          [ 14,  27,  18],
+          [ 18,  31,  21],
+          ...,
+          [ 57,  61,  60],
+          [ 57,  61,  60],
+          [ 58,  62,  61]],
+
+         [[  7,  20,  11],
+          [ 13,  26,  17],
+          [ 17,  30,  20],
+          ...,
+          [ 55,  59,  58],
+          [ 56,  60,  59],
+          [ 56,  60,  59]]],
+
+
+        [[[  9,  13,  12],
+          [ 11,  15,  14],
+          [ 14,  19,  15],
+          ...,
+          [ 27,  29,  16],
+          [ 30,  32,  19],
+          [ 31,  33,  20]],
+
+         [[  9,  13,  12],
+          [ 10,  14,  13],
+          [ 11,  16,  12],
+          ...,
+          [ 31,  33,  20],
+          [ 33,  35,  22],
+          [ 34,  36,  23]],
+
+         [[  9,  14,  10],
+          [  8,  13,   9],
+          [  9,  14,  10],
+          ...,
+          [ 33,  35,  24],
+          [ 33,  35,  24],
+          [ 33,  35,  24]],
+
+         ...,
+
+         [[ 18,  23,  17],
+          [ 30,  37,  30],
+          [ 30,  40,  31],
+          ...,
+          [ 47,  51,  50],
+          [ 50,  52,  51],
+          [ 52,  54,  53]],
+
+         [[ 17,  22,  16],
+          [ 30,  37,  30],
+          [ 30,  40,  31],
+          ...,
+          [ 47,  51,  50],
+          [ 50,  52,  51],
+          [ 52,  54,  53]],
+
+         [[ 12,  17,  11],
+          [ 26,  33,  26],
+          [ 28,  38,  29],
+          ...,
+          [ 47,  51,  50],
+          [ 50,  52,  51],
+          [ 52,  54,  53]]],
+
+
+        [[[  9,  13,  12],
+          [ 11,  15,  14],
+          [ 14,  19,  15],
+          ...,
+          [ 27,  29,  16],
+          [ 30,  32,  19],
+          [ 31,  33,  20]],
+
+         [[  9,  13,  12],
+          [ 10,  14,  13],
+          [ 11,  16,  12],
+          ...,
+          [ 31,  33,  20],
+          [ 33,  35,  22],
+          [ 34,  36,  23]],
+
+         [[  9,  14,  10],
+          [  8,  13,   9],
+          [  9,  14,  10],
+          ...,
+          [ 33,  35,  24],
+          [ 33,  35,  24],
+          [ 33,  35,  24]],
+
+         ...,
+
+         [[ 18,  23,  17],
+          [ 30,  37,  30],
+          [ 30,  40,  31],
+          ...,
+          [ 47,  51,  50],
+          [ 50,  52,  51],
+          [ 52,  54,  53]],
+
+         [[ 17,  22,  16],
+          [ 30,  37,  30],
+          [ 30,  40,  31],
+          ...,
+          [ 47,  51,  50],
+          [ 50,  52,  51],
+          [ 52,  54,  53]],
+
+         [[ 12,  17,  11],
+          [ 26,  33,  26],
+          [ 28,  38,  29],
+          ...,
+          [ 47,  51,  50],
+          [ 50,  52,  51],
+          [ 52,  54,  53]]]], dtype=torch.uint8)
+  File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 587, in <module>
+    main(script_args, training_args, model_args)
+  File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 576, in main
+    trainer.train()
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2241, in train
+    return inner_training_loop(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2548, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 3698, in training_step
+    loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/github/thinking_in_street/train/localization/trainer/grpo_trainer.py", line 490, in compute_loss
+    indices = torch.randperm(video_inputs[0].size[0])
+                             ~~~~~~~~~~~~~~~~~~~~^^^
+TypeError: 'builtin_function_or_method' object is not subscriptable
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 587, in <module>
+[rank0]:     main(script_args, training_args, model_args)
+[rank0]:   File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 576, in main
+[rank0]:     trainer.train()
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2241, in train
+[rank0]:     return inner_training_loop(
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2548, in _inner_training_loop
+[rank0]:     tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+[rank0]:                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 3698, in training_step
+[rank0]:     loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/github/thinking_in_street/train/localization/trainer/grpo_trainer.py", line 490, in compute_loss
+[rank0]:     indices = torch.randperm(video_inputs[0].size[0])
+[rank0]:                              ~~~~~~~~~~~~~~~~~~~~^^^
+[rank0]: TypeError: 'builtin_function_or_method' object is not subscriptable

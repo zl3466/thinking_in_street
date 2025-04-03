@@ -14,7 +14,7 @@ conda activate /scratch/zl3466/env/thinking-in-street/;
 export PATH=/scratch/zl3466/env/thinking-in-street/bin:$PATH;
 cd /scratch/zl3466/github/thinking_in_street;
 
-CUDA_VISIBLE_DEVICES=0,1 torchrun --nproc_per_node="2" \
+CUDA_VISIBLE_DEVICES=0,1 torchrun --nproc_per_node="1" \
     --nnodes="1" \
     --node_rank="0" \
     --master_addr="127.0.0.1" \

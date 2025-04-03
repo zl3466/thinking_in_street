@@ -471,7 +471,7 @@ class Qwen2VLGRPOTrainer(Trainer):
 
         # image_inputs = np.array(image_inputs)
         video_inputs = np.array(video_inputs)
-        
+        video_inputs = torch.from_numpy(video_inputs)
         prompt_inputs = super()._prepare_inputs(prompt_inputs)
 
         prompt_ids, prompt_mask = prompt_inputs["input_ids"], prompt_inputs["attention_mask"]
@@ -479,15 +479,15 @@ class Qwen2VLGRPOTrainer(Trainer):
         # print("prompt ids ", prompt_ids)
         # print("prompt_mask ", prompt_mask)
         # print("video_inputs[0].size", video_inputs[0].size)
-        print(video_inputs[0].size)
-        print(video_inputs[0])
+        # print(video_inputs[0].size())
+
         
         if self.max_prompt_length is not None:
             prompt_ids = prompt_ids[:, -self.max_prompt_length :]
             prompt_mask = prompt_mask[:, -self.max_prompt_length :]
             
         if self.temporal and video_inputs is not None:
-            indices = torch.randperm(video_inputs[0].size[0])
+            indices = torch.randperm(video_inputs[0].size(0))
             # indices = torch.randperm(len(video_inputs[0]))
             shuffled_video_inputs = [video_inputs[0][indices]]
             shuffled_prompt_inputs = self.processing_class(

@@ -1,0 +1,91 @@
+  0%|                                                                                                                                                                                                                        | 0/231 [00:00<?, ?it/s]Traceback (most recent call last):
+video inputs in processor:  {'pixel_values_videos': tensor([[ 0.0617,  0.1201, -0.0405,  ...,  0.1124,  0.1124,  0.1409],
+        [ 0.2661,  0.2953,  0.3099,  ..., -0.0298, -0.4706, -0.7266],
+        [ 0.4267,  0.3975,  0.2661,  ..., -0.0156, -0.0440,  0.0271],
+        ...,
+        [-1.0039, -1.0039, -0.9748,  ..., -0.7123, -0.6981, -0.7123],
+        [-0.9748, -0.9456, -0.9456,  ..., -0.6128, -0.5986, -0.6412],
+        [-1.0331, -1.0185, -0.9456,  ..., -0.7408, -0.7692, -0.7408]]), 'video_grid_thw': tensor([[ 8, 32, 60]])}
+torch.Size([15360, 1176])
+tensor([[ 8, 32, 60]])
+["<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\n<|vision_start|><|video_pad|><|vision_end|>I uploaded 16 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with right turn being positive degrees and left turn being negative degrees.\nKeep all degree values in one list. You should have 15 values in the list.\n\nPlease think about this question as if you were a human pondering deeply. Engage in an internal dialogue using expressions such as 'let me think', 'wait', 'Hmm', 'oh, I see', 'let's break it down', etc, or other natural language thought expressions It's encouraged to include self-reflection or verification in the reasoning process. Provide your detailed reasoning between the <think> </think> tags, and then give your final answer between the <answer> </answer> tags. Please provide the list answer (e.g., [val, val, val, ...]) within the <answer> </answer> tags.<|im_end|>\n<|im_start|>assistant\n"]
+torch.Size([16, 896, 1596, 3])
+video inputs in processor:  {'pixel_values_videos': tensor([[-0.5514, -0.8142, -0.9456,  ...,  0.2120,  0.2404,  0.2404],
+        [-0.9456, -0.9748, -1.0039,  ...,  0.5390,  0.6244,  0.6812],
+        [-0.8434, -0.8142, -0.8142,  ..., -0.1435, -0.1435, -0.1435],
+        ...,
+        [ 0.8063,  0.8063,  0.7917,  ..., -0.6270, -0.6128, -0.6128],
+        [ 0.8792,  0.8647,  0.8355,  ..., -0.5844, -0.5559, -0.5275],
+        [ 0.7479,  0.7479,  0.7625,  ..., -0.6128, -0.6412, -0.6270]]), 'video_grid_thw': tensor([[ 8, 32, 60]])}
+torch.Size([15360, 1176])
+tensor([[ 8, 32, 60]])
+["<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\n<|vision_start|><|video_pad|><|vision_end|>I uploaded 16 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with right turn being positive degrees and left turn being negative degrees.\nKeep all degree values in one list. You should have 15 values in the list.\n\nPlease think about this question as if you were a human pondering deeply. Engage in an internal dialogue using expressions such as 'let me think', 'wait', 'Hmm', 'oh, I see', 'let's break it down', etc, or other natural language thought expressions It's encouraged to include self-reflection or verification in the reasoning process. Provide your detailed reasoning between the <think> </think> tags, and then give your final answer between the <answer> </answer> tags. Please provide the list answer (e.g., [val, val, val, ...]) within the <answer> </answer> tags.<|im_end|>\n<|im_start|>assistant\n"]
+  File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 587, in <module>
+    main(script_args, training_args, model_args)
+  File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 576, in main
+    trainer.train()
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2241, in train
+    return inner_training_loop(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2548, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 3698, in training_step
+    loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/github/thinking_in_street/train/localization/trainer/grpo_trainer.py", line 510, in compute_loss
+    with unwrap_model_for_generation(model, self.accelerator) as unwrapped_model:
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/trl/models/utils.py", line 217, in unwrap_model_for_generation
+    with deepspeed.zero.GatheredParameters(model.parameters()):
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/zero/partition_parameters.py", line 2243, in __enter__
+    self.params[0].all_gather(param_list=self.params)
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/zero/partition_parameters.py", line 1161, in all_gather
+    return self._all_gather(param_list, async_op=async_op, hierarchy=hierarchy)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/utils/nvtx.py", line 20, in wrapped_fn
+    ret_val = func(*args, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/zero/partition_parameters.py", line 1529, in _all_gather
+    self._allgather_params_coalesced(all_gather_nonquantize_list, hierarchy, quantize=False)
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/zero/partition_parameters.py", line 1818, in _allgather_params_coalesced
+    flat_tensor = torch.empty(tensor_size, dtype=param_list[0].ds_tensor.dtype,
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 130.00 MiB. GPU 0 has a total capacity of 44.48 GiB of which 83.31 MiB is free. Including non-PyTorch memory, this process has 44.24 GiB memory in use. Process 145294 has 162.00 MiB memory in use. Of the allocated memory 43.92 GiB is allocated by PyTorch, and 52.45 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 587, in <module>
+[rank0]:     main(script_args, training_args, model_args)
+[rank0]:   File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 576, in main
+[rank0]:     trainer.train()
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2241, in train
+[rank0]:     return inner_training_loop(
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2548, in _inner_training_loop
+[rank0]:     tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+[rank0]:                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 3698, in training_step
+[rank0]:     loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/github/thinking_in_street/train/localization/trainer/grpo_trainer.py", line 510, in compute_loss
+[rank0]:     with unwrap_model_for_generation(model, self.accelerator) as unwrapped_model:
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/contextlib.py", line 137, in __enter__
+[rank0]:     return next(self.gen)
+[rank0]:            ^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/trl/models/utils.py", line 217, in unwrap_model_for_generation
+[rank0]:     with deepspeed.zero.GatheredParameters(model.parameters()):
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/zero/partition_parameters.py", line 2243, in __enter__
+[rank0]:     self.params[0].all_gather(param_list=self.params)
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/zero/partition_parameters.py", line 1161, in all_gather
+[rank0]:     return self._all_gather(param_list, async_op=async_op, hierarchy=hierarchy)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/utils/nvtx.py", line 20, in wrapped_fn
+[rank0]:     ret_val = func(*args, **kwargs)
+[rank0]:               ^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/zero/partition_parameters.py", line 1529, in _all_gather
+[rank0]:     self._allgather_params_coalesced(all_gather_nonquantize_list, hierarchy, quantize=False)
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/zero/partition_parameters.py", line 1818, in _allgather_params_coalesced
+[rank0]:     flat_tensor = torch.empty(tensor_size, dtype=param_list[0].ds_tensor.dtype,
+[rank0]:                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 130.00 MiB. GPU 0 has a total capacity of 44.48 GiB of which 83.31 MiB is free. Including non-PyTorch memory, this process has 44.24 GiB memory in use. Process 145294 has 162.00 MiB memory in use. Of the allocated memory 43.92 GiB is allocated by PyTorch, and 52.45 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
