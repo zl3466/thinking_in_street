@@ -1,0 +1,433 @@
+  0%|                                                                                                                                                                                      | 0/1191 [00:00<?, ?it/s]/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/utils/checkpoint.py:87: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
+  warnings.warn(
+`use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`...
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-24-11-13-19+0800__CAM_FRONT__1532402341912460.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-24-11-13-19+0800__CAM_FRONT__1532402342362460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-24-11-13-19+0800__CAM_FRONT__1532402342762460.jpg']
+problem_id: 24
+prompt_length: 537
+content:  <think>
+I'll carefully analyze the first two frames and try to determine the vehicle's change in heading direction between them. The video shows a stretch of road with trees on both sides and a road sign in the middle of the frame.
+
+The direction of the trees is consistent, suggesting the vehicle is moving in a straight path on the road. There are no other objects or context that provide additional information about the vehicle's movement.
+
+Given the static nature of the road and trees in the frames, it seems the vehicle is traveling on a straight path without any significant changes in direction.
+
+To summarize, from the first frame to the second frame, there is no noticeable movement or direction change.
+
+</think>
+<answer>
+[0]
+</answer>
+content:  <think>
+I need to analyze the change in heading direction between the four frames. By observing the positions of the trees in the background, I can infer the vehicle's movement. The trees seem to be moving in a circular manner, suggesting the vehicle is rounding a corner or passing under an overpass.
+
+Looking at the position of the trees in the first frame, they appear to be closer to the left side of the road. In the second frame, the trees seem to be slightly further to the right. By the third frame, the trees are more to the right, indicating the vehicle is going to the right. In the fourth frame, the trees are to the left, suggesting the vehicle is going to the left.
+
+Let's calculate the change in heading direction:
+
+1. First frame: 0 degrees (assuming the road is in front of the camera)
+2. Second frame: -10 degrees (trees are further to the right)
+3. Third frame: -20 degrees (trees are more to the right)
+4. Fourth frame: -30 degrees (trees are to the left)
+
+This matches the progression of the trees moving from left to right, indicating a 30-degree left turn from the previous positions.
+
+The change in heading direction is: -10, -20, -30 degrees.
+</think>
+
+<think>
+I will now list the changes in heading direction between the four frames as requested.
+</think>
+
+<answer>
+[-10, -20, -30]
+</answer>
+
+========
+batch rewards: [0.0, 0.1]
+========
+
+content:  <think>
+It's not clear to me how to accurately determine the vehicle's change in heading direction based on the static images provided. There is no indication of motion or any change in the objects' positions that would suggest a turning maneuver or any direction change.
+</think>
+<answer>
+[]
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+content:  To determine the vehicle's change in heading direction between each frame and its previous frame, we need to analyze the orientation of the front of the vehicle in each frame. Let's break down the process:
+
+1. **Identify the direction of the front of the vehicle in each frame**: We need to observe the direction that the front of the vehicle is pointing in each frame. This can be done by looking at the orientation of the frame or by consulting the video itself.
+
+2. **Calculate the difference in heading**: We need to find the difference between the direction of the front of the vehicle in the current frame and the previous frame. If the vehicle is facing forward, a left turn would be a negative value, and a right turn would be a positive value.
+
+3. **Repeat for all frames**: We need to repeat this process for each frame to find the change in heading between each consecutive frame.
+
+Let's assume the vehicle is facing forward in the initial frame, which we can consider as a baseline of 0 degrees. We will analyze each frame to determine the change in heading direction.
+
+### Frame 1
+- **Front of vehicle direction**: Suppose the front of the vehicle is pointing forward (0 degrees).
+
+### Frame 2
+- **Front of vehicle direction**: Suppose the front of the vehicle is pointing to the left (30 degrees).
+
+### Frame 3
+- **Front of vehicle direction**: Suppose the front of the vehicle is pointing straight (0 degrees).
+
+### Frame 4
+- **Front of vehicle direction**: Suppose the front of the vehicle is pointing to the right (60 degrees).
+
+Now, we calculate the change in heading direction between each frame:
+
+1. Frame 2 to Frame 1:
+   - Difference = 30 degrees (left)
+
+2. Frame 3 to Frame 2:
+   - Difference = 30 degrees (left) - 0 degrees (forward) = 30 degrees (left)
+
+3. Frame 3 to Frame 4:
+   - Difference = 60 degrees (right) - 0 degrees (forward) = 60 degrees (right)
+
+The list of change in heading direction values is:
+[30, 30, 60]
+
+Thus, the final answer is:
+<answer> [30, 30, 60] </answer>
+content:  To determine the vehicle's change in heading direction between each frame and its previous frame, we need to analyze the direction of the shadow and the direction of the trees in relation to the road. Here's the step-by-step reasoning:
+
+1. **First Frame Analysis:**
+   - The shadow is cast in a specific direction.
+   - The direction of the trees relative to the shadow and the road helps us identify the vehicle's initial direction.
+
+2. **Second Frame Analysis:**
+   - Repeat the analysis to determine the new direction of the shadow and trees relative to the road.
+
+3. **Third Frame Analysis:**
+   - Repeat the analysis to determine the new direction of the shadow and trees relative to the road.
+
+4. **Fourth Frame Analysis:**
+   - Repeat the analysis to determine the new direction of the shadow and trees relative to the road.
+
+By carefully observing these frames, we can infer the vehicle's direction changes and convert them into the required degree values.
+
+Let's assume the observed direction changes in the frames are as follows (this is an hypothetical example based on typical scenarios):
+- From first to second frame, the shadow and trees show a rightward movement.
+- From second to third frame, the shadow and trees show a leftward movement.
+- From third to fourth frame, the shadow and trees show a rightward movement again.
+
+Given this inferred movement, we convert the changes into degrees:
+- From first to second frame: 90 degrees (right turn)
+- From second to third frame: -90 degrees (left turn)
+- From third to fourth frame: 90 degrees (right turn)
+
+Now, let's format this into a list:
+
+<answer>
+[90, -90, 90]
+</answer>
+content:  <think>
+I understand you have a series of images from a vehicle dash cam and you're asking me to calculate the change in heading for each frame. I'll do this by analyzing the direction of the road in each frame, noting whether the direction appears to change and to what degree. Since dash cam footage doesn't inherently indicate direction, I'll consider changes in the way the road is shown. I'll also keep in mind that left and right turns are opposite directions and that the total range of values is between -180 and 180 degrees.
+</think>
+<answer>
+[0, -90, -108]
+</answer>
+
+========
+batch rewards: [0.0, 0.1, 0.1, 0.1]
+========
+
+tensor([0.0000, 0.1000, 0.1000, 1.1000], device='cuda:0')
+tensor([ 60, 479, 357, 136], device='cuda:0')
+[2025-04-03 12:27:27,126] [WARNING] [stage3.py:2139:step] 1 pytorch allocator cache flushes since last step. this happens when there is high memory pressure and is detrimental to performance. if this is happening frequently consider adjusting settings to reduce memory consumption. If you are unable to make the cache flushes go away consider adding get_accelerator().empty_cache() calls in your training loop to ensure that all ranks flush their caches at the same time
+  0%|▏                                                                                                                                                                         | 1/1191 [02:49<55:54:49, 169.15s/it]
+{'loss': 0.0, 'grad_norm': 5.9054284989867325, 'learning_rate': 9.9999826053386e-07, 'completion_length': 285.375, 'rewards/accuracy_reward': 0.07500000298023224, 'rewards/format_reward': 0.25, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 1.0, 'reward': 0.32500001788139343, 'reward_std': 0.5188127756118774, 'kl': 0.0, 'epoch': 0.0}
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n008-2018-08-01-15-52-19-0400__CAM_FRONT__1533153280362404.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n008-2018-08-01-15-52-19-0400__CAM_FRONT__1533153280762404.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n008-2018-08-01-15-52-19-0400__CAM_FRONT__1533153281162404.jpg']
+problem_id: 12
+prompt_length: 537
+content:  <think>
+The task involves interpreting the visual information from a vehicle dash cam video to determine the change in heading direction. For a dash cam, this direction analysis can be challenging as the visual content is limited to the direct view and a minimal part of the car's surroundings. The analysis will have to base on the direction of movement deduced from the video data, which may not be as precise as expected.
+
+I'll start with frame 1, which shows an empty road and a parking lot. For ease of calculation, I'll assume the perspective is straight ahead, and any change in heading should be measured relative to this initial orientation.
+
+Moving to frame 2, if the perspective is still directly on the road, the change in heading would be negligible as there are no other objects to determine a directional shift.
+
+In frame 3, if we consider the perspective is still consistent with the road, the change in heading remains minimal.
+
+For frame 4, the camera seems to be looking slightly to the right, so the heading change would be a right turn.
+
+I now have to determine the change in degrees from the perspective of the camera's orientation, which may need further clarification if considering an earlier frame as well.
+</think>
+<answer>
+[-180]
+</answer>
+content:  <think>
+Let's analyze the sequence of images and determine the vehicle's change in heading direction between each frame.
+
+1. **First Frame**: The vehicle appears to be entering the parking lot from the left side of the image. This suggests the vehicle is approaching the lot from an angle and then turning onto it.
+
+2. **Second Frame**: As the vehicle enters the parking lot, it would be turning right to align with the parking lot's axis.
+
+3. **Third Frame**: After entering the parking lot, the vehicle seems to be moving forward within the parking lot towards the right-hand side.
+
+Considering these observations, here's the detailed reasoning:
+- From the first frame to the second frame, the vehicle is turning right (approaching the parking lot and turning on it).
+- From the second frame to the third frame, the vehicle is moving forward along the parking lot's axis.
+
+Now, let's calculate the changes in heading direction:
+1. **First to Second Frame**: The vehicle is turning right by 90 degrees.
+2. **Second to Third Frame**: The vehicle is moving forward without a notable change in direction.
+
+Thus, the changes in heading direction between each frame are:
+- From the first to the second frame: 90 degrees
+- From the second to the third frame: -30 degrees (moving forward, negligible change)
+
+The list of degrees is: [90, -30]
+
+</think>
+<answer>
+[90, -30]
+</answer>
+
+========
+batch rewards: [0.0, 0.0]
+========
+
+content:  <think>
+To determine the change in heading direction between the frames, we need to analyze the orientation of the vehicle relative to the direction of travel in each frame.
+
+Assuming the vehicle is traveling east, we can infer the change in direction by comparing the orientation of the vehicle's front, which is usually aligned with the direction of travel.
+
+In the first frame, the vehicle's front is pointing towards the left (negative direction). Let's say the vehicle is traveling in the initial direction, which could be east.
+In the second frame, the vehicle's front is pointing towards the right (positive direction). This indicates a change in direction.
+In the third frame, the vehicle's front is pointing towards the left (negative direction). This indicates another change in direction.
+
+To get the change in heading direction between each frame, we calculate the difference in direction:
+Frame 1 to Frame 2: -180 degrees (left)
+Frame 2 to Frame 3: 180 degrees (right)
+
+The list of changes is [180, -180, 180].
+
+</think>
+<answer>
+[180, -180, 180]
+</answer>
+content:  <answer>[-45, -3, 45]</answer>
+content:  <answer>[-5, -180, 175]</answer>
+content:  <think>
+I need to analyze the sequence of frames and determine the vehicle's change in heading direction. From the provided information, there is no description of specific landmarks, objects, or changes between the frames that can provide a precise turn angle.
+
+The instruction asks to consider the vehicle's change in heading direction between each frame and its previous frame, and to provide this as a list of three values ranging between -180 and 180 degrees.
+
+Since there is no context about the position or path of the vehicle, and therefore no turning or changing of direction to note, it is not possible to accurately determine the vehicle's direction change.
+
+Therefore, I would conclude that the answer to the question, as provided, is incorrect or irrelevant because it asks for a calculation that cannot be made based solely on the information given.
+
+Final Answer:
+None of the given frames are labeled as having a specific heading change, and the question requires calculating the change in heading direction between each frame. The information provided is insufficient to determine any change in the vehicle's direction.
+
+I will need additional information or frames with labeled heading changes to accurately calculate the changes in the given list.
+</think>
+<answer>
+None
+</answer>
+Error in reward_fn for question_type 'list': object of type 'NoneType' has no len()
+
+========
+batch rewards: [0.1, 0.1, 0.1, 0.0]
+========
+
+tensor([1.1000, 0.1000, 0.1000, 1.0000], device='cuda:0')
+tensor([249,  17,  19, 246], device='cuda:0')
+[2025-04-03 12:29:53,137] [WARNING] [stage3.py:2139:step] 3 pytorch allocator cache flushes since last step. this happens when there is high memory pressure and is detrimental to performance. if this is happening frequently consider adjusting settings to reduce memory consumption. If you are unable to make the cache flushes go away consider adding get_accelerator().empty_cache() calls in your training loop to ensure that all ranks flush their caches at the same time
+{'loss': 0.0, 'grad_norm': 13.92903968433359, 'learning_rate': 9.999930421475433e-07, 'completion_length': 146.75, 'rewards/accuracy_reward': 0.0625, 'rewards/format_reward': 0.25, 'all_wrong': 0.5, 'all_correct': 0.0, 'temporal_rewards': 0.5, 'reward': 0.3125000298023224, 'reward_std': 0.30386748909950256, 'kl': 0.000385284423828125, 'epoch': 0.0}
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-41-49+0800__CAM_FRONT__1531885431262460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-41-49+0800__CAM_FRONT__1531885431662460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-41-49+0800__CAM_FRONT__1531885432162460.jpg']
+problem_id: 22
+prompt_length: 537
+content:  <answer> [-45, -60, -30 ] </answer>
+content:  <think>
+In the first frame, we see a double-decker bus on the right side of the road, and a small red bus on the left side. The second frame shows that the double-decker bus has slightly moved to the right, and the small red bus has moved closer to the double-decker bus. In the third frame, the double-decker bus has moved further to the right, and the small red bus has moved slightly to the right as well.
+
+To determine the change in heading direction:
+- Between the first and second frame, there is a slight leftward drift of the small red bus.
+- Between the second and third frame, there is a leftward drift of both buses.
+
+The change in heading can be calculated as follows:
+- For the first frame to the second frame: slight leftward drift
+- For the second frame to the third frame: more leftward drift
+
+Thus, the direction change values between each frame are:
+1. From frame 1 to frame 2: slight leftward drift
+2. From frame 2 to frame 3: more leftward drift
+
+Since left turn is negative degrees, the change in heading direction in degrees is:
+[30, 30, -60]
+
+</think>
+<answer>
+[30, 30, -60]
+</answer>
+
+========
+batch rewards: [0.1, 0.1]
+========
+
+content:  <think>
+In the first frame, the double-decker bus is approaching on the left side of the frame. The first bus is at position Y1, and the second bus (the white one) is at position Y2. The angle of the first bus (Y1) is roughly 150 degrees from the road, and the angle of the white bus (Y2) is roughly 120 degrees. This means the first bus is almost 30 degrees to the left of the road.
+
+In the second frame, the double-decker bus has moved further towards the right side of the frame, and the white bus has moved further to the right, still approaching.
+
+The first bus's angle has changed slightly, but it's still around 30 degrees to the left of the road. The second bus is slightly ahead and has moved to about 90 degrees from the road.
+
+Finally, in the third frame, the double-decker bus has moved to the right, and the white bus is still approaching from the right.
+
+The first bus's angle is now around 90 degrees, and the second bus's angle is about 45 degrees.
+
+Therefore, the change in heading direction for the double-decker bus is a 45-degree right turn, and for the white bus it's a 30-degree right turn.
+
+Now, let's compare the angle changes:
+
+From Frame 1 to Frame 2:
+- Double-decker bus: 45 degrees
+- White bus: 90 degrees (assuming the double-decker bus starts at 30 degrees and ends at 90 degrees)
+
+From Frame 2 to Frame 3:
+- Double-decker bus: 45 degrees (90 - 45 = 45 degrees)
+- White bus: 30 degrees (180 - 150 = 30 degrees)
+
+Combining these, the net change is:
+- Double-decker bus: 45 degrees (right turn)
+- White bus: 30 degrees (right turn)
+
+There's no significant change in the heading direction of either bus as they approach.
+</think>
+
+<think>
+Considering the initial positions and the paths taken by the buses, it's clear that both buses are turning right as they approach the intersection. No significant left or right turns are observed, and the buses seem to be maintaining their paths rather than veering off.
+</think>
+
+<answer>
+[30, 30, 30]
+</answer>
+content:  <think>
+The first frame shows a yellow bus with the front slightly to the left of the frame's center. The second frame shows the same yellow bus with its front now pointing towards the right side of the frame.
+
+The third frame shows the same yellow bus with its front now pointing to the left side of the frame, but slightly lower in the frame.
+
+The fourth frame shows a black bus with its front pointing almost directly to the left side of the frame.
+
+Between the first and second frame, the yellow bus turns left.
+Between the second and third frame, the yellow bus turns back to its original direction, which is a left turn.
+Between the third and fourth frame, the black bus turns left.
+
+These are the changes in direction between the frames.
+
+</think>
+<answer>
+[-90, -180, 180]
+</answer>
+content:  <answer>[-75, -65, -10] </answer>
+content:  To determine the change in heading direction between each frame, I need to carefully observe the positions and orientations of the buses in the video frames.
+
+- Frame 1: The two buses are side by side on the road. They appear to be traveling in a straight line, facing the same direction.
+- Frame 2: The buses have moved slightly further down the road. They still appear to be traveling in a straight line, but their relative positions suggest they may be turning slightly to the left.
+- Frame 3: The buses continue to move down the road. They have moved even further down the road and appear to be turning more towards the left.
+
+By analyzing these frames, I can determine the direction of the change in heading direction as follows:
+
+1. From Frame 1 to Frame 2: The buses appear to have moved a bit further down the road, which suggests a very slight left turn.
+2. From Frame 2 to Frame 3: The buses have moved even further down the road and have clearly turned more towards the left.
+
+Based on this analysis, the change in heading direction between each frame is as follows:
+
+- From Frame 1 to Frame 2: The heading change is approximately -5 degrees.
+- From Frame 2 to Frame 3: The heading change is approximately -15 degrees.
+
+Therefore, the list of values is: [-5, -15]
+
+[ -5, -15 ]
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+
+========
+batch rewards: [0.1, 0.1, 0.1, 0.0]
+========
+
+tensor([1.1000, 1.1000, 0.1000, 0.0000], device='cuda:0')
+tensor([519, 179,  19, 291], device='cuda:0')
+  File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 589, in <module>
+    if __name__ == "__main__":
+        ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 578, in main
+    checkpoint = training_args.resume_from_checkpoint
+    ^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2241, in train
+    return inner_training_loop(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2548, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 3740, in training_step
+    self.accelerator.backward(loss, **kwargs)
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/accelerate/accelerator.py", line 2351, in backward
+    self.deepspeed_engine_wrapped.backward(loss, **kwargs)
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/accelerate/utils/deepspeed.py", line 266, in backward
+    self.engine.backward(loss, **kwargs)
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/utils/nvtx.py", line 20, in wrapped_fn
+    ret_val = func(*args, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/engine.py", line 2187, in backward
+    self._do_optimizer_backward(loss, retain_graph)
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/engine.py", line 2133, in _do_optimizer_backward
+    self.optimizer.backward(loss, retain_graph=retain_graph)
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/utils/nvtx.py", line 20, in wrapped_fn
+    ret_val = func(*args, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/zero/stage3.py", line 2284, in backward
+    self.loss_scaler.backward(loss.float(), retain_graph=retain_graph)
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/fp16/loss_scaler.py", line 63, in backward
+    scaled_loss.backward(retain_graph=retain_graph)
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/_tensor.py", line 626, in backward
+    torch.autograd.backward(
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/autograd/__init__.py", line 347, in backward
+    _engine_run_backward(
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/autograd/graph.py", line 823, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 589, in <module>
+[rank0]:     if __name__ == "__main__":
+[rank0]:         ^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 578, in main
+[rank0]:     checkpoint = training_args.resume_from_checkpoint
+[rank0]:     ^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2241, in train
+[rank0]:     return inner_training_loop(
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2548, in _inner_training_loop
+[rank0]:     tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+[rank0]:                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 3740, in training_step
+[rank0]:     self.accelerator.backward(loss, **kwargs)
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/accelerate/accelerator.py", line 2351, in backward
+[rank0]:     self.deepspeed_engine_wrapped.backward(loss, **kwargs)
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/accelerate/utils/deepspeed.py", line 266, in backward
+[rank0]:     self.engine.backward(loss, **kwargs)
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/utils/nvtx.py", line 20, in wrapped_fn
+[rank0]:     ret_val = func(*args, **kwargs)
+[rank0]:               ^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/engine.py", line 2187, in backward
+[rank0]:     self._do_optimizer_backward(loss, retain_graph)
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/engine.py", line 2133, in _do_optimizer_backward
+[rank0]:     self.optimizer.backward(loss, retain_graph=retain_graph)
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/utils/nvtx.py", line 20, in wrapped_fn
+[rank0]:     ret_val = func(*args, **kwargs)
+[rank0]:               ^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/zero/stage3.py", line 2284, in backward
+[rank0]:     self.loss_scaler.backward(loss.float(), retain_graph=retain_graph)
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/fp16/loss_scaler.py", line 63, in backward
+[rank0]:     scaled_loss.backward(retain_graph=retain_graph)
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/_tensor.py", line 626, in backward
+[rank0]:     torch.autograd.backward(
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/autograd/__init__.py", line 347, in backward
+[rank0]:     _engine_run_backward(
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/autograd/graph.py", line 823, in _engine_run_backward
+[rank0]:     return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]: KeyboardInterrupt

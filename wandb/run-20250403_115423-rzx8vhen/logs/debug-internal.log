@@ -1,0 +1,15 @@
+{"time":"2025-04-03T11:54:23.649539375-04:00","level":"INFO","msg":"stream: starting","core version":"0.19.8","symlink path":"/scratch/zl3466/github/thinking_in_street/wandb/run-20250403_115423-rzx8vhen/logs/debug-core.log"}
+{"time":"2025-04-03T11:54:23.763957274-04:00","level":"INFO","msg":"created new stream","id":"rzx8vhen"}
+{"time":"2025-04-03T11:54:23.763993132-04:00","level":"INFO","msg":"stream: started","id":"rzx8vhen"}
+{"time":"2025-04-03T11:54:23.764003793-04:00","level":"INFO","msg":"writer: Do: started","stream_id":"rzx8vhen"}
+{"time":"2025-04-03T11:54:23.764038295-04:00","level":"INFO","msg":"sender: started","stream_id":"rzx8vhen"}
+{"time":"2025-04-03T11:54:23.764011476-04:00","level":"INFO","msg":"handler: started","stream_id":"rzx8vhen"}
+{"time":"2025-04-03T11:54:23.961877655-04:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-04-03T11:55:58.226335767-04:00","level":"INFO","msg":"stream: closing","id":"rzx8vhen"}
+{"time":"2025-04-03T11:55:58.226364858-04:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-04-03T11:55:58.226858782-04:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-04-03T11:55:58.59249446-04:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-04-03T11:55:58.694076069-04:00","level":"INFO","msg":"handler: closed","stream_id":"rzx8vhen"}
+{"time":"2025-04-03T11:55:58.694097309-04:00","level":"INFO","msg":"writer: Close: closed","stream_id":"rzx8vhen"}
+{"time":"2025-04-03T11:55:58.69410118-04:00","level":"INFO","msg":"sender: closed","stream_id":"rzx8vhen"}
+{"time":"2025-04-03T11:55:58.694660829-04:00","level":"INFO","msg":"stream: closed","id":"rzx8vhen"}

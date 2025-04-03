@@ -598,7 +598,7 @@ class Qwen2VLGRPOTrainer(Trainer):
         x_clamped = torch.clamp(ref_per_token_logps - per_token_logps, min=-10, max=10)  # 限制 x 的范围
         per_token_kl = torch.exp(x_clamped) - x_clamped - 1
         
-        if self.temporal and video_inputs:
+        if self.temporal and video_inputs is not None:
             shuffled_completions = self.processing_class.batch_decode(shuffled_completion_ids, skip_special_tokens=True)
             if is_conversational(inputs[0]):
                 shuffled_completions = [[{"role": "assistant", "content": shuffled_completion}] for shuffled_completion in shuffled_completions]
@@ -642,7 +642,7 @@ class Qwen2VLGRPOTrainer(Trainer):
 
         
         
-        if self.temporal and video_inputs:
+        if self.temporal and video_inputs is not None:
             temporal_rewards_per_func = rewards_per_func.clone()
             
             acc_mean = temporal_rewards_per_func[:, 0].mean()
@@ -658,7 +658,7 @@ class Qwen2VLGRPOTrainer(Trainer):
             temporal_rewards =  torch.tensor([0.5]).to('cuda')
         
         # Sum the rewards from all reward functions
-        if self.temporal and video_inputs:
+        if self.temporal and video_inputs is not None:
             rewards = temporal_rewards_per_func.sum(dim=1)
         else:
             rewards = rewards_per_func.sum(dim=1)

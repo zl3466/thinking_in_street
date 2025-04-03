@@ -1,0 +1,277 @@
+  0%|                                                                                                                                                                                       | 0/480 [00:00<?, ?it/s]/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/utils/checkpoint.py:87: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
+  warnings.warn(
+`use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`...
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884307362460.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884307762460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884308162460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884308612467.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884309012473.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884309412467.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884309862460.jpg']
+problem_id: 6
+prompt_length: 843
+content:  <think>
+The first frame shows an empty street with cars on it going to the right. In the second frame, the vehicles are going straight. The third frame shows the vehicles going straight again. The fourth frame shows the vehicles going straight again. The fifth frame shows the vehicles going straight again. The sixth frame shows the vehicles going straight again. The seventh frame shows the vehicles going straight again. Based on the observations, it looks like the vehicles' heading direction is almost consistent with no significant changes in direction.
+</think>
+
+[0, 0, 0, 0, 0, 0, 0]
+output_ans:
+gt_ans:  [0.03400408662508194, 0.005885820380430523, -0.06021135903682978, -0.04669077427234907, -0.06310547793879338, -0.012503699783680156, -0.021087630554923745]
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+logging to ./debug_log_2b.txt
+content:  <think>
+I need to determine the change in heading direction between each frame. The change in heading is calculated by observing the orientation of the vehicle as it moves along the road. This involves noting the direction the vehicle appears to be facing as it moves.
+
+I will examine each frame to determine the new heading after one frame and compare it with the previous frame to calculate the change. Then, I'll summarize the directions for all frames.
+
+For the first frame:
+- The vehicle is traveling straight down the road.
+- I assume the heading is 0 degrees (assuming it's facing forward on the road).
+
+Moving to the next frame:
+- The vehicle appears to be turning to the right, so I will identify the new heading.
+- The new heading is calculated as the vehicle's current direction minus the initial direction.
+- Assuming the initial heading is 0 degrees, I'll subtract the actual direction observed in this frame.
+
+I'll repeat this for each pair of frames and document the changes. This process involves looking at where the vehicle is pointing and making adjustments to account for any rotation.
+
+As I go through the frames, I should be able to determine how the vehicle's heading changes relative to the frame before.
+</think>
+
+[60, 0, -60, -30, 30, -45, 45]
+<answer>
+[60, 0, -60, -30, 30, -45, 45]
+</answer>
+output_ans:  [60, 0, -60, -30, 30, -45, 45]
+gt_ans:  [0.03400408662508194, 0.005885820380430523, -0.06021135903682978, -0.04669077427234907, -0.06310547793879338, -0.012503699783680156, -0.021087630554923745]
+logging to ./debug_log_2b.txt
+
+========
+batch rewards: [0.0, 0.1]
+========
+
+content:  <think>
+It's important to analyze the sequence of frames to understand the direction change of the vehicle. Let's break down the information from the frames provided:
+
+1. From Frame 1 to Frame 2: The vehicle is traveling straight along the road.
+2. From Frame 2 to Frame 3: There is a slight bend or slight change in direction, indicating a slight right turn.
+3. From Frame 3 to Frame 4: The vehicle appears to be traveling straight again.
+4. From Frame 4 to Frame 5: There seems to be a slight right turn.
+5. From Frame 5 to Frame 6: The vehicle is traveling straight, suggesting a small straight path.
+6. From Frame 6 to Frame 7: The vehicle is seen making a slight right turn again.
+7. From Frame 7 to Frame 8: Finally, the vehicle appears to be traveling in a straight line.
+
+Let's summarize the direction changes:
+- Frame 1 to Frame 2: Straight
+- Frame 2 to Frame 3: Slight right turn
+- Frame 3 to Frame 4: Straight
+- Frame 4 to Frame 5: Slight right turn
+- Frame 5 to Frame 6: Straight
+- Frame 6 to Frame 7: Slight right turn
+- Frame 7 to Frame 8: Straight
+
+Given that each straight segment represents 0 degrees change and the turns represent 180 degrees for a right turn and -180 degrees for a left turn, we can calculate the degree values for each turn. However, since the initial position (0 degrees) is considered straight, the only non-zero values will be from the turns.
+
+Therefore, the changes in heading direction will be:
+- 180 degrees (right turn)
+- 180 degrees (right turn)
+- 180 degrees (right turn)
+
+Since we need to include all non-zero values in the list, we will add -180 degrees for each left turn (which doesn't happen in this sequence), but the left turns are represented by changes in sign for the right turns.
+
+So the list will include:
+[0, 180, 180, 180, 0, 180, 180]
+
+<answer>
+[0, 180, 180, 180, 0, 180, 180]
+</answer>
+output_ans:  [0, 180, 180, 180, 0, 180, 180]
+gt_ans:  [0.03400408662508194, 0.005885820380430523, -0.06021135903682978, -0.04669077427234907, -0.06310547793879338, -0.012503699783680156, -0.021087630554923745]
+logging to ./debug_log_2b.txt
+content:  To determine the vehicle's change in heading direction between each frame and its previous frame, I'll analyze the road layout and the vehicles' positions at each frame. Let's break this down step-by-step:
+
+1. <think>First frame shows a straight road with a few vehicles ahead. The vehicle is centered in the frame.
+</think>
+[0]
+
+2. <think>The second frame shows the vehicle following a slight curve to the right as it continues down the straight road. I need to calculate the change in heading from this right turn to the next frame, which shows a slight left turn.
+</think>
+[45] (Considering the vehicles' positions, I'll assume it turns left after the initial right turn.)
+
+3. <think>In the third frame, the vehicle makes a sharp left turn. I need to calculate the change in heading from this left turn to the next frame, which shows a slight right turn.
+</think>
+[-30]
+
+4. <think>The fourth frame shows the vehicle continuing a small curve to the right. I'll assume it's making a slight right turn to keep its path within the road.
+</think>
+[30]
+
+5. <think>The fifth frame shows the vehicle making another sharp right turn. I'll calculate the change in heading from this right turn to the next frame, which shows a slight left turn.
+</think>
+[-25]
+
+6. <think>In the sixth frame, the vehicle continues following the same curve and path as it did in the previous frame.
+</think>
+[25]
+
+7. <think>The seventh frame shows the vehicle making a sudden turn to the left. This is a major change in direction, so I'll calculate the large negative change accordingly.
+</think>
+[-90]
+
+The list of changes in heading direction is as follows:
+[0, 45, -30, 30, -25, 25, -90]
+
+Final answer:
+[0, 45, -30, 30, -25, 25, -90]
+output_ans:
+gt_ans:  [0.03400408662508194, 0.005885820380430523, -0.06021135903682978, -0.04669077427234907, -0.06310547793879338, -0.012503699783680156, -0.021087630554923745]
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+logging to ./debug_log_2b.txt
+content:  To determine the vehicle's change in heading direction between each frame and its previous frame, we need to calculate the direction of the car in relation to the previous frame's heading.
+
+<Think>
+To do this, we need to use the yaw angles of the car in each frame to calculate the change in heading. We can assume that each frame is from a dash cam recording.
+
+We will use the following formulas to calculate the change in heading:
+
+1. Calculate the difference in the yaw angles between each consecutive frame.
+2. Determine the right turns and left turns based on the difference in yaw angles.
+3. If the difference is less than 0 degrees, it indicates a right turn.
+4. If the difference is greater than 0 degrees, it indicates a left turn.
+
+Let's calculate this for each frame.
+
+Frame 1 (start):
+Frame 2:
+Frame 3:
+Frame 4:
+Frame 5:
+Frame 6:
+Frame 7:
+
+<answer>
+[-180, -180, -180, -180, -180, -180, -180]
+</answer>
+output_ans:  [-180, -180, -180, -180, -180, -180, -180]
+gt_ans:  [0.03400408662508194, 0.005885820380430523, -0.06021135903682978, -0.04669077427234907, -0.06310547793879338, -0.012503699783680156, -0.021087630554923745]
+logging to ./debug_log_2b.txt
+content:  <think>
+I understand the task is to analyze the sequence of eight frames captured from a vehicle's dash cam. The goal is to determine the change in heading direction for each frame, providing the values in a specified range between -180 and 180 degrees. This calculation will help visualize the vehicle's path and orientation.
+
+The first frame shows the vehicle driving on the left side of the road, moving straight away from the camera towards a building. The second frame suggests the vehicle has turned left, likely to the right side of the road.
+
+Continuing this analysis:
+The third frame shows the vehicle making a slight right turn.
+The fourth frame indicates a significant left turn, almost reversing direction.
+The fifth frame shows a slight right turn.
+The sixth frame demonstrates a more significant right turn compared to the previous right turn.
+The final seventh frame again indicates a right turn.
+
+Considering the direction each time I calculate, the left turns and right turns are marked accordingly.
+</think>
+
+<answer>
+[-30, 150, 30, -90, 45, 60, 60]
+</answer>
+output_ans:  [-30, 150, 30, -90, 45, 60, 60]
+gt_ans:  [0.03400408662508194, 0.005885820380430523, -0.06021135903682978, -0.04669077427234907, -0.06310547793879338, -0.012503699783680156, -0.021087630554923745]
+logging to ./debug_log_2b.txt
+
+========
+batch rewards: [0.1, 0.0, 0.1, 0.1]
+========
+
+tensor([0.1000, 0.0000, 0.1000, 1.1000], device='cuda:0')
+tensor([515, 437, 235, 236], device='cuda:0')
+Traceback (most recent call last):
+  File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 592, in <module>
+    main(script_args, training_args, model_args)
+  File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 581, in main
+    trainer.train()
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2241, in train
+    return inner_training_loop(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2548, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 3740, in training_step
+    self.accelerator.backward(loss, **kwargs)
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/accelerate/accelerator.py", line 2351, in backward
+    self.deepspeed_engine_wrapped.backward(loss, **kwargs)
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/accelerate/utils/deepspeed.py", line 266, in backward
+    self.engine.backward(loss, **kwargs)
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/utils/nvtx.py", line 20, in wrapped_fn
+    ret_val = func(*args, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/engine.py", line 2187, in backward
+    self._do_optimizer_backward(loss, retain_graph)
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/engine.py", line 2133, in _do_optimizer_backward
+    self.optimizer.backward(loss, retain_graph=retain_graph)
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/utils/nvtx.py", line 20, in wrapped_fn
+    ret_val = func(*args, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/zero/stage3.py", line 2284, in backward
+    self.loss_scaler.backward(loss.float(), retain_graph=retain_graph)
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/fp16/loss_scaler.py", line 63, in backward
+    scaled_loss.backward(retain_graph=retain_graph)
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/_tensor.py", line 626, in backward
+    torch.autograd.backward(
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/autograd/__init__.py", line 347, in backward
+    _engine_run_backward(
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/autograd/graph.py", line 823, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/autograd/function.py", line 307, in apply
+    return user_fn(self, *args)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/utils/checkpoint.py", line 321, in backward
+    torch.autograd.backward(outputs_with_grad, args_with_grad)
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/autograd/__init__.py", line 347, in backward
+    _engine_run_backward(
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/autograd/graph.py", line 823, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 5.72 GiB. GPU 0 has a total capacity of 44.48 GiB of which 5.21 GiB is free. Including non-PyTorch memory, this process has 39.11 GiB memory in use. Process 2885087 has 162.00 MiB memory in use. Of the allocated memory 36.36 GiB is allocated by PyTorch, and 2.44 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 592, in <module>
+[rank0]:     main(script_args, training_args, model_args)
+[rank0]:   File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 581, in main
+[rank0]:     trainer.train()
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2241, in train
+[rank0]:     return inner_training_loop(
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2548, in _inner_training_loop
+[rank0]:     tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+[rank0]:                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 3740, in training_step
+[rank0]:     self.accelerator.backward(loss, **kwargs)
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/accelerate/accelerator.py", line 2351, in backward
+[rank0]:     self.deepspeed_engine_wrapped.backward(loss, **kwargs)
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/accelerate/utils/deepspeed.py", line 266, in backward
+[rank0]:     self.engine.backward(loss, **kwargs)
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/utils/nvtx.py", line 20, in wrapped_fn
+[rank0]:     ret_val = func(*args, **kwargs)
+[rank0]:               ^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/engine.py", line 2187, in backward
+[rank0]:     self._do_optimizer_backward(loss, retain_graph)
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/engine.py", line 2133, in _do_optimizer_backward
+[rank0]:     self.optimizer.backward(loss, retain_graph=retain_graph)
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/utils/nvtx.py", line 20, in wrapped_fn
+[rank0]:     ret_val = func(*args, **kwargs)
+[rank0]:               ^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/zero/stage3.py", line 2284, in backward
+[rank0]:     self.loss_scaler.backward(loss.float(), retain_graph=retain_graph)
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/fp16/loss_scaler.py", line 63, in backward
+[rank0]:     scaled_loss.backward(retain_graph=retain_graph)
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/_tensor.py", line 626, in backward
+[rank0]:     torch.autograd.backward(
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/autograd/__init__.py", line 347, in backward
+[rank0]:     _engine_run_backward(
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/autograd/graph.py", line 823, in _engine_run_backward
+[rank0]:     return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/autograd/function.py", line 307, in apply
+[rank0]:     return user_fn(self, *args)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/utils/checkpoint.py", line 321, in backward
+[rank0]:     torch.autograd.backward(outputs_with_grad, args_with_grad)
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/autograd/__init__.py", line 347, in backward
+[rank0]:     _engine_run_backward(
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/autograd/graph.py", line 823, in _engine_run_backward
+[rank0]:     return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 5.72 GiB. GPU 0 has a total capacity of 44.48 GiB of which 5.21 GiB is free. Including non-PyTorch memory, this process has 39.11 GiB memory in use. Process 2885087 has 162.00 MiB memory in use. Of the allocated memory 36.36 GiB is allocated by PyTorch, and 2.44 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

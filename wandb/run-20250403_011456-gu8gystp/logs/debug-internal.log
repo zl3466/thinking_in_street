@@ -1,0 +1,15 @@
+{"time":"2025-04-03T01:14:56.226176378-04:00","level":"INFO","msg":"stream: starting","core version":"0.19.8","symlink path":"/scratch/zl3466/github/thinking_in_street/wandb/run-20250403_011456-gu8gystp/logs/debug-core.log"}
+{"time":"2025-04-03T01:14:56.393346162-04:00","level":"INFO","msg":"created new stream","id":"gu8gystp"}
+{"time":"2025-04-03T01:14:56.393411055-04:00","level":"INFO","msg":"stream: started","id":"gu8gystp"}
+{"time":"2025-04-03T01:14:56.393449526-04:00","level":"INFO","msg":"writer: Do: started","stream_id":"gu8gystp"}
+{"time":"2025-04-03T01:14:56.393473272-04:00","level":"INFO","msg":"handler: started","stream_id":"gu8gystp"}
+{"time":"2025-04-03T01:14:56.393475449-04:00","level":"INFO","msg":"sender: started","stream_id":"gu8gystp"}
+{"time":"2025-04-03T01:14:56.512527964-04:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-04-03T01:15:01.233904376-04:00","level":"INFO","msg":"stream: closing","id":"gu8gystp"}
+{"time":"2025-04-03T01:15:01.234011757-04:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-04-03T01:15:01.234554238-04:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-04-03T01:15:01.527794504-04:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-04-03T01:15:01.620578564-04:00","level":"INFO","msg":"handler: closed","stream_id":"gu8gystp"}
+{"time":"2025-04-03T01:15:01.620612689-04:00","level":"INFO","msg":"sender: closed","stream_id":"gu8gystp"}
+{"time":"2025-04-03T01:15:01.620608834-04:00","level":"INFO","msg":"writer: Close: closed","stream_id":"gu8gystp"}
+{"time":"2025-04-03T01:15:01.621363126-04:00","level":"INFO","msg":"stream: closed","id":"gu8gystp"}

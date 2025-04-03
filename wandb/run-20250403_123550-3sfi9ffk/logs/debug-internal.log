@@ -1,0 +1,15 @@
+{"time":"2025-04-03T12:35:50.608279257-04:00","level":"INFO","msg":"stream: starting","core version":"0.19.8","symlink path":"/scratch/zl3466/github/thinking_in_street/wandb/run-20250403_123550-3sfi9ffk/logs/debug-core.log"}
+{"time":"2025-04-03T12:35:50.722848168-04:00","level":"INFO","msg":"created new stream","id":"3sfi9ffk"}
+{"time":"2025-04-03T12:35:50.722880834-04:00","level":"INFO","msg":"stream: started","id":"3sfi9ffk"}
+{"time":"2025-04-03T12:35:50.722894549-04:00","level":"INFO","msg":"handler: started","stream_id":"3sfi9ffk"}
+{"time":"2025-04-03T12:35:50.722904039-04:00","level":"INFO","msg":"sender: started","stream_id":"3sfi9ffk"}
+{"time":"2025-04-03T12:35:50.72292272-04:00","level":"INFO","msg":"writer: Do: started","stream_id":"3sfi9ffk"}
+{"time":"2025-04-03T12:35:50.90957829-04:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-04-03T12:40:27.156555617-04:00","level":"INFO","msg":"stream: closing","id":"3sfi9ffk"}
+{"time":"2025-04-03T12:40:27.156600287-04:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-04-03T12:40:27.157136673-04:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-04-03T12:40:27.45659604-04:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-04-03T12:40:27.543761681-04:00","level":"INFO","msg":"handler: closed","stream_id":"3sfi9ffk"}
+{"time":"2025-04-03T12:40:27.543817589-04:00","level":"INFO","msg":"sender: closed","stream_id":"3sfi9ffk"}
+{"time":"2025-04-03T12:40:27.543815412-04:00","level":"INFO","msg":"writer: Close: closed","stream_id":"3sfi9ffk"}
+{"time":"2025-04-03T12:40:27.544065796-04:00","level":"INFO","msg":"stream: closed","id":"3sfi9ffk"}

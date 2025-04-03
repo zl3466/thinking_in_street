@@ -9,4 +9,4 @@ sbatch run_grpo_localization_hpc.sbatch
 
 bash run_grpo_localization.sh
 
-srun --cpus-per-task=16 --mem=64GB --time=3:00:00 --gres=gpu:2 --pty /bin/bash
+srun --cpus-per-task=16 --mem=64GB --time=2:00:00 --gres=gpu:4 --pty /bin/bash

@@ -1,0 +1,70 @@
+  0%|          | 0/231 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 587, in <module>
+    main(script_args, training_args, model_args)
+  File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 576, in main
+    trainer.train()
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2241, in train
+    return inner_training_loop(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2548, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 3698, in training_step
+    loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/github/thinking_in_street/train/localization/trainer/grpo_trainer.py", line 510, in compute_loss
+    with unwrap_model_for_generation(model, self.accelerator) as unwrapped_model:
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/trl/models/utils.py", line 217, in unwrap_model_for_generation
+    with deepspeed.zero.GatheredParameters(model.parameters()):
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/zero/partition_parameters.py", line 2243, in __enter__
+    self.params[0].all_gather(param_list=self.params)
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/zero/partition_parameters.py", line 1161, in all_gather
+    return self._all_gather(param_list, async_op=async_op, hierarchy=hierarchy)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/utils/nvtx.py", line 20, in wrapped_fn
+    ret_val = func(*args, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/zero/partition_parameters.py", line 1529, in _all_gather
+    self._allgather_params_coalesced(all_gather_nonquantize_list, hierarchy, quantize=False)
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/zero/partition_parameters.py", line 1818, in _allgather_params_coalesced
+    flat_tensor = torch.empty(tensor_size, dtype=param_list[0].ds_tensor.dtype,
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 130.00 MiB. GPU 0 has a total capacity of 44.48 GiB of which 83.31 MiB is free. Including non-PyTorch memory, this process has 44.24 GiB memory in use. Process 2626445 has 162.00 MiB memory in use. Of the allocated memory 43.92 GiB is allocated by PyTorch, and 52.45 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 587, in <module>
+[rank0]:     main(script_args, training_args, model_args)
+[rank0]:   File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 576, in main
+[rank0]:     trainer.train()
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2241, in train
+[rank0]:     return inner_training_loop(
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2548, in _inner_training_loop
+[rank0]:     tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+[rank0]:                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 3698, in training_step
+[rank0]:     loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/github/thinking_in_street/train/localization/trainer/grpo_trainer.py", line 510, in compute_loss
+[rank0]:     with unwrap_model_for_generation(model, self.accelerator) as unwrapped_model:
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/contextlib.py", line 137, in __enter__
+[rank0]:     return next(self.gen)
+[rank0]:            ^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/trl/models/utils.py", line 217, in unwrap_model_for_generation
+[rank0]:     with deepspeed.zero.GatheredParameters(model.parameters()):
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/zero/partition_parameters.py", line 2243, in __enter__
+[rank0]:     self.params[0].all_gather(param_list=self.params)
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/zero/partition_parameters.py", line 1161, in all_gather
+[rank0]:     return self._all_gather(param_list, async_op=async_op, hierarchy=hierarchy)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/utils/nvtx.py", line 20, in wrapped_fn
+[rank0]:     ret_val = func(*args, **kwargs)
+[rank0]:               ^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/zero/partition_parameters.py", line 1529, in _all_gather
+[rank0]:     self._allgather_params_coalesced(all_gather_nonquantize_list, hierarchy, quantize=False)
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/zero/partition_parameters.py", line 1818, in _allgather_params_coalesced
+[rank0]:     flat_tensor = torch.empty(tensor_size, dtype=param_list[0].ds_tensor.dtype,
+[rank0]:                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 130.00 MiB. GPU 0 has a total capacity of 44.48 GiB of which 83.31 MiB is free. Including non-PyTorch memory, this process has 44.24 GiB memory in use. Process 2626445 has 162.00 MiB memory in use. Of the allocated memory 43.92 GiB is allocated by PyTorch, and 52.45 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

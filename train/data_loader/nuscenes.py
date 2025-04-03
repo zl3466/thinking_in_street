@@ -61,6 +61,7 @@ class NuScenesDataset():
             )
 
         if os.path.exists(self.meta_out_path):
+            print(self.meta_out_path)
             with open(self.meta_out_path, "r") as f:
                 meta_dict = json.load(f)
             logger.info(f"[Nuscenes] Loaded camera meta from {self.meta_out_path}")

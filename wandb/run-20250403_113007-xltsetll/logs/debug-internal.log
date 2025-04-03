@@ -1,0 +1,15 @@
+{"time":"2025-04-03T11:30:07.390250566-04:00","level":"INFO","msg":"stream: starting","core version":"0.19.8","symlink path":"/scratch/zl3466/github/thinking_in_street/wandb/run-20250403_113007-xltsetll/logs/debug-core.log"}
+{"time":"2025-04-03T11:30:07.505074491-04:00","level":"INFO","msg":"created new stream","id":"xltsetll"}
+{"time":"2025-04-03T11:30:07.505112291-04:00","level":"INFO","msg":"stream: started","id":"xltsetll"}
+{"time":"2025-04-03T11:30:07.505127716-04:00","level":"INFO","msg":"writer: Do: started","stream_id":"xltsetll"}
+{"time":"2025-04-03T11:30:07.505154481-04:00","level":"INFO","msg":"sender: started","stream_id":"xltsetll"}
+{"time":"2025-04-03T11:30:07.505136588-04:00","level":"INFO","msg":"handler: started","stream_id":"xltsetll"}
+{"time":"2025-04-03T11:30:07.684055395-04:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-04-03T11:30:11.985019431-04:00","level":"INFO","msg":"stream: closing","id":"xltsetll"}
+{"time":"2025-04-03T11:30:11.985053277-04:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-04-03T11:30:11.985556779-04:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-04-03T11:30:12.328383596-04:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-04-03T11:30:12.460495505-04:00","level":"INFO","msg":"handler: closed","stream_id":"xltsetll"}
+{"time":"2025-04-03T11:30:12.460516341-04:00","level":"INFO","msg":"writer: Close: closed","stream_id":"xltsetll"}
+{"time":"2025-04-03T11:30:12.460527767-04:00","level":"INFO","msg":"sender: closed","stream_id":"xltsetll"}
+{"time":"2025-04-03T11:30:12.460687951-04:00","level":"INFO","msg":"stream: closed","id":"xltsetll"}

@@ -137,8 +137,11 @@ def accuracy_reward(completions, solution, **kwargs):
     for content, sol in zip(contents, solution):
 
         try:
+            # print("content: ", content)
             output_ans = extract_answer(content)
+            # print("output_ans: ", output_ans)
             gt_ans = extract_answer(sol)
+            # print("gt_ans: ", gt_ans)
             if question_type == "multiple choice":
                 reward = 1.0 if output_ans.strip() == gt_ans.strip() else 0.0
             elif question_type == "numerical":
@@ -169,6 +172,7 @@ def accuracy_reward(completions, solution, **kwargs):
                 rel_diff = min(1.0, max(0.0, rel_diff))
                 reward = 1 - rel_diff
             elif question_type == "list":
+                # print("output_ans: ", output_ans)
                 output_ans_list = ast.literal_eval(output_ans)
                 gt_list = ast.literal_eval(gt_ans)
                 if len(output_ans_list) != len(gt_list):
@@ -191,11 +195,12 @@ def accuracy_reward(completions, solution, **kwargs):
         if os.getenv("DEBUG_MODE") == "true":
             log_path = os.getenv("LOG_PATH")
             # local_rank = int(os.getenv("LOCAL_RANK", 0))
+            # print(f"logging to {log_path}")
             with open(log_path, "a", encoding="utf-8") as f:
                 f.write(f"------------- {current_time} Accuracy reward: {reward} -------------\n")
                 f.write(f"Content: {content}\n")
                 f.write(f"Solution: {sol}\n")
-
+    # print(f"\n========\nbatch rewards: {rewards}\n========\n")
     return rewards
 
 
@@ -225,10 +230,13 @@ def format_reward_list(completions, **kwargs):
             match = re.fullmatch(pattern, content, re.DOTALL)
             if match:
                 reward = 0.5
-                list_pattern = r"<answer>\[.*?\]</answer>"
-                list_match = re.fullmatch(list_pattern, content, re.DOTALL)
-                if list_match:
-                    reward = 1.0
+                try:
+                    output_ans = extract_answer(content)
+                    output_ans_list = ast.literal_eval(output_ans)
+                    if isinstance(output_ans_list, list):
+                        reward = 1.0
+                except Exception as e:
+                    reward = 0.5
             else:
                 reward = 0
 
@@ -267,7 +275,7 @@ def calculate_delta_heading(yaw1, yaw2):
     return delta
 
 
-def nusc_to_examples(nusc_dataset, video_out_dir, sample_rate=10, batch_size=16, visualize=False):
+def nusc_to_examples(nusc_dataset, video_out_dir, sample_rate=10, batch_size=4, visualize=False):
     if visualize:
         ''' prepare video writer '''
         sample_img = cv2.imread(nusc_dataset.img_filepaths[0])
@@ -368,8 +376,8 @@ def nusc_to_examples(nusc_dataset, video_out_dir, sample_rate=10, batch_size=16,
             "problem_id": batch_i + problem_id_offset,
             "problem": f"I uploaded {len(batch_disp_gt)+1} frames from a vehicle dash cam video. \n"
                        f"Determine the vehicle's change in heading direction between each frame and its previous frame.\n"
-                       f"Give your answer in degree values ranging between -180 and 180 degrees, with right turn "
-                       f"being positive degrees and left turn being negative degrees.\n"
+                       f"Give your answer in degree values ranging between -180 and 180 degrees, with veer to the right "
+                       f"being positive degrees and to the left being negative degrees.\n"
                        f"Keep all degree values in one list. "
                        f"You should have {len(batch_disp_gt)} values in the list.\n",
             "data_type": "video",
@@ -493,12 +501,18 @@ def main(script_args, training_args, model_args):
 
     # Load dataset
     num_cam = 1
-    scene_idx_list = []
-    for i in range(80):
-        scene_idx_list.append(i)
+    train_num_scene = 16
+    test_num_scene = train_num_scene // 4
+    sample_rate = 2
+    train_scene_idx_list = []
+    test_scene_idx_list = []
+    for i in range(train_num_scene):
+        train_scene_idx_list.append(i)
+    for i in range(test_num_scene):
+        test_scene_idx_list.append(i)
 
     root_path = script_args.dataset_name
-    out_path = f"./train_result/scene_{scene_idx_list[0]}-{scene_idx_list[-1]}_cam_{num_cam}"
+    out_path = f"./train_result/scene_{train_scene_idx_list[0]}-{train_scene_idx_list[-1]}_cam_{num_cam}"
 
     train_data_path = f"{root_path}/train"
     test_data_path = f"{root_path}/test"
@@ -506,14 +520,14 @@ def main(script_args, training_args, model_args):
     train_out_path = f"{out_path}/train"
     test_out_path = f"{out_path}/test"
     
-    nusc_train = None
-    nusc_test = None
-    # nusc_train = NuScenes(version="v1.0-trainval", dataroot=train_data_path, verbose=True)
-    # nusc_test = NuScenes(version="v1.0-test", dataroot=test_data_path, verbose=True)
+    # nusc_train = None
+    # nusc_test = None
+    nusc_train = NuScenes(version="v1.0-trainval", dataroot=train_data_path, verbose=True)
+    nusc_test = NuScenes(version="v1.0-test", dataroot=test_data_path, verbose=True)
     
     train_example_list = []
     print(f"Processing train dataset into examples...")
-    for scene_idx in scene_idx_list:
+    for scene_idx in train_scene_idx_list:
         scene_out_path = f"{train_out_path}/scene_{scene_idx}"
         os.makedirs(scene_out_path, exist_ok=True)
 
@@ -523,11 +537,11 @@ def main(script_args, training_args, model_args):
                                   nusc=nusc_train,
                                   scene_idx=scene_idx)
 
-        train_example_list += nusc_to_examples(dataset, video_out_dir=f"{scene_out_path}/scene_{scene_idx}.mp4", sample_rate=2)
+        train_example_list += nusc_to_examples(dataset, video_out_dir=f"{scene_out_path}/scene_{scene_idx}.mp4", sample_rate=sample_rate)
 
     test_example_list = []
     print(f"Processing test dataset into examples...")
-    for scene_idx in scene_idx_list:
+    for scene_idx in test_scene_idx_list:
         scene_out_path = f"{test_out_path}/scene_{scene_idx}"
         os.makedirs(scene_out_path, exist_ok=True)
 
@@ -537,7 +551,7 @@ def main(script_args, training_args, model_args):
                                   nusc=nusc_test,
                                   scene_idx=scene_idx)
 
-        test_example_list += nusc_to_examples(dataset, video_out_dir=f"{scene_out_path}/scene_{scene_idx}.mp4", sample_rate=2)
+        test_example_list += nusc_to_examples(dataset, video_out_dir=f"{scene_out_path}/scene_{scene_idx}.mp4", sample_rate=sample_rate)
 
     # Format into conversation
     # dataset = dataset.map(make_conversation_image_and_video)
