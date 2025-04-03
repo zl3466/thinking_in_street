@@ -3,16 +3,17 @@
 #SBATCH --job-name=thinking_in_street_grpo
 #SBATCH --output=/scratch/zl3466/github/thinking_in_street/train_result/localization_grpo_test.out
 #SBATCH --nodes=1
-#SBATCH --ntasks-per-node=1
+#SBATCH --ntasks-per-node=4
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=16GB
 #SBATCH --time=3:00:00
-#SBATCH --gres=gpu:2
+#SBATCH --gres=gpu:4
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=zl3466@nyu.edu
 
 module purge;
 module load anaconda3/2020.07;
+module load openmpi/intel/4.0.5;
 source /share/apps/anaconda3/2020.07/etc/profile.d/conda.sh;
 conda activate /scratch/zl3466/env/thinking-in-street/;
 export PATH=/scratch/zl3466/env/thinking-in-street/bin:$PATH;

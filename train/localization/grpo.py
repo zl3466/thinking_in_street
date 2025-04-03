@@ -15,6 +15,7 @@ import ast
 import math
 import os
 import sys
+import json
 
 from tqdm import tqdm
 
@@ -27,6 +28,7 @@ from typing import Optional
 
 from trainer import Qwen2VLGRPOTrainer, Qwen2VLGRPOVLLMTrainerModified
 from trl import GRPOConfig, GRPOTrainer, ModelConfig, ScriptArguments, TrlParser, get_peft_config
+from datasets import Dataset, DatasetDict
 
 from rouge_score import rouge_scorer
 from nuscenes.nuscenes import LidarPointCloud, NuScenes
@@ -301,8 +303,8 @@ def nusc_to_examples(nusc_dataset, video_out_dir, sample_rate=10, batch_size=16,
     batch_delta_heading_gt = []
     batch_img_list = []
     sample_count = 0
-    for frame_i in tqdm(range(len(ego_pose_list)),
-                        desc=f"Processing dataset into examples, saving video to {video_out_dir}"):
+    
+    for frame_i in range(len(ego_pose_list)):
         if frame_i % step_size != 0:
             continue
         ego_pose = ego_pose_list[frame_i]
@@ -364,13 +366,13 @@ def nusc_to_examples(nusc_dataset, video_out_dir, sample_rate=10, batch_size=16,
 
         example_heading = {
             "problem_id": batch_i + problem_id_offset,
-            "problem": f"I uploaded {len(batch_disp_gt)} frames from a vehicle dash cam video. \n"
+            "problem": f"I uploaded {len(batch_disp_gt)+1} frames from a vehicle dash cam video. \n"
                        f"Determine the vehicle's change in heading direction between each frame and its previous frame.\n"
                        f"Give your answer in degree values ranging between -180 and 180 degrees, with right turn "
                        f"being positive degrees and left turn being negative degrees.\n"
                        f"Keep all degree values in one list. "
-                       f"You should have {len(batch_disp_gt) - 1} values in the list.\n",
-            "data_type": "image",
+                       f"You should have {len(batch_disp_gt)} values in the list.\n",
+            "data_type": "video",
             "problem_type": "list",
             "options": [],
             "solution": f"<answer>{batch_delta_heading_gt}</answer>",
@@ -382,12 +384,12 @@ def nusc_to_examples(nusc_dataset, video_out_dir, sample_rate=10, batch_size=16,
 
         example_disp = {
             "problem_id": batch_i + problem_id_offset,
-            "problem": f"I uploaded {len(batch_disp_gt)} frames from a vehicle dash cam video. \n"
+            "problem": f"I uploaded {len(batch_disp_gt)+1} frames from a vehicle dash cam video. \n"
                        f"Determine the vehicle's displacement between each frame and its previous frame.\n"
                        f"Give your answer in numerical values in meter unit.\n"
                        f"Keep all displacement values in one list. "
-                       f"You should have {len(batch_disp_gt) - 1} values in the list.\n",
-            "data_type": "image",
+                       f"You should have {len(batch_disp_gt)} values in the list.\n",
+            "data_type": "video",
             "problem_type": "list",
             "options": [],
             "solution": f"<answer>{batch_disp_gt}</answer>",
@@ -411,23 +413,39 @@ def prepare_dataset_nusc(example):
         question = example['problem']
 
     if example["problem_type"] == 'list':
-        content = []
-        for data_path in example["path"]:
-            content.append({
-                "type": example['data_type'],
-                example['data_type']: data_path
-            })
+        # content = []
+        
+        # content.append({
+        #     "type": example['data_type'],
+        #     example['data_type']: example["path"]
+        # })
 
-        content.append({
-            "type": "text",
-            "text": QUESTION_TEMPLATE.format(Question=question) + TYPE_TEMPLATE[example['problem_type']]
-        })
+        # content.append({
+        #     "type": "text",
+        #     "text": QUESTION_TEMPLATE.format(Question=question) + TYPE_TEMPLATE[example['problem_type']]
+        # })
 
+        # msg = {
+        #     "prompt":
+        #         [{
+        #             "role": "user",
+        #             "content": content
+        #         }]
+        # }
         msg = {
             "prompt":
                 [{
                     "role": "user",
-                    "content": content
+                    "content": [
+                        {
+                            "type": example['data_type'],
+                            example['data_type']: example["path"]
+                        },
+                        {
+                            "type": "text",
+                            "text": QUESTION_TEMPLATE.format(Question=question) + TYPE_TEMPLATE[example['problem_type']]
+                        }
+                    ]
                 }]
         }
     else:
@@ -447,7 +465,6 @@ def prepare_dataset_nusc(example):
                     ]
                 }]
         }
-
     return msg
 
 
@@ -481,7 +498,7 @@ def main(script_args, training_args, model_args):
         scene_idx_list.append(i)
 
     root_path = script_args.dataset_name
-    out_path = f"../../train_result/scene_{scene_idx_list[0]}-{scene_idx_list[-1]}_cam_{num_cam}"
+    out_path = f"./train_result/scene_{scene_idx_list[0]}-{scene_idx_list[-1]}_cam_{num_cam}"
 
     train_data_path = f"{root_path}/train"
     test_data_path = f"{root_path}/test"
@@ -489,12 +506,13 @@ def main(script_args, training_args, model_args):
     train_out_path = f"{out_path}/train"
     test_out_path = f"{out_path}/test"
     
-
-    nusc_train = NuScenes(version="v1.0-trainval", dataroot=train_data_path, verbose=True)
-    nusc_test = NuScenes(version="v1.0-test", dataroot=test_data_path, verbose=True)
-    # nusc_train = None
-    # nusc_test = None
+    nusc_train = None
+    nusc_test = None
+    # nusc_train = NuScenes(version="v1.0-trainval", dataroot=train_data_path, verbose=True)
+    # nusc_test = NuScenes(version="v1.0-test", dataroot=test_data_path, verbose=True)
+    
     train_example_list = []
+    print(f"Processing train dataset into examples...")
     for scene_idx in scene_idx_list:
         scene_out_path = f"{train_out_path}/scene_{scene_idx}"
         os.makedirs(scene_out_path, exist_ok=True)
@@ -508,6 +526,7 @@ def main(script_args, training_args, model_args):
         train_example_list += nusc_to_examples(dataset, video_out_dir=f"{scene_out_path}/scene_{scene_idx}.mp4", sample_rate=2)
 
     test_example_list = []
+    print(f"Processing test dataset into examples...")
     for scene_idx in scene_idx_list:
         scene_out_path = f"{test_out_path}/scene_{scene_idx}"
         os.makedirs(scene_out_path, exist_ok=True)
@@ -522,8 +541,15 @@ def main(script_args, training_args, model_args):
 
     # Format into conversation
     # dataset = dataset.map(make_conversation_image_and_video)
-    prepared_dataset_train = [prepare_dataset_nusc(example) for example in train_example_list]
-    prepared_dataset_test = [prepare_dataset_nusc(example) for example in test_example_list]
+    # prepared_dataset_train = [prepare_dataset_nusc(example) for example in train_example_list]
+    # prepared_dataset_test = [prepare_dataset_nusc(example) for example in test_example_list]
+    with open(f"{out_path}/train_examples.json", 'w') as f:
+        json.dump(train_example_list, f, indent=4)
+    with open(f"{out_path}/test_examples.json", 'w') as f:
+        json.dump(test_example_list, f, indent=4)
+    
+    dataset =  DatasetDict({"train": Dataset.from_json(f"{out_path}/train_examples.json"), "test": Dataset.from_json(f"{out_path}/test_examples.json")})
+    dataset = dataset.map(prepare_dataset_nusc)
 
     trainer_cls = Qwen2VLGRPOTrainer if not training_args.use_vllm else Qwen2VLGRPOVLLMTrainerModified
     print("using: ", trainer_cls)
@@ -535,8 +561,8 @@ def main(script_args, training_args, model_args):
         reward_funcs=reward_funcs,
         args=training_args,
         script_args=script_args,
-        train_dataset=prepared_dataset_train,
-        eval_dataset=prepared_dataset_test if training_args.eval_strategy != "no" else None,
+        train_dataset=dataset["train"],
+        eval_dataset=dataset["test"] if training_args.eval_strategy != "no" else None,
         peft_config=get_peft_config(model_args),
         attn_implementation=model_args.attn_implementation,
         max_pixels=script_args.max_pixels,

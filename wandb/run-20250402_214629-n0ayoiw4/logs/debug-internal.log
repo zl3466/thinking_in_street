@@ -1,0 +1,10 @@
+{"time":"2025-04-02T21:46:29.056407605-04:00","level":"INFO","msg":"stream: starting","core version":"0.19.8","symlink path":"/scratch/zl3466/github/thinking_in_street/wandb/run-20250402_214629-n0ayoiw4/logs/debug-core.log"}
+{"time":"2025-04-02T21:46:29.211792873-04:00","level":"INFO","msg":"created new stream","id":"n0ayoiw4"}
+{"time":"2025-04-02T21:46:29.211844865-04:00","level":"INFO","msg":"stream: started","id":"n0ayoiw4"}
+{"time":"2025-04-02T21:46:29.21186129-04:00","level":"INFO","msg":"writer: Do: started","stream_id":"n0ayoiw4"}
+{"time":"2025-04-02T21:46:29.211891007-04:00","level":"INFO","msg":"sender: started","stream_id":"n0ayoiw4"}
+{"time":"2025-04-02T21:46:29.211871538-04:00","level":"INFO","msg":"handler: started","stream_id":"n0ayoiw4"}
+{"time":"2025-04-02T21:46:29.388248906-04:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-04-02T21:46:31.608171162-04:00","level":"INFO","msg":"stream: closing","id":"n0ayoiw4"}
+{"time":"2025-04-02T21:46:31.608214197-04:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-04-02T21:46:31.608712473-04:00","level":"INFO","msg":"Stopped system monitor"}

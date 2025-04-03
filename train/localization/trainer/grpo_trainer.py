@@ -17,6 +17,7 @@ import textwrap
 from collections import defaultdict
 from typing import Any, Callable, Optional, Union
 import random
+import numpy as np
 
 import torch
 import torch.utils.data
@@ -399,34 +400,65 @@ class Qwen2VLGRPOTrainer(Trainer):
         if return_outputs:
             raise ValueError("The GRPOTrainer does not support returning outputs")
     
+        # prompts = [x["prompt"] for x in inputs]
+        # prompts_text = [maybe_apply_chat_template(example, self.processing_class)["prompt"] for example in inputs]
+        # # print("\nfull prompt len:", len(prompts))
+        # # print("\nfull prompt:", prompts)
+        # # print("\nfull prompt_text len", len(prompts_text))
+        # # print("\nfull prompt_text:", prompts_text)
         
+        # # print("\nfull input:", inputs)
+        # input_copy = copy.deepcopy(inputs[0]['prompt'])
+        
+        # input_copy = self.remove_none_from_data(input_copy)
+        # # print("\nfull input prompt len:", len(input_copy))
+        # # print("\nfull input prompt:", input_copy)
 
         prompts = [x["prompt"] for x in inputs]
-        prompts_text = [maybe_apply_chat_template(example, self.processing_class)["prompt"] for example in inputs]
-
-                
         
         input_copy = copy.deepcopy(inputs[0]['prompt'])
-        
         input_copy = self.remove_none_from_data(input_copy)
-        
-        if inputs[0]['data_type'] == 'image':
-            input_copy[0]['content'][0]['image'] = os.getcwd() + "/Video-R1-data" + inputs[0]['path'][1:] 
-        elif inputs[0]['data_type'] == 'video':
-            input_copy[0]['content'][0]['video'] = os.getcwd() + "/Video-R1-data" + inputs[0]['path'][1:] 
+        inputs[0]['prompt'] = input_copy
+        prompts_text = [maybe_apply_chat_template(example, self.processing_class)["prompt"] for example in inputs]
+
+        # if inputs[0]['data_type'] == 'image':
+        #     input_copy[0]['content'][0]['image'] = os.getcwd() + "/Video-R1-data" + inputs[0]['path'][1:] 
+        # elif inputs[0]['data_type'] == 'video':
+        #     input_copy[0]['content'][0]['video'] = os.getcwd() + "/Video-R1-data" + inputs[0]['path'][1:] 
             
-        try:
-            image_inputs, video_inputs, video_kwargs = process_vision_info(input_copy, return_video_kwargs=True)
-        except Exception as e:
-            print(f"process_vision_info error, using fixed data, {e}")
-            if inputs[0]['data_type'] == 'image':
-                input_copy[0]['content'][0]['image'] = os.getcwd() + "/Video-R1-data" + '/Math/Multimath-300k/17ff4c7d14c388134de02381b1fc2824.png'
-            elif inputs[0]['data_type'] == 'video':
-                input_copy[0]['content'][0]['video'] = os.getcwd() + "/Video-R1-data" + '/LLaVA-Video-178K/liwei_youtube_videos/videos/youtube_video_2024/ytb_7nRmsEw7nsE.mp4'
+        # try:
+        #     image_inputs, video_inputs, video_kwargs = process_vision_info(input_copy, return_video_kwargs=True)
+        # except Exception as e:
+        #     print(f"process_vision_info error, using fixed data, {e}")
+        #     if inputs[0]['data_type'] == 'image':
+        #         input_copy[0]['content'][0]['image'] = os.getcwd() + "/Video-R1-data" + '/Math/Multimath-300k/17ff4c7d14c388134de02381b1fc2824.png'
+        #     elif inputs[0]['data_type'] == 'video':
+        #         input_copy[0]['content'][0]['video'] = os.getcwd() + "/Video-R1-data" + '/LLaVA-Video-178K/liwei_youtube_videos/videos/youtube_video_2024/ytb_7nRmsEw7nsE.mp4'
                 
-            image_inputs, video_inputs, video_kwargs = process_vision_info(input_copy, return_video_kwargs=True)
-        
-        
+        #     image_inputs, video_inputs, video_kwargs = process_vision_info(input_copy, return_video_kwargs=True)
+
+        if inputs[0]['data_type'] == 'image':
+            input_copy[0]['content'][0]['image'] = inputs[0]['path']
+        elif inputs[0]['data_type'] == 'video':
+            input_copy[0]['content'][0]['video'] = inputs[0]['path']
+
+        # try:
+        #     image_inputs, video_inputs, video_kwargs = process_vision_info(input_copy, return_video_kwargs=True)
+        # except Exception as e:
+        #     print(f"process_vision_info error, using fixed data, {e}")
+        #     if inputs[0]['data_type'] == 'image':
+        #         input_copy[0]['content'][0]['image'] = os.getcwd() + "/Video-R1-data" + '/Math/Multimath-300k/17ff4c7d14c388134de02381b1fc2824.png'
+        #     elif inputs[0]['data_type'] == 'video':
+        #         input_copy[0]['content'][0]['video'] = os.getcwd() + "/Video-R1-data" + '/LLaVA-Video-178K/liwei_youtube_videos/videos/youtube_video_2024/ytb_7nRmsEw7nsE.mp4'
+                
+        #     image_inputs, video_inputs, video_kwargs = process_vision_info(input_copy, return_video_kwargs=True)
+
+        image_inputs, video_inputs, video_kwargs = process_vision_info(input_copy, return_video_kwargs=True)
+
+        # Videos uploaded as a sequence of images will be returned as a list of list of images -- strip one layer of list in that case
+        # if isinstance(video_inputs[0], (list, tuple)):
+        #     video_inputs = video_inputs[0]
+
         prompt_inputs = self.processing_class(
             text=copy.deepcopy(prompts_text),
             images=image_inputs,
@@ -436,19 +468,27 @@ class Qwen2VLGRPOTrainer(Trainer):
             padding_side="left",
             add_special_tokens=False,
         )
-        
+
+        # image_inputs = np.array(image_inputs)
+        video_inputs = np.array(video_inputs)
         
         prompt_inputs = super()._prepare_inputs(prompt_inputs)
 
         prompt_ids, prompt_mask = prompt_inputs["input_ids"], prompt_inputs["attention_mask"]
-
+        # print("prompt_inputs: ", prompt_inputs)
+        # print("prompt ids ", prompt_ids)
+        # print("prompt_mask ", prompt_mask)
+        # print("video_inputs[0].size", video_inputs[0].size)
+        print(video_inputs[0].size)
+        print(video_inputs[0])
         
         if self.max_prompt_length is not None:
             prompt_ids = prompt_ids[:, -self.max_prompt_length :]
             prompt_mask = prompt_mask[:, -self.max_prompt_length :]
             
-        if self.temporal and video_inputs:
-            indices = torch.randperm(video_inputs[0].size(0))
+        if self.temporal and video_inputs is not None:
+            indices = torch.randperm(video_inputs[0].size[0])
+            # indices = torch.randperm(len(video_inputs[0]))
             shuffled_video_inputs = [video_inputs[0][indices]]
             shuffled_prompt_inputs = self.processing_class(
                 text=copy.deepcopy(prompts_text),
@@ -476,7 +516,7 @@ class Qwen2VLGRPOTrainer(Trainer):
             
             if self.temporal:
                 
-                if video_inputs:
+                if video_inputs is not None:
             
                     shuffled_prompt_completion_ids = unwrapped_model.generate(**shuffled_prompt_inputs, generation_config=self.shuffled_generation_config)
                     shuffled_prompt_length = shuffled_prompt_ids.size(1)

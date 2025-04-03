@@ -1,11 +1,458 @@
-[2025-04-02 12:03:32,776] [INFO] [real_accelerator.py:239:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2025-04-02 18:58:05,535] [INFO] [real_accelerator.py:239:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+======
+Loading NuScenes tables for version v1.0-trainval...
+23 category,
+8 attribute,
+4 visibility,
+64386 instance,
+12 sensor,
+10200 calibrated_sensor,
+2631083 ego_pose,
+68 log,
+850 scene,
+34149 sample,
+2631083 sample_data,
+1166187 sample_annotation,
+4 map,
+Done loading in 34.303 seconds.
+======
+Reverse indexing ...
+Done reverse indexing in 6.6 seconds.
+======
+======
+Loading NuScenes tables for version v1.0-test...
+23 category,
+8 attribute,
+4 visibility,
+0 instance,
+12 sensor,
+1800 calibrated_sensor,
+462901 ego_pose,
+15 log,
+150 scene,
+6008 sample,
+462901 sample_data,
+0 sample_annotation,
+4 map,
+Done loading in 3.345 seconds.
+======
+Reverse indexing ...
+Done reverse indexing in 0.7 seconds.
+======
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_0/scene_0.mp4:   0%|          | 0/233 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_0/scene_0.mp4: 100%|██████████| 233/233 [00:00<00:00, 336874.47it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_1/scene_1.mp4:   0%|          | 0/232 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_1/scene_1.mp4: 100%|██████████| 232/232 [00:00<00:00, 1039613.81it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_2/scene_2.mp4:   0%|          | 0/226 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_2/scene_2.mp4: 100%|██████████| 226/226 [00:00<00:00, 1121790.18it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_3/scene_3.mp4:   0%|          | 0/229 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_3/scene_3.mp4: 100%|██████████| 229/229 [00:00<00:00, 1087764.00it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_4/scene_4.mp4:   0%|          | 0/224 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_4/scene_4.mp4: 100%|██████████| 224/224 [00:00<00:00, 1149968.29it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_5/scene_5.mp4:   0%|          | 0/234 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_5/scene_5.mp4: 100%|██████████| 234/234 [00:00<00:00, 1171201.83it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_6/scene_6.mp4:   0%|          | 0/224 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_6/scene_6.mp4: 100%|██████████| 224/224 [00:00<00:00, 1180306.65it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_7/scene_7.mp4:   0%|          | 0/221 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_7/scene_7.mp4: 100%|██████████| 221/221 [00:00<00:00, 1158676.48it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_8/scene_8.mp4:   0%|          | 0/227 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_8/scene_8.mp4: 100%|██████████| 227/227 [00:00<00:00, 1178350.26it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_9/scene_9.mp4:   0%|          | 0/228 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_9/scene_9.mp4: 100%|██████████| 228/228 [00:00<00:00, 1143901.09it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_10/scene_10.mp4:   0%|          | 0/230 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_10/scene_10.mp4: 100%|██████████| 230/230 [00:00<00:00, 1189506.68it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_11/scene_11.mp4:   0%|          | 0/230 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_11/scene_11.mp4: 100%|██████████| 230/230 [00:00<00:00, 1195402.63it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_12/scene_12.mp4:   0%|          | 0/229 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_12/scene_12.mp4: 100%|██████████| 229/229 [00:00<00:00, 1199120.62it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_13/scene_13.mp4:   0%|          | 0/226 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_13/scene_13.mp4: 100%|██████████| 226/226 [00:00<00:00, 1164511.92it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_14/scene_14.mp4:   0%|          | 0/231 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_14/scene_14.mp4: 100%|██████████| 231/231 [00:00<00:00, 1168738.51it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_15/scene_15.mp4:   0%|          | 0/234 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_15/scene_15.mp4: 100%|██████████| 234/234 [00:00<00:00, 1192548.16it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_16/scene_16.mp4:   0%|          | 0/224 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_16/scene_16.mp4: 100%|██████████| 224/224 [00:00<00:00, 1175874.96it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_17/scene_17.mp4:   0%|          | 0/231 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_17/scene_17.mp4: 100%|██████████| 231/231 [00:00<00:00, 1188815.00it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_18/scene_18.mp4:   0%|          | 0/229 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_18/scene_18.mp4: 100%|██████████| 229/229 [00:00<00:00, 1190205.22it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_19/scene_19.mp4:   0%|          | 0/227 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_19/scene_19.mp4: 100%|██████████| 227/227 [00:00<00:00, 1181274.20it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_20/scene_20.mp4:   0%|          | 0/233 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_20/scene_20.mp4: 100%|██████████| 233/233 [00:00<00:00, 1173196.68it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_21/scene_21.mp4:   0%|          | 0/233 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_21/scene_21.mp4: 100%|██████████| 233/233 [00:00<00:00, 1197638.27it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_22/scene_22.mp4:   0%|          | 0/231 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_22/scene_22.mp4: 100%|██████████| 231/231 [00:00<00:00, 1171564.96it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_23/scene_23.mp4:   0%|          | 0/231 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_23/scene_23.mp4: 100%|██████████| 231/231 [00:00<00:00, 1142552.15it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_24/scene_24.mp4:   0%|          | 0/227 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_24/scene_24.mp4: 100%|██████████| 227/227 [00:00<00:00, 1088122.29it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_25/scene_25.mp4:   0%|          | 0/228 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_25/scene_25.mp4: 100%|██████████| 228/228 [00:00<00:00, 1183541.23it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_26/scene_26.mp4:   0%|          | 0/232 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_26/scene_26.mp4: 100%|██████████| 232/232 [00:00<00:00, 1179489.12it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_27/scene_27.mp4:   0%|          | 0/229 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_27/scene_27.mp4: 100%|██████████| 229/229 [00:00<00:00, 1169909.40it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_28/scene_28.mp4:   0%|          | 0/226 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_28/scene_28.mp4: 100%|██████████| 226/226 [00:00<00:00, 1075950.86it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_29/scene_29.mp4:   0%|          | 0/228 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_29/scene_29.mp4: 100%|██████████| 228/228 [00:00<00:00, 1189429.49it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_30/scene_30.mp4:   0%|          | 0/233 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_30/scene_30.mp4: 100%|██████████| 233/233 [00:00<00:00, 1188896.39it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_31/scene_31.mp4:   0%|          | 0/234 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_31/scene_31.mp4: 100%|██████████| 234/234 [00:00<00:00, 1193998.95it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_32/scene_32.mp4:   0%|          | 0/229 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_32/scene_32.mp4: 100%|██████████| 229/229 [00:00<00:00, 1187262.81it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_33/scene_33.mp4:   0%|          | 0/227 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_33/scene_33.mp4: 100%|██████████| 227/227 [00:00<00:00, 1181274.20it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_34/scene_34.mp4:   0%|          | 0/229 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_34/scene_34.mp4: 100%|██████████| 229/229 [00:00<00:00, 1194646.29it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_35/scene_35.mp4:   0%|          | 0/229 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_35/scene_35.mp4: 100%|██████████| 229/229 [00:00<00:00, 1190205.22it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_36/scene_36.mp4:   0%|          | 0/235 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_36/scene_36.mp4: 100%|██████████| 235/235 [00:00<00:00, 1197644.52it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_37/scene_37.mp4:   0%|          | 0/233 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_37/scene_37.mp4: 100%|██████████| 233/233 [00:00<00:00, 1186010.72it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_38/scene_38.mp4:   0%|          | 0/231 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_38/scene_38.mp4: 100%|██████████| 231/231 [00:00<00:00, 1164524.31it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_39/scene_39.mp4:   0%|          | 0/231 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_39/scene_39.mp4: 100%|██████████| 231/231 [00:00<00:00, 1170150.03it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_40/scene_40.mp4:   0%|          | 0/227 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_40/scene_40.mp4: 100%|██████████| 227/227 [00:00<00:00, 1155469.67it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_41/scene_41.mp4:   0%|          | 0/230 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_41/scene_41.mp4: 100%|██████████| 230/230 [00:00<00:00, 1185122.75it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_42/scene_42.mp4:   0%|          | 0/227 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_42/scene_42.mp4: 100%|██████████| 227/227 [00:00<00:00, 1122767.70it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_43/scene_43.mp4:   0%|          | 0/225 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_43/scene_43.mp4: 100%|██████████| 225/225 [00:00<00:00, 1152281.32it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_44/scene_44.mp4:   0%|          | 0/233 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_44/scene_44.mp4: 100%|██████████| 233/233 [00:00<00:00, 1144347.58it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_45/scene_45.mp4:   0%|          | 0/226 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_45/scene_45.mp4: 100%|██████████| 226/226 [00:00<00:00, 1176070.35it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_46/scene_46.mp4:   0%|          | 0/228 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_46/scene_46.mp4: 100%|██████████| 228/228 [00:00<00:00, 1174817.34it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_47/scene_47.mp4:   0%|          | 0/225 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_47/scene_47.mp4: 100%|██████████| 225/225 [00:00<00:00, 1139756.52it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_48/scene_48.mp4:   0%|          | 0/230 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_48/scene_48.mp4: 100%|██████████| 230/230 [00:00<00:00, 1201357.31it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_49/scene_49.mp4:   0%|          | 0/228 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_49/scene_49.mp4: 100%|██████████| 228/228 [00:00<00:00, 1176262.38it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_50/scene_50.mp4:   0%|          | 0/229 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_50/scene_50.mp4: 100%|██████████| 229/229 [00:00<00:00, 1187262.81it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_51/scene_51.mp4:   0%|          | 0/231 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_51/scene_51.mp4: 100%|██████████| 231/231 [00:00<00:00, 968884.22it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_52/scene_52.mp4:   0%|          | 0/227 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_52/scene_52.mp4: 100%|██████████| 227/227 [00:00<00:00, 1079486.40it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_53/scene_53.mp4:   0%|          | 0/230 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_53/scene_53.mp4: 100%|██████████| 230/230 [00:00<00:00, 1169321.12it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_54/scene_54.mp4:   0%|          | 0/228 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_54/scene_54.mp4: 100%|██████████| 228/228 [00:00<00:00, 1179163.15it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_55/scene_55.mp4:   0%|          | 0/230 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_55/scene_55.mp4: 100%|██████████| 230/230 [00:00<00:00, 1177887.57it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_56/scene_56.mp4:   0%|          | 0/231 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_56/scene_56.mp4: 100%|██████████| 231/231 [00:00<00:00, 1029632.54it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_57/scene_57.mp4:   0%|          | 0/230 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_57/scene_57.mp4: 100%|██████████| 230/230 [00:00<00:00, 1079071.50it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_58/scene_58.mp4:   0%|          | 0/224 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_58/scene_58.mp4: 100%|██████████| 224/224 [00:00<00:00, 1175874.96it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_59/scene_59.mp4:   0%|          | 0/228 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_59/scene_59.mp4: 100%|██████████| 228/228 [00:00<00:00, 1118481.07it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_60/scene_60.mp4:   0%|          | 0/229 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_60/scene_60.mp4: 100%|██████████| 229/229 [00:00<00:00, 1019634.41it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_61/scene_61.mp4:   0%|          | 0/230 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_61/scene_61.mp4: 100%|██████████| 230/230 [00:00<00:00, 1147074.82it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_62/scene_62.mp4:   0%|          | 0/232 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_62/scene_62.mp4: 100%|██████████| 232/232 [00:00<00:00, 1154304.30it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_63/scene_63.mp4:   0%|          | 0/227 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_63/scene_63.mp4: 100%|██████████| 227/227 [00:00<00:00, 1070986.51it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_64/scene_64.mp4:   0%|          | 0/229 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_64/scene_64.mp4: 100%|██████████| 229/229 [00:00<00:00, 1162827.62it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_65/scene_65.mp4:   0%|          | 0/228 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_65/scene_65.mp4: 100%|██████████| 228/228 [00:00<00:00, 1166221.11it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_66/scene_66.mp4:   0%|          | 0/228 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_66/scene_66.mp4: 100%|██████████| 228/228 [00:00<00:00, 1177710.98it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_67/scene_67.mp4:   0%|          | 0/234 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_67/scene_67.mp4: 100%|██████████| 234/234 [00:00<00:00, 1157390.49it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_68/scene_68.mp4:   0%|          | 0/232 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_68/scene_68.mp4: 100%|██████████| 232/232 [00:00<00:00, 1176636.67it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_69/scene_69.mp4:   0%|          | 0/231 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_69/scene_69.mp4: 100%|██████████| 231/231 [00:00<00:00, 1165925.66it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_70/scene_70.mp4:   0%|          | 0/230 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_70/scene_70.mp4: 100%|██████████| 230/230 [00:00<00:00, 1192447.37it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_71/scene_71.mp4:   0%|          | 0/227 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_71/scene_71.mp4: 100%|██████████| 227/227 [00:00<00:00, 1116186.41it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_72/scene_72.mp4:   0%|          | 0/225 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_72/scene_72.mp4: 100%|██████████| 225/225 [00:00<00:00, 1159359.21it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_73/scene_73.mp4:   0%|          | 0/228 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_73/scene_73.mp4: 100%|██████████| 228/228 [00:00<00:00, 1139810.86it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_74/scene_74.mp4:   0%|          | 0/225 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_74/scene_74.mp4: 100%|██████████| 225/225 [00:00<00:00, 1184088.33it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_75/scene_75.mp4:   0%|          | 0/229 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_75/scene_75.mp4: 100%|██████████| 229/229 [00:00<00:00, 1172766.32it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_76/scene_76.mp4:   0%|          | 0/233 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_76/scene_76.mp4: 100%|██████████| 233/233 [00:00<00:00, 1190344.50it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_77/scene_77.mp4:   0%|          | 0/227 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_77/scene_77.mp4: 100%|██████████| 227/227 [00:00<00:00, 1023770.98it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_78/scene_78.mp4:   0%|          | 0/228 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_78/scene_78.mp4: 100%|██████████| 228/228 [00:00<00:00, 1173375.84it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_79/scene_79.mp4:   0%|          | 0/231 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/train/scene_79/scene_79.mp4: 100%|██████████| 231/231 [00:00<00:00, 1078935.66it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_0/scene_0.mp4:   0%|          | 0/232 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_0/scene_0.mp4: 100%|██████████| 232/232 [00:00<00:00, 1136773.98it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_1/scene_1.mp4:   0%|          | 0/229 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_1/scene_1.mp4: 100%|██████████| 229/229 [00:00<00:00, 1175637.23it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_2/scene_2.mp4:   0%|          | 0/230 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_2/scene_2.mp4: 100%|██████████| 230/230 [00:00<00:00, 1182218.04it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_3/scene_3.mp4:   0%|          | 0/228 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_3/scene_3.mp4: 100%|██████████| 228/228 [00:00<00:00, 1170503.44it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_4/scene_4.mp4:   0%|          | 0/230 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_4/scene_4.mp4: 100%|██████████| 230/230 [00:00<00:00, 1129613.49it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_5/scene_5.mp4:   0%|          | 0/227 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_5/scene_5.mp4: 100%|██████████| 227/227 [00:00<00:00, 1171103.33it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_6/scene_6.mp4:   0%|          | 0/229 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_6/scene_6.mp4: 100%|██████████| 229/229 [00:00<00:00, 1123386.69it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_7/scene_7.mp4:   0%|          | 0/225 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_7/scene_7.mp4: 100%|██████████| 225/225 [00:00<00:00, 1166524.60it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_8/scene_8.mp4:   0%|          | 0/228 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_8/scene_8.mp4: 100%|██████████| 228/228 [00:00<00:00, 1118481.07it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_9/scene_9.mp4:   0%|          | 0/228 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_9/scene_9.mp4: 100%|██████████| 228/228 [00:00<00:00, 1174817.34it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_10/scene_10.mp4:   0%|          | 0/224 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_10/scene_10.mp4: 100%|██████████| 224/224 [00:00<00:00, 1157049.38it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_11/scene_11.mp4:   0%|          | 0/229 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_11/scene_11.mp4: 100%|██████████| 229/229 [00:00<00:00, 1120765.01it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_12/scene_12.mp4:   0%|          | 0/226 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_12/scene_12.mp4: 100%|██████████| 226/226 [00:00<00:00, 1161657.73it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_13/scene_13.mp4:   0%|          | 0/230 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_13/scene_13.mp4: 100%|██████████| 230/230 [00:00<00:00, 1175018.17it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_14/scene_14.mp4:   0%|          | 0/226 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_14/scene_14.mp4: 100%|██████████| 226/226 [00:00<00:00, 1154583.07it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_15/scene_15.mp4:   0%|          | 0/232 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_15/scene_15.mp4: 100%|██████████| 232/232 [00:00<00:00, 1110820.24it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_16/scene_16.mp4:   0%|          | 0/234 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_16/scene_16.mp4: 100%|██████████| 234/234 [00:00<00:00, 1169805.88it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_17/scene_17.mp4:   0%|          | 0/230 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_17/scene_17.mp4: 100%|██████████| 230/230 [00:00<00:00, 1140295.41it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_18/scene_18.mp4:   0%|          | 0/231 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_18/scene_18.mp4: 100%|██████████| 231/231 [00:00<00:00, 1170150.03it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_19/scene_19.mp4:   0%|          | 0/227 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_19/scene_19.mp4: 100%|██████████| 227/227 [00:00<00:00, 1179810.42it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_20/scene_20.mp4:   0%|          | 0/232 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_20/scene_20.mp4: 100%|██████████| 232/232 [00:00<00:00, 1175215.61it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_21/scene_21.mp4:   0%|          | 0/228 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_21/scene_21.mp4: 100%|██████████| 228/228 [00:00<00:00, 1186478.05it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_22/scene_22.mp4:   0%|          | 0/226 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_22/scene_22.mp4: 100%|██████████| 226/226 [00:00<00:00, 1164511.92it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_23/scene_23.mp4:   0%|          | 0/230 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_23/scene_23.mp4: 100%|██████████| 230/230 [00:00<00:00, 1190975.21it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_24/scene_24.mp4:   0%|          | 0/232 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_24/scene_24.mp4: 100%|██████████| 232/232 [00:00<00:00, 1182355.44it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_25/scene_25.mp4:   0%|          | 0/234 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_25/scene_25.mp4: 100%|██████████| 234/234 [00:00<00:00, 1185346.78it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_26/scene_26.mp4:   0%|          | 0/231 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_26/scene_26.mp4: 100%|██████████| 231/231 [00:00<00:00, 1125301.07it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_27/scene_27.mp4:   0%|          | 0/233 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_27/scene_27.mp4: 100%|██████████| 233/233 [00:00<00:00, 1144347.58it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_28/scene_28.mp4:   0%|          | 0/230 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_28/scene_28.mp4: 100%|██████████| 230/230 [00:00<00:00, 1137606.04it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_29/scene_29.mp4:   0%|          | 0/228 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_29/scene_29.mp4: 100%|██████████| 228/228 [00:00<00:00, 1119790.76it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_30/scene_30.mp4:   0%|          | 0/227 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_30/scene_30.mp4: 100%|██████████| 227/227 [00:00<00:00, 1181274.20it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_31/scene_31.mp4:   0%|          | 0/232 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_31/scene_31.mp4: 100%|██████████| 232/232 [00:00<00:00, 1180920.54it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_32/scene_32.mp4:   0%|          | 0/229 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_32/scene_32.mp4: 100%|██████████| 229/229 [00:00<00:00, 1162827.62it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_33/scene_33.mp4:   0%|          | 0/232 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_33/scene_33.mp4: 100%|██████████| 232/232 [00:00<00:00, 1176636.67it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_34/scene_34.mp4:   0%|          | 0/230 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_34/scene_34.mp4: 100%|██████████| 230/230 [00:00<00:00, 1188041.77it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_35/scene_35.mp4:   0%|          | 0/233 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_35/scene_35.mp4: 100%|██████████| 233/233 [00:00<00:00, 1139012.62it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_36/scene_36.mp4:   0%|          | 0/228 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_36/scene_36.mp4: 100%|██████████| 228/228 [00:00<00:00, 1135749.78it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_37/scene_37.mp4:   0%|          | 0/235 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_37/scene_37.mp4: 100%|██████████| 235/235 [00:00<00:00, 1179020.86it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_38/scene_38.mp4:   0%|          | 0/227 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_38/scene_38.mp4: 100%|██████████| 227/227 [00:00<00:00, 1110976.67it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_39/scene_39.mp4:   0%|          | 0/226 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_39/scene_39.mp4: 100%|██████████| 226/226 [00:00<00:00, 1171709.15it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_40/scene_40.mp4:   0%|          | 0/232 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_40/scene_40.mp4: 100%|██████████| 232/232 [00:00<00:00, 1180920.54it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_41/scene_41.mp4:   0%|          | 0/235 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_41/scene_41.mp4: 100%|██████████| 235/235 [00:00<00:00, 1165084.44it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_42/scene_42.mp4:   0%|          | 0/234 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_42/scene_42.mp4: 100%|██████████| 234/234 [00:00<00:00, 1164255.20it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_43/scene_43.mp4:   0%|          | 0/230 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_43/scene_43.mp4: 100%|██████████| 230/230 [00:00<00:00, 1132265.16it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_44/scene_44.mp4:   0%|          | 0/234 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_44/scene_44.mp4: 100%|██████████| 234/234 [00:00<00:00, 1121676.73it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_45/scene_45.mp4:   0%|          | 0/231 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_45/scene_45.mp4: 100%|██████████| 231/231 [00:00<00:00, 1161731.68it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_46/scene_46.mp4:   0%|          | 0/228 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_46/scene_46.mp4: 100%|██████████| 228/228 [00:00<00:00, 1129045.23it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_47/scene_47.mp4:   0%|          | 0/233 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_47/scene_47.mp4: 100%|██████████| 233/233 [00:00<00:00, 1174606.77it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_48/scene_48.mp4:   0%|          | 0/233 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_48/scene_48.mp4: 100%|██████████| 233/233 [00:00<00:00, 1170386.63it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_49/scene_49.mp4:   0%|          | 0/233 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_49/scene_49.mp4: 100%|██████████| 233/233 [00:00<00:00, 1157906.20it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_50/scene_50.mp4:   0%|          | 0/235 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_50/scene_50.mp4: 100%|██████████| 235/235 [00:00<00:00, 1179020.86it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_51/scene_51.mp4:   0%|          | 0/231 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_51/scene_51.mp4: 100%|██████████| 231/231 [00:00<00:00, 1126609.56it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_52/scene_52.mp4:   0%|          | 0/233 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_52/scene_52.mp4: 100%|██████████| 233/233 [00:00<00:00, 1183139.02it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_53/scene_53.mp4:   0%|          | 0/231 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_53/scene_53.mp4: 100%|██████████| 231/231 [00:00<00:00, 1143901.09it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_54/scene_54.mp4:   0%|          | 0/229 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_54/scene_54.mp4: 100%|██████████| 229/229 [00:00<00:00, 1142087.53it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_55/scene_55.mp4:   0%|          | 0/228 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_55/scene_55.mp4: 100%|██████████| 228/228 [00:00<00:00, 1170503.44it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_56/scene_56.mp4:   0%|          | 0/234 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_56/scene_56.mp4: 100%|██████████| 234/234 [00:00<00:00, 1161499.57it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_57/scene_57.mp4:   0%|          | 0/235 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_57/scene_57.mp4: 100%|██████████| 235/235 [00:00<00:00, 1173406.48it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_58/scene_58.mp4:   0%|          | 0/235 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_58/scene_58.mp4: 100%|██████████| 235/235 [00:00<00:00, 1173406.48it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_59/scene_59.mp4:   0%|          | 0/233 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_59/scene_59.mp4: 100%|██████████| 233/233 [00:00<00:00, 1149732.74it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_60/scene_60.mp4:   0%|          | 0/232 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_60/scene_60.mp4: 100%|██████████| 232/232 [00:00<00:00, 1175215.61it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_61/scene_61.mp4:   0%|          | 0/234 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_61/scene_61.mp4: 100%|██████████| 234/234 [00:00<00:00, 1178231.86it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_62/scene_62.mp4:   0%|          | 0/231 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_62/scene_62.mp4: 100%|██████████| 231/231 [00:00<00:00, 1165925.66it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_63/scene_63.mp4:   0%|          | 0/236 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_63/scene_63.mp4: 100%|██████████| 236/236 [00:00<00:00, 1137765.22it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_64/scene_64.mp4:   0%|          | 0/233 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_64/scene_64.mp4: 100%|██████████| 233/233 [00:00<00:00, 1106764.25it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_65/scene_65.mp4:   0%|          | 0/239 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_65/scene_65.mp4: 100%|██████████| 239/239 [00:00<00:00, 1177953.77it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_66/scene_66.mp4:   0%|          | 0/234 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_66/scene_66.mp4: 100%|██████████| 234/234 [00:00<00:00, 1186780.09it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_67/scene_67.mp4:   0%|          | 0/235 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_67/scene_67.mp4: 100%|██████████| 235/235 [00:00<00:00, 1034272.24it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_68/scene_68.mp4:   0%|          | 0/231 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_68/scene_68.mp4: 100%|██████████| 231/231 [00:00<00:00, 1071774.58it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_69/scene_69.mp4:   0%|          | 0/236 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_69/scene_69.mp4: 100%|██████████| 236/236 [00:00<00:00, 1101063.12it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_70/scene_70.mp4:   0%|          | 0/233 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_70/scene_70.mp4: 100%|██████████| 233/233 [00:00<00:00, 1131102.81it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_71/scene_71.mp4:   0%|          | 0/232 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_71/scene_71.mp4: 100%|██████████| 232/232 [00:00<00:00, 1168161.50it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_72/scene_72.mp4:   0%|          | 0/236 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_72/scene_72.mp4: 100%|██████████| 236/236 [00:00<00:00, 1051918.96it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_73/scene_73.mp4:   0%|          | 0/234 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_73/scene_73.mp4: 100%|██████████| 234/234 [00:00<00:00, 1053076.33it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_74/scene_74.mp4:   0%|          | 0/235 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_74/scene_74.mp4: 100%|██████████| 235/235 [00:00<00:00, 1156879.62it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_75/scene_75.mp4:   0%|          | 0/238 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_75/scene_75.mp4: 100%|██████████| 238/238 [00:00<00:00, 1184157.00it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_76/scene_76.mp4:   0%|          | 0/231 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_76/scene_76.mp4: 100%|██████████| 231/231 [00:00<00:00, 1156186.42it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_77/scene_77.mp4:   0%|          | 0/235 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_77/scene_77.mp4: 100%|██████████| 235/235 [00:00<00:00, 1188976.41it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_78/scene_78.mp4:   0%|          | 0/234 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_78/scene_78.mp4: 100%|██████████| 234/234 [00:00<00:00, 1157390.49it/s]
+Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_79/scene_79.mp4:   0%|          | 0/235 [00:00<?, ?it/s]Processing dataset into examples, saving video to ../train_result/scene_0-79_cam_1/test/scene_79/scene_79.mp4: 100%|██████████| 235/235 [00:00<00:00, 1187543.90it/s]
+Generating train split: 0 examples [00:00, ? examples/s]Generating train split: 462 examples [00:00, 4944.78 examples/s]
+Generating train split: 0 examples [00:00, ? examples/s]Generating train split: 476 examples [00:00, 37180.64 examples/s]
+Map:   0%|          | 0/462 [00:00<?, ? examples/s]Map: 100%|██████████| 462/462 [00:00<00:00, 7741.17 examples/s]
+Map:   0%|          | 0/476 [00:00<?, ? examples/s]Map: 100%|██████████| 476/476 [00:00<00:00, 8250.57 examples/s]
+using:  <class 'trainer.grpo_trainer.Qwen2VLGRPOTrainer'>
+Qwen/Qwen2.5-VL-7B-Instruct
+[2025-04-02 18:59:27,872] [INFO] [config.py:734:__init__] Config mesh_device None world_size = 1
+[2025-04-02 18:59:27,873] [INFO] [comm.py:658:init_distributed] cdb=None
+[2025-04-02 18:59:27,873] [INFO] [comm.py:673:init_distributed] Not using the DeepSpeed or dist launchers, attempting to detect MPI environment...
+[2025-04-02 18:59:28,115] [INFO] [comm.py:728:mpi_discovery] Discovered MPI settings of world_rank=0, local_rank=0, world_size=1, master_addr=10.32.35.88, master_port=29500
+[2025-04-02 18:59:28,115] [INFO] [comm.py:689:init_distributed] Initializing TorchBackend in DeepSpeed with backend nccl
+You are attempting to use Flash Attention 2.0 without specifying a torch dtype. This might lead to unexpected behaviour
+You are attempting to use Flash Attention 2.0 with a model not initialized on GPU. Make sure to move the model to GPU after initializing it on CPU with `model.to('cuda')`.
+Flash Attention 2.0 only supports torch.float16 and torch.bfloat16 dtypes, but the current dype in Qwen2_5_VisionTransformerPretrainedModel is torch.float32. You should run training or inference using Automatic Mixed-Precision via the `with torch.autocast(device_type='torch_device'):` decorator, or load the model with the `torch_dtype` argument. Example: `model = AutoModel.from_pretrained("openai/whisper-tiny", attn_implementation="flash_attention_2", torch_dtype=torch.float16)`
+[2025-04-02 18:59:29,589] [INFO] [partition_parameters.py:348:__exit__] finished initializing model - num_params = 729, num_elems = 8.29B
+Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]Loading checkpoint shards:  20%|██        | 1/5 [00:22<01:28, 22.10s/it]Loading checkpoint shards:  40%|████      | 2/5 [00:33<00:47, 15.98s/it]Loading checkpoint shards:  60%|██████    | 3/5 [00:47<00:29, 14.79s/it]Loading checkpoint shards:  80%|████████  | 4/5 [01:00<00:14, 14.06s/it]Loading checkpoint shards: 100%|██████████| 5/5 [01:03<00:00, 10.35s/it]Loading checkpoint shards: 100%|██████████| 5/5 [01:03<00:00, 12.78s/it]
+[2025-04-02 19:00:33,667] [INFO] [config.py:734:__init__] Config mesh_device None world_size = 1
+[2025-04-02 19:00:33,952] [INFO] [partition_parameters.py:348:__exit__] finished initializing model - num_params = 1458, num_elems = 16.58B
+Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]Loading checkpoint shards:  20%|██        | 1/5 [00:39<02:36, 39.13s/it]Loading checkpoint shards:  40%|████      | 2/5 [00:50<01:08, 22.77s/it]Loading checkpoint shards:  60%|██████    | 3/5 [01:02<00:36, 18.08s/it]Loading checkpoint shards:  80%|████████  | 4/5 [01:15<00:15, 15.86s/it]Loading checkpoint shards: 100%|██████████| 5/5 [01:19<00:00, 11.54s/it]Loading checkpoint shards: 100%|██████████| 5/5 [01:19<00:00, 15.85s/it]
+[2025-04-02 19:01:54,959] [INFO] [logging.py:107:log_dist] [Rank 0] DeepSpeed info: version=0.16.5, git-hash=unknown, git-branch=unknown
+[2025-04-02 19:01:54,959] [INFO] [config.py:734:__init__] Config mesh_device None world_size = 1
+[2025-04-02 19:01:55,132] [INFO] [logging.py:107:log_dist] [Rank 0] DeepSpeed Flops Profiler Enabled: False
+[2025-04-02 19:01:55,134] [INFO] [logging.py:107:log_dist] [Rank 0] Creating ZeRO Offload
+[2025-04-02 19:01:57,166] [INFO] [utils.py:781:see_memory_usage] DeepSpeedZeRoOffload initialize [begin]
+[2025-04-02 19:01:57,167] [INFO] [utils.py:782:see_memory_usage] MA 30.98 GB         Max_MA 33.02 GB         CA 33.44 GB         Max_CA 33 GB 
+[2025-04-02 19:01:57,167] [INFO] [utils.py:789:see_memory_usage] CPU Virtual Memory:  used = 28.27 GB, percent = 7.5%
+Parameter Offload: Total persistent parameters: 848896 in 368 params
+[2025-04-02 19:01:59,249] [INFO] [utils.py:781:see_memory_usage] DeepSpeedZeRoOffload initialize [end]
+[2025-04-02 19:01:59,250] [INFO] [utils.py:782:see_memory_usage] MA 30.98 GB         Max_MA 30.98 GB         CA 33.44 GB         Max_CA 33 GB 
+[2025-04-02 19:01:59,250] [INFO] [utils.py:789:see_memory_usage] CPU Virtual Memory:  used = 28.28 GB, percent = 7.5%
+[2025-04-02 19:01:59,252] [INFO] [config.py:1000:print] DeepSpeedEngine configuration:
+[2025-04-02 19:01:59,252] [INFO] [config.py:1004:print]   activation_checkpointing_config  {
+    "partition_activations": false, 
+    "contiguous_memory_optimization": false, 
+    "cpu_checkpointing": false, 
+    "number_checkpoints": null, 
+    "synchronize_checkpoint_boundary": false, 
+    "profile": false
+}
+[2025-04-02 19:01:59,252] [INFO] [config.py:1004:print]   aio_config ................... {'block_size': 1048576, 'queue_depth': 8, 'intra_op_parallelism': 1, 'single_submit': False, 'overlap_events': True, 'use_gds': False}
+[2025-04-02 19:01:59,252] [INFO] [config.py:1004:print]   amp_enabled .................. False
+[2025-04-02 19:01:59,252] [INFO] [config.py:1004:print]   amp_params ................... False
+[2025-04-02 19:01:59,252] [INFO] [config.py:1004:print]   autotuning_config ............ {
+    "enabled": false, 
+    "start_step": null, 
+    "end_step": null, 
+    "metric_path": null, 
+    "arg_mappings": null, 
+    "metric": "throughput", 
+    "model_info": null, 
+    "results_dir": "autotuning_results", 
+    "exps_dir": "autotuning_exps", 
+    "overwrite": true, 
+    "fast": true, 
+    "start_profile_step": 3, 
+    "end_profile_step": 5, 
+    "tuner_type": "gridsearch", 
+    "tuner_early_stopping": 5, 
+    "tuner_num_trials": 50, 
+    "model_info_path": null, 
+    "mp_size": 1, 
+    "max_train_batch_size": null, 
+    "min_train_batch_size": 1, 
+    "max_train_micro_batch_size_per_gpu": 1.024000e+03, 
+    "min_train_micro_batch_size_per_gpu": 1, 
+    "num_tuning_micro_batch_sizes": 3
+}
+[2025-04-02 19:01:59,252] [INFO] [config.py:1004:print]   bfloat16_enabled ............. True
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   bfloat16_immediate_grad_update  True
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   checkpoint_parallel_write_pipeline  False
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   checkpoint_tag_validation_enabled  True
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   checkpoint_tag_validation_fail  False
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   comms_config ................. <deepspeed.comm.config.DeepSpeedCommsConfig object at 0x1493c8f42510>
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   communication_data_type ...... None
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   compression_config ........... {'weight_quantization': {'shared_parameters': {'enabled': False, 'quantizer_kernel': False, 'schedule_offset': 0, 'quantize_groups': 1, 'quantize_verbose': False, 'quantization_type': 'symmetric', 'quantize_weight_in_forward': False, 'rounding': 'nearest', 'fp16_mixed_quantize': False, 'quantize_change_ratio': 0.001}, 'different_groups': {}}, 'activation_quantization': {'shared_parameters': {'enabled': False, 'quantization_type': 'symmetric', 'range_calibration': 'dynamic', 'schedule_offset': 1000}, 'different_groups': {}}, 'sparse_pruning': {'shared_parameters': {'enabled': False, 'method': 'l1', 'schedule_offset': 1000}, 'different_groups': {}}, 'row_pruning': {'shared_parameters': {'enabled': False, 'method': 'l1', 'schedule_offset': 1000}, 'different_groups': {}}, 'head_pruning': {'shared_parameters': {'enabled': False, 'method': 'topk', 'schedule_offset': 1000}, 'different_groups': {}}, 'channel_pruning': {'shared_parameters': {'enabled': False, 'method': 'l1', 'schedule_offset': 1000}, 'different_groups': {}}, 'layer_reduction': {'enabled': False}}
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   curriculum_enabled_legacy .... False
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   curriculum_params_legacy ..... False
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   data_efficiency_config ....... {'enabled': False, 'seed': 1234, 'data_sampling': {'enabled': False, 'num_epochs': 1000, 'num_workers': 0, 'pin_memory': False, 'curriculum_learning': {'enabled': False}, 'dynamic_batching': {'enabled': False, 'lr_scaling_method': 'linear', 'min_batch_size': 1, 'max_batch_size': None, 'sequence_picking_order': 'dataloader', 'verbose': False}}, 'data_routing': {'enabled': False, 'random_ltd': {'enabled': False, 'layer_token_lr_schedule': {'enabled': False}}}}
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   data_efficiency_enabled ...... False
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   dataloader_drop_last ......... False
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   disable_allgather ............ False
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   dump_state ................... False
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   dynamic_loss_scale_args ...... None
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   eigenvalue_enabled ........... False
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   eigenvalue_gas_boundary_resolution  1
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   eigenvalue_layer_name ........ bert.encoder.layer
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   eigenvalue_layer_num ......... 0
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   eigenvalue_max_iter .......... 100
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   eigenvalue_stability ......... 1e-06
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   eigenvalue_tol ............... 0.01
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   eigenvalue_verbose ........... False
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   elasticity_enabled ........... False
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   flops_profiler_config ........ {
+    "enabled": false, 
+    "recompute_fwd_factor": 0.0, 
+    "profile_step": 1, 
+    "module_depth": -1, 
+    "top_modules": 1, 
+    "detailed": true, 
+    "output_file": null
+}
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   fp16_auto_cast ............... None
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   fp16_enabled ................. False
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   fp16_master_weights_and_gradients  False
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   global_rank .................. 0
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   grad_accum_dtype ............. None
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   gradient_accumulation_steps .. 1
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   gradient_clipping ............ 5.0
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   gradient_predivide_factor .... 1.0
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   graph_harvesting ............. False
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   hybrid_engine ................ enabled=False max_out_tokens=512 inference_tp_size=1 release_inference_cache=False pin_parameters=True tp_gather_partition_size=8
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   initial_dynamic_scale ........ 1
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   load_universal_checkpoint .... False
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   loss_scale ................... 1.0
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   memory_breakdown ............. False
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   mics_hierarchial_params_gather  False
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   mics_shard_size .............. -1
+[2025-04-02 19:01:59,253] [INFO] [config.py:1004:print]   monitor_config ............... tensorboard=TensorBoardConfig(enabled=False, output_path='', job_name='DeepSpeedJobName') comet=CometConfig(enabled=False, samples_log_interval=100, project=None, workspace=None, api_key=None, experiment_name=None, experiment_key=None, online=None, mode=None) wandb=WandbConfig(enabled=False, group=None, team=None, project='deepspeed') csv_monitor=CSVConfig(enabled=False, output_path='', job_name='DeepSpeedJobName')
+[2025-04-02 19:01:59,254] [INFO] [config.py:1004:print]   nebula_config ................ {
+    "enabled": false, 
+    "persistent_storage_path": null, 
+    "persistent_time_interval": 100, 
+    "num_of_version_in_retention": 2, 
+    "enable_nebula_load": true, 
+    "load_path": null
+}
+[2025-04-02 19:01:59,254] [INFO] [config.py:1004:print]   optimizer_legacy_fusion ...... False
+[2025-04-02 19:01:59,254] [INFO] [config.py:1004:print]   optimizer_name ............... None
+[2025-04-02 19:01:59,254] [INFO] [config.py:1004:print]   optimizer_params ............. None
+[2025-04-02 19:01:59,254] [INFO] [config.py:1004:print]   pipeline ..................... {'stages': 'auto', 'partition': 'best', 'seed_layers': False, 'activation_checkpoint_interval': 0, 'pipe_partitioned': True, 'grad_partitioned': True}
+[2025-04-02 19:01:59,254] [INFO] [config.py:1004:print]   pld_enabled .................. False
+[2025-04-02 19:01:59,254] [INFO] [config.py:1004:print]   pld_params ................... False
+[2025-04-02 19:01:59,254] [INFO] [config.py:1004:print]   prescale_gradients ........... False
+[2025-04-02 19:01:59,254] [INFO] [config.py:1004:print]   scheduler_name ............... None
+[2025-04-02 19:01:59,254] [INFO] [config.py:1004:print]   scheduler_params ............. None
+[2025-04-02 19:01:59,254] [INFO] [config.py:1004:print]   seq_parallel_communication_data_type  torch.float32
+[2025-04-02 19:01:59,254] [INFO] [config.py:1004:print]   sparse_attention ............. None
+[2025-04-02 19:01:59,254] [INFO] [config.py:1004:print]   sparse_gradients_enabled ..... False
+[2025-04-02 19:01:59,254] [INFO] [config.py:1004:print]   steps_per_print .............. inf
+[2025-04-02 19:01:59,254] [INFO] [config.py:1004:print]   tensor_parallel_config ....... dtype=torch.float16 autotp_size=0 tensor_parallel=TPConfig(tp_size=1, tp_grain_size=1, mpu=None, tp_group=None) injection_policy_tuple=None keep_module_on_host=False replace_with_kernel_inject=False
+[2025-04-02 19:01:59,254] [INFO] [config.py:1004:print]   timers_config ................ enabled=True synchronized=True
+[2025-04-02 19:01:59,254] [INFO] [config.py:1004:print]   train_batch_size ............. 1
+[2025-04-02 19:01:59,254] [INFO] [config.py:1004:print]   train_micro_batch_size_per_gpu  1
+[2025-04-02 19:01:59,254] [INFO] [config.py:1004:print]   use_data_before_expert_parallel_  False
+[2025-04-02 19:01:59,254] [INFO] [config.py:1004:print]   use_node_local_storage ....... False
+[2025-04-02 19:01:59,254] [INFO] [config.py:1004:print]   wall_clock_breakdown ......... False
+[2025-04-02 19:01:59,254] [INFO] [config.py:1004:print]   weight_quantization_config ... None
+[2025-04-02 19:01:59,254] [INFO] [config.py:1004:print]   world_size ................... 1
+[2025-04-02 19:01:59,254] [INFO] [config.py:1004:print]   zero_allow_untested_optimizer  False
+[2025-04-02 19:01:59,254] [INFO] [config.py:1004:print]   zero_config .................. stage=3 contiguous_gradients=True reduce_scatter=True reduce_bucket_size=500000000 use_multi_rank_bucket_allreduce=True allgather_partitions=True allgather_bucket_size=500000000 overlap_comm=True load_from_fp32_weights=True elastic_checkpoint=False offload_param=DeepSpeedZeroOffloadParamConfig(device='none', nvme_path=None, buffer_count=5, buffer_size=100000000, max_in_cpu=1000000000, pin_memory=True) offload_optimizer=DeepSpeedZeroOffloadOptimizerConfig(device='none', nvme_path=None, buffer_count=4, pin_memory=True, pipeline_read=False, pipeline_write=False, fast_init=False, ratio=1.0) sub_group_size=1000000000 cpu_offload_param=None cpu_offload_use_pin_memory=None cpu_offload=None prefetch_bucket_size=50000000 param_persistence_threshold=100000 model_persistence_threshold=9223372036854775807 max_live_parameters=1000000000 max_reuse_distance=1000000000 gather_16bit_weights_on_model_save=True module_granularity_threshold=0 use_all_reduce_for_fetch_params=False stage3_gather_fp16_weights_on_model_save=False ignore_unused_parameters=True legacy_stage1=False round_robin_gradients=False zero_hpz_partition_size=1 zero_quantized_weights=False zero_quantized_nontrainable_weights=False zero_quantized_gradients=False zeropp_loco_param=None mics_shard_size=-1 mics_hierarchical_params_gather=False memory_efficient_linear=True pipeline_loading_checkpoint=False override_module_apply=True log_trace_cache_warnings=False
+[2025-04-02 19:01:59,254] [INFO] [config.py:1004:print]   zero_enabled ................. True
+[2025-04-02 19:01:59,254] [INFO] [config.py:1004:print]   zero_force_ds_cpu_optimizer .. True
+[2025-04-02 19:01:59,254] [INFO] [config.py:1004:print]   zero_optimization_stage ...... 3
+[2025-04-02 19:01:59,254] [INFO] [config.py:990:print_user_config]   json = {
+    "fp16": {
+        "enabled": false, 
+        "loss_scale": 0, 
+        "loss_scale_window": 1000, 
+        "initial_scale_power": 16, 
+        "hysteresis": 2, 
+        "min_loss_scale": 1
+    }, 
+    "bf16": {
+        "enabled": true
+    }, 
+    "zero_optimization": {
+        "stage": 3, 
+        "offload_optimizer": {
+            "device": "none", 
+            "pin_memory": true
+        }, 
+        "offload_param": {
+            "device": "none", 
+            "pin_memory": true
+        }, 
+        "overlap_comm": true, 
+        "contiguous_gradients": true, 
+        "sub_group_size": 1.000000e+09, 
+        "reduce_bucket_size": "auto", 
+        "stage3_prefetch_bucket_size": "auto", 
+        "stage3_param_persistence_threshold": "auto", 
+        "stage3_max_live_parameters": 1.000000e+09, 
+        "stage3_max_reuse_distance": 1.000000e+09, 
+        "stage3_gather_16bit_weights_on_model_save": true
+    }, 
+    "gradient_accumulation_steps": 1, 
+    "gradient_clipping": 5.0, 
+    "steps_per_print": inf, 
+    "train_batch_size": 1, 
+    "train_micro_batch_size_per_gpu": 1, 
+    "wall_clock_breakdown": false, 
+    "zero_optimization.reduce_bucket_size": 1.284506e+07, 
+    "zero_optimization.stage3_param_persistence_threshold": 3.584000e+04, 
+    "zero_optimization.stage3_prefetch_bucket_size": 1.156055e+07
+}
+wandb: Using wandb-core as the SDK backend.  Please refer to https://wandb.me/wandb-core for more information.
+wandb: Currently logged in as: zl3466 (zl3466-new-york-university) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.19.8
+wandb: Run data is saved locally in /scratch/zl3466/github/thinking_in_street/wandb/run-20250402_190202-aibf8ymr
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run Video-R1
+wandb: ⭐️ View project at https://wandb.ai/zl3466-new-york-university/huggingface
+wandb: 🚀 View run at https://wandb.ai/zl3466-new-york-university/huggingface/runs/aibf8ymr
+  0%|          | 0/116 [00:00<?, ?it/s]video inputs in processor:  {'pixel_values_videos': tensor([[ 0.0617,  0.1201, -0.0405,  ...,  0.1124,  0.1124,  0.1409],
+        [ 0.2661,  0.2953,  0.3099,  ..., -0.0298, -0.4706, -0.7266],
+        [ 0.4267,  0.3975,  0.2661,  ..., -0.0156, -0.0440,  0.0271],
+        ...,
+        [-1.0039, -1.0039, -0.9748,  ..., -0.7123, -0.6981, -0.7123],
+        [-0.9748, -0.9456, -0.9456,  ..., -0.6128, -0.5986, -0.6412],
+        [-1.0331, -1.0185, -0.9456,  ..., -0.7408, -0.7692, -0.7408]]), 'video_grid_thw': tensor([[ 8, 32, 60]])}
+torch.Size([15360, 1176])
+tensor([[ 8, 32, 60]])
 Traceback (most recent call last):
-  File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 561, in <module>
+  File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 569, in <module>
     main(script_args, training_args, model_args)
-  File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 493, in main
-    nusc_train = NuScenes(version="v1.0-trainval", dataroot=train_data_path, verbose=True)
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/nuscenes/nuscenes.py", line 62, in __init__
-    assert osp.exists(self.table_root), 'Database version not found: {}'.format(self.table_root)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: Database version not found: /scratch/zl3466/dataset/NuScenes/train/v1.0-trainval
+  File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 558, in main
+    trainer.train()
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2241, in train
+    return inner_training_loop(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2548, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 3698, in training_step
+    loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/github/thinking_in_street/train/localization/trainer/grpo_trainer.py", line 444, in compute_loss
+    prompt_inputs = self.processing_class(
+                    ^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/models/qwen2_5_vl/processing_qwen2_5_vl.py", line 176, in __call__
+    "<|placeholder|>" * (video_grid_thw[index].prod() // merge_length),
+                         ~~~~~~~~~~~~~~^^^^^^^
+IndexError: index 1 is out of bounds for dimension 0 with size 1
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 569, in <module>
+[rank0]:     main(script_args, training_args, model_args)
+[rank0]:   File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 558, in main
+[rank0]:     trainer.train()
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2241, in train
+[rank0]:     return inner_training_loop(
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2548, in _inner_training_loop
+[rank0]:     tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+[rank0]:                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 3698, in training_step
+[rank0]:     loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/github/thinking_in_street/train/localization/trainer/grpo_trainer.py", line 444, in compute_loss
+[rank0]:     prompt_inputs = self.processing_class(
+[rank0]:                     ^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/models/qwen2_5_vl/processing_qwen2_5_vl.py", line 176, in __call__
+[rank0]:     "<|placeholder|>" * (video_grid_thw[index].prod() // merge_length),
+[rank0]:                          ~~~~~~~~~~~~~~^^^^^^^
+[rank0]: IndexError: index 1 is out of bounds for dimension 0 with size 1
+[1;34mwandb[0m: 
+[1;34mwandb[0m: 🚀 View run [33mVideo-R1[0m at: [34mhttps://wandb.ai/zl3466-new-york-university/huggingface/runs/aibf8ymr[0m
+[1;34mwandb[0m: Find logs at: [1;35mwandb/run-20250402_190202-aibf8ymr/logs[0m

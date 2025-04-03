@@ -1,7 +1,12 @@
-conda activate /scratch/zl3466/env/thinking-in-street/
+cd /scratch/zl3466/github/thinking_in_street
 
+conda activate /scratch/zl3466/env/thinking-in-street/
+export PATH=/scratch/zl3466/env/thinking-in-street/bin:$PATH
 
 cd ./train/scripts
+
 sbatch run_grpo_localization_hpc.sbatch
 
-srun --cpus-per-task=8 --mem=16GB --time=3:00:00 --gres=gpu:2 --pty /bin/bash
+bash run_grpo_localization.sh
+
+srun --cpus-per-task=8 --mem=64GB --time=3:00:00 --gres=gpu:2 --pty /bin/bash

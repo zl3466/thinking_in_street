@@ -1,0 +1,52 @@
+  0%|                                                                                                                                                                   | 0/231 [00:00<?, ?it/s]Traceback (most recent call last):
+video inputs in processor:  {'pixel_values_videos': tensor([[ 0.0617,  0.1201, -0.0405,  ...,  0.1124,  0.1124,  0.1409],
+        [ 0.2661,  0.2953,  0.3099,  ..., -0.0298, -0.4706, -0.7266],
+        [ 0.4267,  0.3975,  0.2661,  ..., -0.0156, -0.0440,  0.0271],
+        ...,
+        [-1.0039, -1.0039, -0.9748,  ..., -0.7123, -0.6981, -0.7123],
+        [-0.9748, -0.9456, -0.9456,  ..., -0.6128, -0.5986, -0.6412],
+        [-1.0331, -1.0185, -0.9456,  ..., -0.7408, -0.7692, -0.7408]]), 'video_grid_thw': tensor([[ 8, 32, 60]])}
+torch.Size([15360, 1176])
+tensor([[ 8, 32, 60]])
+['<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\n<|vision_start|><|video_pad|><|vision_end|><|vision_start|><|video_pad|><|vision_end|><|im_end|>\n<|im_start|>assistant\n', '<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\n<|vision_start|><|video_pad|><|vision_end|><|vision_start|><|video_pad|><|vision_end|><|im_end|>\n<|im_start|>assistant\n']
+  File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 569, in <module>
+    main(script_args, training_args, model_args)
+  File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 558, in main
+    trainer.train()
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2241, in train
+    return inner_training_loop(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2548, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 3698, in training_step
+    loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/github/thinking_in_street/train/localization/trainer/grpo_trainer.py", line 444, in compute_loss
+    prompt_inputs = self.processing_class(
+                    ^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/models/qwen2_5_vl/processing_qwen2_5_vl.py", line 176, in __call__
+    "<|placeholder|>" * (video_grid_thw[index].prod() // merge_length),
+                         ~~~~~~~~~~~~~~^^^^^^^
+IndexError: index 1 is out of bounds for dimension 0 with size 1
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 569, in <module>
+[rank0]:     main(script_args, training_args, model_args)
+[rank0]:   File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 558, in main
+[rank0]:     trainer.train()
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2241, in train
+[rank0]:     return inner_training_loop(
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2548, in _inner_training_loop
+[rank0]:     tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+[rank0]:                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 3698, in training_step
+[rank0]:     loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/github/thinking_in_street/train/localization/trainer/grpo_trainer.py", line 444, in compute_loss
+[rank0]:     prompt_inputs = self.processing_class(
+[rank0]:                     ^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/models/qwen2_5_vl/processing_qwen2_5_vl.py", line 176, in __call__
+[rank0]:     "<|placeholder|>" * (video_grid_thw[index].prod() // merge_length),
+[rank0]:                          ~~~~~~~~~~~~~~^^^^^^^
+[rank0]: IndexError: index 1 is out of bounds for dimension 0 with size 1

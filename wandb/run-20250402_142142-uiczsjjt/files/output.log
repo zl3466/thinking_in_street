@@ -1,0 +1,36 @@
+  0%|                                                                                                                                  | 0/231 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 561, in <module>
+    main(script_args, training_args, model_args)
+  File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 550, in main
+    trainer.train()
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2241, in train
+    return inner_training_loop(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2548, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 3698, in training_step
+    loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/github/thinking_in_street/train/localization/trainer/grpo_trainer.py", line 413, in compute_loss
+    if inputs[0]['data_type'] == 'image':
+       ~~~~~~~~~^^^^^^^^^^^^^
+KeyError: 'data_type'
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 561, in <module>
+[rank0]:     main(script_args, training_args, model_args)
+[rank0]:   File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 550, in main
+[rank0]:     trainer.train()
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2241, in train
+[rank0]:     return inner_training_loop(
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2548, in _inner_training_loop
+[rank0]:     tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+[rank0]:                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 3698, in training_step
+[rank0]:     loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/github/thinking_in_street/train/localization/trainer/grpo_trainer.py", line 413, in compute_loss
+[rank0]:     if inputs[0]['data_type'] == 'image':
+[rank0]:        ~~~~~~~~~^^^^^^^^^^^^^
+[rank0]: KeyError: 'data_type'

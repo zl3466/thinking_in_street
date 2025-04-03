@@ -1,0 +1,7 @@
+{"time":"2025-04-02T21:41:30.363888779-04:00","level":"INFO","msg":"stream: starting","core version":"0.19.8","symlink path":"/scratch/zl3466/github/thinking_in_street/wandb/run-20250402_214130-v8edffhp/logs/debug-core.log"}
+{"time":"2025-04-02T21:41:30.479300285-04:00","level":"INFO","msg":"created new stream","id":"v8edffhp"}
+{"time":"2025-04-02T21:41:30.479334826-04:00","level":"INFO","msg":"stream: started","id":"v8edffhp"}
+{"time":"2025-04-02T21:41:30.479346759-04:00","level":"INFO","msg":"handler: started","stream_id":"v8edffhp"}
+{"time":"2025-04-02T21:41:30.479357803-04:00","level":"INFO","msg":"sender: started","stream_id":"v8edffhp"}
+{"time":"2025-04-02T21:41:30.479379021-04:00","level":"INFO","msg":"writer: Do: started","stream_id":"v8edffhp"}
+{"time":"2025-04-02T21:41:30.622081793-04:00","level":"INFO","msg":"Starting system monitor"}

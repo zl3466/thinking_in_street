@@ -1,0 +1,46 @@
+  0%|                                                                                                                                                                                                                        | 0/231 [00:00<?, ?it/s]Traceback (most recent call last):
+
+full prompt len: 1
+
+full prompt: [[{'content': [{'text': None, 'type': 'video', 'video': ['/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-24-10-42-41+0800__CAM_FRONT__1532400233612460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-24-10-42-41+0800__CAM_FRONT__1532400234012460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-24-10-42-41+0800__CAM_FRONT__1532400234412460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-24-10-42-41+0800__CAM_FRONT__1532400234862460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-24-10-42-41+0800__CAM_FRONT__1532400235262460.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-24-10-42-41+0800__CAM_FRONT__1532400235662460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-24-10-42-41+0800__CAM_FRONT__1532400236112460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-24-10-42-41+0800__CAM_FRONT__1532400236512460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-24-10-42-41+0800__CAM_FRONT__1532400236912460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-24-10-42-41+0800__CAM_FRONT__1532400237362460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-24-10-42-41+0800__CAM_FRONT__1532400237862460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-24-10-42-41+0800__CAM_FRONT__1532400238262460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-24-10-42-41+0800__CAM_FRONT__1532400238762460.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-24-10-42-41+0800__CAM_FRONT__1532400239162460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-24-10-42-41+0800__CAM_FRONT__1532400239612460.jpg']}, {'text': "I uploaded 16 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with right turn being positive degrees and left turn being negative degrees.\nKeep all degree values in one list. You should have 15 values in the list.\n\nPlease think about this question as if you were a human pondering deeply. Engage in an internal dialogue using expressions such as 'let me think', 'wait', 'Hmm', 'oh, I see', 'let's break it down', etc, or other natural language thought expressions It's encouraged to include self-reflection or verification in the reasoning process. Provide your detailed reasoning between the <think> </think> tags, and then give your final answer between the <answer> </answer> tags. Please provide the list answer (e.g., [val, val, val, ...]) within the <answer> </answer> tags.", 'type': 'text', 'video': None}], 'role': 'user'}]]
+
+full prompt_text len 1
+
+full prompt_text: ['<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\n<|vision_start|><|video_pad|><|vision_end|><|vision_start|><|video_pad|><|vision_end|><|im_end|>\n<|im_start|>assistant\n']
+
+full input prompt len: 1
+  File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 585, in <module>
+    main(script_args, training_args, model_args)
+  File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 574, in main
+    trainer.train()
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2241, in train
+    return inner_training_loop(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2548, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 3698, in training_step
+    loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/github/thinking_in_street/train/localization/trainer/grpo_trainer.py", line 414, in compute_loss
+    print("\nfull input prompt:", prominput_copypts)
+                                  ^^^^^^^^^^^^^^^^^
+NameError: name 'prominput_copypts' is not defined
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 585, in <module>
+[rank0]:     main(script_args, training_args, model_args)
+[rank0]:   File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 574, in main
+[rank0]:     trainer.train()
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2241, in train
+[rank0]:     return inner_training_loop(
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2548, in _inner_training_loop
+[rank0]:     tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+[rank0]:                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 3698, in training_step
+[rank0]:     loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/github/thinking_in_street/train/localization/trainer/grpo_trainer.py", line 414, in compute_loss
+[rank0]:     print("\nfull input prompt:", prominput_copypts)
+[rank0]:                                   ^^^^^^^^^^^^^^^^^
+[rank0]: NameError: name 'prominput_copypts' is not defined
