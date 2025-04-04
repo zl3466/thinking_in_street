@@ -1,56 +1,250 @@
-W0403 01:40:52.397000 2671481 site-packages/torch/distributed/run.py:792] 
-W0403 01:40:52.397000 2671481 site-packages/torch/distributed/run.py:792] *****************************************
-W0403 01:40:52.397000 2671481 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
-W0403 01:40:52.397000 2671481 site-packages/torch/distributed/run.py:792] *****************************************
-[2025-04-03 01:41:55,851] [INFO] [real_accelerator.py:239:get_accelerator] Setting ds_accelerator to cuda (auto detect)
-[2025-04-03 01:41:55,851] [INFO] [real_accelerator.py:239:get_accelerator] Setting ds_accelerator to cuda (auto detect)
-[2025-04-03 01:42:24,150] [INFO] [comm.py:658:init_distributed] cdb=None
-[2025-04-03 01:42:24,152] [INFO] [comm.py:658:init_distributed] cdb=None
-[2025-04-03 01:42:24,152] [INFO] [comm.py:689:init_distributed] Initializing TorchBackend in DeepSpeed with backend nccl
+W0403 18:22:02.824000 67701 site-packages/torch/distributed/run.py:792] 
+W0403 18:22:02.824000 67701 site-packages/torch/distributed/run.py:792] *****************************************
+W0403 18:22:02.824000 67701 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0403 18:22:02.824000 67701 site-packages/torch/distributed/run.py:792] *****************************************
+[2025-04-03 18:22:55,083] [INFO] [real_accelerator.py:239:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2025-04-03 18:22:55,083] [INFO] [real_accelerator.py:239:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2025-04-03 18:22:55,083] [INFO] [real_accelerator.py:239:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2025-04-03 18:22:55,083] [INFO] [real_accelerator.py:239:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2025-04-03 18:23:19,647] [INFO] [comm.py:658:init_distributed] cdb=None
+[2025-04-03 18:23:19,647] [INFO] [comm.py:658:init_distributed] cdb=None
+[2025-04-03 18:23:19,647] [INFO] [comm.py:689:init_distributed] Initializing TorchBackend in DeepSpeed with backend nccl
+[2025-04-03 18:23:19,647] [INFO] [comm.py:658:init_distributed] cdb=None
+[2025-04-03 18:23:19,650] [INFO] [comm.py:658:init_distributed] cdb=None
+======
+Loading NuScenes tables for version v1.0-trainval...
+======
+Loading NuScenes tables for version v1.0-trainval...
+======
+Loading NuScenes tables for version v1.0-trainval...
+======
+Loading NuScenes tables for version v1.0-trainval...
+23 category,
+8 attribute,
+4 visibility,
+64386 instance,
+12 sensor,
+10200 calibrated_sensor,
+2631083 ego_pose,
+68 log,
+850 scene,
+34149 sample,
+2631083 sample_data,
+1166187 sample_annotation,
+4 map,
+Done loading in 33.652 seconds.
+======
+Reverse indexing ...
+23 category,
+8 attribute,
+4 visibility,
+64386 instance,
+12 sensor,
+10200 calibrated_sensor,
+2631083 ego_pose,
+68 log,
+850 scene,
+34149 sample,
+2631083 sample_data,
+1166187 sample_annotation,
+4 map,
+Done loading in 33.714 seconds.
+======
+Reverse indexing ...
+23 category,
+8 attribute,
+4 visibility,
+64386 instance,
+12 sensor,
+10200 calibrated_sensor,
+2631083 ego_pose,
+68 log,
+850 scene,
+34149 sample,
+2631083 sample_data,
+1166187 sample_annotation,
+4 map,
+Done loading in 33.717 seconds.
+======
+Reverse indexing ...
+23 category,
+8 attribute,
+4 visibility,
+64386 instance,
+12 sensor,
+10200 calibrated_sensor,
+2631083 ego_pose,
+68 log,
+850 scene,
+34149 sample,
+2631083 sample_data,
+1166187 sample_annotation,
+4 map,
+Done loading in 33.996 seconds.
+======
+Reverse indexing ...
+Done reverse indexing in 7.0 seconds.
+======
+======
+Loading NuScenes tables for version v1.0-test...
+Done reverse indexing in 7.1 seconds.
+======
+======
+Loading NuScenes tables for version v1.0-test...
+Done reverse indexing in 7.2 seconds.
+======
+======
+Loading NuScenes tables for version v1.0-test...
+Done reverse indexing in 7.1 seconds.
+======
+======
+Loading NuScenes tables for version v1.0-test...
+23 category,
+8 attribute,
+4 visibility,
+0 instance,
+12 sensor,
+1800 calibrated_sensor,
+462901 ego_pose,
+15 log,
+150 scene,
+6008 sample,
+462901 sample_data,
+0 sample_annotation,
+4 map,
+Done loading in 3.255 seconds.
+======
+Reverse indexing ...
+23 category,
+8 attribute,
+4 visibility,
+0 instance,
+12 sensor,
+1800 calibrated_sensor,
+462901 ego_pose,
+15 log,
+150 scene,
+6008 sample,
+462901 sample_data,
+0 sample_annotation,
+4 map,
+Done loading in 3.119 seconds.
+======
+Reverse indexing ...
+23 category,
+8 attribute,
+4 visibility,
+0 instance,
+12 sensor,
+1800 calibrated_sensor,
+462901 ego_pose,
+15 log,
+150 scene,
+6008 sample,
+462901 sample_data,
+0 sample_annotation,
+4 map,
+Done loading in 3.093 seconds.
+======
+Reverse indexing ...
+23 category,
+8 attribute,
+4 visibility,
+0 instance,
+12 sensor,
+1800 calibrated_sensor,
+462901 ego_pose,
+15 log,
+150 scene,
+6008 sample,
+462901 sample_data,
+0 sample_annotation,
+4 map,
+Done loading in 3.109 seconds.
+======
+Reverse indexing ...
+Done reverse indexing in 0.8 seconds.
+======
 Processing train dataset into examples...
+./train_result/scene_0-3_cam_1/train/scene_0/meta_dict.json
+Done reverse indexing in 0.8 seconds.
+======
 Processing train dataset into examples...
+./train_result/scene_0-3_cam_1/train/scene_0/meta_dict.json
+./train_result/scene_0-3_cam_1/train/scene_1/meta_dict.json./train_result/scene_0-3_cam_1/train/scene_1/meta_dict.json
+
+./train_result/scene_0-3_cam_1/train/scene_2/meta_dict.json./train_result/scene_0-3_cam_1/train/scene_2/meta_dict.json
+
+Done reverse indexing in 0.8 seconds.
+======
+Processing train dataset into examples...
+./train_result/scene_0-3_cam_1/train/scene_0/meta_dict.json
+Done reverse indexing in 0.8 seconds.
+======
+Processing train dataset into examples...
+./train_result/scene_0-3_cam_1/train/scene_0/meta_dict.json
+./train_result/scene_0-3_cam_1/train/scene_3/meta_dict.json./train_result/scene_0-3_cam_1/train/scene_3/meta_dict.json
+
+./train_result/scene_0-3_cam_1/train/scene_1/meta_dict.json
+./train_result/scene_0-3_cam_1/train/scene_1/meta_dict.json
+./train_result/scene_0-3_cam_1/train/scene_2/meta_dict.json
 Processing test dataset into examples...
 Processing test dataset into examples...
-Generating train split: 0 examples [00:00, ? examples/s]Generating train split: 462 examples [00:00, 4470.65 examples/s]Generating train split: 462 examples [00:00, 4353.41 examples/s]
-Generating train split: 0 examples [00:00, ? examples/s]Generating train split: 476 examples [00:00, 29891.14 examples/s]
-Map:   0%|          | 0/462 [00:00<?, ? examples/s]Map:   0%|          | 0/462 [00:00<?, ? examples/s]Map: 100%|██████████| 462/462 [00:00<00:00, 6903.15 examples/s]
-Map:   0%|          | 0/476 [00:00<?, ? examples/s]Map: 100%|██████████| 462/462 [00:00<00:00, 6479.08 examples/s]
-Map:   0%|          | 0/476 [00:00<?, ? examples/s]Map: 100%|██████████| 476/476 [00:00<00:00, 7103.48 examples/s]
+./train_result/scene_0-3_cam_1/test/scene_0/meta_dict.json./train_result/scene_0-3_cam_1/test/scene_0/meta_dict.json
+
+./train_result/scene_0-3_cam_1/train/scene_2/meta_dict.json
+./train_result/scene_0-3_cam_1/train/scene_3/meta_dict.json
+./train_result/scene_0-3_cam_1/train/scene_3/meta_dict.json
+Processing test dataset into examples...
+./train_result/scene_0-3_cam_1/test/scene_0/meta_dict.json
+Processing test dataset into examples...
+./train_result/scene_0-3_cam_1/test/scene_0/meta_dict.json
+Generating train split: 0 examples [00:00, ? examples/s]Generating train split: 120 examples [00:00, 2792.00 examples/s]
+Generating train split: 0 examples [00:00, ? examples/s]Generating train split: 30 examples [00:00, 5818.15 examples/s]
+Map:   0%|          | 0/120 [00:00<?, ? examples/s]Map: 100%|██████████| 120/120 [00:00<00:00, 6799.09 examples/s]
+Map:   0%|          | 0/30 [00:00<?, ? examples/s]Map: 100%|██████████| 30/30 [00:00<00:00, 3846.93 examples/s]
 using:  <class 'trainer.grpo_trainer.Qwen2VLGRPOTrainer'>
-Qwen/Qwen2.5-VL-7B-Instruct
-Map: 100%|██████████| 476/476 [00:00<00:00, 7346.05 examples/s]
+Qwen/Qwen2.5-VL-3B-Instruct
 using:  <class 'trainer.grpo_trainer.Qwen2VLGRPOTrainer'>
-Qwen/Qwen2.5-VL-7B-Instruct
-[2025-04-03 01:42:39,983] [INFO] [config.py:734:__init__] Config mesh_device None world_size = 2
-[2025-04-03 01:42:39,983] [INFO] [config.py:734:__init__] Config mesh_device None world_size = 2
-You are attempting to use Flash Attention 2.0 without specifying a torch dtype. This might lead to unexpected behaviour
-You are attempting to use Flash Attention 2.0 with a model not initialized on GPU. Make sure to move the model to GPU after initializing it on CPU with `model.to('cuda')`.
-You are attempting to use Flash Attention 2.0 without specifying a torch dtype. This might lead to unexpected behaviour
-You are attempting to use Flash Attention 2.0 with a model not initialized on GPU. Make sure to move the model to GPU after initializing it on CPU with `model.to('cuda')`.
-Flash Attention 2.0 only supports torch.float16 and torch.bfloat16 dtypes, but the current dype in Qwen2_5_VisionTransformerPretrainedModel is torch.float32. You should run training or inference using Automatic Mixed-Precision via the `with torch.autocast(device_type='torch_device'):` decorator, or load the model with the `torch_dtype` argument. Example: `model = AutoModel.from_pretrained("openai/whisper-tiny", attn_implementation="flash_attention_2", torch_dtype=torch.float16)`
-Flash Attention 2.0 only supports torch.float16 and torch.bfloat16 dtypes, but the current dype in Qwen2_5_VisionTransformerPretrainedModel is torch.float32. You should run training or inference using Automatic Mixed-Precision via the `with torch.autocast(device_type='torch_device'):` decorator, or load the model with the `torch_dtype` argument. Example: `model = AutoModel.from_pretrained("openai/whisper-tiny", attn_implementation="flash_attention_2", torch_dtype=torch.float16)`
-[2025-04-03 01:42:41,569] [INFO] [partition_parameters.py:348:__exit__] finished initializing model - num_params = 729, num_elems = 8.29B
-Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]Loading checkpoint shards:  20%|██        | 1/5 [00:13<00:54, 13.70s/it]Loading checkpoint shards:  20%|██        | 1/5 [00:14<00:56, 14.10s/it]Loading checkpoint shards:  40%|████      | 2/5 [00:24<00:36, 12.18s/it]Loading checkpoint shards:  40%|████      | 2/5 [00:24<00:36, 12.16s/it]Loading checkpoint shards:  60%|██████    | 3/5 [00:42<00:29, 14.51s/it]Loading checkpoint shards:  60%|██████    | 3/5 [00:42<00:29, 14.60s/it]Loading checkpoint shards:  80%|████████  | 4/5 [00:58<00:15, 15.07s/it]Loading checkpoint shards: 100%|██████████| 5/5 [00:58<00:00,  9.77s/it]Loading checkpoint shards: 100%|██████████| 5/5 [00:58<00:00, 11.70s/it]
-[2025-04-03 01:43:40,389] [INFO] [config.py:734:__init__] Config mesh_device None world_size = 2
-Loading checkpoint shards:  80%|████████  | 4/5 [00:58<00:15, 15.24s/it]Loading checkpoint shards: 100%|██████████| 5/5 [01:00<00:00, 10.47s/it]Loading checkpoint shards: 100%|██████████| 5/5 [01:00<00:00, 12.11s/it]
-[2025-04-03 01:43:42,667] [INFO] [config.py:734:__init__] Config mesh_device None world_size = 2
-Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s][2025-04-03 01:43:43,019] [INFO] [partition_parameters.py:348:__exit__] finished initializing model - num_params = 1458, num_elems = 16.58B
-Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]Loading checkpoint shards:  20%|██        | 1/5 [00:04<00:18,  4.51s/it]Loading checkpoint shards:  20%|██        | 1/5 [00:04<00:17,  4.39s/it]Loading checkpoint shards:  40%|████      | 2/5 [00:07<00:10,  3.62s/it]Loading checkpoint shards:  40%|████      | 2/5 [00:07<00:10,  3.58s/it]Loading checkpoint shards:  60%|██████    | 3/5 [00:10<00:06,  3.32s/it]Loading checkpoint shards:  60%|██████    | 3/5 [00:10<00:06,  3.36s/it]Loading checkpoint shards:  80%|████████  | 4/5 [00:13<00:03,  3.19s/it]Loading checkpoint shards: 100%|██████████| 5/5 [00:13<00:00,  2.14s/it]Loading checkpoint shards: 100%|██████████| 5/5 [00:13<00:00,  2.75s/it]
-Loading checkpoint shards:  80%|████████  | 4/5 [00:13<00:03,  3.26s/it]Loading checkpoint shards: 100%|██████████| 5/5 [00:14<00:00,  2.52s/it]Loading checkpoint shards: 100%|██████████| 5/5 [00:14<00:00,  2.96s/it]
-[2025-04-03 01:43:58,618] [INFO] [config.py:734:__init__] Config mesh_device None world_size = 2
-[2025-04-03 01:43:59,547] [INFO] [logging.py:107:log_dist] [Rank 0] DeepSpeed info: version=0.16.5, git-hash=unknown, git-branch=unknown
-[2025-04-03 01:43:59,548] [INFO] [config.py:734:__init__] Config mesh_device None world_size = 2
-[2025-04-03 01:43:59,572] [INFO] [logging.py:107:log_dist] [Rank 0] DeepSpeed Flops Profiler Enabled: False
-[2025-04-03 01:43:59,575] [INFO] [logging.py:107:log_dist] [Rank 0] Creating ZeRO Offload
-[2025-04-03 01:44:00,188] [INFO] [utils.py:781:see_memory_usage] DeepSpeedZeRoOffload initialize [begin]
-[2025-04-03 01:44:00,189] [INFO] [utils.py:782:see_memory_usage] MA 15.48 GB         Max_MA 18.02 GB         CA 18.46 GB         Max_CA 18 GB 
-[2025-04-03 01:44:00,189] [INFO] [utils.py:789:see_memory_usage] CPU Virtual Memory:  used = 46.15 GB, percent = 12.2%
-Parameter Offload: Total persistent parameters: 848896 in 368 params
-[2025-04-03 01:44:00,678] [INFO] [utils.py:781:see_memory_usage] DeepSpeedZeRoOffload initialize [end]
-[2025-04-03 01:44:00,679] [INFO] [utils.py:782:see_memory_usage] MA 15.48 GB         Max_MA 15.48 GB         CA 18.46 GB         Max_CA 18 GB 
-[2025-04-03 01:44:00,679] [INFO] [utils.py:789:see_memory_usage] CPU Virtual Memory:  used = 48.78 GB, percent = 12.9%
-[2025-04-03 01:44:00,681] [INFO] [config.py:1000:print] DeepSpeedEngine configuration:
-[2025-04-03 01:44:00,682] [INFO] [config.py:1004:print]   activation_checkpointing_config  {
+Qwen/Qwen2.5-VL-3B-Instruct
+using:  <class 'trainer.grpo_trainer.Qwen2VLGRPOTrainer'>
+Qwen/Qwen2.5-VL-3B-Instruct
+using:  <class 'trainer.grpo_trainer.Qwen2VLGRPOTrainer'>
+Qwen/Qwen2.5-VL-3B-Instruct
+[2025-04-03 18:24:05,137] [INFO] [config.py:734:__init__] Config mesh_device None world_size = 4
+[2025-04-03 18:24:05,137] [INFO] [config.py:734:__init__] Config mesh_device None world_size = 4
+[2025-04-03 18:24:05,148] [INFO] [config.py:734:__init__] Config mesh_device None world_size = 4
+[2025-04-03 18:24:05,165] [INFO] [config.py:734:__init__] Config mesh_device None world_size = 4
+[2025-04-03 18:24:06,720] [INFO] [partition_parameters.py:348:__exit__] finished initializing model - num_params = 825, num_elems = 4.07B
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:15<00:15, 15.54s/it]Loading checkpoint shards:  50%|█████     | 1/2 [00:15<00:15, 15.49s/it]Loading checkpoint shards:  50%|█████     | 1/2 [00:15<00:15, 15.56s/it]Loading checkpoint shards:  50%|█████     | 1/2 [00:15<00:15, 15.58s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:27<00:00, 13.31s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:27<00:00, 13.64s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:27<00:00, 13.28s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:27<00:00, 13.61s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:27<00:00, 13.32s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:27<00:00, 13.65s/it]
+[2025-04-03 18:24:34,163] [INFO] [config.py:734:__init__] Config mesh_device None world_size = 4
+[2025-04-03 18:24:34,202] [INFO] [config.py:734:__init__] Config mesh_device None world_size = 4
+[2025-04-03 18:24:34,204] [INFO] [config.py:734:__init__] Config mesh_device None world_size = 4
+Loading checkpoint shards: 100%|██████████| 2/2 [00:27<00:00, 13.41s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:27<00:00, 13.73s/it]
+[2025-04-03 18:24:34,410] [INFO] [config.py:734:__init__] Config mesh_device None world_size = 4
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][2025-04-03 18:24:34,762] [INFO] [partition_parameters.py:348:__exit__] finished initializing model - num_params = 1650, num_elems = 8.13B
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:05<00:05,  5.29s/it]Loading checkpoint shards:  50%|█████     | 1/2 [00:05<00:05,  5.31s/it]Loading checkpoint shards:  50%|█████     | 1/2 [00:05<00:05,  5.33s/it]Loading checkpoint shards:  50%|█████     | 1/2 [00:05<00:05,  5.36s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:09<00:00,  4.74s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:09<00:00,  4.83s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:09<00:00,  4.75s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:09<00:00,  4.84s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:09<00:00,  4.76s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:09<00:00,  4.84s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:09<00:00,  4.83s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:09<00:00,  4.91s/it]
+[2025-04-03 18:24:46,020] [INFO] [config.py:734:__init__] Config mesh_device None world_size = 4
+[2025-04-03 18:24:46,020] [INFO] [config.py:734:__init__] Config mesh_device None world_size = 4
+[2025-04-03 18:24:46,167] [INFO] [config.py:734:__init__] Config mesh_device None world_size = 4
+[2025-04-03 18:24:46,248] [INFO] [logging.py:107:log_dist] [Rank 0] DeepSpeed info: version=0.16.5, git-hash=unknown, git-branch=unknown
+[2025-04-03 18:24:46,248] [INFO] [config.py:734:__init__] Config mesh_device None world_size = 4
+[2025-04-03 18:24:46,263] [INFO] [logging.py:107:log_dist] [Rank 0] DeepSpeed Flops Profiler Enabled: False
+[2025-04-03 18:24:46,266] [INFO] [logging.py:107:log_dist] [Rank 0] Creating ZeRO Offload
+[2025-04-03 18:24:48,337] [INFO] [utils.py:781:see_memory_usage] DeepSpeedZeRoOffload initialize [begin]
+[2025-04-03 18:24:48,338] [INFO] [utils.py:782:see_memory_usage] MA 3.51 GB         Max_MA 5.25 GB         CA 5.81 GB         Max_CA 6 GB 
+[2025-04-03 18:24:48,338] [INFO] [utils.py:789:see_memory_usage] CPU Virtual Memory:  used = 88.92 GB, percent = 23.6%
+Parameter Offload: Total persistent parameters: 755712 in 408 params
+[2025-04-03 18:24:50,411] [INFO] [utils.py:781:see_memory_usage] DeepSpeedZeRoOffload initialize [end]
+[2025-04-03 18:24:50,412] [INFO] [utils.py:782:see_memory_usage] MA 3.51 GB         Max_MA 3.51 GB         CA 5.81 GB         Max_CA 6 GB 
+[2025-04-03 18:24:50,412] [INFO] [utils.py:789:see_memory_usage] CPU Virtual Memory:  used = 88.99 GB, percent = 23.6%
+[2025-04-03 18:24:50,414] [INFO] [config.py:1000:print] DeepSpeedEngine configuration:
+[2025-04-03 18:24:50,414] [INFO] [config.py:1004:print]   activation_checkpointing_config  {
     "partition_activations": false, 
     "contiguous_memory_optimization": false, 
     "cpu_checkpointing": false, 
@@ -58,10 +252,10 @@ Parameter Offload: Total persistent parameters: 848896 in 368 params
     "synchronize_checkpoint_boundary": false, 
     "profile": false
 }
-[2025-04-03 01:44:00,682] [INFO] [config.py:1004:print]   aio_config ................... {'block_size': 1048576, 'queue_depth': 8, 'intra_op_parallelism': 1, 'single_submit': False, 'overlap_events': True, 'use_gds': False}
-[2025-04-03 01:44:00,682] [INFO] [config.py:1004:print]   amp_enabled .................. False
-[2025-04-03 01:44:00,682] [INFO] [config.py:1004:print]   amp_params ................... False
-[2025-04-03 01:44:00,682] [INFO] [config.py:1004:print]   autotuning_config ............ {
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   aio_config ................... {'block_size': 1048576, 'queue_depth': 8, 'intra_op_parallelism': 1, 'single_submit': False, 'overlap_events': True, 'use_gds': False}
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   amp_enabled .................. False
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   amp_params ................... False
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   autotuning_config ............ {
     "enabled": false, 
     "start_step": null, 
     "end_step": null, 
@@ -86,32 +280,32 @@ Parameter Offload: Total persistent parameters: 848896 in 368 params
     "min_train_micro_batch_size_per_gpu": 1, 
     "num_tuning_micro_batch_sizes": 3
 }
-[2025-04-03 01:44:00,682] [INFO] [config.py:1004:print]   bfloat16_enabled ............. True
-[2025-04-03 01:44:00,682] [INFO] [config.py:1004:print]   bfloat16_immediate_grad_update  True
-[2025-04-03 01:44:00,682] [INFO] [config.py:1004:print]   checkpoint_parallel_write_pipeline  False
-[2025-04-03 01:44:00,682] [INFO] [config.py:1004:print]   checkpoint_tag_validation_enabled  True
-[2025-04-03 01:44:00,682] [INFO] [config.py:1004:print]   checkpoint_tag_validation_fail  False
-[2025-04-03 01:44:00,682] [INFO] [config.py:1004:print]   comms_config ................. <deepspeed.comm.config.DeepSpeedCommsConfig object at 0x1530c4865250>
-[2025-04-03 01:44:00,682] [INFO] [config.py:1004:print]   communication_data_type ...... None
-[2025-04-03 01:44:00,682] [INFO] [config.py:1004:print]   compression_config ........... {'weight_quantization': {'shared_parameters': {'enabled': False, 'quantizer_kernel': False, 'schedule_offset': 0, 'quantize_groups': 1, 'quantize_verbose': False, 'quantization_type': 'symmetric', 'quantize_weight_in_forward': False, 'rounding': 'nearest', 'fp16_mixed_quantize': False, 'quantize_change_ratio': 0.001}, 'different_groups': {}}, 'activation_quantization': {'shared_parameters': {'enabled': False, 'quantization_type': 'symmetric', 'range_calibration': 'dynamic', 'schedule_offset': 1000}, 'different_groups': {}}, 'sparse_pruning': {'shared_parameters': {'enabled': False, 'method': 'l1', 'schedule_offset': 1000}, 'different_groups': {}}, 'row_pruning': {'shared_parameters': {'enabled': False, 'method': 'l1', 'schedule_offset': 1000}, 'different_groups': {}}, 'head_pruning': {'shared_parameters': {'enabled': False, 'method': 'topk', 'schedule_offset': 1000}, 'different_groups': {}}, 'channel_pruning': {'shared_parameters': {'enabled': False, 'method': 'l1', 'schedule_offset': 1000}, 'different_groups': {}}, 'layer_reduction': {'enabled': False}}
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   curriculum_enabled_legacy .... False
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   curriculum_params_legacy ..... False
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   data_efficiency_config ....... {'enabled': False, 'seed': 1234, 'data_sampling': {'enabled': False, 'num_epochs': 1000, 'num_workers': 0, 'pin_memory': False, 'curriculum_learning': {'enabled': False}, 'dynamic_batching': {'enabled': False, 'lr_scaling_method': 'linear', 'min_batch_size': 1, 'max_batch_size': None, 'sequence_picking_order': 'dataloader', 'verbose': False}}, 'data_routing': {'enabled': False, 'random_ltd': {'enabled': False, 'layer_token_lr_schedule': {'enabled': False}}}}
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   data_efficiency_enabled ...... False
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   dataloader_drop_last ......... False
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   disable_allgather ............ False
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   dump_state ................... False
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   dynamic_loss_scale_args ...... None
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   eigenvalue_enabled ........... False
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   eigenvalue_gas_boundary_resolution  1
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   eigenvalue_layer_name ........ bert.encoder.layer
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   eigenvalue_layer_num ......... 0
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   eigenvalue_max_iter .......... 100
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   eigenvalue_stability ......... 1e-06
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   eigenvalue_tol ............... 0.01
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   eigenvalue_verbose ........... False
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   elasticity_enabled ........... False
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   flops_profiler_config ........ {
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   bfloat16_enabled ............. True
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   bfloat16_immediate_grad_update  True
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   checkpoint_parallel_write_pipeline  False
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   checkpoint_tag_validation_enabled  True
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   checkpoint_tag_validation_fail  False
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   comms_config ................. <deepspeed.comm.config.DeepSpeedCommsConfig object at 0x1488f3bf1090>
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   communication_data_type ...... None
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   compression_config ........... {'weight_quantization': {'shared_parameters': {'enabled': False, 'quantizer_kernel': False, 'schedule_offset': 0, 'quantize_groups': 1, 'quantize_verbose': False, 'quantization_type': 'symmetric', 'quantize_weight_in_forward': False, 'rounding': 'nearest', 'fp16_mixed_quantize': False, 'quantize_change_ratio': 0.001}, 'different_groups': {}}, 'activation_quantization': {'shared_parameters': {'enabled': False, 'quantization_type': 'symmetric', 'range_calibration': 'dynamic', 'schedule_offset': 1000}, 'different_groups': {}}, 'sparse_pruning': {'shared_parameters': {'enabled': False, 'method': 'l1', 'schedule_offset': 1000}, 'different_groups': {}}, 'row_pruning': {'shared_parameters': {'enabled': False, 'method': 'l1', 'schedule_offset': 1000}, 'different_groups': {}}, 'head_pruning': {'shared_parameters': {'enabled': False, 'method': 'topk', 'schedule_offset': 1000}, 'different_groups': {}}, 'channel_pruning': {'shared_parameters': {'enabled': False, 'method': 'l1', 'schedule_offset': 1000}, 'different_groups': {}}, 'layer_reduction': {'enabled': False}}
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   curriculum_enabled_legacy .... False
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   curriculum_params_legacy ..... False
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   data_efficiency_config ....... {'enabled': False, 'seed': 1234, 'data_sampling': {'enabled': False, 'num_epochs': 1000, 'num_workers': 0, 'pin_memory': False, 'curriculum_learning': {'enabled': False}, 'dynamic_batching': {'enabled': False, 'lr_scaling_method': 'linear', 'min_batch_size': 1, 'max_batch_size': None, 'sequence_picking_order': 'dataloader', 'verbose': False}}, 'data_routing': {'enabled': False, 'random_ltd': {'enabled': False, 'layer_token_lr_schedule': {'enabled': False}}}}
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   data_efficiency_enabled ...... False
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   dataloader_drop_last ......... False
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   disable_allgather ............ False
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   dump_state ................... False
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   dynamic_loss_scale_args ...... None
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   eigenvalue_enabled ........... False
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   eigenvalue_gas_boundary_resolution  1
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   eigenvalue_layer_name ........ bert.encoder.layer
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   eigenvalue_layer_num ......... 0
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   eigenvalue_max_iter .......... 100
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   eigenvalue_stability ......... 1e-06
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   eigenvalue_tol ............... 0.01
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   eigenvalue_verbose ........... False
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   elasticity_enabled ........... False
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   flops_profiler_config ........ {
     "enabled": false, 
     "recompute_fwd_factor": 0.0, 
     "profile_step": 1, 
@@ -120,24 +314,24 @@ Parameter Offload: Total persistent parameters: 848896 in 368 params
     "detailed": true, 
     "output_file": null
 }
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   fp16_auto_cast ............... None
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   fp16_enabled ................. False
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   fp16_master_weights_and_gradients  False
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   global_rank .................. 0
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   grad_accum_dtype ............. None
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   gradient_accumulation_steps .. 1
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   gradient_clipping ............ 5.0
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   gradient_predivide_factor .... 1.0
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   graph_harvesting ............. False
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   hybrid_engine ................ enabled=False max_out_tokens=512 inference_tp_size=1 release_inference_cache=False pin_parameters=True tp_gather_partition_size=8
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   initial_dynamic_scale ........ 1
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   load_universal_checkpoint .... False
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   loss_scale ................... 1.0
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   memory_breakdown ............. False
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   mics_hierarchial_params_gather  False
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   mics_shard_size .............. -1
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   monitor_config ............... tensorboard=TensorBoardConfig(enabled=False, output_path='', job_name='DeepSpeedJobName') comet=CometConfig(enabled=False, samples_log_interval=100, project=None, workspace=None, api_key=None, experiment_name=None, experiment_key=None, online=None, mode=None) wandb=WandbConfig(enabled=False, group=None, team=None, project='deepspeed') csv_monitor=CSVConfig(enabled=False, output_path='', job_name='DeepSpeedJobName')
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   nebula_config ................ {
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   fp16_auto_cast ............... None
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   fp16_enabled ................. False
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   fp16_master_weights_and_gradients  False
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   global_rank .................. 0
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   grad_accum_dtype ............. None
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   gradient_accumulation_steps .. 1
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   gradient_clipping ............ 5.0
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   gradient_predivide_factor .... 1.0
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   graph_harvesting ............. False
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   hybrid_engine ................ enabled=False max_out_tokens=512 inference_tp_size=1 release_inference_cache=False pin_parameters=True tp_gather_partition_size=8
+[2025-04-03 18:24:50,415] [INFO] [config.py:1004:print]   initial_dynamic_scale ........ 1
+[2025-04-03 18:24:50,416] [INFO] [config.py:1004:print]   load_universal_checkpoint .... False
+[2025-04-03 18:24:50,416] [INFO] [config.py:1004:print]   loss_scale ................... 1.0
+[2025-04-03 18:24:50,416] [INFO] [config.py:1004:print]   memory_breakdown ............. False
+[2025-04-03 18:24:50,416] [INFO] [config.py:1004:print]   mics_hierarchial_params_gather  False
+[2025-04-03 18:24:50,416] [INFO] [config.py:1004:print]   mics_shard_size .............. -1
+[2025-04-03 18:24:50,416] [INFO] [config.py:1004:print]   monitor_config ............... tensorboard=TensorBoardConfig(enabled=False, output_path='', job_name='DeepSpeedJobName') comet=CometConfig(enabled=False, samples_log_interval=100, project=None, workspace=None, api_key=None, experiment_name=None, experiment_key=None, online=None, mode=None) wandb=WandbConfig(enabled=False, group=None, team=None, project='deepspeed') csv_monitor=CSVConfig(enabled=False, output_path='', job_name='DeepSpeedJobName')
+[2025-04-03 18:24:50,416] [INFO] [config.py:1004:print]   nebula_config ................ {
     "enabled": false, 
     "persistent_storage_path": null, 
     "persistent_time_interval": 100, 
@@ -145,34 +339,34 @@ Parameter Offload: Total persistent parameters: 848896 in 368 params
     "enable_nebula_load": true, 
     "load_path": null
 }
-[2025-04-03 01:44:00,683] [INFO] [config.py:1004:print]   optimizer_legacy_fusion ...... False
-[2025-04-03 01:44:00,684] [INFO] [config.py:1004:print]   optimizer_name ............... None
-[2025-04-03 01:44:00,684] [INFO] [config.py:1004:print]   optimizer_params ............. None
-[2025-04-03 01:44:00,684] [INFO] [config.py:1004:print]   pipeline ..................... {'stages': 'auto', 'partition': 'best', 'seed_layers': False, 'activation_checkpoint_interval': 0, 'pipe_partitioned': True, 'grad_partitioned': True}
-[2025-04-03 01:44:00,684] [INFO] [config.py:1004:print]   pld_enabled .................. False
-[2025-04-03 01:44:00,684] [INFO] [config.py:1004:print]   pld_params ................... False
-[2025-04-03 01:44:00,684] [INFO] [config.py:1004:print]   prescale_gradients ........... False
-[2025-04-03 01:44:00,684] [INFO] [config.py:1004:print]   scheduler_name ............... None
-[2025-04-03 01:44:00,684] [INFO] [config.py:1004:print]   scheduler_params ............. None
-[2025-04-03 01:44:00,684] [INFO] [config.py:1004:print]   seq_parallel_communication_data_type  torch.float32
-[2025-04-03 01:44:00,684] [INFO] [config.py:1004:print]   sparse_attention ............. None
-[2025-04-03 01:44:00,684] [INFO] [config.py:1004:print]   sparse_gradients_enabled ..... False
-[2025-04-03 01:44:00,684] [INFO] [config.py:1004:print]   steps_per_print .............. inf
-[2025-04-03 01:44:00,684] [INFO] [config.py:1004:print]   tensor_parallel_config ....... dtype=torch.float16 autotp_size=0 tensor_parallel=TPConfig(tp_size=1, tp_grain_size=1, mpu=None, tp_group=None) injection_policy_tuple=None keep_module_on_host=False replace_with_kernel_inject=False
-[2025-04-03 01:44:00,684] [INFO] [config.py:1004:print]   timers_config ................ enabled=True synchronized=True
-[2025-04-03 01:44:00,684] [INFO] [config.py:1004:print]   train_batch_size ............. 2
-[2025-04-03 01:44:00,684] [INFO] [config.py:1004:print]   train_micro_batch_size_per_gpu  1
-[2025-04-03 01:44:00,684] [INFO] [config.py:1004:print]   use_data_before_expert_parallel_  False
-[2025-04-03 01:44:00,684] [INFO] [config.py:1004:print]   use_node_local_storage ....... False
-[2025-04-03 01:44:00,684] [INFO] [config.py:1004:print]   wall_clock_breakdown ......... False
-[2025-04-03 01:44:00,684] [INFO] [config.py:1004:print]   weight_quantization_config ... None
-[2025-04-03 01:44:00,684] [INFO] [config.py:1004:print]   world_size ................... 2
-[2025-04-03 01:44:00,684] [INFO] [config.py:1004:print]   zero_allow_untested_optimizer  False
-[2025-04-03 01:44:00,684] [INFO] [config.py:1004:print]   zero_config .................. stage=3 contiguous_gradients=True reduce_scatter=True reduce_bucket_size=500000000 use_multi_rank_bucket_allreduce=True allgather_partitions=True allgather_bucket_size=500000000 overlap_comm=True load_from_fp32_weights=True elastic_checkpoint=False offload_param=DeepSpeedZeroOffloadParamConfig(device='none', nvme_path=None, buffer_count=5, buffer_size=100000000, max_in_cpu=1000000000, pin_memory=True) offload_optimizer=DeepSpeedZeroOffloadOptimizerConfig(device='none', nvme_path=None, buffer_count=4, pin_memory=True, pipeline_read=False, pipeline_write=False, fast_init=False, ratio=1.0) sub_group_size=1000000000 cpu_offload_param=None cpu_offload_use_pin_memory=None cpu_offload=None prefetch_bucket_size=50000000 param_persistence_threshold=100000 model_persistence_threshold=9223372036854775807 max_live_parameters=1000000000 max_reuse_distance=1000000000 gather_16bit_weights_on_model_save=True module_granularity_threshold=0 use_all_reduce_for_fetch_params=False stage3_gather_fp16_weights_on_model_save=False ignore_unused_parameters=True legacy_stage1=False round_robin_gradients=False zero_hpz_partition_size=1 zero_quantized_weights=False zero_quantized_nontrainable_weights=False zero_quantized_gradients=False zeropp_loco_param=None mics_shard_size=-1 mics_hierarchical_params_gather=False memory_efficient_linear=True pipeline_loading_checkpoint=False override_module_apply=True log_trace_cache_warnings=False
-[2025-04-03 01:44:00,684] [INFO] [config.py:1004:print]   zero_enabled ................. True
-[2025-04-03 01:44:00,684] [INFO] [config.py:1004:print]   zero_force_ds_cpu_optimizer .. True
-[2025-04-03 01:44:00,684] [INFO] [config.py:1004:print]   zero_optimization_stage ...... 3
-[2025-04-03 01:44:00,684] [INFO] [config.py:990:print_user_config]   json = {
+[2025-04-03 18:24:50,416] [INFO] [config.py:1004:print]   optimizer_legacy_fusion ...... False
+[2025-04-03 18:24:50,416] [INFO] [config.py:1004:print]   optimizer_name ............... None
+[2025-04-03 18:24:50,416] [INFO] [config.py:1004:print]   optimizer_params ............. None
+[2025-04-03 18:24:50,416] [INFO] [config.py:1004:print]   pipeline ..................... {'stages': 'auto', 'partition': 'best', 'seed_layers': False, 'activation_checkpoint_interval': 0, 'pipe_partitioned': True, 'grad_partitioned': True}
+[2025-04-03 18:24:50,416] [INFO] [config.py:1004:print]   pld_enabled .................. False
+[2025-04-03 18:24:50,416] [INFO] [config.py:1004:print]   pld_params ................... False
+[2025-04-03 18:24:50,416] [INFO] [config.py:1004:print]   prescale_gradients ........... False
+[2025-04-03 18:24:50,416] [INFO] [config.py:1004:print]   scheduler_name ............... None
+[2025-04-03 18:24:50,416] [INFO] [config.py:1004:print]   scheduler_params ............. None
+[2025-04-03 18:24:50,416] [INFO] [config.py:1004:print]   seq_parallel_communication_data_type  torch.float32
+[2025-04-03 18:24:50,416] [INFO] [config.py:1004:print]   sparse_attention ............. None
+[2025-04-03 18:24:50,416] [INFO] [config.py:1004:print]   sparse_gradients_enabled ..... False
+[2025-04-03 18:24:50,416] [INFO] [config.py:1004:print]   steps_per_print .............. inf
+[2025-04-03 18:24:50,416] [INFO] [config.py:1004:print]   tensor_parallel_config ....... dtype=torch.float16 autotp_size=0 tensor_parallel=TPConfig(tp_size=1, tp_grain_size=1, mpu=None, tp_group=None) injection_policy_tuple=None keep_module_on_host=False replace_with_kernel_inject=False
+[2025-04-03 18:24:50,416] [INFO] [config.py:1004:print]   timers_config ................ enabled=True synchronized=True
+[2025-04-03 18:24:50,416] [INFO] [config.py:1004:print]   train_batch_size ............. 4
+[2025-04-03 18:24:50,416] [INFO] [config.py:1004:print]   train_micro_batch_size_per_gpu  1
+[2025-04-03 18:24:50,416] [INFO] [config.py:1004:print]   use_data_before_expert_parallel_  False
+[2025-04-03 18:24:50,416] [INFO] [config.py:1004:print]   use_node_local_storage ....... False
+[2025-04-03 18:24:50,416] [INFO] [config.py:1004:print]   wall_clock_breakdown ......... False
+[2025-04-03 18:24:50,416] [INFO] [config.py:1004:print]   weight_quantization_config ... None
+[2025-04-03 18:24:50,416] [INFO] [config.py:1004:print]   world_size ................... 4
+[2025-04-03 18:24:50,416] [INFO] [config.py:1004:print]   zero_allow_untested_optimizer  False
+[2025-04-03 18:24:50,416] [INFO] [config.py:1004:print]   zero_config .................. stage=3 contiguous_gradients=True reduce_scatter=True reduce_bucket_size=500000000 use_multi_rank_bucket_allreduce=True allgather_partitions=True allgather_bucket_size=500000000 overlap_comm=True load_from_fp32_weights=True elastic_checkpoint=False offload_param=DeepSpeedZeroOffloadParamConfig(device='none', nvme_path=None, buffer_count=5, buffer_size=100000000, max_in_cpu=1000000000, pin_memory=True) offload_optimizer=DeepSpeedZeroOffloadOptimizerConfig(device='none', nvme_path=None, buffer_count=4, pin_memory=True, pipeline_read=False, pipeline_write=False, fast_init=False, ratio=1.0) sub_group_size=1000000000 cpu_offload_param=None cpu_offload_use_pin_memory=None cpu_offload=None prefetch_bucket_size=50000000 param_persistence_threshold=100000 model_persistence_threshold=9223372036854775807 max_live_parameters=1000000000 max_reuse_distance=1000000000 gather_16bit_weights_on_model_save=True module_granularity_threshold=0 use_all_reduce_for_fetch_params=False stage3_gather_fp16_weights_on_model_save=False ignore_unused_parameters=True legacy_stage1=False round_robin_gradients=False zero_hpz_partition_size=1 zero_quantized_weights=False zero_quantized_nontrainable_weights=False zero_quantized_gradients=False zeropp_loco_param=None mics_shard_size=-1 mics_hierarchical_params_gather=False memory_efficient_linear=True pipeline_loading_checkpoint=False override_module_apply=True log_trace_cache_warnings=False
+[2025-04-03 18:24:50,416] [INFO] [config.py:1004:print]   zero_enabled ................. True
+[2025-04-03 18:24:50,416] [INFO] [config.py:1004:print]   zero_force_ds_cpu_optimizer .. True
+[2025-04-03 18:24:50,416] [INFO] [config.py:1004:print]   zero_optimization_stage ...... 3
+[2025-04-03 18:24:50,416] [INFO] [config.py:990:print_user_config]   json = {
     "fp16": {
         "enabled": false, 
         "loss_scale": 0, 
@@ -207,161 +401,773 @@ Parameter Offload: Total persistent parameters: 848896 in 368 params
     "gradient_accumulation_steps": 1, 
     "gradient_clipping": 5.0, 
     "steps_per_print": inf, 
-    "train_batch_size": 2, 
+    "train_batch_size": 4, 
     "train_micro_batch_size_per_gpu": 1, 
     "wall_clock_breakdown": false, 
-    "zero_optimization.reduce_bucket_size": 1.284506e+07, 
-    "zero_optimization.stage3_param_persistence_threshold": 3.584000e+04, 
-    "zero_optimization.stage3_prefetch_bucket_size": 1.156055e+07
+    "zero_optimization.reduce_bucket_size": 4.194304e+06, 
+    "zero_optimization.stage3_param_persistence_threshold": 2.048000e+04, 
+    "zero_optimization.stage3_prefetch_bucket_size": 3.774874e+06
 }
-Parameter Offload: Total persistent parameters: 848896 in 368 params
+Parameter Offload: Total persistent parameters: 755712 in 408 params
 wandb: Using wandb-core as the SDK backend.  Please refer to https://wandb.me/wandb-core for more information.
 wandb: Currently logged in as: zl3466 (zl3466-new-york-university) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
 wandb: Tracking run with wandb version 0.19.8
-wandb: Run data is saved locally in /scratch/zl3466/github/thinking_in_street/wandb/run-20250403_014418-wolirl0z
+wandb: Run data is saved locally in /scratch/zl3466/github/thinking_in_street/wandb/run-20250403_182517-nx0hxons
 wandb: Run `wandb offline` to turn off syncing.
-wandb: Syncing run localization
+wandb: Syncing run localization-3b
 wandb: ⭐️ View project at https://wandb.ai/zl3466-new-york-university/huggingface
-wandb: 🚀 View run at https://wandb.ai/zl3466-new-york-university/huggingface/runs/wolirl0z
-[rank1]: Traceback (most recent call last):
-[rank1]:   File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 587, in <module>
-[rank1]:     main(script_args, training_args, model_args)
-[rank1]:   File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 576, in main
-[rank1]:     trainer.train()
-[rank1]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2241, in train
-[rank1]:     return inner_training_loop(
-[rank1]:            ^^^^^^^^^^^^^^^^^^^^
-[rank1]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2548, in _inner_training_loop
-[rank1]:     tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
-[rank1]:                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[rank1]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 3698, in training_step
-[rank1]:     loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
-[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[rank1]:   File "/scratch/zl3466/github/thinking_in_street/train/localization/trainer/grpo_trainer.py", line 510, in compute_loss
-[rank1]:     with unwrap_model_for_generation(model, self.accelerator) as unwrapped_model:
-[rank1]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/contextlib.py", line 137, in __enter__
-[rank1]:     return next(self.gen)
-[rank1]:            ^^^^^^^^^^^^^^
-[rank1]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/trl/models/utils.py", line 217, in unwrap_model_for_generation
-[rank1]:     with deepspeed.zero.GatheredParameters(model.parameters()):
-[rank1]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/zero/partition_parameters.py", line 2243, in __enter__
-[rank1]:     self.params[0].all_gather(param_list=self.params)
-[rank1]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/zero/partition_parameters.py", line 1161, in all_gather
-[rank1]:     return self._all_gather(param_list, async_op=async_op, hierarchy=hierarchy)
-[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[rank1]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/utils/nvtx.py", line 20, in wrapped_fn
-[rank1]:     ret_val = func(*args, **kwargs)
-[rank1]:               ^^^^^^^^^^^^^^^^^^^^^
-[rank1]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/zero/partition_parameters.py", line 1529, in _all_gather
-[rank1]:     self._allgather_params_coalesced(all_gather_nonquantize_list, hierarchy, quantize=False)
-[rank1]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/zero/partition_parameters.py", line 1818, in _allgather_params_coalesced
-[rank1]:     flat_tensor = torch.empty(tensor_size, dtype=param_list[0].ds_tensor.dtype,
-[rank1]:                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[rank1]: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 130.00 MiB. GPU 1 has a total capacity of 44.48 GiB of which 63.31 MiB is free. Including non-PyTorch memory, this process has 44.42 GiB memory in use. Of the allocated memory 44.10 GiB is allocated by PyTorch, and 51.77 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-  0%|          | 0/231 [00:00<?, ?it/s]Traceback (most recent call last):
-  File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 587, in <module>
-    main(script_args, training_args, model_args)
-  File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 576, in main
-    trainer.train()
-  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2241, in train
-    return inner_training_loop(
-           ^^^^^^^^^^^^^^^^^^^^
-  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2548, in _inner_training_loop
-    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 3698, in training_step
-    loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/scratch/zl3466/github/thinking_in_street/train/localization/trainer/grpo_trainer.py", line 510, in compute_loss
-    with unwrap_model_for_generation(model, self.accelerator) as unwrapped_model:
-  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/contextlib.py", line 137, in __enter__
-    return next(self.gen)
-           ^^^^^^^^^^^^^^
-  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/trl/models/utils.py", line 217, in unwrap_model_for_generation
-    with deepspeed.zero.GatheredParameters(model.parameters()):
-  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/zero/partition_parameters.py", line 2243, in __enter__
-    self.params[0].all_gather(param_list=self.params)
-  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/zero/partition_parameters.py", line 1161, in all_gather
-    return self._all_gather(param_list, async_op=async_op, hierarchy=hierarchy)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/utils/nvtx.py", line 20, in wrapped_fn
-    ret_val = func(*args, **kwargs)
-              ^^^^^^^^^^^^^^^^^^^^^
-  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/zero/partition_parameters.py", line 1529, in _all_gather
-    self._allgather_params_coalesced(all_gather_nonquantize_list, hierarchy, quantize=False)
-  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/zero/partition_parameters.py", line 1818, in _allgather_params_coalesced
-    flat_tensor = torch.empty(tensor_size, dtype=param_list[0].ds_tensor.dtype,
-                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 130.00 MiB. GPU 0 has a total capacity of 44.48 GiB of which 83.31 MiB is free. Process 2671556 has 162.00 MiB memory in use. Including non-PyTorch memory, this process has 44.24 GiB memory in use. Of the allocated memory 43.92 GiB is allocated by PyTorch, and 52.45 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
-[rank0]: Traceback (most recent call last):
-[rank0]:   File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 587, in <module>
-[rank0]:     main(script_args, training_args, model_args)
-[rank0]:   File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 576, in main
-[rank0]:     trainer.train()
-[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2241, in train
-[rank0]:     return inner_training_loop(
-[rank0]:            ^^^^^^^^^^^^^^^^^^^^
-[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2548, in _inner_training_loop
-[rank0]:     tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
-[rank0]:                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 3698, in training_step
-[rank0]:     loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
-[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[rank0]:   File "/scratch/zl3466/github/thinking_in_street/train/localization/trainer/grpo_trainer.py", line 510, in compute_loss
-[rank0]:     with unwrap_model_for_generation(model, self.accelerator) as unwrapped_model:
-[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/contextlib.py", line 137, in __enter__
-[rank0]:     return next(self.gen)
-[rank0]:            ^^^^^^^^^^^^^^
-[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/trl/models/utils.py", line 217, in unwrap_model_for_generation
-[rank0]:     with deepspeed.zero.GatheredParameters(model.parameters()):
-[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/zero/partition_parameters.py", line 2243, in __enter__
-[rank0]:     self.params[0].all_gather(param_list=self.params)
-[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/zero/partition_parameters.py", line 1161, in all_gather
-[rank0]:     return self._all_gather(param_list, async_op=async_op, hierarchy=hierarchy)
-[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/utils/nvtx.py", line 20, in wrapped_fn
-[rank0]:     ret_val = func(*args, **kwargs)
-[rank0]:               ^^^^^^^^^^^^^^^^^^^^^
-[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/zero/partition_parameters.py", line 1529, in _all_gather
-[rank0]:     self._allgather_params_coalesced(all_gather_nonquantize_list, hierarchy, quantize=False)
-[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/zero/partition_parameters.py", line 1818, in _allgather_params_coalesced
-[rank0]:     flat_tensor = torch.empty(tensor_size, dtype=param_list[0].ds_tensor.dtype,
-[rank0]:                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[rank0]: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 130.00 MiB. GPU 0 has a total capacity of 44.48 GiB of which 83.31 MiB is free. Process 2671556 has 162.00 MiB memory in use. Including non-PyTorch memory, this process has 44.24 GiB memory in use. Of the allocated memory 43.92 GiB is allocated by PyTorch, and 52.45 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+wandb: 🚀 View run at https://wandb.ai/zl3466-new-york-university/huggingface/runs/nx0hxons
+  0%|          | 0/30 [00:00<?, ?it/s]/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/utils/checkpoint.py:87: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
+  warnings.warn(
+/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/utils/checkpoint.py:87: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
+  warnings.warn(
+/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/utils/checkpoint.py:87: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
+  warnings.warn(
+/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/utils/checkpoint.py:87: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
+  warnings.warn(
+`use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`...
+`use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`...
+`use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`...
+`use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`...
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883534612464.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883535012465.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883535412467.jpg']
+problem_id: 7
+prompt_length: 668
+path: path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883537112463.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883537612469.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883538012469.jpg']['/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883993912469.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883994362460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883994762460.jpg']
+problem_id: 10
+prompt_length: 697
+
+problem_id: path:12 ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201474662460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201475112460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201475512460.jpg']
+
+problem_id: 6
+prompt_length:prompt_length: 697
+ 697
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([1.1000, 0.1000, 0.0000, 1.1000], device='cuda:2')tensor([2.0124, 0.0000, 0.1000, 0.0000], device='cuda:0')
+
+tensor([150, 347,  83, 393], device='cuda:2')
+tensor([284, 268, 382, 315], device='cuda:0')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([1.0000, 0.0000, 0.0000, 1.1000], device='cuda:1')
+tensor([113, 215, 299, 408], device='cuda:1')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([2.0596, 0.0000, 0.0000, 1.0596], device='cuda:3')
+tensor([251, 748, 230, 194], device='cuda:3')
+  3%|▎         | 1/30 [05:10<2:30:14, 310.84s/it]                                                 {'loss': -0.0, 'grad_norm': 4.811934167257597, 'learning_rate': 9.972609476841365e-07, 'completion_length': 292.5, 'rewards/accuracy_reward': 0.1707223802804947, 'rewards/format_reward': 0.375, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 1.0, 'reward': 0.6019724011421204, 'reward_std': 0.7986198663711548, 'kl': 0.0, 'epoch': 0.03}
+  3%|▎         | 1/30 [05:10<2:30:14, 310.84s/it]path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883723762460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883724162460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883724612463.jpg']
+problem_id: 6
+prompt_length: 697
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883719862460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883720262460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883720662460.jpg']
+problem_id: 0
+prompt_length: 697
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883726262460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883726662460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883727112468.jpg']
+problem_id: 10
+prompt_length: path:697
+ ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883532112465.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883532512468.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883532912466.jpg']
+problem_id: 2
+prompt_length: 697
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([0.0000, 1.2784, 2.2784, 1.1000], device='cuda:2')
+tensor([270, 204, 259, 104], device='cuda:2')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([1.1000, 1.1000, 1.0000, 0.0000], device='cuda:3')
+tensor([379, 291, 247, 119], device='cuda:3')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([1.1000, 0.1000, 0.0000, 0.1000], device='cuda:1')
+tensor([399,  18, 388, 289], device='cuda:1')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([0.0000, 1.4543, 1.1000, 2.0611], device='cuda:0')
+tensor([768, 185, 358, 181], device='cuda:0')
+[2025-04-03 18:34:55,907] [WARNING] [stage3.py:2139:step] 2 pytorch allocator cache flushes since last step. this happens when there is high memory pressure and is detrimental to performance. if this is happening frequently consider adjusting settings to reduce memory consumption. If you are unable to make the cache flushes go away consider adding get_accelerator().empty_cache() calls in your training loop to ensure that all ranks flush their caches at the same time
+  7%|▋         | 2/30 [09:36<2:12:35, 284.12s/it]                                                 {'loss': 0.0, 'grad_norm': 10.04896691417041, 'learning_rate': 9.890738003669027e-07, 'completion_length': 278.6875, 'rewards/accuracy_reward': 0.22326847910881042, 'rewards/format_reward': 0.5625, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.75, 'reward': 0.8607684373855591, 'reward_std': 0.7133160829544067, 'kl': 0.00051116943359375, 'epoch': 0.07}
+  7%|▋         | 2/30 [09:36<2:12:35, 284.12s/it]path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201482262460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201482662460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201483112460.jpg']
+problem_id: 18
+prompt_length: 697
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883987612464.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883988012472.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883988412463.jpg']
+problem_id: 3
+prompt_length: 668
+path: ['/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883991362460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883991762460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883992262460.jpg']
+problem_id:path: 8
+ prompt_length: 697['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201488862460.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201489262460.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201489662460.jpg']
+
+problem_id: 28
+prompt_length: 697
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([1.4844, 0.0000, 1.5160, 2.1006], device='cuda:3')
+tensor([285,  85, 259, 170], device='cuda:3')
+tensor([0.0000, 0.1000, 0.0000, 1.0000], device='cuda:0')
+tensor([267,  20, 392, 190], device='cuda:0')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([0.0000, 0.0000, 1.1000, 0.0000], device='cuda:2')
+tensor([335, 218, 307, 768], device='cuda:2')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([1.1000, 1.1990, 0.0000, 0.0000], device='cuda:1')
+tensor([199, 264, 241, 768], device='cuda:1')
+ 10%|█         | 3/30 [13:41<1:59:50, 266.31s/it]                                                 {'loss': 0.0, 'grad_norm': 5.035318164609083, 'learning_rate': 9.755282581475767e-07, 'completion_length': 298.0, 'rewards/accuracy_reward': 0.10625119507312775, 'rewards/format_reward': 0.4375, 'all_wrong': 0.25, 'all_correct': 0.0, 'temporal_rewards': 0.25, 'reward': 0.6000012159347534, 'reward_std': 0.6491647958755493, 'kl': 0.0010223388671875, 'epoch': 0.1}
+ 10%|█         | 3/30 [13:41<1:59:50, 266.31s/it]path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201479762460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201480163869.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201480612460.jpg']
+problem_id: path:14 
+['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883733862460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883734262460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883734662460.jpg']
+problem_id: prompt_length:22
+prompt_length:  697
+697
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883530862460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883531262460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883531662460.jpg']
+problem_id: 0
+prompt_length: 697
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883986362460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883986762460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883987162460.jpg']
+problem_id: 1
+prompt_length: 668
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([1.1755, 1.0000, 1.1000, 0.0000], device='cuda:2')
+tensor([313, 206, 125, 259], device='cuda:2')
+tensor([0.1000, 0.1000, 1.0000, 0.1000], device='cuda:0')
+tensor([ 18,  20, 257, 361], device='cuda:0')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([1.0000, 0.0000, 1.1000, 0.1000], device='cuda:1')
+tensor([257, 364, 194, 263], device='cuda:1')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+Error in reward_fn for question_type 'list': object of type 'NoneType' has no len()
+tensor([1.1000, 1.1000, 0.0000, 1.0000], device='cuda:3')
+tensor([249, 651, 768,  94], device='cuda:3')
+ 13%|█▎        | 4/30 [17:58<1:53:49, 262.66s/it]                                                 {'loss': 0.0, 'grad_norm': 5.469237808009454, 'learning_rate': 9.567727288213004e-07, 'completion_length': 274.9375, 'rewards/accuracy_reward': 0.0609661303460598, 'rewards/format_reward': 0.5625, 'all_wrong': 0.25, 'all_correct': 0.0, 'temporal_rewards': 0.5, 'reward': 0.6234661340713501, 'reward_std': 0.5290654897689819, 'kl': 0.0011749267578125, 'epoch': 0.13}
+ 13%|█▎        | 4/30 [17:58<1:53:49, 262.66s/it]path:path:  ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201473412460.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201473862460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201474262460.jpg']
+problem_id: 5
+prompt_length: 668['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884001612466.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884002012468.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884002412460.jpg']
+
+problem_id: 25
+prompt_length: 668
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883547262460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883547662460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883548112551.jpg']
+problem_id: 26
+prompt_length: 697
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883543412464.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883543862460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883544262460.jpg']
+problem_id: 21
+prompt_length: 668
+Error in reward_fn for question_type 'list': object of type 'NoneType' has no len()
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 1)
+tensor([1.1000, 1.0000, 1.0540, 1.0000], device='cuda:2')
+tensor([ 75, 132, 249, 130], device='cuda:2')
+Error in reward_fn for question_type 'list': invalid syntax. Perhaps you forgot a comma? (<unknown>, line 1)
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([1.0000, 0.0000, 1.6364, 1.1000], device='cuda:0')
+tensor([280, 293, 144, 371], device='cuda:0')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([0.0000, 1.8590, 0.0000, 1.5178], device='cuda:3')
+tensor([459, 190, 105, 218], device='cuda:3')
+Error in reward_fn for question_type 'list': malformed node or string on line 1: <ast.Name object at 0x14fa8430f040>
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([1.1000, 2.2091, 0.0000, 0.1000], device='cuda:1')
+tensor([299, 193,  80, 572], device='cuda:1')
+ 17%|█▋        | 5/30 [21:37<1:42:52, 246.88s/it]                                                 {'loss': 0.0001, 'grad_norm': 7.427359884083174, 'learning_rate': 9.330127018922193e-07, 'completion_length': 236.875, 'rewards/accuracy_reward': 0.217274010181427, 'rewards/format_reward': 0.625, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.75, 'reward': 0.917273998260498, 'reward_std': 0.6868696212768555, 'kl': 0.0013275146484375, 'epoch': 0.17}
+ 17%|█▋        | 5/30 [21:37<1:42:52, 246.88s/it]path: ['/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201475912460.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201476362460.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201476862460.jpg']
+problem_id: path:9 
+['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883730012463.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883730412469.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883730862460.jpg']
+problem_id: prompt_length:17
+prompt_length:  668
+668
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883548512465.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883548912464.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883549362460.jpg']
+problem_id: 29
+prompt_length: 668
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884000162460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884000612466.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884001112466.jpg']
+problem_id: 23
+prompt_length: 668
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([1.9314, 1.1000, 1.1000, 0.0000], device='cuda:2')
+tensor([156, 224, 251, 256], device='cuda:2')
+tensor([1.1000, 1.0000, 1.0000, 1.1356], device='cuda:3')
+tensor([451, 282, 197,  65], device='cuda:3')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+Error in reward_fn for question_type 'list': malformed node or string on line 1: <ast.Name object at 0x14fa9458eec0>
+tensor([1.0000, 1.1000, 2.4400, 1.8137], device='cuda:1')
+tensor([399, 418, 464, 380], device='cuda:1')
+tensor([1.1000, 1.8663, 1.4350, 1.0000], device='cuda:0')
+tensor([173, 313, 478, 143], device='cuda:0')
+ 20%|██        | 6/30 [25:17<1:35:05, 237.72s/it]                                                 {'loss': 0.0001, 'grad_norm': 4.1782932167638895, 'learning_rate': 9.045084971874737e-07, 'completion_length': 290.625, 'rewards/accuracy_reward': 0.22637376189231873, 'rewards/format_reward': 0.9375, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.5, 'reward': 1.2576236724853516, 'reward_std': 0.4815952777862549, 'kl': 0.00244140625, 'epoch': 0.2}
+ 20%|██        | 6/30 [25:17<1:35:05, 237.72s/it]path:path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883732612465.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883733012471.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883733412543.jpg']
+problem_id: 21
+prompt_length: 668
+ ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883722412465.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883722862460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883723362475.jpg']
+problem_id: 5
+prompt_length: 668
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201472162460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201472612460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201473012460.jpg']
+problem_id: 3
+prompt_length: 668
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883721112467.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883721512465.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883722012464.jpg']
+problem_id: 3
+prompt_length: 668
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([1.1000, 1.5073, 1.1000, 1.0000], device='cuda:2')
+tensor([232, 168,  73, 195], device='cuda:2')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([0.5090, 0.0000, 1.0000, 2.3808], device='cuda:0')
+tensor([279, 243, 155, 351], device='cuda:0')
+Error in reward_fn for question_type 'list': malformed node or string on line 1: <ast.Name object at 0x14fa9455d2d0>
+tensor([0.6248, 2.1558, 0.1000, 0.0000], device='cuda:1')
+tensor([239, 251, 317, 458], device='cuda:1')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([1.2729, 1.0000, 1.3825, 1.1000], device='cuda:3')
+tensor([499, 409, 432, 177], device='cuda:3')
+ 23%|██▎       | 7/30 [29:37<1:33:55, 245.04s/it]                                                 {'loss': 0.0003, 'grad_norm': 3.208659316470263, 'learning_rate': 8.71572412738697e-07, 'completion_length': 279.875, 'rewards/accuracy_reward': 0.2833186686038971, 'rewards/format_reward': 0.5625, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 1.0, 'reward': 1.0145686864852905, 'reward_std': 0.6040266156196594, 'kl': 0.00689697265625, 'epoch': 0.23}
+ 23%|██▎       | 7/30 [29:37<1:33:55, 245.04s/it]path:path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201470862460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201471262460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201471762460.jpg']
+problem_id: 0
+prompt_length: 697
+ ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201474662460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201475112460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201475512460.jpg']
+problem_id: 7
+prompt_length: 668
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883727512462.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883727912479.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883728362460.jpg']
+problem_id: 12
+prompt_length: 697
+path: ['/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201483512460.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201484012460.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201484412460.jpg']
+problem_id: 20
+prompt_length: 697
+tensor([2.2266, 2.2348, 1.1000, 1.0000], device='cuda:0')
+tensor([ 98, 183, 207, 114], device='cuda:0')
+Error in reward_fn for question_type 'list': invalid syntax. Perhaps you forgot a comma? (<unknown>, line 1)
+tensor([1.0000, 1.1000, 1.0000, 1.1000], device='cuda:2')
+tensor([291, 221, 240, 155], device='cuda:2')
+tensor([2.0149, 1.1000, 1.1000, 1.0000], device='cuda:3')
+tensor([167, 252, 275, 319], device='cuda:3')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([1.1000, 2.2877, 1.1000, 1.1000], device='cuda:1')
+tensor([136, 321, 269, 242], device='cuda:1')
+ 27%|██▋       | 8/30 [33:25<1:27:51, 239.60s/it]                                                 {'loss': 0.0001, 'grad_norm': 3.7411661283040774, 'learning_rate': 8.34565303179429e-07, 'completion_length': 218.125, 'rewards/accuracy_reward': 0.27275073528289795, 'rewards/format_reward': 1.0, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.75, 'reward': 1.3477507829666138, 'reward_std': 0.4527384042739868, 'kl': 0.0024871826171875, 'epoch': 0.27}
+ 27%|██▋       | 8/30 [33:25<1:27:51, 239.60s/it]path: ['/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883988862460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883989262460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883989662460.jpg']
+problem_id: 4
+prompt_length: 697
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883539662460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883540112464.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883540512466.jpg']
+problem_id: 14
+prompt_length: 697
+path: path:['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884000162460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884000612466.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884001112466.jpg']
+ problem_id: 22['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883731262460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883731662460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883732112465.jpg']
+
+prompt_length:problem_id:  69719
+
+prompt_length: 668
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([0.0000, 1.1000, 1.1000, 2.1802], device='cuda:0')
+tensor([131, 161, 120, 233], device='cuda:0')
+tensor([1.1000, 1.1000, 2.2934, 2.1604], device='cuda:1')
+tensor([311, 226, 100, 127], device='cuda:1')
+tensor([1.1000, 1.4392, 0.1000, 1.1000], device='cuda:3')
+tensor([272, 424, 382, 149], device='cuda:3')
+Error in reward_fn for question_type 'list': object of type 'NoneType' has no len()
+tensor([1.2699, 1.1000, 2.0700, 0.7867], device='cuda:2')
+tensor([398, 241, 217, 520], device='cuda:2')
+ 30%|███       | 9/30 [36:57<1:20:48, 230.87s/it]                                                 {'loss': 0.0001, 'grad_norm': 6.479083135866598, 'learning_rate': 7.938926261462365e-07, 'completion_length': 250.75, 'rewards/accuracy_reward': 0.3562396764755249, 'rewards/format_reward': 0.75, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 1.0, 'reward': 1.249989628791809, 'reward_std': 0.6672080755233765, 'kl': 0.0016326904296875, 'epoch': 0.3}
+ 30%|███       | 9/30 [36:57<1:20:48, 230.87s/it]path:path: ['/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201487362460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201487912460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201488362460.jpg']
+problem_id: 27
+prompt_length: 668
+ ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883544762460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883545162460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883545612464.jpg']
+problem_id: 23
+prompt_length: 668
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883532112465.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883532512468.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883532912466.jpg']
+problem_id: 3
+prompt_length: 668
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884002912468.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884003362460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884003762460.jpg']
+problem_id: 26
+prompt_length: 697
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 1)
+tensor([0.0000, 0.0000, 1.5004, 1.1000], device='cuda:3')
+tensor([135, 177, 243, 185], device='cuda:3')
+tensor([1.1000, 1.1000, 1.0000, 1.0000], device='cuda:1')
+tensor([178, 134, 380, 375], device='cuda:1')
+tensor([1.4057, 1.0000, 1.1000, 1.1000], device='cuda:2')
+tensor([396, 384, 239, 173], device='cuda:2')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 1)
+tensor([1.0000, 2.2121, 1.4624, 1.7718], device='cuda:0')
+tensor([311, 485, 629,  87], device='cuda:0')
+ 33%|███▎      | 10/30 [41:09<1:19:11, 237.55s/it]                                                  {'loss': 0.0001, 'grad_norm': 3.285902270598233, 'learning_rate': 7.5e-07, 'completion_length': 281.9375, 'rewards/accuracy_reward': 0.17202094197273254, 'rewards/format_reward': 0.875, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.25, 'reward': 1.115770936012268, 'reward_std': 0.3781697154045105, 'kl': 0.002685546875, 'epoch': 0.33}
+ 33%|███▎      | 10/30 [41:09<1:19:11, 237.55s/it]path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883530862460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883531262460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883531662460.jpg']
+path:problem_id:  ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883995162460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883995612465.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883996012468.jpg']
+problem_id: 114
+prompt_length: 
+697
+prompt_length: 668
+path: ['/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883546012462.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883546412464.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883546862460.jpg']
+problem_id: 24
+prompt_length: 697
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883997662460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883998112463.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883998512467.jpg']
+problem_id: 19
+prompt_length: 668
+tensor([2.2571, 1.1000, 2.2571, 1.5232], device='cuda:1')
+tensor([232, 226, 121, 225], device='cuda:1')
+tensor([1.9540, 0.1000, 1.0000, 1.1000], device='cuda:3')
+tensor([138, 272, 222, 213], device='cuda:3')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([1.0000, 1.4844, 1.0000, 1.0000], device='cuda:2')
+tensor([157, 209, 152, 390], device='cuda:2')
+Error in reward_fn for question_type 'list': object of type 'NoneType' has no len()
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([0.8322, 1.0000, 1.0000, 0.0000], device='cuda:0')
+tensor([120, 159, 206, 768], device='cuda:0')
+ 37%|███▋      | 11/30 [45:26<1:17:05, 243.45s/it]                                                  {'loss': 0.0002, 'grad_norm': 70.3640610792076, 'learning_rate': 7.033683215379002e-07, 'completion_length': 238.125, 'rewards/accuracy_reward': 0.29424193501472473, 'rewards/format_reward': 0.8125, 'all_wrong': 0.25, 'all_correct': 0.0, 'temporal_rewards': 0.25, 'reward': 1.1629918813705444, 'reward_std': 0.5128669142723083, 'kl': 0.0042724609375, 'epoch': 0.37}
+ 37%|███▋      | 11/30 [45:26<1:17:05, 243.45s/it]path: path:['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883731262460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883731662460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883732112465.jpg']
+problem_id: 18
+prompt_length: 697
+ ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883998912464.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883999362460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883999762460.jpg']
+problem_id: 21
+prompt_length: 668
+path: ['/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201475912460.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201476362460.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201476862460.jpg']
+problem_id: 8
+prompt_length: 697
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883721112467.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883721512465.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883722012464.jpg']
+problem_id: 2
+prompt_length: 697
+tensor([1.0000, 1.7578, 1.1000, 2.2631], device='cuda:1')
+tensor([196, 179, 223, 150], device='cuda:1')
+tensor([1.6876, 2.4302, 1.1000, 1.1000], device='cuda:0')
+tensor([446, 408, 457, 331], device='cuda:0')
+Error in reward_fn for question_type 'list': unterminated string literal (detected at line 1) (<unknown>, line 1)
+tensor([1.0000, 1.1000, 1.1000, 1.1000], device='cuda:3')
+tensor([226, 415, 504, 309], device='cuda:3')
+tensor([1.8941, 1.1000, 1.1000, 1.1000], device='cuda:2')
+tensor([146, 231, 577, 211], device='cuda:2')
+ 40%|████      | 12/30 [49:14<1:11:40, 238.91s/it]                                                  {'loss': 0.0002, 'grad_norm': 2.907395268461152, 'learning_rate': 6.545084971874736e-07, 'completion_length': 313.0625, 'rewards/accuracy_reward': 0.25204768776893616, 'rewards/format_reward': 1.0, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.75, 'reward': 1.3707976341247559, 'reward_std': 0.41782093048095703, 'kl': 0.005157470703125, 'epoch': 0.4}
+ 40%|████      | 12/30 [49:14<1:11:40, 238.91s/it]path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883995162460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883995612465.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883996012468.jpg']
+problem_id: 15
+prompt_length: 668
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883725012491.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883725412468.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883725862460.jpg']path:
+problem_id:  9
+['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883992662460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883993112463.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883993512461.jpg']prompt_length:
+ problem_id:668 
+10
+prompt_length: 697
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883537112463.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883537612469.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883538012469.jpg']
+problem_id: 11
+prompt_length: 668
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([1.1000, 1.1000, 1.1000, 1.1000], device='cuda:2')
+tensor([212,  65, 338, 189], device='cuda:2')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 1)
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 1)
+tensor([1.3518, 1.1000, 1.0000, 1.1000], device='cuda:0')
+tensor([410, 121,  95, 103], device='cuda:0')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([1.4184, 0.0000, 1.0000, 1.0000], device='cuda:3')
+tensor([131, 156, 364, 407], device='cuda:3')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 1)
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([2.1041, 2.1041, 0.0000, 1.4777], device='cuda:1')
+tensor([ 99,  66, 768, 245], device='cuda:1')
+ 43%|████▎     | 13/30 [54:26<1:13:56, 260.98s/it]                                                  {'loss': 0.0009, 'grad_norm': 4.407287012776665, 'learning_rate': 6.039558454088795e-07, 'completion_length': 235.5625, 'rewards/accuracy_reward': 0.1972542256116867, 'rewards/format_reward': 0.875, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.5, 'reward': 1.1285042762756348, 'reward_std': 0.43641209602355957, 'kl': 0.0230712890625, 'epoch': 0.43}
+ 43%|████▎     | 13/30 [54:26<1:13:56, 260.98s/it]path:path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884001612466.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884002012468.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884002412460.jpg']
+problem_id: 24
+prompt_length: 697
+ ['/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201487362460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201487912460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201488362460.jpg']
+problem_id: 26
+prompt_length: 697
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201482262460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201482662460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201483112460.jpg']
+problem_id: 19
+prompt_length: 668
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883732612465.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883733012471.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883733412543.jpg']
+problem_id: 20
+prompt_length: 697
+Error in reward_fn for question_type 'list': unmatched ']' (<unknown>, line 1)
+tensor([1.0000, 1.9584, 1.0000, 1.0000], device='cuda:1')
+tensor([213, 187, 254, 182], device='cuda:1')
+tensor([1.1000, 1.0000, 1.0000, 1.1000], device='cuda:0')
+tensor([ 77, 316, 346, 355], device='cuda:0')
+Error in reward_fn for question_type 'list': unsupported operand type(s) for -: 'str' and 'float'
+tensor([1.1000, 1.1000, 2.2584, 1.1000], device='cuda:2')
+tensor([115, 137, 256, 349], device='cuda:2')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([1.1000, 1.6259, 1.1000, 0.0000], device='cuda:3')
+tensor([265, 338, 162, 768], device='cuda:3')
+ 47%|████▋     | 14/30 [58:48<1:09:42, 261.39s/it]                                                  {'loss': 0.0003, 'grad_norm': 3.5300775671422198, 'learning_rate': 5.522642316338268e-07, 'completion_length': 270.0, 'rewards/accuracy_reward': 0.20266656577587128, 'rewards/format_reward': 0.9375, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.25, 'reward': 1.1589165925979614, 'reward_std': 0.450067400932312, 'kl': 0.0084228515625, 'epoch': 0.47}
+ 47%|████▋     | 14/30 [58:48<1:09:42, 261.39s/it]path: ['/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883996412465.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883996862516.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883997262460.jpg']
+problem_id: 16
+prompt_length: 697
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884004162460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884004612467.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884005012471.jpg']
+problem_id: 29
+path:prompt_length:  ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884004162460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884004612467.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884005012471.jpg']
+problem_id: 66828
+prompt_length: 
+697
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201472162460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201472612460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201473012460.jpg']
+problem_id: 2
+prompt_length: 697
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([0.0000, 1.2135, 1.1000, 1.1000], device='cuda:3')
+tensor([303, 268, 203, 239], device='cuda:3')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([1.6369, 1.1000, 0.0000, 1.0000], device='cuda:2')
+tensor([119, 381, 166, 187], device='cuda:2')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([2.2959, 1.0000, 1.1000, 1.0000], device='cuda:1')
+tensor([142, 178, 411,  82], device='cuda:1')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([1.2117, 0.0000, 0.0000, 1.0000], device='cuda:0')
+tensor([338, 109, 768,  99], device='cuda:0')
+ 50%|█████     | 15/30 [1:04:00<1:09:07, 276.50s/it]                                                    {'loss': 0.0002, 'grad_norm': 6.159323895134138, 'learning_rate': 5e-07, 'completion_length': 249.5625, 'rewards/accuracy_reward': 0.13487231731414795, 'rewards/format_reward': 0.75, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.5, 'reward': 0.9223723411560059, 'reward_std': 0.63286292552948, 'kl': 0.00421142578125, 'epoch': 0.5}
+ 50%|█████     | 15/30 [1:04:00<1:09:07, 276.50s/it]path:path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883533362460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883533762460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883534162460.jpg']
+problem_id: 5
+prompt_length: 668
+ ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883539662460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883540112464.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883540512466.jpg']
+problem_id: 15
+prompt_length: 668
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883542162460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883542612464.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883543012467.jpg']
+problem_id: 18
+prompt_length: 697
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883990112465.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883990512464.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883990912477.jpg']
+problem_id: 6
+prompt_length: 697
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+Error in reward_fn for question_type 'list': invalid syntax. Perhaps you forgot a comma? (<unknown>, line 1)
+tensor([1.0000, 1.1000, 0.7922, 1.1000], device='cuda:0')
+tensor([271, 331, 277, 157], device='cuda:0')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([1.1000, 2.2960, 1.0000, 1.0000], device='cuda:1')
+tensor([164, 108, 322, 269], device='cuda:1')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 1)
+tensor([1.0000, 1.1085, 0.4198, 1.1000], device='cuda:3')
+tensor([153, 277, 360, 336], device='cuda:3')
+tensor([1.1000, 2.0059, 1.1000, 1.1000], device='cuda:2')
+tensor([205, 196, 497, 203], device='cuda:2')
+ 53%|█████▎    | 16/30 [1:07:26<59:35, 255.41s/it]                                                    {'loss': 0.0003, 'grad_norm': 3.9343229362848335, 'learning_rate': 4.477357683661733e-07, 'completion_length': 257.875, 'rewards/accuracy_reward': 0.22015056014060974, 'rewards/format_reward': 0.875, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.5, 'reward': 1.1451506614685059, 'reward_std': 0.38992899656295776, 'kl': 0.007568359375, 'epoch': 0.53}
+ 53%|█████▎    | 16/30 [1:07:26<59:35, 255.41s/it]path:path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883987612464.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883988012472.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883988412463.jpg']
+problem_id: 2
+prompt_length: 697
+ ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883737612469.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883738013231.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883738412465.jpg']
+problem_id: 28
+prompt_length: 697
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884002912468.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884003362460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884003762460.jpg']
+problem_id: 27
+prompt_length: 668
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883737612469.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883738013231.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883738412465.jpg']
+problem_id: 29
+prompt_length: 668
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([0.1000, 1.1000, 2.2930, 1.1000], device='cuda:0')
+tensor([252, 243, 140, 276], device='cuda:0')
+tensor([2.0071, 1.0000, 1.6676, 1.9190], device='cuda:2')
+tensor([166, 113, 314, 116], device='cuda:2')
+tensor([1.1000, 1.4795, 1.1000, 1.9973], device='cuda:3')
+tensor([269, 155,  99, 272], device='cuda:3')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([1.4850, 0.0000, 1.0000, 0.1000], device='cuda:1')
+tensor([400, 140, 289, 253], device='cuda:1')
+ 57%|█████▋    | 17/30 [1:10:32<50:48, 234.54s/it]                                                  {'loss': 0.0002, 'grad_norm': 4.2054333294001465, 'learning_rate': 3.960441545911204e-07, 'completion_length': 218.5625, 'rewards/accuracy_reward': 0.3280321955680847, 'rewards/format_reward': 0.8125, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.5, 'reward': 1.2155323028564453, 'reward_std': 0.6237598657608032, 'kl': 0.005859375, 'epoch': 0.57}
+ 57%|█████▋    | 17/30 [1:10:32<50:48, 234.54s/it]path:path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201488862460.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201489262460.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201489662460.jpg']
+problem_id: 29
+prompt_length: 668
+ ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883728762460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883729162460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883729612467.jpg']
+problem_id: 14
+prompt_length: 697
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883540912465.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883541362460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883541762460.jpg']
+problem_id: 17
+prompt_length: 668
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883990112465.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883990512464.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883990912477.jpg']
+problem_id: 7
+prompt_length: 668
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 1)
+tensor([2.1707, 0.0000, 0.0000, 1.0000], device='cuda:3')
+tensor([ 88, 125, 201, 101], device='cuda:3')
+tensor([1.5177, 1.1000, 1.1000, 1.4033], device='cuda:0')
+tensor([288, 119, 256, 137], device='cuda:0')
+tensor([2.1106, 1.0000, 2.1326, 2.1362], device='cuda:1')
+tensor([239, 349, 140, 298], device='cuda:1')
+Error in reward_fn for question_type 'list': invalid syntax. Perhaps you forgot a comma? (<unknown>, line 1)
+tensor([0.4547, 1.0000, 1.0000, 1.1000], device='cuda:2')
+tensor([448, 221, 210, 162], device='cuda:2')
+ 60%|██████    | 18/30 [1:13:24<43:08, 215.74s/it]                                                  {'loss': 0.0004, 'grad_norm': 4.455416110536747, 'learning_rate': 3.454915028125263e-07, 'completion_length': 211.375, 'rewards/accuracy_reward': 0.27661409974098206, 'rewards/format_reward': 0.8125, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.75, 'reward': 1.2016141414642334, 'reward_std': 0.5255832076072693, 'kl': 0.01007080078125, 'epoch': 0.6}
+ 60%|██████    | 18/30 [1:13:24<43:08, 215.74s/it]path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883538412466.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883538862460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883539262460.jpg']
+problem_id: 12
+prompt_length: 697
+path: ['/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883546012462.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883546412464.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883546862460.jpg']
+problem_id: 25
+prompt_length: 668
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201479762460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201480163869.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201480612460.jpg']
+problem_id: 15
+prompt_length: 668
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883727512462.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883727912479.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883728362460.jpg']
+problem_id: 13
+prompt_length: 668
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 1)
+tensor([1.0000, 0.0000, 1.9640, 1.1000], device='cuda:1')
+tensor([ 58, 347,  49, 197], device='cuda:1')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 1)
+tensor([1.0000, 2.0191, 1.0000, 1.9972], device='cuda:2')
+tensor([372,  83,  81, 220], device='cuda:2')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([1.1000, 1.1000, 0.0000, 0.1000], device='cuda:3')
+tensor([223, 281, 360, 333], device='cuda:3')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([1.6108, 2.3347, 2.0396, 2.0396], device='cuda:0')
+tensor([401, 430,  64,  99], device='cuda:0')
+ 63%|██████▎   | 19/30 [1:17:32<41:17, 225.25s/it]                                                  {'loss': 0.0008, 'grad_norm': 9.12034651888482, 'learning_rate': 2.9663167846209996e-07, 'completion_length': 224.875, 'rewards/accuracy_reward': 0.3253149390220642, 'rewards/format_reward': 0.8125, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.75, 'reward': 1.2753150463104248, 'reward_std': 0.5728964805603027, 'kl': 0.020751953125, 'epoch': 0.63}
+ 63%|██████▎   | 19/30 [1:17:32<41:17, 225.25s/it]path:path: ['/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883988862460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883989262460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883989662460.jpg']
+problem_id: 5
+prompt_length: 668
+ ['/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883991362460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883991762460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883992262460.jpg']
+problem_id: 9
+prompt_length: 668
+path:path:  ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883535862460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883536262460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883536662460.jpg']
+['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883723762460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883724162460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883724612463.jpg']problem_id:
+ problem_id:9 
+7prompt_length:
+ prompt_length:668 
+668
+tensor([2.0361, 1.9906, 1.5194, 1.9906], device='cuda:0')
+tensor([109,  76, 104, 214], device='cuda:0')
+tensor([2.0956, 1.1000, 2.0679, 2.0679], device='cuda:3')
+tensor([241, 258, 175,  92], device='cuda:3')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([2.3584, 1.1000, 2.1487, 2.0735], device='cuda:1')
+tensor([327, 143, 305, 226], device='cuda:1')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 1)
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([1.4898, 2.0658, 1.0000, 0.0000], device='cuda:2')
+tensor([ 84, 173, 131, 768], device='cuda:2')
+ 67%|██████▋   | 20/30 [1:22:43<41:50, 251.02s/it]                                                  {'loss': 0.0007, 'grad_norm': 4.6846028639224855, 'learning_rate': 2.500000000000001e-07, 'completion_length': 214.125, 'rewards/accuracy_reward': 0.5190155506134033, 'rewards/format_reward': 0.9375, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 1.0, 'reward': 1.6940155029296875, 'reward_std': 0.5420328378677368, 'kl': 0.016357421875, 'epoch': 0.67}
+ 67%|██████▋   | 20/30 [1:22:43<41:50, 251.02s/it]path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883544762460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883545162460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883545612464.jpg']
+problem_id: 22
+prompt_length: 697
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883726262460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883726662460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883727112468.jpg']
+problem_id: 11
+prompt_length: 668
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201477262460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201477662460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201478112523.jpg']
+problem_id: 10
+prompt_length: 697
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883997662460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883998112463.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883998512467.jpg']
+problem_id: 18
+prompt_length: 697
+tensor([1.1000, 1.1000, 1.1000, 1.0000], device='cuda:2')
+tensor([147, 242, 280, 134], device='cuda:2')
+tensor([1.1000, 1.6427, 1.1000, 1.6735], device='cuda:3')
+tensor([136, 140, 315, 280], device='cuda:3')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+Error in reward_fn for question_type 'list': object of type 'NoneType' has no len()
+tensor([1.4337, 1.0000, 2.0477, 0.1000], device='cuda:0')
+tensor([134, 223, 282, 462], device='cuda:0')
+Error in reward_fn for question_type 'list': invalid character '°' (U+00B0) (<unknown>, line 1)
+tensor([1.1000, 1.0000, 1.1000, 0.1000], device='cuda:1')
+tensor([312, 155, 208, 704], device='cuda:1')
+ 70%|███████   | 21/30 [1:27:22<38:54, 259.37s/it]                                                  {'loss': 0.0003, 'grad_norm': 3.721304924909233, 'learning_rate': 2.0610737385376348e-07, 'completion_length': 259.625, 'rewards/accuracy_reward': 0.156100332736969, 'rewards/format_reward': 0.875, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.75, 'reward': 1.10610032081604, 'reward_std': 0.41922253370285034, 'kl': 0.007080078125, 'epoch': 0.7}
+ 70%|███████   | 21/30 [1:27:22<38:54, 259.37s/it]path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201470862460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201471262460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201471762460.jpg']
+problem_id: 1
+prompt_length: 668
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883542162460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883542612464.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883543012467.jpg']
+problem_id: path:19 path:
+['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883540912465.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883541362460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883541762460.jpg'] 
+problem_id:['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883534612464.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883535012465.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883535412467.jpg'] prompt_length:
+16problem_id:
+ prompt_length:6  
+697prompt_length:
+ 668697
+
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 1)
+tensor([0.9232, 1.9984, 1.0000, 1.1000], device='cuda:3')
+tensor([235, 199, 220,  95], device='cuda:3')
+tensor([1.1000, 1.1000, 1.1000, 1.1000], device='cuda:0')
+tensor([171, 208, 186, 261], device='cuda:0')
+tensor([1.1000, 1.1000, 2.2368, 1.0000], device='cuda:1')
+tensor([ 64, 327,  78, 206], device='cuda:1')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 1)
+tensor([1.1000, 1.0000, 1.1000, 0.0000], device='cuda:2')
+tensor([394, 110, 185, 139], device='cuda:2')
+ 73%|███████▎  | 22/30 [1:30:33<31:52, 239.00s/it]                                                  {'loss': 0.0004, 'grad_norm': 4.9474537944541135, 'learning_rate': 1.6543469682057104e-07, 'completion_length': 192.375, 'rewards/accuracy_reward': 0.23489908874034882, 'rewards/format_reward': 0.875, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.25, 'reward': 1.1286489963531494, 'reward_std': 0.40574613213539124, 'kl': 0.00927734375, 'epoch': 0.73}
+ 73%|███████▎  | 22/30 [1:30:33<31:52, 239.00s/it]path:path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883547262460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883547662460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883548112551.jpg']
+problem_id: 27
+prompt_length: 668
+ ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883730012463.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883730412469.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883730862460.jpg']
+problem_id: 16
+prompt_length: 697
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883533362460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883533762460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883534162460.jpg']
+problem_id: 4
+prompt_length: 697
+path: ['/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201483512460.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201484012460.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201484412460.jpg']
+problem_id: 21
+prompt_length: 668
+tensor([1.1000, 2.0383, 2.1166, 2.0383], device='cuda:3')
+tensor([178, 128, 143, 225], device='cuda:3')
+tensor([2.0366, 1.1000, 1.6484, 1.1000], device='cuda:1')
+tensor([ 58,  97, 292, 119], device='cuda:1')
+tensor([2.2532, 1.1000, 1.1000, 2.2532], device='cuda:0')
+tensor([133, 263, 346, 170], device='cuda:0')
+tensor([1.1000, 1.1000, 0.1000, 1.9644], device='cuda:2')
+tensor([211, 507, 143, 172], device='cuda:2')
+ 77%|███████▋  | 23/30 [1:34:16<27:19, 234.22s/it]                                                  {'loss': 0.0003, 'grad_norm': 5.490431271203149, 'learning_rate': 1.284275872613028e-07, 'completion_length': 199.0625, 'rewards/accuracy_reward': 0.44055530428886414, 'rewards/format_reward': 0.9375, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.75, 'reward': 1.5093053579330444, 'reward_std': 0.592138409614563, 'kl': 0.00762939453125, 'epoch': 0.77}
+ 77%|███████▋  | 23/30 [1:34:16<27:19, 234.22s/it]path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201486112460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201486512460.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201486912460.jpg']
+problem_id: 25
+prompt_length: 668
+path: ['/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201481012460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201481412460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201481862460.jpg']
+problem_id: 17
+prompt_length: 668
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201484862460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201485262460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201485662460.jpg']
+problem_id: 22
+prompt_length: 697
+path: ['/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883993912469.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883994362460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883994762460.jpg']
+problem_id: 13
+prompt_length: 668
+Error in reward_fn for question_type 'list': invalid syntax. Perhaps you forgot a comma? (<unknown>, line 1)
+tensor([2.0960, 2.2444, 1.0000, 1.2225], device='cuda:0')
+tensor([251, 110, 337, 188], device='cuda:0')
+tensor([1.9752, 1.0000, 1.1000, 1.9263], device='cuda:2')
+tensor([256, 485, 194, 150], device='cuda:2')
+tensor([2.2535, 1.0000, 1.1000, 1.6822], device='cuda:1')
+tensor([298, 554, 144, 365], device='cuda:1')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([2.1662, 2.1662, 0.0000, 2.1662], device='cuda:3')
+tensor([291, 273, 768, 262], device='cuda:3')
+ 80%|████████  | 24/30 [1:38:29<23:58, 239.70s/it]                                                  {'loss': 0.0004, 'grad_norm': 5.95729638973548, 'learning_rate': 9.549150281252632e-08, 'completion_length': 307.875, 'rewards/accuracy_reward': 0.4936738610267639, 'rewards/format_reward': 0.875, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 1.0, 'reward': 1.5686739683151245, 'reward_std': 0.7016545534133911, 'kl': 0.01007080078125, 'epoch': 0.8}
+ 80%|████████  | 24/30 [1:38:29<23:58, 239.70s/it]path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883736362460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883736762460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883737162460.jpg']
+problem_id: 26
+prompt_length: 697
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883538412466.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883538862460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883539262460.jpg']
+problem_id: 13
+prompt_length: 668
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883543412464.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883543862460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883544262460.jpg']
+problem_id: 20
+prompt_length: 697
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883986362460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883986762460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883987162460.jpg']
+problem_id: 0
+prompt_length: 697
+tensor([1.1000, 1.4409, 1.1000, 1.5101], device='cuda:0')
+tensor([242,  91, 265, 262], device='cuda:0')
+tensor([2.1777, 1.7097, 1.6574, 2.3220], device='cuda:1')
+tensor([297, 229, 201, 344], device='cuda:1')
+tensor([1.0000, 0.1000, 1.1000, 1.1000], device='cuda:2')
+tensor([330, 166, 245, 231], device='cuda:2')
+tensor([1.1000, 1.1000, 2.0191, 0.0000], device='cuda:3')
+tensor([188, 129, 470, 318], device='cuda:3')
+ 83%|████████▎ | 25/30 [1:42:33<20:05, 241.19s/it]                                                  {'loss': 0.0001, 'grad_norm': 7.369205628721312, 'learning_rate': 6.698729810778064e-08, 'completion_length': 250.5, 'rewards/accuracy_reward': 0.26480257511138916, 'rewards/format_reward': 0.875, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.75, 'reward': 1.283552646636963, 'reward_std': 0.465777188539505, 'kl': 0.0036163330078125, 'epoch': 0.83}
+ 83%|████████▎ | 25/30 [1:42:33<20:05, 241.19s/it]path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883998912464.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883999362460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883999762460.jpg']
+problem_id: 20
+prompt_length: path:697 
+['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883735112462.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883735512466.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883735912468.jpg']
+problem_id: 25
+prompt_length: 668
+path: path:['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883728762460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883729162460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883729612467.jpg']
+ problem_id: 15['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201484862460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201485262460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201485662460.jpg']
+
+prompt_length:problem_id:  66823
+
+prompt_length: 668
+tensor([1.8537, 1.1000, 1.1000, 1.1000], device='cuda:1')
+tensor([202,  80, 176, 122], device='cuda:1')
+tensor([1.0000, 0.1000, 1.3412, 1.7044], device='cuda:2')
+tensor([ 52, 231, 182, 210], device='cuda:2')
+Error in reward_fn for question_type 'list': invalid character '°' (U+00B0) (<unknown>, line 1)
+tensor([2.2853, 0.4007, 1.1000, 1.1000], device='cuda:0')
+tensor([185, 295, 154, 358], device='cuda:0')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([1.1000, 2.0802, 1.0802, 2.3089], device='cuda:3')
+tensor([208,  82, 562, 322], device='cuda:3')
+ 87%|████████▋ | 26/30 [1:46:03<15:27, 231.75s/it]                                                  {'loss': 0.0007, 'grad_norm': 4.2957810077170295, 'learning_rate': 4.322727117869951e-08, 'completion_length': 213.8125, 'rewards/accuracy_reward': 0.3596627712249756, 'rewards/format_reward': 0.8125, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.75, 'reward': 1.2971627712249756, 'reward_std': 0.6226885318756104, 'kl': 0.0172119140625, 'epoch': 0.87}
+ 87%|████████▋ | 26/30 [1:46:03<15:27, 231.75s/it]path:path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883736362460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883736762460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883737162460.jpg']
+problem_id: 27 
+prompt_length: 668
+['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883535862460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883536262460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883536662460.jpg']
+problem_id: path:8 
+['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883992662460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883993112463.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883993512461.jpg']
+problem_id:prompt_length: 11
+prompt_length:  668
+697
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883722412465.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883722862460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883723362475.jpg']
+problem_id: 4
+prompt_length: 697
+tensor([1.5729, 1.0000, 1.1000, 1.1000], device='cuda:1')
+tensor([126, 245, 214, 144], device='cuda:1')
+tensor([1.1000, 1.1000, 2.2967, 1.1000], device='cuda:0')
+tensor([295, 267,  85, 169], device='cuda:0')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([0.1000, 1.8883, 2.2422, 1.1000], device='cuda:2')
+tensor([338, 288, 381,  96], device='cuda:2')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([1.1000, 2.0157, 1.6283, 1.1000], device='cuda:3')
+tensor([211, 119, 282, 513], device='cuda:3')
+ 90%|█████████ | 27/30 [1:50:27<12:04, 241.41s/it]                                                  {'loss': 0.0003, 'grad_norm': 4.032191554828666, 'learning_rate': 2.4471741852423233e-08, 'completion_length': 235.8125, 'rewards/accuracy_reward': 0.28400370478630066, 'rewards/format_reward': 0.9375, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 1.0, 'reward': 1.346503734588623, 'reward_std': 0.5630035996437073, 'kl': 0.006439208984375, 'epoch': 0.9}
+ 90%|█████████ | 27/30 [1:50:27<12:04, 241.41s/it]path:path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201478512460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201478912460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201479362460.jpg'] 
+problem_id: 13
+prompt_length: 668
+['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201477262460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201477662460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201478112523.jpg']
+problem_id: 11
+prompt_length: 668
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883733862460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883734262460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883734662460.jpg']
+problem_id: 23
+prompt_length: 668
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201486112460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201486512460.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201486912460.jpg']
+problem_id: 24
+prompt_length: 697
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 1)
+tensor([1.0000, 1.6426, 2.2668, 1.1000], device='cuda:3')
+tensor([107, 298, 251, 104], device='cuda:3')
+tensor([1.1000, 1.0000, 1.1000, 1.2389], device='cuda:1')
+tensor([162, 256, 280,  55], device='cuda:1')
+tensor([1.0000, 1.1000, 2.2556, 1.0000], device='cuda:0')
+tensor([258, 205, 190, 331], device='cuda:0')
+tensor([2.2749, 2.1233, 2.3655, 1.0000], device='cuda:2')
+tensor([ 58, 309, 373, 274], device='cuda:2')
+ 93%|█████████▎| 28/30 [1:53:37<07:32, 226.04s/it]                                                  {'loss': 0.0006, 'grad_norm': 4.912334305020448, 'learning_rate': 1.0926199633097154e-08, 'completion_length': 219.4375, 'rewards/accuracy_reward': 0.39172860980033875, 'rewards/format_reward': 0.9375, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 1.0, 'reward': 1.4729785919189453, 'reward_std': 0.482237845659256, 'kl': 0.0162353515625, 'epoch': 0.93}
+ 93%|█████████▎| 28/30 [1:53:37<07:32, 226.04s/it]path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201478512460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201478912460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201479362460.jpg']
+problem_id: 12
+prompt_length: 697
+path: ['/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201481012460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201481412460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201481862460.jpg']
+problem_id: 16
+prompt_length: 697
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883725012491.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883725412468.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883725862460.jpg']
+problem_id: 8
+prompt_length: 697
+path: ['/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883996412465.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883996862516.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883997262460.jpg']
+problem_id: 17
+prompt_length: 668
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([2.2067, 1.9457, 1.1000, 2.4263], device='cuda:1')
+tensor([122, 173, 214, 333], device='cuda:1')
+tensor([0.1000, 1.1000, 1.3964, 1.9826], device='cuda:0')
+tensor([297, 154, 356, 178], device='cuda:0')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([1.1000, 1.1000, 1.8480, 1.1000], device='cuda:2')
+tensor([355, 318, 176, 418], device='cuda:2')
+tensor([1.1000, 1.5110, 1.1000, 1.1000], device='cuda:3')
+tensor([311, 343, 167, 432], device='cuda:3')
+ 97%|█████████▋| 29/30 [1:57:47<03:53, 233.21s/it]                                                  {'loss': 0.0003, 'grad_norm': 5.6713507578246425, 'learning_rate': 2.739052315863355e-09, 'completion_length': 271.6875, 'rewards/accuracy_reward': 0.3322947323322296, 'rewards/format_reward': 0.9375, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.75, 'reward': 1.3885447978973389, 'reward_std': 0.48683446645736694, 'kl': 0.008544921875, 'epoch': 0.97}
+ 97%|█████████▋| 29/30 [1:57:47<03:53, 233.21s/it]path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883719862460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883720262460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883720662460.jpg']
+problem_id: 1
+prompt_length: 668
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883548512465.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883548912464.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883549362460.jpg']
+problem_id: 28
+prompt_length: 697
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883735112462.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883735512466.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883735912468.jpg']
+problem_id: 24
+prompt_length: 697
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201473412460.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201473862460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201474262460.jpg']
+problem_id: 4
+prompt_length: 697
+tensor([1.1000, 2.1470, 2.2017, 2.2787], device='cuda:2')
+tensor([219, 103,  96, 118], device='cuda:2')
+tensor([1.1000, 2.1899, 2.2760, 2.1758], device='cuda:3')
+tensor([145, 316, 283, 207], device='cuda:3')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([1.1000, 0.1000, 1.0000, 1.1000], device='cuda:1')
+tensor([232, 263, 287, 223], device='cuda:1')
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([1.0000, 1.1000, 1.1000, 1.1000], device='cuda:0')
+tensor([310,  91, 637, 168], device='cuda:0')
+100%|██████████| 30/30 [2:02:37<00:00, 250.25s/it]                                                  {'loss': 0.0003, 'grad_norm': 4.391621827040879, 'learning_rate': 0.0, 'completion_length': 231.125, 'rewards/accuracy_reward': 0.39181652665138245, 'rewards/format_reward': 0.9375, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.75, 'reward': 1.4418165683746338, 'reward_std': 0.41287994384765625, 'kl': 0.007354736328125, 'epoch': 1.0}
+100%|██████████| 30/30 [2:02:37<00:00, 250.25s/it]                                                  {'train_runtime': 7391.9338, 'train_samples_per_second': 0.016, 'train_steps_per_second': 0.004, 'train_loss': 0.0002923875348642468, 'epoch': 1.0}
+100%|██████████| 30/30 [2:03:09<00:00, 250.25s/it]100%|██████████| 30/30 [2:03:09<00:00, 246.31s/it]
 [1;34mwandb[0m: 
-[1;34mwandb[0m: 🚀 View run [33mlocalization[0m at: [34mhttps://wandb.ai/zl3466-new-york-university/huggingface/runs/wolirl0z[0m
-[1;34mwandb[0m: Find logs at: [1;35mwandb/run-20250403_014418-wolirl0z/logs[0m
-W0403 01:44:35.359000 2671481 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 2671556 closing signal SIGTERM
-E0403 01:44:35.574000 2671481 site-packages/torch/distributed/elastic/multiprocessing/api.py:869] failed (exitcode: 1) local_rank: 0 (pid: 2671555) of binary: /scratch/zl3466/env/thinking-in-street/bin/python
-Traceback (most recent call last):
-  File "/scratch/zl3466/env/thinking-in-street/bin/torchrun", line 8, in <module>
-    sys.exit(main())
-             ^^^^^^
-  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
-    return f(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^
-  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/distributed/run.py", line 918, in main
-    run(args)
-  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/distributed/run.py", line 909, in run
-    elastic_launch(
-  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 138, in __call__
-    return launch_agent(self._config, self._entrypoint, list(args))
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 269, in launch_agent
-    raise ChildFailedError(
-torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
-============================================================
-./train/localization/grpo.py FAILED
-------------------------------------------------------------
-Failures:
-  <NO_OTHER_FAILURES>
-------------------------------------------------------------
-Root Cause (first observed failure):
-[0]:
-  time      : 2025-04-03_01:44:35
-  host      : gr065.hpc.nyu.edu
-  rank      : 0 (local_rank: 0)
-  exitcode  : 1 (pid: 2671555)
-  error_file: <N/A>
-  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
-============================================================
+[1;34mwandb[0m: 🚀 View run [33mlocalization-3b[0m at: [34mhttps://wandb.ai/zl3466-new-york-university/huggingface/runs/nx0hxons[0m
+[1;34mwandb[0m: Find logs at: [1;35mwandb/run-20250403_182517-nx0hxons/logs[0m

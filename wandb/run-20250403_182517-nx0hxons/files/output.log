@@ -1,0 +1,210 @@
+  0%|          | 0/30 [00:00<?, ?it/s]/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/utils/checkpoint.py:87: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
+  warnings.warn(
+`use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`...
+path: ['/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883993912469.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883994362460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883994762460.jpg']
+problem_id: 12
+prompt_length: 697
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([2.0124, 0.0000, 0.1000, 0.0000], device='cuda:0')
+tensor([284, 268, 382, 315], device='cuda:0')
+ 17%|█▋        | 5/30 [21:37<1:42:52, 246.88s/it]
+{'loss': -0.0, 'grad_norm': 4.811934167257597, 'learning_rate': 9.972609476841365e-07, 'completion_length': 292.5, 'rewards/accuracy_reward': 0.1707223802804947, 'rewards/format_reward': 0.375, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 1.0, 'reward': 0.6019724011421204, 'reward_std': 0.7986198663711548, 'kl': 0.0, 'epoch': 0.03}
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883719862460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883720262460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883720662460.jpg']
+problem_id: 0
+prompt_length: 697
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([0.0000, 1.4543, 1.1000, 2.0611], device='cuda:0')
+tensor([768, 185, 358, 181], device='cuda:0')
+[2025-04-03 18:34:55,907] [WARNING] [stage3.py:2139:step] 2 pytorch allocator cache flushes since last step. this happens when there is high memory pressure and is detrimental to performance. if this is happening frequently consider adjusting settings to reduce memory consumption. If you are unable to make the cache flushes go away consider adding get_accelerator().empty_cache() calls in your training loop to ensure that all ranks flush their caches at the same time
+{'loss': 0.0, 'grad_norm': 10.04896691417041, 'learning_rate': 9.890738003669027e-07, 'completion_length': 278.6875, 'rewards/accuracy_reward': 0.22326847910881042, 'rewards/format_reward': 0.5625, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.75, 'reward': 0.8607684373855591, 'reward_std': 0.7133160829544067, 'kl': 0.00051116943359375, 'epoch': 0.07}
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201482262460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201482662460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201483112460.jpg']
+problem_id: 18
+prompt_length: 697
+tensor([0.0000, 0.1000, 0.0000, 1.0000], device='cuda:0')
+tensor([267,  20, 392, 190], device='cuda:0')
+{'loss': 0.0, 'grad_norm': 5.035318164609083, 'learning_rate': 9.755282581475767e-07, 'completion_length': 298.0, 'rewards/accuracy_reward': 0.10625119507312775, 'rewards/format_reward': 0.4375, 'all_wrong': 0.25, 'all_correct': 0.0, 'temporal_rewards': 0.25, 'reward': 0.6000012159347534, 'reward_std': 0.6491647958755493, 'kl': 0.0010223388671875, 'epoch': 0.1}
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201479762460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201480163869.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201480612460.jpg']
+problem_id: 14
+prompt_length: 697
+tensor([0.1000, 0.1000, 1.0000, 0.1000], device='cuda:0')
+tensor([ 18,  20, 257, 361], device='cuda:0')
+{'loss': 0.0, 'grad_norm': 5.469237808009454, 'learning_rate': 9.567727288213004e-07, 'completion_length': 274.9375, 'rewards/accuracy_reward': 0.0609661303460598, 'rewards/format_reward': 0.5625, 'all_wrong': 0.25, 'all_correct': 0.0, 'temporal_rewards': 0.5, 'reward': 0.6234661340713501, 'reward_std': 0.5290654897689819, 'kl': 0.0011749267578125, 'epoch': 0.13}
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884001612466.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884002012468.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884002412460.jpg']
+problem_id: 25
+prompt_length: 668
+Error in reward_fn for question_type 'list': invalid syntax. Perhaps you forgot a comma? (<unknown>, line 1)
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([1.0000, 0.0000, 1.6364, 1.1000], device='cuda:0')
+tensor([280, 293, 144, 371], device='cuda:0')
+{'loss': 0.0001, 'grad_norm': 7.427359884083174, 'learning_rate': 9.330127018922193e-07, 'completion_length': 236.875, 'rewards/accuracy_reward': 0.217274010181427, 'rewards/format_reward': 0.625, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.75, 'reward': 0.917273998260498, 'reward_std': 0.6868696212768555, 'kl': 0.0013275146484375, 'epoch': 0.17}
+path: ['/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201475912460.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201476362460.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201476862460.jpg']
+problem_id: 9
+prompt_length: 668
+tensor([1.1000, 1.8663, 1.4350, 1.0000], device='cuda:0')
+tensor([173, 313, 478, 143], device='cuda:0')
+{'loss': 0.0001, 'grad_norm': 4.1782932167638895, 'learning_rate': 9.045084971874737e-07, 'completion_length': 290.625, 'rewards/accuracy_reward': 0.22637376189231873, 'rewards/format_reward': 0.9375, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.5, 'reward': 1.2576236724853516, 'reward_std': 0.4815952777862549, 'kl': 0.00244140625, 'epoch': 0.2}
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883722412465.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883722862460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883723362475.jpg']
+problem_id: 5
+prompt_length: 668
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([0.5090, 0.0000, 1.0000, 2.3808], device='cuda:0')
+tensor([279, 243, 155, 351], device='cuda:0')
+{'loss': 0.0003, 'grad_norm': 3.208659316470263, 'learning_rate': 8.71572412738697e-07, 'completion_length': 279.875, 'rewards/accuracy_reward': 0.2833186686038971, 'rewards/format_reward': 0.5625, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 1.0, 'reward': 1.0145686864852905, 'reward_std': 0.6040266156196594, 'kl': 0.00689697265625, 'epoch': 0.23}
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201474662460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201475112460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201475512460.jpg']
+problem_id: 7
+prompt_length: 668
+tensor([2.2266, 2.2348, 1.1000, 1.0000], device='cuda:0')
+tensor([ 98, 183, 207, 114], device='cuda:0')
+{'loss': 0.0001, 'grad_norm': 3.7411661283040774, 'learning_rate': 8.34565303179429e-07, 'completion_length': 218.125, 'rewards/accuracy_reward': 0.27275073528289795, 'rewards/format_reward': 1.0, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.75, 'reward': 1.3477507829666138, 'reward_std': 0.4527384042739868, 'kl': 0.0024871826171875, 'epoch': 0.27}
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883539662460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883540112464.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883540512466.jpg']
+problem_id: 14
+prompt_length: 697
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([0.0000, 1.1000, 1.1000, 2.1802], device='cuda:0')
+tensor([131, 161, 120, 233], device='cuda:0')
+{'loss': 0.0001, 'grad_norm': 6.479083135866598, 'learning_rate': 7.938926261462365e-07, 'completion_length': 250.75, 'rewards/accuracy_reward': 0.3562396764755249, 'rewards/format_reward': 0.75, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 1.0, 'reward': 1.249989628791809, 'reward_std': 0.6672080755233765, 'kl': 0.0016326904296875, 'epoch': 0.3}
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883544762460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883545162460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883545612464.jpg']
+problem_id: 23
+prompt_length: 668
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 1)
+tensor([1.0000, 2.2121, 1.4624, 1.7718], device='cuda:0')
+tensor([311, 485, 629,  87], device='cuda:0')
+{'loss': 0.0001, 'grad_norm': 3.285902270598233, 'learning_rate': 7.5e-07, 'completion_length': 281.9375, 'rewards/accuracy_reward': 0.17202094197273254, 'rewards/format_reward': 0.875, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.25, 'reward': 1.115770936012268, 'reward_std': 0.3781697154045105, 'kl': 0.002685546875, 'epoch': 0.33}
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883530862460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883531262460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883531662460.jpg']
+problem_id: 1
+prompt_length: 668
+Error in reward_fn for question_type 'list': object of type 'NoneType' has no len()
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([0.8322, 1.0000, 1.0000, 0.0000], device='cuda:0')
+tensor([120, 159, 206, 768], device='cuda:0')
+{'loss': 0.0002, 'grad_norm': 70.3640610792076, 'learning_rate': 7.033683215379002e-07, 'completion_length': 238.125, 'rewards/accuracy_reward': 0.29424193501472473, 'rewards/format_reward': 0.8125, 'all_wrong': 0.25, 'all_correct': 0.0, 'temporal_rewards': 0.25, 'reward': 1.1629918813705444, 'reward_std': 0.5128669142723083, 'kl': 0.0042724609375, 'epoch': 0.37}
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883998912464.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883999362460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883999762460.jpg']
+problem_id: 21
+prompt_length: 668
+tensor([1.6876, 2.4302, 1.1000, 1.1000], device='cuda:0')
+tensor([446, 408, 457, 331], device='cuda:0')
+{'loss': 0.0002, 'grad_norm': 2.907395268461152, 'learning_rate': 6.545084971874736e-07, 'completion_length': 313.0625, 'rewards/accuracy_reward': 0.25204768776893616, 'rewards/format_reward': 1.0, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.75, 'reward': 1.3707976341247559, 'reward_std': 0.41782093048095703, 'kl': 0.005157470703125, 'epoch': 0.4}
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883537112463.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883537612469.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883538012469.jpg']
+problem_id: 11
+prompt_length: 668
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 1)
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 1)
+tensor([1.3518, 1.1000, 1.0000, 1.1000], device='cuda:0')
+tensor([410, 121,  95, 103], device='cuda:0')
+{'loss': 0.0009, 'grad_norm': 4.407287012776665, 'learning_rate': 6.039558454088795e-07, 'completion_length': 235.5625, 'rewards/accuracy_reward': 0.1972542256116867, 'rewards/format_reward': 0.875, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.5, 'reward': 1.1285042762756348, 'reward_std': 0.43641209602355957, 'kl': 0.0230712890625, 'epoch': 0.43}
+path: ['/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201487362460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201487912460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201488362460.jpg']
+problem_id: 26
+prompt_length: 697
+tensor([1.1000, 1.0000, 1.0000, 1.1000], device='cuda:0')
+tensor([ 77, 316, 346, 355], device='cuda:0')
+{'loss': 0.0003, 'grad_norm': 3.5300775671422198, 'learning_rate': 5.522642316338268e-07, 'completion_length': 270.0, 'rewards/accuracy_reward': 0.20266656577587128, 'rewards/format_reward': 0.9375, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.25, 'reward': 1.1589165925979614, 'reward_std': 0.450067400932312, 'kl': 0.0084228515625, 'epoch': 0.47}
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884004162460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884004612467.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884005012471.jpg']
+problem_id: 29
+prompt_length: 668
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([1.2117, 0.0000, 0.0000, 1.0000], device='cuda:0')
+tensor([338, 109, 768,  99], device='cuda:0')
+{'loss': 0.0002, 'grad_norm': 6.159323895134138, 'learning_rate': 5e-07, 'completion_length': 249.5625, 'rewards/accuracy_reward': 0.13487231731414795, 'rewards/format_reward': 0.75, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.5, 'reward': 0.9223723411560059, 'reward_std': 0.63286292552948, 'kl': 0.00421142578125, 'epoch': 0.5}
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883539662460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883540112464.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883540512466.jpg']
+problem_id: 15
+prompt_length: 668
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+Error in reward_fn for question_type 'list': invalid syntax. Perhaps you forgot a comma? (<unknown>, line 1)
+tensor([1.0000, 1.1000, 0.7922, 1.1000], device='cuda:0')
+tensor([271, 331, 277, 157], device='cuda:0')
+{'loss': 0.0003, 'grad_norm': 3.9343229362848335, 'learning_rate': 4.477357683661733e-07, 'completion_length': 257.875, 'rewards/accuracy_reward': 0.22015056014060974, 'rewards/format_reward': 0.875, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.5, 'reward': 1.1451506614685059, 'reward_std': 0.38992899656295776, 'kl': 0.007568359375, 'epoch': 0.53}
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883737612469.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883738013231.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883738412465.jpg']
+problem_id: 28
+prompt_length: 697
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([0.1000, 1.1000, 2.2930, 1.1000], device='cuda:0')
+tensor([252, 243, 140, 276], device='cuda:0')
+{'loss': 0.0002, 'grad_norm': 4.2054333294001465, 'learning_rate': 3.960441545911204e-07, 'completion_length': 218.5625, 'rewards/accuracy_reward': 0.3280321955680847, 'rewards/format_reward': 0.8125, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.5, 'reward': 1.2155323028564453, 'reward_std': 0.6237598657608032, 'kl': 0.005859375, 'epoch': 0.57}
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883728762460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883729162460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883729612467.jpg']
+problem_id: 14
+prompt_length: 697
+tensor([1.5177, 1.1000, 1.1000, 1.4033], device='cuda:0')
+tensor([288, 119, 256, 137], device='cuda:0')
+{'loss': 0.0004, 'grad_norm': 4.455416110536747, 'learning_rate': 3.454915028125263e-07, 'completion_length': 211.375, 'rewards/accuracy_reward': 0.27661409974098206, 'rewards/format_reward': 0.8125, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.75, 'reward': 1.2016141414642334, 'reward_std': 0.5255832076072693, 'kl': 0.01007080078125, 'epoch': 0.6}
+path: ['/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883546012462.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883546412464.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883546862460.jpg']
+problem_id: 25
+prompt_length: 668
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([1.6108, 2.3347, 2.0396, 2.0396], device='cuda:0')
+tensor([401, 430,  64,  99], device='cuda:0')
+{'loss': 0.0008, 'grad_norm': 9.12034651888482, 'learning_rate': 2.9663167846209996e-07, 'completion_length': 224.875, 'rewards/accuracy_reward': 0.3253149390220642, 'rewards/format_reward': 0.8125, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.75, 'reward': 1.2753150463104248, 'reward_std': 0.5728964805603027, 'kl': 0.020751953125, 'epoch': 0.63}
+path: ['/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883991362460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883991762460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883992262460.jpg']
+problem_id: 9
+prompt_length: 668
+tensor([2.0361, 1.9906, 1.5194, 1.9906], device='cuda:0')
+tensor([109,  76, 104, 214], device='cuda:0')
+{'loss': 0.0007, 'grad_norm': 4.6846028639224855, 'learning_rate': 2.500000000000001e-07, 'completion_length': 214.125, 'rewards/accuracy_reward': 0.5190155506134033, 'rewards/format_reward': 0.9375, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 1.0, 'reward': 1.6940155029296875, 'reward_std': 0.5420328378677368, 'kl': 0.016357421875, 'epoch': 0.67}
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883726262460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883726662460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883727112468.jpg']
+problem_id: 11
+prompt_length: 668
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+Error in reward_fn for question_type 'list': object of type 'NoneType' has no len()
+tensor([1.4337, 1.0000, 2.0477, 0.1000], device='cuda:0')
+tensor([134, 223, 282, 462], device='cuda:0')
+{'loss': 0.0003, 'grad_norm': 3.721304924909233, 'learning_rate': 2.0610737385376348e-07, 'completion_length': 259.625, 'rewards/accuracy_reward': 0.156100332736969, 'rewards/format_reward': 0.875, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.75, 'reward': 1.10610032081604, 'reward_std': 0.41922253370285034, 'kl': 0.007080078125, 'epoch': 0.7}
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883542162460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883542612464.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883543012467.jpg']
+problem_id: 19
+prompt_length: 668
+tensor([1.1000, 1.1000, 1.1000, 1.1000], device='cuda:0')
+tensor([171, 208, 186, 261], device='cuda:0')
+{'loss': 0.0004, 'grad_norm': 4.9474537944541135, 'learning_rate': 1.6543469682057104e-07, 'completion_length': 192.375, 'rewards/accuracy_reward': 0.23489908874034882, 'rewards/format_reward': 0.875, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.25, 'reward': 1.1286489963531494, 'reward_std': 0.40574613213539124, 'kl': 0.00927734375, 'epoch': 0.73}
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883730012463.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883730412469.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883730862460.jpg']
+problem_id: 16
+prompt_length: 697
+tensor([2.2532, 1.1000, 1.1000, 2.2532], device='cuda:0')
+tensor([133, 263, 346, 170], device='cuda:0')
+{'loss': 0.0003, 'grad_norm': 5.490431271203149, 'learning_rate': 1.284275872613028e-07, 'completion_length': 199.0625, 'rewards/accuracy_reward': 0.44055530428886414, 'rewards/format_reward': 0.9375, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.75, 'reward': 1.5093053579330444, 'reward_std': 0.592138409614563, 'kl': 0.00762939453125, 'epoch': 0.77}
+path: ['/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201481012460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201481412460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201481862460.jpg']
+problem_id: 17
+prompt_length: 668
+Error in reward_fn for question_type 'list': invalid syntax. Perhaps you forgot a comma? (<unknown>, line 1)
+tensor([2.0960, 2.2444, 1.0000, 1.2225], device='cuda:0')
+tensor([251, 110, 337, 188], device='cuda:0')
+{'loss': 0.0004, 'grad_norm': 5.95729638973548, 'learning_rate': 9.549150281252632e-08, 'completion_length': 307.875, 'rewards/accuracy_reward': 0.4936738610267639, 'rewards/format_reward': 0.875, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 1.0, 'reward': 1.5686739683151245, 'reward_std': 0.7016545534133911, 'kl': 0.01007080078125, 'epoch': 0.8}
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883986362460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883986762460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883987162460.jpg']
+problem_id: 0
+prompt_length: 697
+tensor([1.1000, 1.4409, 1.1000, 1.5101], device='cuda:0')
+tensor([242,  91, 265, 262], device='cuda:0')
+{'loss': 0.0001, 'grad_norm': 7.369205628721312, 'learning_rate': 6.698729810778064e-08, 'completion_length': 250.5, 'rewards/accuracy_reward': 0.26480257511138916, 'rewards/format_reward': 0.875, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.75, 'reward': 1.283552646636963, 'reward_std': 0.465777188539505, 'kl': 0.0036163330078125, 'epoch': 0.83}
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883998912464.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883999362460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883999762460.jpg']
+problem_id: 20
+prompt_length: 697
+Error in reward_fn for question_type 'list': invalid character '°' (U+00B0) (<unknown>, line 1)
+tensor([2.2853, 0.4007, 1.1000, 1.1000], device='cuda:0')
+tensor([185, 295, 154, 358], device='cuda:0')
+{'loss': 0.0007, 'grad_norm': 4.2957810077170295, 'learning_rate': 4.322727117869951e-08, 'completion_length': 213.8125, 'rewards/accuracy_reward': 0.3596627712249756, 'rewards/format_reward': 0.8125, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.75, 'reward': 1.2971627712249756, 'reward_std': 0.6226885318756104, 'kl': 0.0172119140625, 'epoch': 0.87}
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883535862460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883536262460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883536662460.jpg']
+problem_id: 8
+prompt_length: 697
+tensor([1.1000, 1.1000, 2.2967, 1.1000], device='cuda:0')
+tensor([295, 267,  85, 169], device='cuda:0')
+{'loss': 0.0003, 'grad_norm': 4.032191554828666, 'learning_rate': 2.4471741852423233e-08, 'completion_length': 235.8125, 'rewards/accuracy_reward': 0.28400370478630066, 'rewards/format_reward': 0.9375, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 1.0, 'reward': 1.346503734588623, 'reward_std': 0.5630035996437073, 'kl': 0.006439208984375, 'epoch': 0.9}
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201477262460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201477662460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201478112523.jpg']
+problem_id: 11
+prompt_length: 668
+tensor([1.0000, 1.1000, 2.2556, 1.0000], device='cuda:0')
+tensor([258, 205, 190, 331], device='cuda:0')
+{'loss': 0.0006, 'grad_norm': 4.912334305020448, 'learning_rate': 1.0926199633097154e-08, 'completion_length': 219.4375, 'rewards/accuracy_reward': 0.39172860980033875, 'rewards/format_reward': 0.9375, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 1.0, 'reward': 1.4729785919189453, 'reward_std': 0.482237845659256, 'kl': 0.0162353515625, 'epoch': 0.93}
+path: ['/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201481012460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201481412460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201481862460.jpg']
+problem_id: 16
+prompt_length: 697
+tensor([0.1000, 1.1000, 1.3964, 1.9826], device='cuda:0')
+tensor([297, 154, 356, 178], device='cuda:0')
+{'loss': 0.0003, 'grad_norm': 5.6713507578246425, 'learning_rate': 2.739052315863355e-09, 'completion_length': 271.6875, 'rewards/accuracy_reward': 0.3322947323322296, 'rewards/format_reward': 0.9375, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.75, 'reward': 1.3885447978973389, 'reward_std': 0.48683446645736694, 'kl': 0.008544921875, 'epoch': 0.97}
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883548512465.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883548912464.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883549362460.jpg']
+problem_id: 28
+prompt_length: 697
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+tensor([1.0000, 1.1000, 1.1000, 1.1000], device='cuda:0')
+tensor([310,  91, 637, 168], device='cuda:0')
+{'loss': 0.0003, 'grad_norm': 4.391621827040879, 'learning_rate': 0.0, 'completion_length': 231.125, 'rewards/accuracy_reward': 0.39181652665138245, 'rewards/format_reward': 0.9375, 'all_wrong': 0.0, 'all_correct': 0.0, 'temporal_rewards': 0.75, 'reward': 1.4418165683746338, 'reward_std': 0.41287994384765625, 'kl': 0.007354736328125, 'epoch': 1.0}
+{'train_runtime': 7391.9338, 'train_samples_per_second': 0.016, 'train_steps_per_second': 0.004, 'train_loss': 0.0002923875348642468, 'epoch': 1.0}

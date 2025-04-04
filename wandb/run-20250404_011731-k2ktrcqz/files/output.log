@@ -1,0 +1,228 @@
+  0%|                                                                                                                                                                           | 0/1969 [00:00<?, ?it/s]/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/utils/checkpoint.py:87: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
+  warnings.warn(
+`use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`...
+path: ['/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-24-11-03-52+0800__CAM_FRONT__1532401565912460.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-24-11-03-52+0800__CAM_FRONT__1532401566162460.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-24-11-03-52+0800__CAM_FRONT__1532401566412460.jpg']
+problem_id: 34
+prompt_length: 475
+Error in reward_fn for question_type 'list': invalid syntax (<unknown>, line 0)
+
+ordered completions:
+ [[{'role': 'assistant', 'content': "<think>\nThe road you described has an apparent direction change from frame to frame. Let's analyze the direction change between each frame:\n\n1. From the first frame to the second frame, the vehicle seems to have veered to the right, likely because it is turning into a parking lot or approaching a corner. This suggests a turning angle.\n\n2. From the second frame to the third frame, the vehicle continues to turn towards the right, maintaining the same direction change.\n\n3. From the third frame to the fourth frame, the vehicle changes its direction again, this time veering to the left, indicating that it is moving away from the parked area and either continuing straight or turning to the left.\n\nThese directions match the sequence of turns usually associated with navigating in an urban environment. For example, approaching a parking lot and then turning either to the left or right depending on the traffic patterns.\n\nGiven this analysis, we can calculate the direction changes:\n\n1. From the first frame to the second frame: A 90-degree right turn.\n2. From the second frame to the third frame: A 90-degree right turn.\n3. From the third frame to the fourth frame: A 90-degree left turn.\n\nThese angles are all relative to the initial position and frame of the video.\n</think>\n<answer>\n[90, 90, -90]\n</answer>"}], [{'role': 'assistant', 'content': "To determine the vehicle's change in heading direction between each frame and its previous frame, we need to analyze the orientation of the front of the vehicle in each frame. Let's break down the process:\n\n1. **Identify the direction of the front of the vehicle in each frame:**\n   - Frame 1: Facing straight ahead.\n   - Frame 2: Turning left slightly.\n   - Frame 3: Turning right slightly.\n\n2. **Calculate the angle changes:**\n   - From Frame 1 to Frame 2: The vehicle is turning left slightly.\n     - Assume the angle of turning left is around 30 degrees (this is a hypothetical value based on the general direction of turn).\n   - From Frame 2 to Frame 3: The vehicle is turning right slightly.\n     - Assume the angle of turning right is also around 30 degrees (this is a hypothetical value based on the general direction of turn).\n\n3. **Summarize the changes:**\n   - Change in heading from Frame 1 to Frame 2: -30 degrees.\n   - Change in heading from Frame 2 to Frame 3: +30 degrees.\n\nThus, the vehicle's change in heading direction between each frame and its previous frame is as follows:\n- From Frame 1 to Frame 2: -30 degrees.\n- From Frame 2 to Frame 3: +30 degrees.\n\nThe list of values is:\n- [-30, 30, -30]\n\nHere's how we arrived at these values:\n- The turning left in Frame 2 means the heading changes by -30 degrees (left turn).\n- The turning right in Frame 3 means the heading changes by 30 degrees (right turn).\n\nTherefore, the final answer is:\n<answer>[-30, 30, -30]</answer>"}], [{'role': 'assistant', 'content': "To determine the vehicle's change in heading direction between each frame and its previous frame, we need to calculate the direction of the vehicle in relation to the previous frame's heading.\n\n<Think>\nLet's assume the following heading values for the vehicle:\n- Frame 1: 0 degrees (heading straight ahead)\n- Frame 2: 45 degrees (slightly to the right)\n- Frame 3: 135 degrees (right again)\n- Frame 4: 225 degrees (right again)\n\nNow, we calculate the change in heading between each pair of consecutive frames.\n\n- Change from Frame 1 to Frame 2: 45 degrees (right)\n- Change from Frame 2 to Frame 3: 135 degrees (right)\n- Change from Frame 3 to Frame 4: 225 degrees (right)\n\nTherefore, the total change in heading direction is:\n- From 0 degrees (straight ahead) to 45 degrees: 45 degrees\n- From 45 degrees to 135 degrees: 90 degrees\n- From 135 degrees to 225 degrees: 90 degrees\n\n<Answer>\n[45, 90, 90]"}], [{'role': 'assistant', 'content': "<think>\nI understand the task is to analyze the dashcam video and calculate the change in heading direction between consecutive frames. The heading change is measured
+tensor([1.1000, 0.1000, 0.0000, 0.9553], device='cuda:0')
+tensor([284, 383, 260, 105], device='cuda:0')
+[2025-04-04 01:20:14,357] [WARNING] [stage3.py:2139:step] 1 pytorch allocator cache flushes since last step. this happens when there is high memory pressure and is detrimental to performance. if this is happening frequently consider adjusting settings to reduce memory consumption. If you are unable to make the cache flushes go away consider adding get_accelerator().empty_cache() calls in your training loop to ensure that all ranks flush their caches at the same time
+  0%|▏                                                                                                                                                              | 2/1969 [04:22<68:37:41, 125.60s/it]Traceback (most recent call last):
+{'loss': -0.0, 'grad_norm': 5.246172983449932, 'learning_rate': 9.999993635735369e-07, 'completion_length': 368.375, 'rewards/accuracy_reward': 0.144409641623497, 'rewards/format_reward': 0.25, 'all_wrong': 0.5, 'all_correct': 0.0, 'reward': 0.3944096565246582, 'reward_std': 0.5344951152801514, 'kl': 0.0, 'epoch': 0.0}
+path: ['/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-50-34+0800__CAM_FRONT__1531885881612465.jpg', '/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-50-34+0800__CAM_FRONT__1531885881662460.jpg', '/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-50-34+0800__CAM_FRONT__1531885881762460.jpg']
+problem_id: 150
+prompt_length: 475
+
+ordered completions:
+ [[{'role': 'assistant', 'content': "<think>\nI understand the task is to analyze a dash cam video to determine the vehicle's change in heading direction between each frame. The video is divided into four frames, and my job is to figure out if the vehicle is heading to the right, to the left, or not changing direction. I'll need to watch each video frame carefully to see how the vehicle's path changes over time.\n\nI should consider the distance changes from one frame to the next, whether the vehicle is turning left or right, and how much it's turning. For example, if the vehicle moves forward for one frame, then turns left slightly and moves again, I'd need to calculate that turning point.\n\nThis is a complex task, especially when dealing with video content and real-time changes in the vehicle's direction. Let's observe the changes from one frame to the next.\n</think>\n\n<think>\nUpon analyzing the video frames, I can see the vehicle is consistently moving forward in the first few frames. However, in the final frame, the vehicle appears to veer slightly to the left. It seems the vehicle initially moved straight but then turned a bit to the left before continuing its course.\n\nTherefore, the direction of the vehicle's motion changes from the first frame to the last. The degree of change between the first and second frames is small but noticeable. Between the second and third frames, the vehicle is still heading forward but slightly to the left. Finally, in the last frame, the vehicle appears to veer significantly to the left as indicated by the slight turn observed after the forward movement.\n</think>\n\n<answer>\n[-45, -5, 40]\n</answer>"}], [{'role': 'assistant', 'content': "<think>\nFirstly, I will analyze the difference between the initial frame and the following frames to determine the direction the vehicle is veering.\nIn the first frame, the car seems to be heading straight towards the stadium entrance. The next frame shows the car has veered to the left, possibly approaching the entrance from a different direction.\n\nNow, I will analyze the difference between the third and fourth frames to further refine the direction of the vehicle.\nThe fourth frame shows the car continuing to move straight, which indicates a slight right turn.\n\nFinally, I will summarize the changes in direction:\n1. From the initial frame (heading straight towards the stadium entrance) to the second frame (left veering), the vehicle's heading changed by 90 degrees (left).\n2. From the second frame (left veering) to the third frame (continued straight), the vehicle's heading changed by 0 degrees (straight).\n3. From the third frame (continued straight) to the fourth frame (right veering), the vehicle's heading changed by -30 degrees (right).\n\nThese changes indicate a vehicle that initially veers left, then continues straight, and finally veers right.\n</think>\n<answer>\n[90, 0, -30]\n</answer>"}], [{'role': 'assistant', 'content': "<think>\nI see we have four frames of a video captured from a vehicle's dash cam. To determine the change in heading direction between each frame, I need to compare the orientation of the road and the buildings as seen from the camera's perspective. The last frame appears to be taken from a slightly leftward or upward position compared to the first frame. This slight shift could indicate the vehicle has either turned slightly to the left or has adjusted its angle while driving.\n</think>\n<answer>\n[-80, 0, 80]\n</answer>"}], [{'role': 'assistant', 'content': "<think>\nThe vehicle starts at an intersection and seems to continue in a straight path. There is no significant change in the direction or heading from one frame to another, suggesting the vehicle maintains a steady course. Given the uniformity of the frames, it appears the vehicle's heading remains constant over these frames.\n\n</think>\n<answer>\n[0, 0, 0]\n</answer>"}]]
+tensor([1.1000, 1.1000, 1.1000, 1.8735], device='cuda:0')
+tensor([339, 259, 115,  81], device='cuda:0')
+[2025-04-04 01:21:54,391] [WARNING] [stage3.py:2139:step] 3 pytorch allocator cache flushes since last step. this happens when there is high memory pressure and is detrimental to performance. if this is happening frequently consider adjusting settings to reduce memory consumption. If you are unable to make the cache flushes go away consider adding get_accelerator().empty_cache() calls in your training loop to ensure that all ranks flush their caches at the same time
+{'loss': 0.0, 'grad_norm': 5.732095440064887, 'learning_rate': 9.999974542957676e-07, 'completion_length': 271.625, 'rewards/accuracy_reward': 0.17169144749641418, 'rewards/format_reward': 0.625, 'all_wrong': 0.0, 'all_correct': 0.0, 'reward': 0.7966914176940918, 'reward_std': 0.46108919382095337, 'kl': 0.00045013427734375, 'epoch': 0.0}
+  File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 606, in <module>
+    main(script_args, training_args, model_args)
+  File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 595, in main
+    trainer.train()
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2241, in train
+    return inner_training_loop(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2548, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 3698, in training_step
+    loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/github/thinking_in_street/train/localization/trainer/grpo_trainer.py", line 511, in compute_loss
+    prompt_completion_ids = unwrapped_model.generate(**prompt_inputs, generation_config=self.generation_config)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/generation/utils.py", line 2223, in generate
+    result = self._sample(
+             ^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/generation/utils.py", line 3213, in _sample
+    outputs = model_forward(**model_inputs, return_dict=True)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1845, in _call_impl
+    return inner()
+           ^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1793, in inner
+    result = forward_call(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1810, in forward
+    outputs = self.model(
+              ^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1143, in forward
+    layer_outputs = self._gradient_checkpointing_func(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/_compile.py", line 32, in inner
+    return disable_fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/_dynamo/eval_frame.py", line 745, in _fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/utils/checkpoint.py", line 489, in checkpoint
+    return CheckpointFunction.apply(function, preserve, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/autograd/function.py", line 575, in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/utils/checkpoint.py", line 264, in forward
+    outputs = run_function(*args)
+              ^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1017, in forward
+    hidden_states, self_attn_weights, present_key_value = self.self_attn(
+                                                          ^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 904, in forward
+    value_states = self.v_proj(hidden_states)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/nn/modules/linear.py", line 125, in forward
+    return F.linear(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/zero/linear.py", line 118, in zero3_linear_wrap
+    return LinearFunctionForZeroStage3.apply(input, weight, bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/autograd/function.py", line 575, in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/amp/autocast_mode.py", line 503, in decorate_fwd
+    return fwd(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/zero/linear.py", line 64, in forward
+    output = input.matmul(weight.t())
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 606, in <module>
+[rank0]:     main(script_args, training_args, model_args)
+[rank0]:   File "/scratch/zl3466/github/thinking_in_street/./train/localization/grpo.py", line 595, in main
+[rank0]:     trainer.train()
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2241, in train
+[rank0]:     return inner_training_loop(
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 2548, in _inner_training_loop
+[rank0]:     tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+[rank0]:                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/trainer.py", line 3698, in training_step
+[rank0]:     loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/github/thinking_in_street/train/localization/trainer/grpo_trainer.py", line 511, in compute_loss
+[rank0]:     prompt_completion_ids = unwrapped_model.generate(**prompt_inputs, generation_config=self.generation_config)
+[rank0]:                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+[rank0]:     return func(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/generation/utils.py", line 2223, in generate
+[rank0]:     result = self._sample(
+[rank0]:              ^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/generation/utils.py", line 3213, in _sample
+[rank0]:     outputs = model_forward(**model_inputs, return_dict=True)
+[rank0]:               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1845, in _call_impl
+[rank0]:     return inner()
+[rank0]:            ^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1793, in inner
+[rank0]:     result = forward_call(*args, **kwargs)
+[rank0]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1810, in forward
+[rank0]:     outputs = self.model(
+[rank0]:               ^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1143, in forward
+[rank0]:     layer_outputs = self._gradient_checkpointing_func(
+[rank0]:                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/_compile.py", line 32, in inner
+[rank0]:     return disable_fn(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/_dynamo/eval_frame.py", line 745, in _fn
+[rank0]:     return fn(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/utils/checkpoint.py", line 489, in checkpoint
+[rank0]:     return CheckpointFunction.apply(function, preserve, *args)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/autograd/function.py", line 575, in apply
+[rank0]:     return super().apply(*args, **kwargs)  # type: ignore[misc]
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/utils/checkpoint.py", line 264, in forward
+[rank0]:     outputs = run_function(*args)
+[rank0]:               ^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 1017, in forward
+[rank0]:     hidden_states, self_attn_weights, present_key_value = self.self_attn(
+[rank0]:                                                           ^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py", line 904, in forward
+[rank0]:     value_states = self.v_proj(hidden_states)
+[rank0]:                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/nn/modules/linear.py", line 125, in forward
+[rank0]:     return F.linear(input, self.weight, self.bias)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/zero/linear.py", line 118, in zero3_linear_wrap
+[rank0]:     return LinearFunctionForZeroStage3.apply(input, weight, bias)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/autograd/function.py", line 575, in apply
+[rank0]:     return super().apply(*args, **kwargs)  # type: ignore[misc]
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/torch/amp/autocast_mode.py", line 503, in decorate_fwd
+[rank0]:     return fwd(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/scratch/zl3466/env/thinking-in-street/lib/python3.11/site-packages/deepspeed/runtime/zero/linear.py", line 64, in forward
+[rank0]:     output = input.matmul(weight.t())
+[rank0]:              ^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]: KeyboardInterrupt

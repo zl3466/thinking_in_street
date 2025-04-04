@@ -34,6 +34,8 @@ from rouge_score import rouge_scorer
 from nuscenes.nuscenes import LidarPointCloud, NuScenes
 from train.data_loader.nuscenes import NuScenesDataset
 import cv2
+import random
+import time
 
 QUESTION_TEMPLATE = (
     "{Question}\n"
@@ -84,50 +86,52 @@ class GRPOScriptArguments(ScriptArguments):
         metadata={"help": "whether using length reward"},
     )
 
-
-def accuracy_reward(completions, solution, **kwargs):
-    def extract_answer(text):
+def extract_answer(text):
         pattern = r'<answer>\s*(.*?)\s*</answer>'
         match = re.search(pattern, text, re.DOTALL)
         if match:
             return match.group(1).strip()
         return ""
 
-    def normalize_number(num_str):
-        try:
-            num_str = num_str.replace(',', '')
-            return float(num_str)
-        except Exception as e:
-            print(f"Error converting '{num_str}' to float: {e}")
-            return None
+def normalize_number(num_str):
+    try:
+        num_str = num_str.replace(',', '')
+        return float(num_str)
+    except Exception as e:
+        print(f"Error converting '{num_str}' to float: {e}")
+        return None
 
-    def wer(reference, hypothesis):
-        ref_words = reference.split()
-        hyp_words = hypothesis.split()
-        m = len(ref_words)
-        n = len(hyp_words)
-        d = [[0] * (n + 1) for _ in range(m + 1)]
-        for i in range(m + 1):
-            d[i][0] = i
-        for j in range(n + 1):
-            d[0][j] = j
-        for i in range(1, m + 1):
-            for j in range(1, n + 1):
-                if ref_words[i - 1] == hyp_words[j - 1]:
-                    d[i][j] = d[i - 1][j - 1]
-                else:
-                    d[i][j] = 1 + min(d[i - 1][j], d[i][j - 1], d[i - 1][j - 1])
-        return d[m][n] / max(1, m)
+def wer(reference, hypothesis):
+    ref_words = reference.split()
+    hyp_words = hypothesis.split()
+    m = len(ref_words)
+    n = len(hyp_words)
+    d = [[0] * (n + 1) for _ in range(m + 1)]
+    for i in range(m + 1):
+        d[i][0] = i
+    for j in range(n + 1):
+        d[0][j] = j
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            if ref_words[i - 1] == hyp_words[j - 1]:
+                d[i][j] = d[i - 1][j - 1]
+            else:
+                d[i][j] = 1 + min(d[i - 1][j], d[i][j - 1], d[i - 1][j - 1])
+    return d[m][n] / max(1, m)
 
-    def compute_rouge_score(reference, hypothesis, use_stemmer=True):
-        scorer = rouge_scorer.RougeScorer(['rouge1', 'rouge2', 'rougeL'], use_stemmer=use_stemmer)
-        scores = scorer.score(reference, hypothesis)
-        average_fmeasure = (scores['rouge1'].fmeasure + scores['rouge2'].fmeasure + scores['rougeL'].fmeasure) / 3
-        return average_fmeasure
+def compute_rouge_score(reference, hypothesis, use_stemmer=True):
+    scorer = rouge_scorer.RougeScorer(['rouge1', 'rouge2', 'rougeL'], use_stemmer=use_stemmer)
+    scores = scorer.score(reference, hypothesis)
+    average_fmeasure = (scores['rouge1'].fmeasure + scores['rouge2'].fmeasure + scores['rougeL'].fmeasure) / 3
+    return average_fmeasure
 
-    def sigmoid(x, a=1, b=0):
-        return 1 / (1 + math.exp(a * (-x - b)))
+def sigmoid(x, a=1, b=0):
+    return 1 / (1 + math.exp(a * (-x - b)))
 
+
+
+def accuracy_reward(completions, solution, **kwargs):
+    
     question_type = kwargs['problem_type'][0]
 
     contents = [completion[0]["content"] for completion in completions]
@@ -501,9 +505,9 @@ def main(script_args, training_args, model_args):
 
     # Load dataset
     num_cam = 1
-    train_num_scene = 16
+    train_num_scene = 40
     test_num_scene = train_num_scene // 4
-    sample_rate = 2
+    # sample_rate = 2
     train_scene_idx_list = []
     test_scene_idx_list = []
     for i in range(train_num_scene):
@@ -537,7 +541,7 @@ def main(script_args, training_args, model_args):
                                   nusc=nusc_train,
                                   scene_idx=scene_idx)
 
-        train_example_list += nusc_to_examples(dataset, video_out_dir=f"{scene_out_path}/scene_{scene_idx}.mp4", sample_rate=sample_rate)
+        train_example_list += nusc_to_examples(dataset, video_out_dir=f"{scene_out_path}/scene_{scene_idx}.mp4", sample_rate=random.randint(1, 10))
 
     test_example_list = []
     print(f"Processing test dataset into examples...")
@@ -551,7 +555,7 @@ def main(script_args, training_args, model_args):
                                   nusc=nusc_test,
                                   scene_idx=scene_idx)
 
-        test_example_list += nusc_to_examples(dataset, video_out_dir=f"{scene_out_path}/scene_{scene_idx}.mp4", sample_rate=sample_rate)
+        test_example_list += nusc_to_examples(dataset, video_out_dir=f"{scene_out_path}/scene_{scene_idx}.mp4", sample_rate=random.randint(1, 10))
 
     # Format into conversation
     # dataset = dataset.map(make_conversation_image_and_video)
@@ -561,7 +565,8 @@ def main(script_args, training_args, model_args):
         json.dump(train_example_list, f, indent=4)
     with open(f"{out_path}/test_examples.json", 'w') as f:
         json.dump(test_example_list, f, indent=4)
-    
+    # wait for the json dump to finish
+    time.sleep(5)
     dataset =  DatasetDict({"train": Dataset.from_json(f"{out_path}/train_examples.json"), "test": Dataset.from_json(f"{out_path}/test_examples.json")})
     dataset = dataset.map(prepare_dataset_nusc)
 

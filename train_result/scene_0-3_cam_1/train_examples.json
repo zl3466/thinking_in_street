@@ -1,0 +1,1802 @@
+[
+    {
+        "problem_id": 0,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[-7.964518576026864, -8.251725136159708, -8.726645666346315]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883530862460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883531262460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883531662460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 1,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[1.8932774546624376, 1.5708378154560707, 1.6004560220768727]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883530862460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883531262460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883531662460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 2,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[-10.11374664662946, -9.079453878455153, -7.508366651572038]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883532112465.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883532512468.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883532912466.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 3,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[1.8537411805992265, 1.7533063275229592, 1.8002307260426664]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883532112465.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883532512468.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883532912466.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 4,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[-4.585792908667243, -1.303717835848153, -0.09379178887506134]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883533362460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883533762460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883534162460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 5,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[2.2271762579322867, 2.1560922219750327, 2.2056323671159226]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883533362460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883533762460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883534162460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 6,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.10214018184109726, -0.03269475256085373, 0.1294574525804456]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883534612464.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883535012465.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883535412467.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 7,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[2.5928486701124625, 2.3803408629022234, 2.376663081583603]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883534612464.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883535012465.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883535412467.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 8,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.001876549112677692, -0.027472620081222664, -0.05907716414945561]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883535862460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883536262460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883536662460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 9,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[2.648539949607127, 2.267166199143499, 2.218290186217432]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883535862460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883536262460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883536662460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 10,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.13556128163981795, 0.30407513284949206, 0.789790639632025]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883537112463.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883537612469.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883538012469.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 11,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[2.3667539909335287, 2.5580352686268433, 1.9218667783147296]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883537112463.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883537612469.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883538012469.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 12,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[1.1819937880198974, 1.2861033446687533, 1.1608246514452865]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883538412466.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883538862460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883539262460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 13,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[1.7970821523072718, 1.9424618488646892, 1.6459610953933763]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883538412466.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883538862460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883539262460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 14,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[1.1825388102673353, 1.4547000283503912, 0.912812034822055]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883539662460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883540112464.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883540512466.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 15,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[1.6092372064159124, 1.838092982095922, 1.6537657203120821]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883539662460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883540112464.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883540512466.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 16,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.16424217549910938, -0.21902209373793055, -1.0615124291853557]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883540912465.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883541362460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883541762460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 17,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[1.7345640832163094, 2.0849271584427993, 1.9172625360849052]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883540912465.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883541362460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883541762460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 18,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[-1.5328046539467743, -2.1401603993029825, -1.9600067196474453]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883542162460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883542612464.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883543012467.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 19,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[1.9809363836461888, 2.4001073151783356, 2.2481998326550743]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883542162460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883542612464.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883543012467.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 20,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[-1.3963447607832715, -0.4209584058271962, -0.19175082952162373]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883543412464.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883543862460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883544262460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 21,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[2.3228904131215518, 2.734138429895828, 2.4601205060005795]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883543412464.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883543862460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883544262460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 22,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[-0.25786665058583774, -0.06887088024904726, -0.44230902232204206]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883544762460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883545162460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883545612464.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 23,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[3.175451527902782, 2.560906271349237, 2.87888213288814]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883544762460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883545162460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883545612464.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 24,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[-0.2315932934177971, -0.4230972662229924, -0.5667566309478909]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883546012462.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883546412464.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883546862460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 25,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[2.5377121411883103, 2.5319208071456614, 2.9083072904397493]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883546012462.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883546412464.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883546862460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 26,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[-0.5220019184877481, -0.683070650620459, -1.323343052314559]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883547262460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883547662460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883548112551.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 27,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[2.630343471016186, 2.5671100389779613, 2.8321906154669736]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883547262460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883547662460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883548112551.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 28,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[-1.0799224436570798, -0.1992383201469525, 0.4429685019608176]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883548512465.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883548912464.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883549362460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 29,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[2.4945395270534902, 2.481904458240575, 2.779264662746282]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883548512465.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883548912464.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883549362460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 0,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[-2.1140855972623345, -2.310139737855073, -2.828002170977475]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883719862460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883720262460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883720662460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 1,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[1.2561908665592425, 1.2263978287058148, 1.2619336022314078]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883719862460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883720262460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883720662460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 2,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[-3.3742128453135565, -3.685247057019353, -5.538125242122933]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883721112467.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883721512465.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883722012464.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 3,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[1.5147654888655862, 1.3282166632290031, 1.5601298033082813]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883721112467.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883721512465.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883722012464.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 4,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[-5.3857673236902155, -7.141821757344458, -8.930446872382245]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883722412465.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883722862460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883723362475.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 5,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[1.2578813512361242, 1.344871056265569, 1.4860155419237426]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883722412465.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883722862460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883723362475.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 6,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[-7.798572102876696, -8.517913101530223, -9.884040212408044]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883723762460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883724162460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883724612463.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 7,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[1.3034199011248293, 1.463110552325292, 1.76966686737211]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883723762460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883724162460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883724612463.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 8,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[-6.923962445019923, -4.209748912485631, -2.357049694869016]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883725012491.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883725412468.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883725862460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 9,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[1.6734455880778285, 1.8592372526824428, 2.357390291688495]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883725012491.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883725412468.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883725862460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 10,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[-0.3505991280886652, 0.12341369397863716, 0.03489088925103711]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883726262460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883726662460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883727112468.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 11,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[2.247427729095049, 2.4990594517132334, 2.9407794300383765]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883726262460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883726662460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883727112468.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 12,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.12399527020856531, 0.39004517982968223, 0.10570901209534209]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883727512462.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883727912479.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883728362460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 13,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[2.8960168333627507, 3.0557541799672627, 3.4033706336907725]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883727512462.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883727912479.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883728362460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 14,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.1403096763209252, 0.19337116518046318, 0.5438482790477627]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883728762460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883729162460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883729612467.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 15,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[3.1361335503992396, 3.059950132219297, 3.3402819983673626]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883728762460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883729162460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883729612467.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 16,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.5455679384179077, 0.4406323814666228, 0.4091947281322391]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883730012463.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883730412469.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883730862460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 17,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[2.9630391476445497, 2.886514794022002, 3.1646050504847385]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883730012463.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883730412469.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883730862460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 18,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.11207105091621647, 0.008609688817786166, -0.6741342541516305]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883731262460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883731662460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883732112465.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 19,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[2.6512160871157926, 2.5668765797976607, 2.75944934417452]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883731262460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883731662460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883732112465.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 20,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[-0.5487701085007176, -0.31217146979843713, -0.34751845896826267]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883732612465.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883733012471.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883733412543.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 21,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[2.8219225801706327, 2.0891908991109, 1.9237006539483337]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883732612465.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883733012471.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883733412543.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 22,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[-0.4633636104926237, -0.28334760465150843, -0.21244206090891898]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883733862460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883734262460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883734662460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 23,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[1.9472266902875364, 1.6555470623019692, 1.7405667572115904]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883733862460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883734262460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883734662460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 24,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[-0.2905523657048227, -0.11104830605913056, -0.19765212430596563]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883735112462.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883735512466.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883735912468.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 25,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[2.158358462132663, 2.1663390101807614, 2.371615073902138]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883735112462.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883735512466.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883735912468.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 26,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[-0.16638482378610875, 0.004848403288236292, -0.11051239878451813]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883736362460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883736762460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883737162460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 27,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[2.8718758591381675, 2.8645449104836103, 3.0313036739930346]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883736362460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883736762460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883737162460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 28,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[-0.0759325410652795, -0.02017715884415135, -0.09245502677516323]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883737612469.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883738013231.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883738412465.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 29,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[3.598364225332182, 3.329283191867245, 3.4397443714836724]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883737612469.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883738013231.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883738412465.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 0,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.16582969578187806, 0.07573396387951799, 0.043494202856977894]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201470862460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201471262460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201471762460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 1,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.027076516012751805, 0.0029681372616920916, 0.0019077456815997746]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201470862460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201471262460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201471762460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 2,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.019356957911263472, 0.001906548157014186, 0.06906129498308769]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201472162460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201472612460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201473012460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 3,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.0011616437541112218, 0.0010696334501686022, 0.03238270432967147]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201472162460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201472612460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201473012460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 4,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.18011422921832096, -0.35509002668985584, -0.763952287907615]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201473412460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201473862460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201474262460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 5,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.1357873549093548, 0.251690535264525, 0.4140551872369996]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201473412460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201473862460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201474262460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 6,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[-0.745888727210006, -0.3670070685230633, -0.5443003268032963]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201474662460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201475112460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201475512460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 7,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.6052188483367802, 0.7913419389001555, 0.7942419814604533]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201474662460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201475112460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201475512460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 8,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[-0.17708248964547763, 0.3417831067403484, 0.5113044642750032]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201475912460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201476362460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201476862460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 9,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.7579039235410238, 0.8159182326455321, 0.7662026322681988]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201475912460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201476362460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201476862460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 10,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.38086561867541596, 0.3199621394951574, 0.34630033424417145]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201477262460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201477662460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201478112523.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 11,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.4973040368651626, 0.397225678229229, 0.43203498541916674]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201477262460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201477662460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201478112523.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 12,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.38932435523863396, 0.32670539416211275, 0.28238792394549983]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201478512460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201478912460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201479362460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 13,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.3668648570513262, 0.32854218363272253, 0.2957504631877735]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201478512460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201478912460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201479362460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 14,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.3224964667130815, 0.0036941355295187694, -0.14938588441074238]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201479762460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201480163869.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201480612460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 15,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.3529212686964995, 0.5332927640244794, 0.5837697568079231]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201479762460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201480163869.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201480612460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 16,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[-0.10028732519245342, -0.18646847407523515, -0.4572427670194542]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201481012460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201481412460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201481862460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 17,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.5048771099195798, 0.5440748218478237, 0.61553891773986]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201481012460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201481412460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201481862460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 18,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[-0.40430852874816364, -0.19691103782365532, 0.16018644782681069]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201482262460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201482662460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201483112460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 19,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.4687598278891166, 0.4000232176626221, 0.3749926140326093]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201482262460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201482662460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201483112460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 20,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.15319134140676524, 0.1444507548575128, 0.03168512044146628]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201483512460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201484012460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201484412460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 21,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.3045492060632727, 0.349904554950696, 0.4078727645589261]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201483512460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201484012460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201484412460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 22,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[-0.09353337516371066, -0.329748130320663, -0.7291633172370309]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201484862460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201485262460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201485662460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 23,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.6550221989710379, 0.8427006303260168, 1.0414434189800335]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201484862460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201485262460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201485662460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 24,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[-0.8142007623910084, -0.6281585044436511, -0.2547187300395914]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201486112460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201486512460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201486912460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 25,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[1.3349968181458578, 1.3038838545123939, 1.3965714964363298]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201486112460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201486512460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201486912460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 26,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.16072741369206117, 0.690334178018015, 0.47659757295738714]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201487362460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201487912460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201488362460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 27,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[1.6976540732518361, 2.058249283823741, 1.5868253969709272]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201487362460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201487912460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201488362460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 28,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.1420435335614005, 0.04608158815406605, 0.09425219255807739]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201488862460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201489262460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201489662460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 29,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[1.6361227295930874, 1.1873359918145496, 0.9939548499022595]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201488862460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201489262460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-08-02-17-16-37+0800__CAM_FRONT__1533201489662460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 0,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.08016889547069042, 0.060533684999399553, 0.12616901991230414]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883986362460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883986762460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883987162460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 1,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[1.8996618828860041, 1.7342599041123445, 1.7427628839557479]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883986362460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883986762460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883987162460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 2,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.041365476169213086, -0.022479162739598674, -0.006896642992514716]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883987612464.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883988012472.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883988412463.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 3,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[2.084627945660951, 1.9526453864607538, 2.0230407225114324]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883987612464.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883988012472.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883988412463.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 4,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[-0.11434378734924062, -0.1602523623524595, -0.11798438340960561]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883988862460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883989262460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883989662460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 5,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[2.434610567950027, 2.263996610568796, 2.390532080957295]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883988862460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883989262460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883989662460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 6,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[-0.03384429690119884, -0.030672577504390848, -0.05133021445162339]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883990112465.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883990512464.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883990912477.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 7,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[2.7771737057939476, 2.551860510604824, 2.647330059854274]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883990112465.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883990512464.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883990912477.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 8,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[-0.05619092426385445, -0.20010637045158206, -0.4846805695498168]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883991362460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883991762460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883992262460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 9,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[3.0941129302747368, 2.7960484270568657, 3.648502554231331]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883991362460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883991762460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883992262460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 10,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[-0.409195481361771, -0.6059838762028995, -0.43618232329149104]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883992662460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883993112463.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883993512461.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 11,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[2.9806338463823168, 3.4383403421633343, 3.2067702953639343]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883992662460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883993112463.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883993512461.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 12,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[-0.18546483290745575, -0.15014195809870343, 0.121032675224929]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883993912469.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883994362460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883994762460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 13,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[3.238769733007523, 3.6122818728138273, 3.246241355714814]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883993912469.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883994362460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883994762460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 14,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.48243361565560366, 0.455498091820318, 0.4410580711294245]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883995162460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883995612465.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883996012468.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 15,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[3.2444293097687704, 3.6921570633796255, 3.341155169176421]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883995162460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883995612465.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883996012468.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 16,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.36209948406137227, 0.29721817437342574, 0.05324200152188719]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883996412465.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883996862516.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883997262460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 17,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[3.460359124540115, 4.0385272825191, 3.5873020352681366]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883996412465.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883996862516.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883997262460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 18,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.28254437684100253, 0.20452909780336193, 0.09041810558578305]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883997662460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883998112463.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883998512467.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 19,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[3.6519426489814313, 4.097978146632697, 3.63546384743183]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883997662460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883998112463.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883998512467.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 20,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.18531145551891112, 0.17123332631341426, -0.02874029412674631]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883998912464.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883999362460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883999762460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 21,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[3.6121185438104, 3.9606778431637553, 3.4125445553625573]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883998912464.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883999362460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531883999762460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 22,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.08389056111988928, 0.07650488567545025, 0.008399984110937059]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884000162460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884000612466.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884001112466.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 23,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[3.4525017426405937, 3.8201987343369885, 4.286319770574105]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884000162460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884000612466.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884001112466.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 24,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.07709004327531647, -0.32205934021343036, -0.516443658314528]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884001612466.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884002012468.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884002412460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 25,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[4.379835396293424, 3.4928318896788864, 3.4874739345033725]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884001612466.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884002012468.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884002412460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 26,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[-0.6977102663629035, -0.38099215328246216, 0.5031471300188061]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884002912468.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884003362460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884003762460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 27,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[4.39461312571865, 4.031200542241353, 3.568587013437421]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884002912468.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/samples/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884003362460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884003762460.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 28,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's change in heading direction between each frame and its previous frame.\nGive your answer in degree values ranging between -180 and 180 degrees, with veer to the right being positive degrees and to the left being negative degrees.\nKeep all degree values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[0.4537861704311863, 0.15594979332227069, 0.30055112925413907]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884004162460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884004612467.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884005012471.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    },
+    {
+        "problem_id": 29,
+        "problem": "I uploaded 4 frames from a vehicle dash cam video. \nDetermine the vehicle's displacement between each frame and its previous frame.\nGive your answer in numerical values in meter unit.\nKeep all displacement values in one list. You should have 3 values in the list.\n",
+        "data_type": "video",
+        "problem_type": "list",
+        "options": [],
+        "solution": "<answer>[3.6545007252532136, 4.142455787657255, 3.668313381575112]</answer>",
+        "path": [
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884004162460.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884004612467.jpg",
+            "/scratch/zl3466/dataset/NuScenes/train/sweeps/CAM_FRONT/n015-2018-07-18-11-18-34+0800__CAM_FRONT__1531884005012471.jpg"
+        ],
+        "reward": 1.0,
+        "select": true
+    }
+]

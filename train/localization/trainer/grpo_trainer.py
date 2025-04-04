@@ -51,6 +51,9 @@ from trl.trainer.utils import generate_model_card, get_comet_experiment_url
 from qwen_vl_utils import process_vision_info
 
 import copy
+import re
+import ast
+import math
 
 
 if is_peft_available():
@@ -63,6 +66,46 @@ if is_wandb_available():
 # What we call a reward function is a callable that takes a list of prompts and completions and returns a list of
 # rewards. When it's a string, it's a model ID, so it's loaded as a pretrained model.
 RewardFunc = Union[str, PreTrainedModel, Callable[[list, list], list[float]]]
+
+
+# helper funcs for calculating the reverse-play reward
+def extract_answer(text):
+            pattern = r'<answer>\s*(.*?)\s*</answer>'
+            match = re.search(pattern, text, re.DOTALL)
+            if match:
+                return match.group(1).strip()
+            return ""
+
+def sigmoid(x, a=1, b=0):
+    return 1 / (1 + math.exp(a * (-x - b)))
+
+
+def reverse_consistent_reward(ordered_completions, reversed_completions):
+    ordered_contents = [completion[0]["content"] for completion in ordered_completions]
+    reversed_contents = [completion[0]["content"] for completion in reversed_completions]
+    total_reward = 0
+    for ordered_content, reversed_content in zip(ordered_contents, reversed_contents):
+        try:
+            ordered_output_ans = extract_answer(ordered_content)
+            reversed_output_ans = extract_answer(reversed_content)
+
+            ordered_output_ans_list = ast.literal_eval(ordered_output_ans)
+            reversed_output_ans_list = ast.literal_eval(reversed_output_ans)
+
+            if len(ordered_output_ans_list) != len(reversed_output_ans_list):
+                reward = 0.0
+            else:
+                ''' reward = 2 * sigmoid(rmse) -> range(0, 1). Use a = 0.2 to get steep sigmoid '''
+                squared_diffs = [(p - gt) ** 2 for p, gt in zip(reversed_output_ans_list, ordered_output_ans_list)]
+                rmse = math.sqrt(sum(squared_diffs) / len(squared_diffs))
+                reward = 2 * (1 - sigmoid(rmse, a=0.2, b=0))
+                ''' we ensure a minimum reward of 0.1 if the number of elements in the list is correct '''
+                reward = max(0.1, reward)
+        except Exception as e:
+            print(f"Error in reversed-input reward calc: {e}")
+            reward = 0.0
+        total_reward += reward
+    return total_reward
 
 
 class Qwen2VLGRPOTrainer(Trainer):
@@ -396,6 +439,7 @@ class Qwen2VLGRPOTrainer(Trainer):
     def _prepare_inputs(self, inputs: dict[str, Union[torch.Tensor, Any]]) -> dict[str, Union[torch.Tensor, Any]]:
         return inputs
 
+    
     def compute_loss(self, model, inputs, return_outputs=False, num_items_in_batch=None):
         if return_outputs:
             raise ValueError("The GRPOTrainer does not support returning outputs")
@@ -487,8 +531,9 @@ class Qwen2VLGRPOTrainer(Trainer):
             prompt_mask = prompt_mask[:, -self.max_prompt_length :]
             
         if self.temporal and video_inputs is not None:
-            indices = torch.randperm(video_inputs[0].size(0))
-            # indices = torch.randperm(len(video_inputs[0]))
+            # indices = torch.randperm(video_inputs[0].size(0))
+            indices = torch.arange(video_inputs[0].size(0) - 1, -1, -1)  # reverse the video frames
+            reversed_video_inputs = [video_inputs[0][indices]]
             shuffled_video_inputs = [video_inputs[0][indices]]
             shuffled_prompt_inputs = self.processing_class(
                 text=copy.deepcopy(prompts_text),
@@ -594,10 +639,10 @@ class Qwen2VLGRPOTrainer(Trainer):
                 ref_per_token_logps = ref_per_token_logps[:, prompt_length - 1 :]
 
         # Compute the KL divergence between the model and the reference model
-        
         x_clamped = torch.clamp(ref_per_token_logps - per_token_logps, min=-10, max=10)  # 限制 x 的范围
         per_token_kl = torch.exp(x_clamped) - x_clamped - 1
         
+        # Compute rewards for shuffled input
         if self.temporal and video_inputs is not None:
             shuffled_completions = self.processing_class.batch_decode(shuffled_completion_ids, skip_special_tokens=True)
             if is_conversational(inputs[0]):
@@ -618,7 +663,7 @@ class Qwen2VLGRPOTrainer(Trainer):
                 shuffled_output_reward_func = reward_func(prompts=shuffled_prompts, completions=shuffled_completions, **shuffled_reward_kwargs)
                 shuffled_rewards_per_func[:, i] = torch.tensor(shuffled_output_reward_func, dtype=torch.float32, device=device)
 
-        
+        # Compute rewards for regular ordered input
         # Decode the generated completions
         completions = self.processing_class.batch_decode(completion_ids, skip_special_tokens=True)
         if is_conversational(inputs[0]):
@@ -639,23 +684,44 @@ class Qwen2VLGRPOTrainer(Trainer):
             output_reward_func = reward_func(prompts=prompts, completions=completions, **reward_kwargs)
             rewards_per_func[:, i] = torch.tensor(output_reward_func, dtype=torch.float32, device=device)
         
-
         
-        
-        if self.temporal and video_inputs is not None:
-            temporal_rewards_per_func = rewards_per_func.clone()
+                
+        # Calculate temporal reward: 
+        # reward = 1 if ordered answer accuracy > 0.8 shuffled answer accuracy
+        # if self.temporal and video_inputs is not None:
+        #     temporal_rewards_per_func = rewards_per_func.clone()
             
-            acc_mean = temporal_rewards_per_func[:, 0].mean()
-            shuffled_acc_mean = shuffled_rewards_per_func[:, 0].mean()
+        #     acc_mean = temporal_rewards_per_func[:, 0].mean()
+        #     shuffled_acc_mean = shuffled_rewards_per_func[:, 0].mean()
 
-            if acc_mean >= 0.8 * shuffled_acc_mean:
-                mask = temporal_rewards_per_func[:, 0] > 0.1
-                temporal_rewards_per_func[mask, 0] = temporal_rewards_per_func[mask, 0] + 0.3
-                temporal_rewards = torch.tensor([1.0]).to('cuda')
+        #     if acc_mean >= 0.8 * shuffled_acc_mean:
+        #         mask = temporal_rewards_per_func[:, 0] > 0.1
+        #         temporal_rewards_per_func[mask, 0] = temporal_rewards_per_func[mask, 0] + 0.3
+        #         temporal_rewards = torch.tensor([1.0]).to('cuda')
+        #     else:
+        #         temporal_rewards = torch.tensor([0.0]).to('cuda')
+        # else:
+        #     temporal_rewards =  torch.tensor([0.5]).to('cuda')
+        if self.temporal and video_inputs is not None:
+            question_type = reward_kwargs['problem_type'][0]
+            temporal_rewards_per_func = rewards_per_func.clone()
+            if question_type == "list":
+                reward = reverse_consistent_reward(ordered_completions=completions, reversed_completions=shuffled_completions) / self.num_generations
+                temporal_rewards = torch.tensor([reward]).to('cuda')
             else:
-                temporal_rewards = torch.tensor([0.0]).to('cuda')
+                acc_mean = temporal_rewards_per_func[:, 0].mean()
+                shuffled_acc_mean = shuffled_rewards_per_func[:, 0].mean()
+
+                if acc_mean >= 0.8 * shuffled_acc_mean:
+                    mask = temporal_rewards_per_func[:, 0] > 0.1
+                    temporal_rewards_per_func[mask, 0] = temporal_rewards_per_func[mask, 0] + 0.3
+                    temporal_rewards = torch.tensor([1.0]).to('cuda')
+                else:
+                    temporal_rewards = torch.tensor([0.0]).to('cuda')
         else:
             temporal_rewards =  torch.tensor([0.5]).to('cuda')
+        
+        print(f"temporal reward: {temporal_rewards}")
         
         # Sum the rewards from all reward functions
         if self.temporal and video_inputs is not None:
@@ -669,26 +735,14 @@ class Qwen2VLGRPOTrainer(Trainer):
             mask = rewards_per_func[:, 0] > 0.1
             lenth_list = completion_mask.sum(1)
             selected_indices = torch.nonzero(mask, as_tuple=True)[0].tolist()
-            #             if len(selected_indices) > 1 and len(selected_indices) < self.num_generations:
-            # if len(selected_indices) > 1:
-            #     selected_items = [(i, lenth_list[i]) for i in selected_indices]
-            #     sorted_items = sorted(selected_items, key=lambda x: x[1], reverse=True)
-            #     N = len(sorted_items)
-            #     for rank, (idx, length) in enumerate(sorted_items):
-            #         reward = 0.2 - 0.2 * (rank / N)
-            #         rewards[idx] += reward
-            #         mem_rewards[idx] = reward
-            # for idx in range(len(lenth_list)):
-            #     if lenth_list[idx] >= 512:
-            #         rewards[idx] -= 0.5
                     
             if len(selected_indices) > 1:     
                 for idx in selected_indices:
                     if 320 <= lenth_list[idx] <= 512:
                         rewards[idx] += 0.2
         
-        print(rewards)
-        print(completion_mask.sum(1))
+        print(f"rewards: {rewards}")
+        print(f"completion_mask sum: {completion_mask.sum(1)}")
 
         # Compute grouped-wise rewards
         mean_grouped_rewards = rewards.view(-1, self.num_generations).mean(dim=1)
@@ -698,10 +752,6 @@ class Qwen2VLGRPOTrainer(Trainer):
         mean_grouped_rewards = mean_grouped_rewards.repeat_interleave(self.num_generations, dim=0)
         std_grouped_rewards = std_grouped_rewards.repeat_interleave(self.num_generations, dim=0)
         advantages = (rewards - mean_grouped_rewards) / (std_grouped_rewards + 1e-4)
-        
-        # if self.len_control and len(selected_indices) == self.num_generations:
-        #     for idx in range(len(rewards)):
-        #         advantages[idx] += (mem_rewards[idx] - 0.2) * 2
 
         # x - x.detach() allows for preserving gradients from x
         per_token_loss = torch.exp(per_token_logps - per_token_logps.detach()) * advantages.unsqueeze(1)

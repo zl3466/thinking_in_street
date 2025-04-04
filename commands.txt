@@ -6,6 +6,7 @@ export PATH=/scratch/zl3466/env/thinking-in-street/bin:$PATH
 cd ./train/scripts
 
 sbatch run_grpo_localization_hpc.sbatch
+sbatch run_grpo_localization_hpc_a100.sbatch
 
 bash run_grpo_localization.sh
 
