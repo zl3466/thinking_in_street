@@ -1,5 +1,6 @@
-export DEBUG_MODE="true" # Enable Debug if you want to see the rollout of model during RL
+export DEBUG_MODE="false" # Enable Debug if you want to see the rollout of model during RL
 export LOG_PATH="/scratch/zl3466/github/thinking_in_street/debug_log_3b.txt"
+
 
 # For resume training:  --resume_from_checkpoint Model_Path \
 # Set temporal to choose between T-GRPO and GRPO, and len_control to enable or disable the length control reward.
@@ -13,6 +14,8 @@ source /share/apps/anaconda3/2020.07/etc/profile.d/conda.sh;
 conda activate /scratch/zl3466/env/thinking-in-street/;
 export PATH=/scratch/zl3466/env/thinking-in-street/bin:$PATH;
 cd /scratch/zl3466/github/thinking_in_street;
+
+export NUM_TRAIN_SCENE=40
 
 CUDA_VISIBLE_DEVICES=0,1 torchrun --nproc_per_node="2" \
     --nnodes="1" \
@@ -39,7 +42,7 @@ CUDA_VISIBLE_DEVICES=0,1 torchrun --nproc_per_node="2" \
     --attn_implementation sdpa \
     --max_pixels 100352 \
     --num_train_epochs 1 \
-    --run_name localization-3b \
+    --run_name localization-3b-debug \
     --save_steps 100 \
     --beta 0.04 \
     --max_grad_norm 5 \

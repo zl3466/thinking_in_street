@@ -20,6 +20,8 @@ conda activate /scratch/zl3466/env/thinking-in-street/;
 export PATH=/scratch/zl3466/env/thinking-in-street/bin:$PATH;
 cd /scratch/zl3466/github/thinking_in_street;
 
+export NUM_TRAIN_SCENE=40
+
 CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node="4" \
     --nnodes="1" \
     --node_rank="0" \
@@ -45,7 +47,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node="4" \
     --attn_implementation sdpa \
     --max_pixels 200704 \
     --num_train_epochs 1 \
-    --run_name localization-3b \
+    --run_name localization-3b-full \
     --save_steps 100 \
     --beta 0.04 \
     --max_grad_norm 5 \

@@ -126,7 +126,7 @@ def compute_rouge_score(reference, hypothesis, use_stemmer=True):
     return average_fmeasure
 
 def sigmoid(x, a=1, b=0):
-    return 1 / (1 + math.exp(a * (-x - b)))
+    return 1 / (1 + math.exp(a * (-x + b)))
 
 
 
@@ -505,8 +505,8 @@ def main(script_args, training_args, model_args):
 
     # Load dataset
     num_cam = 1
-    train_num_scene = 40
-    test_num_scene = train_num_scene // 4
+    train_num_scene = int(os.getenv("NUM_TRAIN_SCENE"))
+    test_num_scene = min(150, train_num_scene // 4)
     # sample_rate = 2
     train_scene_idx_list = []
     test_scene_idx_list = []
@@ -566,7 +566,7 @@ def main(script_args, training_args, model_args):
     with open(f"{out_path}/test_examples.json", 'w') as f:
         json.dump(test_example_list, f, indent=4)
     # wait for the json dump to finish
-    time.sleep(5)
+    time.sleep(10)
     dataset =  DatasetDict({"train": Dataset.from_json(f"{out_path}/train_examples.json"), "test": Dataset.from_json(f"{out_path}/test_examples.json")})
     dataset = dataset.map(prepare_dataset_nusc)
 

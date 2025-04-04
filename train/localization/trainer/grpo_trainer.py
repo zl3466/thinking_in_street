@@ -77,7 +77,7 @@ def extract_answer(text):
             return ""
 
 def sigmoid(x, a=1, b=0):
-    return 1 / (1 + math.exp(a * (-x - b)))
+    return 1 / (1 + math.exp(a * (-x + b)))
 
 
 def reverse_consistent_reward(ordered_completions, reversed_completions):
@@ -706,7 +706,10 @@ class Qwen2VLGRPOTrainer(Trainer):
             question_type = reward_kwargs['problem_type'][0]
             temporal_rewards_per_func = rewards_per_func.clone()
             if question_type == "list":
-                reward = reverse_consistent_reward(ordered_completions=completions, reversed_completions=shuffled_completions) / self.num_generations
+                # sum of temporal reward for all groups
+                total_reward = reverse_consistent_reward(ordered_completions=completions, reversed_completions=shuffled_completions)
+                # map total reward range (0, 4) to (0, 1), with slope 2 and center 1 to favor high total reward
+                reward = sigmoid(total_reward, a=2, b=1)
                 temporal_rewards = torch.tensor([reward]).to('cuda')
             else:
                 acc_mean = temporal_rewards_per_func[:, 0].mean()
