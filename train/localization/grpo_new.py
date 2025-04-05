@@ -498,58 +498,15 @@ def main(script_args, training_args, model_args):
         test_scene_idx_list.append(i)
 
     root_path = script_args.dataset_name
-    out_path = f"./train_result/scene_{train_scene_idx_list[0]}-{train_scene_idx_list[-1]}_cam_{num_cam}"
-
-    train_data_path = f"{root_path}/train"
-    test_data_path = f"{root_path}/test"
+    example_json_path = f"{root_path}/examples/gemini"
 
     train_out_path = f"{out_path}/train"
     test_out_path = f"{out_path}/test"
     
-    # nusc_train = None
-    # nusc_test = None
-    nusc_train = NuScenes(version="v1.0-trainval", dataroot=train_data_path, verbose=True)
-    nusc_test = NuScenes(version="v1.0-test", dataroot=test_data_path, verbose=True)
-    
-    train_example_list = []
-    print(f"Processing train dataset into examples...")
-    for scene_idx in train_scene_idx_list:
-        scene_out_path = f"{train_out_path}/scene_{scene_idx}"
-        os.makedirs(scene_out_path, exist_ok=True)
-
-        dataset = NuScenesDataset(data_path=train_data_path,
-                                  meta_out_path=f"{scene_out_path}/meta_dict.json",
-                                  num_cams=num_cam,
-                                  nusc=nusc_train,
-                                  scene_idx=scene_idx)
-
-        train_example_list += nusc_to_examples(dataset, video_out_dir=f"{scene_out_path}/scene_{scene_idx}.mp4", sample_rate=random.randint(1, 10))
-
-    test_example_list = []
-    print(f"Processing test dataset into examples...")
-    for scene_idx in test_scene_idx_list:
-        scene_out_path = f"{test_out_path}/scene_{scene_idx}"
-        os.makedirs(scene_out_path, exist_ok=True)
-
-        dataset = NuScenesDataset(data_path=test_data_path,
-                                  meta_out_path=f"{scene_out_path}/meta_dict.json",
-                                  num_cams=num_cam,
-                                  nusc=nusc_test,
-                                  scene_idx=scene_idx)
-
-        test_example_list += nusc_to_examples(dataset, video_out_dir=f"{scene_out_path}/scene_{scene_idx}.mp4", sample_rate=random.randint(1, 10))
-
-    # Format into conversation
-    # dataset = dataset.map(make_conversation_image_and_video)
-    # prepared_dataset_train = [prepare_dataset_nusc(example) for example in train_example_list]
-    # prepared_dataset_test = [prepare_dataset_nusc(example) for example in test_example_list]
-    with open(f"{out_path}/train_examples.json", 'w') as f:
-        json.dump(train_example_list, f, indent=4)
-    with open(f"{out_path}/test_examples.json", 'w') as f:
-        json.dump(test_example_list, f, indent=4)
-    # wait for the json dump to finish
-    time.sleep(10)
-    dataset =  DatasetDict({"train": Dataset.from_json(f"{out_path}/train_examples.json"), "test": Dataset.from_json(f"{out_path}/test_examples.json")})
+    dataset =  DatasetDict({
+        "train": Dataset.from_json(f"{example_json_path}/train/scene_{train_scene_idx_list[0]}-{train_scene_idx_list[-1]}_cam_{num_cam}/train_examples.json"), 
+        "test": Dataset.from_json(f"{example_json_path}/test/scene_{train_scene_idx_list[0]}-{train_scene_idx_list[-1]}_cam_{num_cam}/test_examples.json")
+    })
     dataset = dataset.map(prepare_dataset_nusc)
 
     trainer_cls = Qwen2VLGRPOTrainer if not training_args.use_vllm else Qwen2VLGRPOVLLMTrainerModified

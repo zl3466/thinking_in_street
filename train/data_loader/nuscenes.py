@@ -23,7 +23,8 @@ class NuScenesDataset():
         split: str = 'train',
         scene_idx: int = 0,
         start_timestep: int = 0,
-        end_timestep: int = -1
+        end_timestep: int = -1,
+        save_meta=True
     ):
 
         logger.info("Loading new NuScenes dataset.")
@@ -33,11 +34,14 @@ class NuScenesDataset():
         self.split = split
         self.start_timestep = start_timestep
         self.end_timestep = end_timestep
+        self.save_meta = save_meta
+
         self.nusc = nusc
         self.scene_idx = scene_idx
         self.meta_dict = self.create_or_load_metas()
         self.create_all_filelist()
         self.load_calibrations()
+
 
 
     def create_or_load_metas(self):
@@ -152,9 +156,10 @@ class NuScenesDataset():
 
                 current_camera_data_tokens[camera] = current_camera_data["next"]
 
-        with open(self.meta_out_path, "w") as f:
-            json.dump(meta_dict, f, cls=NumpyEncoder)
-        logger.info(f"[Pixel] Saved camera meta to {self.meta_out_path}")
+        if self.save_meta:
+            with open(self.meta_out_path, "w") as f:
+                json.dump(meta_dict, f, cls=NumpyEncoder)
+            logger.info(f"[Pixel] Saved camera meta to {self.meta_out_path}")
         return meta_dict
 
     def create_all_filelist(self):
@@ -182,7 +187,7 @@ class NuScenesDataset():
         logger.info(f"[Pixel] Start timestep: {self.start_timestep}")
         logger.info(f"[Pixel] End timestep: {self.end_timestep}")
 
-        img_filepaths, feat_filepaths, sky_mask_filepaths = [], [], []
+        img_filepaths, rel_img_filepaths, feat_filepaths, sky_mask_filepaths = [], [], [], []
         # TODO: support dynamic masks
 
         for t in range(self.start_timestep, self.end_timestep):
@@ -191,8 +196,10 @@ class NuScenesDataset():
                     self.data_path, self.meta_dict[cam_idx]["filepath"][t]
                 )
                 img_filepaths.append(img_filepath)
+                rel_img_filepaths.append(self.meta_dict[cam_idx]["filepath"][t])
 
         self.img_filepaths = np.array(img_filepaths)
+        self.rel_img_filepaths = np.array(rel_img_filepaths)
 
 
     def load_calibrations(self):

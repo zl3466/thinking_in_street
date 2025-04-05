@@ -18,6 +18,7 @@ module load openmpi/intel/4.0.5;
 source /share/apps/anaconda3/2020.07/etc/profile.d/conda.sh;
 conda activate /scratch/zl3466/env/thinking-in-street/;
 export PATH=/scratch/zl3466/env/thinking-in-street/bin:$PATH;
+export DATASET_DIR="/scratch/zl3466/dataset/NuScenes"
 cd /scratch/zl3466/github/thinking_in_street;
 
 export NUM_TRAIN_SCENE=40
