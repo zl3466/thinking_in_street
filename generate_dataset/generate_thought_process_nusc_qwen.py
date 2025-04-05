@@ -19,6 +19,8 @@ import cv2
 import random
 import time
 import math
+from model.gemini import GeminiModel
+
 
 QUESTION_TEMPLATE = (
     "{Question}\n"
@@ -167,7 +169,6 @@ def calculate_delta_heading(yaw1, yaw2):
     elif delta < -180:
         delta += 360
     return delta
-
 
 def nusc_to_examples(nusc_dataset, video_out_dir="", sample_rate=10, batch_size=4, visualize=False):
     if visualize:
@@ -448,10 +449,7 @@ model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
 )
 processor = AutoProcessor.from_pretrained("Qwen/Qwen2.5-VL-32B-Instruct", min_pixels=256*28*28, max_pixels=1280*28*28)
 
-# processor = AutoProcessor.from_pretrained(MODEL_PATH)
-# tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
-# tokenizer.padding_side = "left"
-# processor.tokenizer = tokenizer
+
 
 ''' ========================== generate examples from NuScenes dataset ============================ '''
 num_cam = 1
@@ -513,9 +511,10 @@ for scene_idx in train_scene_idx_list:
     train_example_json_dict[f'scene_{scene_idx}'] = gen_thought_process(train_example_json_dict[f'scene_{scene_idx}'],
                                                                         model, processor, scene_idx)
 
-for scene_idx in train_scene_idx_list:
+for scene_idx in test_scene_idx_list:
     test_example_json_dict[f'scene_{scene_idx}'] = gen_thought_process(test_example_json_dict[f'scene_{scene_idx}'],
                                                                        model, processor, scene_idx)
+
 
 with open(f"{out_path}/train_examples.json", 'w') as f:
     json.dump(train_example_json_dict, f, indent=4)

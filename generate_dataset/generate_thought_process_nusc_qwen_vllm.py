@@ -10,7 +10,7 @@ from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
 import torch
 
 from transformers import Qwen2_5_VLForConditionalGeneration, AutoProcessor, AutoTokenizer
-# from vllm import LLM, SamplingParams
+from vllm import LLM, SamplingParams
 from qwen_vl_utils import process_vision_info
 from rouge_score import rouge_scorer
 from nuscenes.nuscenes import LidarPointCloud, NuScenes
@@ -19,6 +19,8 @@ import cv2
 import random
 import time
 import math
+from model.gemini import GeminiModel
+
 
 QUESTION_TEMPLATE = (
     "{Question}\n"
@@ -167,7 +169,6 @@ def calculate_delta_heading(yaw1, yaw2):
     elif delta < -180:
         delta += 360
     return delta
-
 
 def nusc_to_examples(nusc_dataset, video_out_dir="", sample_rate=10, batch_size=4, visualize=False):
     if visualize:
@@ -336,7 +337,7 @@ def ask_qwen(model, processor, messages):
     return output_text
 
 
-def gen_thought_process(data, model, processor, scene_idx):
+def gen_thought_process(data, llm, sampling_params):
     '''
     input data: a list of examples
     '''
@@ -364,61 +365,47 @@ def gen_thought_process(data, model, processor, scene_idx):
         }]
         messages.append(msg)
 
+    prompts = [processor.apply_chat_template(msg, tokenize=False, add_generation_prompt=True) for msg in
+               messages]
+    image_inputs, video_inputs, video_kwargs = process_vision_info(prompts, return_video_kwargs=True)
     for i in tqdm(range(len(messages)),
                   desc=f"Processing examples for scene {scene_idx}, sample rate {sample_rate}, batch size {batch_size}"):
-        msg = messages[i]
-        # print(msg)
-        output_text = ask_qwen(model, processor, msg)
-        print(output_text)
+        try:
+            image_idx = 0
+            video_idx = 0
+            llm_inputs = []
+
+            for idx, prompt in enumerate(prompts):
+                mm_type = messages[idx][0]['content'][0]['type']
+                sample_mm_data = {}
+                sample_video_kw = {}
+                if mm_type == 'image':
+                    sample_mm_data["image"] = image_inputs[image_idx]
+                    image_idx += 1
+                elif mm_type == 'video':
+                    sample_mm_data["video"] = video_inputs[video_idx]
+                    for key, value in video_kwargs.items():
+                        sample_video_kw[key] = value[video_idx]
+                    video_idx += 1
+
+                llm_inputs.append({
+                    "prompt": prompt,
+                    "multi_modal_data": sample_mm_data,
+                    "mm_processor_kwargs": sample_video_kw,
+                })
+
+            outputs = llm.generate(llm_inputs, sampling_params=sampling_params)
+            output_text = [out.outputs[0].text for out in outputs]
+
+        except Exception as e:
+            print('error:', data[i]['path'])
+            output_text = ['<answer>error</answer>']
+
         think_chain = extract_think(output_text[0])
         if think_chain:
             data[i]["process"] = f"<think>{think_chain}</think>"
         else:
             data[i]["process"] = f"<think></think>"
-
-    # for i in tqdm(range(len(messages)),
-    #               desc=f"Processing examples for scene {scene_idx}, sample rate {sample_rate}, batch size {batch_size}"):
-    #     prompts = [processor.apply_chat_template(msg, tokenize=False, add_generation_prompt=True) for msg in
-    #                messages]
-    #     try:
-    #         image_inputs, video_inputs, video_kwargs = process_vision_info(prompts, return_video_kwargs=True)
-
-    #         image_idx = 0
-    #         video_idx = 0
-    #         llm_inputs = []
-
-    #         for idx, prompt in enumerate(prompts):
-    #             mm_type = messages[idx][0]['content'][0]['type']
-    #             sample_mm_data = {}
-    #             sample_video_kw = {}
-    #             if mm_type == 'image':
-    #                 sample_mm_data["image"] = image_inputs[image_idx]
-    #                 image_idx += 1
-    #             elif mm_type == 'video':
-    #                 sample_mm_data["video"] = video_inputs[video_idx]
-    #                 for key, value in video_kwargs.items():
-    #                     sample_video_kw[key] = value[video_idx]
-    #                 video_idx += 1
-
-    #             llm_inputs.append({
-    #                 "prompt": prompt,
-    #                 "multi_modal_data": sample_mm_data,
-    #                 "mm_processor_kwargs": sample_video_kw,
-    #             })
-
-    #         output_text = ask_qwen(model, processor, messages)
-    #         # outputs = llm.generate(llm_inputs, sampling_params=sampling_params)
-    #         # output_text = [out.outputs[0].text for out in outputs]
-
-    #     except Exception as e:
-    #         print('error:', data[i]['path'])
-    #         output_text = ['<answer>error</answer>']
-
-    #     think_chain = extract_think(output_text[0])
-    #     if think_chain:
-    #         data[i]["process"] = f"<think>{think_chain}</think>"
-    #     else:
-    #         data[i]["process"] = f"<think></think>"
 
     return data
 
@@ -426,32 +413,27 @@ def gen_thought_process(data, model, processor, scene_idx):
 MODEL_PATH = "Qwen/Qwen2.5-VL-32B-Instruct"
 BSZ = 32
 
-# llm = LLM(
-#     model=MODEL_PATH,
-#     tensor_parallel_size=torch.cuda.device_count(),
-#     max_model_len=8192,
-#     gpu_memory_utilization=0.8,
-#     limit_mm_per_prompt={"image": 10, "video": 10},
-#     dtype="float16"
-# )
-
-# sampling_params = SamplingParams(
-#     temperature=1.0,
-#     top_p=0.95,
-#     max_tokens=512,
-#     stop_token_ids=[],
-# )
-
-
-model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
-    "Qwen/Qwen2.5-VL-32B-Instruct", torch_dtype="auto", device_map="auto", cache_dir="/scratch/zl3466/github/thinking_in_street/model/Qwen"
+llm = LLM(
+    model=MODEL_PATH,
+    tensor_parallel_size=torch.cuda.device_count(),
+    max_model_len=8192,
+    gpu_memory_utilization=0.8,
+    limit_mm_per_prompt={"image": 10, "video": 10},
+    dtype="float16"
 )
-processor = AutoProcessor.from_pretrained("Qwen/Qwen2.5-VL-32B-Instruct", min_pixels=256*28*28, max_pixels=1280*28*28)
 
-# processor = AutoProcessor.from_pretrained(MODEL_PATH)
-# tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
-# tokenizer.padding_side = "left"
-# processor.tokenizer = tokenizer
+sampling_params = SamplingParams(
+    temperature=1.0,
+    top_p=0.95,
+    max_tokens=512,
+    stop_token_ids=[],
+)
+processor = AutoProcessor.from_pretrained(MODEL_PATH)
+tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
+tokenizer.padding_side = "left"
+processor.tokenizer = tokenizer
+
+
 
 ''' ========================== generate examples from NuScenes dataset ============================ '''
 num_cam = 1
@@ -511,11 +493,11 @@ for scene_idx in test_scene_idx_list:
 
 for scene_idx in train_scene_idx_list:
     train_example_json_dict[f'scene_{scene_idx}'] = gen_thought_process(train_example_json_dict[f'scene_{scene_idx}'],
-                                                                        model, processor, scene_idx)
+                                                                       llm, sampling_params)
 
-for scene_idx in train_scene_idx_list:
+for scene_idx in test_scene_idx_list:
     test_example_json_dict[f'scene_{scene_idx}'] = gen_thought_process(test_example_json_dict[f'scene_{scene_idx}'],
-                                                                       model, processor, scene_idx)
+                                                                       llm, sampling_params)
 
 with open(f"{out_path}/train_examples.json", 'w') as f:
     json.dump(train_example_json_dict, f, indent=4)
