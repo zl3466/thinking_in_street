@@ -1,13 +1,15 @@
+import argparse
 import os
 import sys
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+import torch
 
 import json
 import re
 from tqdm import tqdm
 from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
-import torch
+
 
 from transformers import Qwen2_5_VLForConditionalGeneration, AutoProcessor, AutoTokenizer
 from vllm import LLM, SamplingParams
@@ -19,7 +21,6 @@ import cv2
 import random
 import time
 import math
-from model.gemini import GeminiModel
 
 
 QUESTION_TEMPLATE = (
@@ -170,24 +171,8 @@ def calculate_delta_heading(yaw1, yaw2):
         delta += 360
     return delta
 
-def nusc_to_examples(nusc_dataset, video_out_dir="", sample_rate=10, batch_size=4, visualize=False):
-    if visualize:
-        ''' prepare video writer '''
-        sample_img = cv2.imread(nusc_dataset.img_filepaths[0])
-        w = sample_img.shape[1]
-        h = sample_img.shape[0]
-        video_width = w
-        video_height = h
 
-        fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-        out0 = cv2.VideoWriter(video_out_dir, fourcc, sample_rate, (video_width, video_height))
-        frame_text = ""
-        ''' video writer code ends here '''
-
-
-    # raw data is 10hz
-    step_size = 10 // sample_rate
-
+def nusc_to_examples(nusc_dataset, step_size=1, batch_size=4):
     meta_dict = nusc_dataset.meta_dict
     cam_list = nusc_dataset.camera_list
     cam = cam_list[0]
@@ -206,7 +191,7 @@ def nusc_to_examples(nusc_dataset, video_out_dir="", sample_rate=10, batch_size=
     batch_delta_heading_gt = []
     batch_img_list = []
     sample_count = 0
-    
+
     for frame_i in range(len(ego_pose_list)):
         if frame_i % step_size != 0:
             continue
@@ -218,7 +203,7 @@ def nusc_to_examples(nusc_dataset, video_out_dir="", sample_rate=10, batch_size=
         rotation = ego_pose["rotation"]
         yaw = quaternion_to_yaw(rotation)
 
-        batch_img_list.append(nusc_dataset.img_filepaths[frame_i])
+        batch_img_list.append(nusc_dataset.rel_img_filepaths[frame_i])
         if prev_yaw is not None and prev_translation is not None:
             disp = calculate_displacement(prev_translation, translation)
             delta_heading = calculate_delta_heading(prev_yaw, yaw)
@@ -231,7 +216,8 @@ def nusc_to_examples(nusc_dataset, video_out_dir="", sample_rate=10, batch_size=
         prev_translation = translation
 
         if sample_count != 0 and sample_count % (batch_size - 1) == 0:
-            if len(batch_disp_gt) != batch_size - 1 or len(batch_delta_heading_gt) != batch_size - 1 or len(batch_img_list) != batch_size:
+            if len(batch_disp_gt) != batch_size - 1 or len(batch_delta_heading_gt) != batch_size - 1 or len(
+                    batch_img_list) != batch_size:
                 # if this is residue at the end of a scene, don't use it
 
                 if frame_i == len(ego_pose_list) - 1:
@@ -253,15 +239,6 @@ def nusc_to_examples(nusc_dataset, video_out_dir="", sample_rate=10, batch_size=
             prev_yaw = None
             prev_translation = None
             sample_count = 0
-
-        if visualize:
-            img = cv2.imread(f"{nusc_dataset.img_filepaths[frame_i]}")
-            font = cv2.FONT_HERSHEY_SIMPLEX
-            cv2.putText(img, frame_text, (10, 30), font, fontScale=1, color=(0, 0, 255), thickness=2,
-                        lineType=cv2.LINE_AA)
-            out0.write(img)
-
-        
 
     example_list = []
     problem_id_offset = 0
@@ -355,7 +332,7 @@ def gen_thought_process(data, llm, sampling_params):
             "content": [
                 {
                     "type": x['data_type'],
-                    x['data_type']: [f"{dataset_dir}/{file_path}" for file_path in x['path']]
+                    x['data_type']: [f"{os.getenv('DATASET_DIR')}/{file_path}" for file_path in x['path']]
                 },
                 {
                     "type": "text",
@@ -367,41 +344,40 @@ def gen_thought_process(data, llm, sampling_params):
 
     prompts = [processor.apply_chat_template(msg, tokenize=False, add_generation_prompt=True) for msg in
                messages]
-    image_inputs, video_inputs, video_kwargs = process_vision_info(prompts, return_video_kwargs=True)
-    for i in tqdm(range(len(messages)),
-                  desc=f"Processing examples for scene {scene_idx}, sample rate {sample_rate}, batch size {batch_size}"):
-        try:
-            image_idx = 0
-            video_idx = 0
-            llm_inputs = []
 
-            for idx, prompt in enumerate(prompts):
-                mm_type = messages[idx][0]['content'][0]['type']
-                sample_mm_data = {}
-                sample_video_kw = {}
-                if mm_type == 'image':
-                    sample_mm_data["image"] = image_inputs[image_idx]
-                    image_idx += 1
-                elif mm_type == 'video':
-                    sample_mm_data["video"] = video_inputs[video_idx]
-                    for key, value in video_kwargs.items():
-                        sample_video_kw[key] = value[video_idx]
-                    video_idx += 1
+    image_inputs, video_inputs, video_kwargs = process_vision_info(messages, return_video_kwargs=True)
+    try:
+        image_idx = 0
+        video_idx = 0
+        llm_inputs = []
 
-                llm_inputs.append({
-                    "prompt": prompt,
-                    "multi_modal_data": sample_mm_data,
-                    "mm_processor_kwargs": sample_video_kw,
-                })
+        for idx, prompt in enumerate(prompts):
+            mm_type = messages[idx][0]['content'][0]['type']
+            sample_mm_data = {}
+            sample_video_kw = {}
+            if mm_type == 'image':
+                sample_mm_data["image"] = image_inputs[image_idx]
+                image_idx += 1
+            elif mm_type == 'video':
+                sample_mm_data["video"] = video_inputs[video_idx]
+                for key, value in video_kwargs.items():
+                    sample_video_kw[key] = value[video_idx]
+                video_idx += 1
 
-            outputs = llm.generate(llm_inputs, sampling_params=sampling_params)
-            output_text = [out.outputs[0].text for out in outputs]
+            llm_inputs.append({
+                "prompt": prompt,
+                "multi_modal_data": sample_mm_data,
+                "mm_processor_kwargs": sample_video_kw,
+            })
 
-        except Exception as e:
-            print('error:', data[i]['path'])
-            output_text = ['<answer>error</answer>']
+        outputs = llm.generate(llm_inputs, sampling_params=sampling_params)
+        output_text = [out.outputs[0].text for out in outputs]
 
-        think_chain = extract_think(output_text[0])
+    except Exception as e:
+        output_text = ['<answer>error</answer>']
+
+    for i in tqdm(range(len(messages)), desc="generating thought processes for a scene"):
+        think_chain = extract_think(output_text[i])
         if think_chain:
             data[i]["process"] = f"<think>{think_chain}</think>"
         else:
@@ -410,98 +386,117 @@ def gen_thought_process(data, llm, sampling_params):
     return data
 
 
-MODEL_PATH = "Qwen/Qwen2.5-VL-32B-Instruct"
-BSZ = 32
-
-llm = LLM(
-    model=MODEL_PATH,
-    tensor_parallel_size=torch.cuda.device_count(),
-    max_model_len=8192,
-    gpu_memory_utilization=0.8,
-    limit_mm_per_prompt={"image": 10, "video": 10},
-    dtype="float16"
-)
-
-sampling_params = SamplingParams(
-    temperature=1.0,
-    top_p=0.95,
-    max_tokens=512,
-    stop_token_ids=[],
-)
-processor = AutoProcessor.from_pretrained(MODEL_PATH)
-tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
-tokenizer.padding_side = "left"
-processor.tokenizer = tokenizer
 
 
 
-''' ========================== generate examples from NuScenes dataset ============================ '''
-num_cam = 1
-train_num_scene = 850
-test_num_scene = 150
-sample_rate = 2
-batch_size = 4
-
-train_scene_idx_list = []
-test_scene_idx_list = []
-for i in range(train_num_scene):
-    train_scene_idx_list.append(i)
-for i in range(test_num_scene):
-    test_scene_idx_list.append(i)
-
-root_path = "/scratch/zl3466/dataset/NuScenes"
-out_path = f"{root_path}/examples/scene_{train_scene_idx_list[0]}-{train_scene_idx_list[-1]}_cam_{num_cam}"
-
-train_data_path = f"{root_path}/train"
-test_data_path = f"{root_path}/test"
-
-train_out_path = f"{out_path}/train"
-test_out_path = f"{out_path}/test"
-os.makedirs(train_out_path, exist_ok=True)
-os.makedirs(test_out_path, exist_ok=True)
-
-nusc_train = NuScenes(version="v1.0-trainval", dataroot=train_data_path, verbose=True)
-nusc_test = NuScenes(version="v1.0-test", dataroot=test_data_path, verbose=True)
-
-# train_example_list = []
-train_example_json_dict = {}
-print(f"Processing train dataset into examples...")
-for scene_idx in train_scene_idx_list:
-    dataset = NuScenesDataset(data_path=train_data_path,
-                              meta_out_path="",
-                              num_cams=num_cam,
-                              nusc=nusc_train,
-                              scene_idx=scene_idx,
-                              save_meta=False)
-    train_example_json_dict[f"scene_{scene_idx}"] = nusc_to_examples(nusc_dataset=dataset, sample_rate=sample_rate,
-                                                                     batch_size=batch_size)
-    # train_example_list += nusc_to_examples(nusc_dataset=dataset, sample_rate=sample_rate, batch_size=batch_size)
-
-# test_example_list = []
-test_example_json_dict = {}
-print(f"Processing test dataset into examples...")
-for scene_idx in test_scene_idx_list:
-    dataset = NuScenesDataset(data_path=test_data_path,
-                              meta_out_path="",
-                              num_cams=num_cam,
-                              nusc=nusc_test,
-                              scene_idx=scene_idx,
-                              save_meta=False)
-    test_example_json_dict[f"scene_{scene_idx}"] = nusc_to_examples(nusc_dataset=dataset, sample_rate=sample_rate,
-                                                                    batch_size=batch_size)
-    # test_example_list += nusc_to_examples(nusc_dataset=dataset, sample_rate=sample_rate, batch_size=batch_size)
-
-for scene_idx in train_scene_idx_list:
-    train_example_json_dict[f'scene_{scene_idx}'] = gen_thought_process(train_example_json_dict[f'scene_{scene_idx}'],
-                                                                       llm, sampling_params)
-
-for scene_idx in test_scene_idx_list:
-    test_example_json_dict[f'scene_{scene_idx}'] = gen_thought_process(test_example_json_dict[f'scene_{scene_idx}'],
-                                                                       llm, sampling_params)
-
-with open(f"{out_path}/train_examples.json", 'w') as f:
-    json.dump(train_example_json_dict, f, indent=4)
-with open(f"{out_path}/test_examples.json", 'w') as f:
-    json.dump(test_example_json_dict, f, indent=4)
 
 
+def main(args):
+
+
+    ''' ========================== generate examples from NuScenes dataset ============================ '''
+    num_cam = args.num_cam
+    train_num_scene = args.train_num_scene
+    test_num_scene = args.test_num_scene
+    # sample_rate = args.sample_rate
+    batch_size = args.batch_size
+    data_root_path = args.data_root_path
+    ''' =============================================================================== '''
+
+    train_scene_idx_list = []
+    test_scene_idx_list = []
+    for i in range(train_num_scene):
+        train_scene_idx_list.append(i)
+    for i in range(test_num_scene):
+        test_scene_idx_list.append(i)
+
+
+    train_out_path = f"{data_root_path}/examples/qwen_vllm/train/scene_{train_scene_idx_list[0]}-{train_scene_idx_list[-1]}_cam_{num_cam}"
+    test_out_path = f"{data_root_path}/examples/qwen_vllm/test/scene_{train_scene_idx_list[0]}-{train_scene_idx_list[-1]}_cam_{num_cam}"
+
+    train_data_path = f"{data_root_path}/train_test"
+    test_data_path = f"{data_root_path}/train_test"
+
+    os.makedirs(train_out_path, exist_ok=True)
+    os.makedirs(test_out_path, exist_ok=True)
+
+    nusc_train = NuScenes(version="v1.0-trainval", dataroot=train_data_path, verbose=True)
+    nusc_test = NuScenes(version="v1.0-test", dataroot=test_data_path, verbose=True)
+
+    train_example_json_dict = {}
+    print(f"Processing train dataset into examples...")
+    for scene_idx in train_scene_idx_list:
+        step_size = random.randint(1, 10)
+        print(f"step size: {step_size}")
+        dataset = NuScenesDataset(data_path=train_data_path,
+                                  meta_out_path="",
+                                  num_cams=num_cam,
+                                  nusc=nusc_train,
+                                  scene_idx=scene_idx,
+                                  save_meta=False)
+        scene_example_list = nusc_to_examples(nusc_dataset=dataset, step_size=step_size, batch_size=batch_size)
+        train_example_json_dict[f'scene_{scene_idx}'] = gen_thought_process(scene_example_list, llm, sampling_params)
+
+    with open(f"{train_out_path}/train_examples.json", 'w') as f:
+        json.dump(train_example_json_dict, f, indent=4)
+
+    test_example_json_dict = {}
+    print(f"Processing test dataset into examples...")
+    for scene_idx in test_scene_idx_list:
+        step_size = random.randint(1, 10)
+        print(f"step size: {step_size}")
+        dataset = NuScenesDataset(data_path=test_data_path,
+                                  meta_out_path="",
+                                  num_cams=num_cam,
+                                  nusc=nusc_test,
+                                  scene_idx=scene_idx,
+                                  save_meta=False)
+        scene_example_list = nusc_to_examples(nusc_dataset=dataset, step_size=step_size, batch_size=batch_size)
+        test_example_json_dict[f'scene_{scene_idx}'] = gen_thought_process(scene_example_list, llm, sampling_params)
+
+    with open(f"{test_out_path}/test_examples.json", 'w') as f:
+        json.dump(test_example_json_dict, f, indent=4)
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Generate thought process from NuScenes with Gemini.")
+    parser.add_argument("--num_cam", type=int, default=1)
+    parser.add_argument("--train_num_scene", type=int, default=1)
+    parser.add_argument("--test_num_scene", type=int, default=1)
+    parser.add_argument("--step_size", type=int, default=1)
+    parser.add_argument("--batch_size", type=int, default=4)
+    parser.add_argument("--data_root_path", type=str, default="NuScenes")
+    parser.add_argument("--model", type=str, default="Qwen/Qwen2.5-VL-7B-Instruct")
+    parser.add_argument("--model_path", type=str, default="/scratch/zl3466/github/thinking_in_street/model/Qwen")
+    
+    args = parser.parse_args()
+
+    # MODEL_PATH = "Qwen/Qwen2.5-VL-7B-Instruct"
+    model_name = args.model
+    model_path = args.model_path
+
+    llm = LLM(
+        model=model_name,
+        download_dir=model_path,
+        tensor_parallel_size=torch.cuda.device_count(),
+        max_model_len=8192,
+        gpu_memory_utilization=0.8,
+        limit_mm_per_prompt={"image": 10, "video": 10},
+        dtype="float16"
+    )
+
+    sampling_params = SamplingParams(
+        temperature=1.0,
+        top_p=0.95,
+        max_tokens=512,
+        stop_token_ids=[],
+    )
+
+
+    processor = AutoProcessor.from_pretrained(model_name, cache_dir="/scratch/zl3466/github/thinking_in_street/model/Qwen")
+    tokenizer = AutoTokenizer.from_pretrained(model_name, cache_dir="/scratch/zl3466/github/thinking_in_street/model/Qwen")
+    tokenizer.padding_side = "left"
+    processor.tokenizer = tokenizer
+
+    
+    main(args)

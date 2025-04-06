@@ -498,7 +498,7 @@ def main(script_args, training_args, model_args):
         test_scene_idx_list.append(i)
 
     root_path = script_args.dataset_name
-    example_json_path = f"{root_path}/examples/gemini"
+    example_json_path = f"{root_path}/examples/qwen_vllm"
 
     train_out_path = f"{out_path}/train"
     test_out_path = f"{out_path}/test"
