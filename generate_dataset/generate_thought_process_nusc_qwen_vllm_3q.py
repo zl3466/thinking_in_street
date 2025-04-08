@@ -2,6 +2,8 @@ import argparse
 import os
 import sys
 
+import numpy as np
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import torch
 
@@ -9,7 +11,6 @@ import json
 import re
 from tqdm import tqdm
 from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
-
 
 from transformers import Qwen2_5_VLForConditionalGeneration, AutoProcessor, AutoTokenizer
 from vllm import LLM, SamplingParams
@@ -21,7 +22,6 @@ import cv2
 import random
 import time
 import math
-
 
 QUESTION_TEMPLATE = (
     "{Question}\n"
@@ -39,6 +39,8 @@ TYPE_TEMPLATE = {
     "regression": " Please provide the numerical value (e.g., 42 or 3.14) within the <answer> </answer> tags.",
     "list": " Please provide the list answer (e.g., [val, val, val, ...]) within the <answer> </answer> tags."
 }
+
+general_direction_options = ["stationary", "forward", "backward", "left", "slight left", "back left", "slight back left", "right", "slight right", "back right", "slight back right"]
 
 
 def extract_think(output_str):
@@ -174,7 +176,71 @@ def calculate_delta_heading(yaw1, yaw2):
     # return delta
 
 
-def nusc_to_examples(nusc_dataset, step_size=1, batch_size=4):
+def calc_general_dir(prev_translation, translation, prev_yaw, yaw):
+    """
+    Calculate the agent's general heading direction.
+
+    Parameters:
+    - prev_translation: Previous position (x, y, z)
+    - translation: Current position (x, y, z)
+    - prev_yaw: Previous yaw angle in radians (clockwise positive, from quaternion_to_yaw)
+    - yaw: Current yaw angle in radians (clockwise positive, from quaternion_to_yaw)
+
+    Returns:
+    - str: One of ["forward", "backward", "left", "slight left", "right", "slight right", "stationary"]
+    """
+    # Calculate movement vector
+    movement = np.array(translation) - np.array(prev_translation)
+
+    # Check if the agent is stationary (very little movement and rotation)
+    movement_magnitude = np.linalg.norm(movement)
+    yaw_diff = abs((yaw - prev_yaw) % (2 * np.pi))
+    if yaw_diff > np.pi:
+        yaw_diff = 2 * np.pi - yaw_diff
+
+    # If there's almost no movement and minimal rotation, agent is stationary
+    if movement_magnitude < 0.05 and yaw_diff < 0.00175:
+        return "stationary"
+
+    # If there is rotation, use the rotation change
+
+    # Normalize the yaw difference to [-π, π]
+    yaw_diff = (yaw - prev_yaw) % (2 * np.pi)
+    if yaw_diff > np.pi:
+        yaw_diff -= 2 * np.pi
+    angle_diff = math.degrees(yaw_diff)
+    # Determine direction based on rotation
+    # Note: Since yaw is clockwise positive, positive yaw_diff means turning right
+    if abs(angle_diff) < 1:  # 1 degree, Almost no rotation
+        return "forward"
+    elif abs(angle_diff) < 5:  # Less than 5 degrees
+        return "slight right" if yaw_diff > 0 else "slight left"
+    elif abs(angle_diff) < 90:  # Less than 90 degrees
+        return "right" if yaw_diff > 0 else "left"
+    elif abs(angle_diff) < 175:  # Less than 175 degrees
+        return "back right" if yaw_diff > 0 else "back left"
+    elif abs(angle_diff) < 179:  # Less than 179 degrees
+        return "slight back right" if yaw_diff > 0 else "slight back left"
+    else:
+        return "backward"
+
+
+
+
+def nusc_to_examples(nusc_dataset, step_size=1, batch_size=4, video_out_dir=""):
+    if video_out_dir != "":
+        ''' prepare video writer '''
+        sample_img = cv2.imread(nusc_dataset.img_filepaths[0])
+        w = sample_img.shape[1]
+        h = sample_img.shape[0]
+        video_width = w
+        video_height = h
+
+        fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+        out0 = cv2.VideoWriter(video_out_dir, fourcc, 10//step_size, (video_width, video_height))
+        frame_text = ""
+        ''' video writer code ends here '''
+        
     meta_dict = nusc_dataset.meta_dict
     cam_list = nusc_dataset.camera_list
     cam = cam_list[0]
@@ -184,13 +250,17 @@ def nusc_to_examples(nusc_dataset, step_size=1, batch_size=4):
 
     prev_yaw = None
     prev_translation = None
-
+    
+    general_dir_gt_all = []
     disp_gt_all = []
     delta_heading_gt_all = []
     img_list_all = []
 
+    batch_general_dir_gt = []
     batch_disp_gt = []
     batch_delta_heading_gt = []
+    batch_img_list = []
+    sample_count = 0
     batch_img_list = []
     sample_count = 0
 
@@ -207,11 +277,14 @@ def nusc_to_examples(nusc_dataset, step_size=1, batch_size=4):
 
         batch_img_list.append(nusc_dataset.rel_img_filepaths[frame_i])
         if prev_yaw is not None and prev_translation is not None:
+            general_dir = calc_general_dir(prev_translation, translation, prev_yaw, yaw)
             disp = calculate_displacement(prev_translation, translation)
             delta_heading = calculate_delta_heading(prev_yaw, yaw)
+
+            batch_general_dir_gt.append(general_dir)
             batch_disp_gt.append(disp)
             batch_delta_heading_gt.append(delta_heading)
-            frame_text = f"delta heading: {delta_heading}, displacement: {disp}"
+            frame_text = f"dir: {general_dir}, delta heading: {delta_heading}, displacement: {disp}"
             sample_count += 1
 
         prev_yaw = yaw
@@ -228,13 +301,17 @@ def nusc_to_examples(nusc_dataset, step_size=1, batch_size=4):
                     assert len(
                         batch_img_list) == batch_size, f"image path batch size mismatch {len(batch_img_list)}, {batch_size}"
                     assert len(
+                        batch_general_dir_gt) == batch_size - 1, f"general direction batch size mismatch {len(batch_general_dir_gt)}, {batch_size - 1}"
+                    assert len(
                         batch_disp_gt) == batch_size - 1, f"displacement batch size mismatch {len(batch_disp_gt)}, {batch_size - 1}"
                     assert len(
                         batch_delta_heading_gt) == batch_size - 1, f"delta_heading batch size mismatch {len(batch_delta_heading_gt)}, {batch_size - 1}"
 
+            general_dir_gt_all.append(batch_general_dir_gt)
             disp_gt_all.append(batch_disp_gt)
             delta_heading_gt_all.append(batch_delta_heading_gt)
             img_list_all.append(batch_img_list)
+            batch_general_dir_gt = []
             batch_disp_gt = []
             batch_delta_heading_gt = []
             batch_img_list = []
@@ -242,12 +319,38 @@ def nusc_to_examples(nusc_dataset, step_size=1, batch_size=4):
             prev_translation = None
             sample_count = 0
 
+    if video_out_dir != "":
+        img = cv2.imread(f"{nusc_dataset.img_filepaths[frame_i]}")
+        font = cv2.FONT_HERSHEY_SIMPLEX
+        cv2.putText(img, frame_text, (10, 30), font, fontScale=1, color=(0, 0, 255), thickness=2,
+                    lineType=cv2.LINE_AA)
+        out0.write(img)
+        
     example_list = []
     problem_id_offset = 0
     for batch_i in range(len(disp_gt_all)):
+        batch_general_dir_gt = general_dir_gt_all[batch_i]
         batch_disp_gt = disp_gt_all[batch_i]
         batch_delta_heading_gt = delta_heading_gt_all[batch_i]
         batch_img_list = img_list_all[batch_i]
+
+        example_general_dir = {
+            "problem_id": batch_i + problem_id_offset,
+            "problem": f"I uploaded {len(batch_img_list)} frames from a vehicle dash cam video. \n"
+                       f"Determine the vehicle's movement direction between each frame and its previous frame.\n"
+                       f"Get your answer from the following options: {general_direction_options}.\n"
+                       f"Keep all answers in one list. "
+                       f"You should have {len(batch_general_dir_gt)} values in the list.\n",
+            "data_type": "video",
+            "problem_type": "list",
+            "problem_subject": "general direction",
+            "options": [],
+            "solution": f"<answer>{batch_general_dir_gt}</answer>",
+            "path": batch_img_list,
+            "reward": 1.0,
+            "select": True
+        }
+        problem_id_offset += 1
 
         example_heading = {
             "problem_id": batch_i + problem_id_offset,
@@ -256,9 +359,10 @@ def nusc_to_examples(nusc_dataset, step_size=1, batch_size=4):
                        f"Give your answer in degree values ranging between -180 and 180 degrees, with veer to the right "
                        f"being positive degrees and to the left being negative degrees.\n"
                        f"Keep all degree values in one list. "
-                       f"You should have {len(batch_disp_gt)} values in the list.\n",
+                       f"You should have {len(batch_delta_heading_gt)} values in the list.\n",
             "data_type": "video",
             "problem_type": "list",
+            "problem_subject": "heading",
             "options": [],
             "solution": f"<answer>{batch_delta_heading_gt}</answer>",
             "path": batch_img_list,
@@ -276,6 +380,7 @@ def nusc_to_examples(nusc_dataset, step_size=1, batch_size=4):
                        f"You should have {len(batch_disp_gt)} values in the list.\n",
             "data_type": "video",
             "problem_type": "list",
+            "problem_subject": "displacement",
             "options": [],
             "solution": f"<answer>{batch_disp_gt}</answer>",
             "path": batch_img_list,
@@ -283,6 +388,7 @@ def nusc_to_examples(nusc_dataset, step_size=1, batch_size=4):
             "select": True
         }
 
+        example_list.append(example_general_dir)
         example_list.append(example_heading)
         example_list.append(example_disp)
 
@@ -388,14 +494,7 @@ def gen_thought_process(data, llm, sampling_params):
     return data
 
 
-
-
-
-
-
 def main(args):
-
-
     ''' ========================== generate examples from NuScenes dataset ============================ '''
     num_cam = args.num_cam
     # train_num_scene = args.train_num_scene
@@ -417,9 +516,8 @@ def main(args):
     for i in range(test_scene_start, test_scene_end):
         test_scene_idx_list.append(i)
 
-
-    train_out_path = f"{data_root_path}/examples/qwen_vllm/train/scene_{train_scene_idx_list[0]}-{train_scene_idx_list[-1]}_cam_{num_cam}_frame_{batch_size}"
-    test_out_path = f"{data_root_path}/examples/qwen_vllm/test/scene_{test_scene_idx_list[0]}-{test_scene_idx_list[-1]}_cam_{num_cam}_frame_{batch_size}"
+    train_out_path = f"{data_root_path}/examples/qwen_vllm_3q/train/scene_{train_scene_idx_list[0]}-{train_scene_idx_list[-1]}_cam_{num_cam}_frame_{batch_size}"
+    test_out_path = f"{data_root_path}/examples/qwen_vllm_3q/test/scene_{test_scene_idx_list[0]}-{test_scene_idx_list[-1]}_cam_{num_cam}_frame_{batch_size}"
 
     train_data_path = f"{data_root_path}/train_test"
     test_data_path = f"{data_root_path}/train_test"
@@ -476,7 +574,7 @@ if __name__ == "__main__":
     parser.add_argument("--data_root_path", type=str, default="NuScenes")
     parser.add_argument("--model", type=str, default="Qwen/Qwen2.5-VL-7B-Instruct")
     parser.add_argument("--model_path", type=str, default="/scratch/zl3466/github/thinking_in_street/model/Qwen")
-    
+
     args = parser.parse_args()
 
     # MODEL_PATH = "Qwen/Qwen2.5-VL-7B-Instruct"
@@ -500,11 +598,11 @@ if __name__ == "__main__":
         stop_token_ids=[],
     )
 
-
-    processor = AutoProcessor.from_pretrained(model_name, cache_dir="/scratch/zl3466/github/thinking_in_street/model/Qwen")
-    tokenizer = AutoTokenizer.from_pretrained(model_name, cache_dir="/scratch/zl3466/github/thinking_in_street/model/Qwen")
+    processor = AutoProcessor.from_pretrained(model_name,
+                                              cache_dir="/scratch/zl3466/github/thinking_in_street/model/Qwen")
+    tokenizer = AutoTokenizer.from_pretrained(model_name,
+                                              cache_dir="/scratch/zl3466/github/thinking_in_street/model/Qwen")
     tokenizer.padding_side = "left"
     processor.tokenizer = tokenizer
 
-    
     main(args)

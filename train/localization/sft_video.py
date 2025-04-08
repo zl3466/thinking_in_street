@@ -126,18 +126,14 @@ def prepare_dataset_nusc(example: Dict[str, Any]) -> Dict[str, List[Dict[str, An
         },
         {
             "role": "user",
-            "content": [
-                {
-                    "type": example['data_type'],
-                    example['data_type']: os.getcwd() + "/Video-R1-data" + example['path'][1:]
-                    # "max_pixels": 360*420,
-                    # "fps": 1.0
-                },
-                {
-                    "type": "text",
-                    "text": QUESTION_TEMPLATE.format(Question=question) + TYPE_TEMPLATE[example['problem_type']]
-                }
-            ]
+            "content": [{
+                "type": example['data_type'],
+                example['data_type']: [f"{os.getenv('DATASET_DIR')}/{file_path}" for file_path in
+                                        example['path']]},
+            {
+                "type": "text",
+                "text": QUESTION_TEMPLATE.format(Question=question) + TYPE_TEMPLATE[example['problem_type']]
+            }]
         },
         {
             "role": "assistant",
@@ -192,49 +188,55 @@ if __name__ == "__main__":
     parser = TrlParser((ScriptArguments, SFTConfig, ModelConfig))
     script_args, training_args, model_config = parser.parse_args_and_config()
 
-    # print(script_args)
-    # print(training_args)
-    print(model_config)
-
     # Configure training args
     training_args.gradient_checkpointing_kwargs = dict(use_reentrant=False)
     training_args.remove_unused_columns = False
     training_args.dataset_kwargs = {"skip_prepare_dataset": True}
 
-    # Load dataset
+    ''' ========================= load dataset ========================= '''
     num_cam = 1
-    scene_idx = 0
+    train_num_scene = int(os.getenv("NUM_TRAIN_SCENE"))
+    test_num_scene = min(150, train_num_scene // 4)
+    # sample_rate = 2
+    train_scene_idx_list = []
+    test_scene_idx_list = []
+    for i in range(train_num_scene):
+        train_scene_idx_list.append(i)
+    for i in range(test_num_scene):
+        test_scene_idx_list.append(i)
 
-    data_path = "/home/zl3466/Downloads/NuScenes/train"
-    meta_out_path = f"/home/zl3466/Documents/github/thinking_in_street/train_result/scene_{scene_idx}_cam_{num_cam}.json"
+    root_path = script_args.dataset_name
+    example_json_path = f"{root_path}/examples/qwen_vllm"
 
-    dataset = NuScenesDataset(data_path=data_path,
-                              meta_out_path=meta_out_path,
-                              num_cams=num_cam,
-                              nusc=None,
-                              scene_idx=scene_idx)
-    # # if script_args.dataset_name.endswith('.json') or script_args.dataset_name.endswith('.jsonl'):
-    # #     dataset =  DatasetDict({"train": Dataset.from_json(script_args.dataset_name)})
-    # # else:
-    # #     # Load the dataset
-    # #     dataset = load_dataset(script_args.dataset_name, name=script_args.dataset_config)
+    train_example_dict = json.load(open(
+        f"{example_json_path}/train/scene_{train_scene_idx_list[0]}-{train_scene_idx_list[-1]}_cam_{num_cam}/train_examples.json"))
+    test_example_dict = json.load(open(
+        f"{example_json_path}/test/scene_{train_scene_idx_list[0]}-{train_scene_idx_list[-1]}_cam_{num_cam}/test_examples.json"))
 
-    print(dataset.meta_dict.keys())
+    train_example_list = []
+    test_example_list = []
+    for scene in train_example_dict.keys():
+        examples = train_example_dict[scene]
+        train_example_list += examples
 
-    # Setup model
+    for scene in test_example_dict.keys():
+        examples = test_example_dict[scene]
+        test_example_list += examples
+
+    dataset = DatasetDict({
+        "train": Dataset.from_list(train_example_list),
+        "test": Dataset.from_list(test_example_list)
+    })
+    ''' ========================= Prepare dataset (process examples into messages) ========================= '''
+    prepared_dataset = [prepare_dataset_nusc(example) for example in dataset['train']]
+    
+    
+    ''' ========================= setup model ========================= '''
     torch_dtype = (
         model_config.torch_dtype
         if model_config.torch_dtype in ["auto", None]
         else getattr(torch, model_config.torch_dtype)
     )
-
-    # # Quantization configuration for 4-bit training
-    # bnb_config = BitsAndBytesConfig(
-    #     load_in_4bit=True,
-    #     bnb_4bit_use_double_quant=True,
-    #     bnb_4bit_quant_type="nf4",
-    #     bnb_4bit_compute_dtype=torch.bfloat16
-    # )
 
     # Model initialization
     model_kwargs = dict(
@@ -245,30 +247,20 @@ if __name__ == "__main__":
         # quantization_config=bnb_config,
     )
 
-    # if "Qwen2-VL" in model_config.model_name_or_path:
-    #     model = Qwen2VLForConditionalGeneration.from_pretrained(model_config.model_name_or_path, **model_kwargs)
-    # elif "Qwen2.5-VL" in model_config.model_name_or_path:
-    #     print(model_config.model_name_or_path, **model_kwargs)
-    #     model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
-    #         "Qwen/Qwen2.5-VL-7B-Instruct", torch_dtype="auto", device_map="auto"
-    #     )
-    #     # model = Qwen2_5_VLForConditionalGeneration.from_pretrained(model_config.model_name_or_path, **model_kwargs)
-    # else:
-    #     model = AutoModelForVision2Seq.from_pretrained(model_config.model_name_or_path, **model_kwargs)
-
-
-    model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
-        "Qwen/Qwen2.5-VL-7B-Instruct", torch_dtype="auto", device_map="auto"
-    )
+    if "Qwen2-VL" in model_config.model_name_or_path:
+        model = Qwen2VLForConditionalGeneration.from_pretrained(model_config.model_name_or_path, **model_kwargs)
+    elif "Qwen2.5-VL" in model_config.model_name_or_path:
+        model = Qwen2_5_VLForConditionalGeneration.from_pretrained(model_config.model_name_or_path, **model_kwargs)
+    else:
+        model = AutoModelForVision2Seq.from_pretrained(model_config.model_name_or_path, **model_kwargs)
 
     processor = AutoProcessor.from_pretrained(
         model_config.model_name_or_path,
         trust_remote_code=model_config.trust_remote_code
     )
 
-    # Prepare dataset
-    prepared_dataset = [prepare_dataset(example) for example in dataset['train']]
-    #
+    
+
     # Initialize wandb if specified
     if training_args.report_to == "wandb":
         wandb.init(project="video-llm-training")
@@ -282,22 +274,21 @@ if __name__ == "__main__":
         peft_config=get_peft_config(model_config),
         tokenizer=processor.tokenizer
     )
-    #
-    # # Train model
-    # trainer.train()
-    #
-    # # Save final model
-    #
-    # trainer.save_model(training_args.output_dir)
-    # processor.save_pretrained(training_args.output_dir)
-    #
-    # if trainer.accelerator.is_main_process:
-    #     # Restore k,v cache for fast inference
-    #     trainer.model.config.use_cache = True
-    #     trainer.model.config.save_pretrained(training_args.output_dir)
-    #
-    # # Cleanup
-    # del model
-    # del trainer
-    # torch.cuda.empty_cache()
-    # wandb.finish()
+
+    # Train model
+    trainer.train()
+
+    # Save final model
+    trainer.save_model(training_args.output_dir)
+    processor.save_pretrained(training_args.output_dir)
+
+    if trainer.accelerator.is_main_process:
+        # Restore k,v cache for fast inference
+        trainer.model.config.use_cache = True
+        trainer.model.config.save_pretrained(training_args.output_dir)
+
+    # Cleanup
+    del model
+    del trainer
+    torch.cuda.empty_cache()
+    wandb.finish()

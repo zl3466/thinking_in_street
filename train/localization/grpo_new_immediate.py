@@ -36,6 +36,7 @@ from train.data_loader.nuscenes import NuScenesDataset
 import cv2
 import random
 import time
+import numpy as np
 
 QUESTION_TEMPLATE = (
     "{Question}\n"
@@ -53,6 +54,7 @@ TYPE_TEMPLATE = {
     "regression": " Please provide the numerical value (e.g., 42 or 3.14) within the <answer> </answer> tags.",
     "list": " Please provide the list answer (e.g., [val, val, val, ...]) within the <answer> </answer> tags."
 }
+general_direction_options = ["stationary", "forward", "backward", "left", "slight left", "back left", "slight back left", "right", "slight right", "back right", "slight back right"]
 
 
 @dataclass
@@ -260,6 +262,254 @@ def format_reward_list(completions, **kwargs):
         return all_rewards
 
 
+def quaternion_to_yaw(q):
+    """
+    Convert quaternion (w, x, y, z) to yaw angle.
+    """
+    w, x, y, z = q
+    # negate to make right turn positive and left turn negative (clockwise)
+    yaw = -math.atan2(2 * (w * z + x * y), 1 - 2 * (y ** 2 + z ** 2))
+    return yaw
+
+
+def calculate_displacement(t1, t2):
+    """
+    Calculate Euclidean distance between two translation vectors.
+    """
+    disp = math.sqrt((t2[0] - t1[0]) ** 2 + (t2[1] - t1[1]) ** 2)
+    return round(disp, 3)
+
+
+def calculate_delta_heading(yaw1, yaw2):
+    """
+    Calculate the delta heading in degrees clockwise, range [-180, 180].
+    Turning right is positive, turning left is negative.
+    """
+    delta = math.degrees(yaw2 - yaw1)
+    if delta > 180:
+        delta -= 360
+    elif delta < -180:
+        delta += 360
+    return round(delta, 3)
+    # return delta
+
+
+def calc_general_dir(prev_translation, translation, prev_yaw, yaw):
+    """
+    Calculate the agent's general heading direction.
+
+    Parameters:
+    - prev_translation: Previous position (x, y, z)
+    - translation: Current position (x, y, z)
+    - prev_yaw: Previous yaw angle in radians (clockwise positive, from quaternion_to_yaw)
+    - yaw: Current yaw angle in radians (clockwise positive, from quaternion_to_yaw)
+
+    Returns:
+    - str: One of ["forward", "backward", "left", "slight left", "right", "slight right", "stationary"]
+    """
+    # Calculate movement vector
+    movement = np.array(translation) - np.array(prev_translation)
+
+    # Check if the agent is stationary (very little movement and rotation)
+    movement_magnitude = np.linalg.norm(movement)
+    yaw_diff = abs((yaw - prev_yaw) % (2 * np.pi))
+    if yaw_diff > np.pi:
+        yaw_diff = 2 * np.pi - yaw_diff
+
+    # If there's almost no movement and minimal rotation, agent is stationary
+    if movement_magnitude < 0.05 and yaw_diff < 0.00175:
+        return "stationary"
+
+    # If there is rotation, use the rotation change
+
+    # Normalize the yaw difference to [-π, π]
+    yaw_diff = (yaw - prev_yaw) % (2 * np.pi)
+    if yaw_diff > np.pi:
+        yaw_diff -= 2 * np.pi
+    angle_diff = math.degrees(yaw_diff)
+    # Determine direction based on rotation
+    # Note: Since yaw is clockwise positive, positive yaw_diff means turning right
+    if abs(angle_diff) < 1:  # 1 degree, Almost no rotation
+        return "forward"
+    elif abs(angle_diff) < 5:  # Less than 5 degrees
+        return "slight right" if yaw_diff > 0 else "slight left"
+    elif abs(angle_diff) < 90:  # Less than 90 degrees
+        return "right" if yaw_diff > 0 else "left"
+    elif abs(angle_diff) < 175:  # Less than 175 degrees
+        return "back right" if yaw_diff > 0 else "back left"
+    elif abs(angle_diff) < 179:  # Less than 179 degrees
+        return "slight back right" if yaw_diff > 0 else "slight back left"
+    else:
+        return "backward"
+
+
+def nusc_to_examples(nusc_dataset, step_size=1, batch_size=4, video_out_dir=""):
+    if video_out_dir != "":
+        ''' prepare video writer '''
+        sample_img = cv2.imread(nusc_dataset.img_filepaths[0])
+        w = sample_img.shape[1]
+        h = sample_img.shape[0]
+        video_width = w
+        video_height = h
+
+        fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+        out0 = cv2.VideoWriter(video_out_dir, fourcc, 10 // step_size, (video_width, video_height))
+        frame_text = ""
+        ''' video writer code ends here '''
+
+    meta_dict = nusc_dataset.meta_dict
+    cam_list = nusc_dataset.camera_list
+    cam = cam_list[0]
+
+    meta_data = meta_dict[cam]
+    ego_pose_list = meta_data["ego_pose_original"]
+
+    prev_yaw = None
+    prev_translation = None
+
+    general_dir_gt_all = []
+    disp_gt_all = []
+    delta_heading_gt_all = []
+    img_list_all = []
+
+    batch_general_dir_gt = []
+    batch_disp_gt = []
+    batch_delta_heading_gt = []
+    batch_img_list = []
+    sample_count = 0
+    batch_img_list = []
+    sample_count = 0
+
+    for frame_i in range(len(ego_pose_list)):
+        if frame_i % step_size != 0:
+            continue
+        ego_pose = ego_pose_list[frame_i]
+
+        # Note that NuScenes's Ego Pose rotation is in (w, x, y, z) quat format
+        # translation is (x, y, z=0) in meters
+        translation = ego_pose["translation"]
+        rotation = ego_pose["rotation"]
+        yaw = quaternion_to_yaw(rotation)
+
+        batch_img_list.append(nusc_dataset.rel_img_filepaths[frame_i])
+        if prev_yaw is not None and prev_translation is not None:
+            general_dir = calc_general_dir(prev_translation, translation, prev_yaw, yaw)
+            disp = calculate_displacement(prev_translation, translation)
+            delta_heading = calculate_delta_heading(prev_yaw, yaw)
+
+            batch_general_dir_gt.append(general_dir)
+            batch_disp_gt.append(disp)
+            batch_delta_heading_gt.append(delta_heading)
+            frame_text = f"dir: {general_dir}, delta heading: {delta_heading}, displacement: {disp}"
+            sample_count += 1
+
+        prev_yaw = yaw
+        prev_translation = translation
+
+        if sample_count != 0 and sample_count % (batch_size - 1) == 0:
+            if len(batch_disp_gt) != batch_size - 1 or len(batch_delta_heading_gt) != batch_size - 1 or len(
+                    batch_img_list) != batch_size:
+                # if this is residue at the end of a scene, don't use it
+
+                if frame_i == len(ego_pose_list) - 1:
+                    break
+                else:
+                    assert len(
+                        batch_img_list) == batch_size, f"image path batch size mismatch {len(batch_img_list)}, {batch_size}"
+                    assert len(
+                        batch_general_dir_gt) == batch_size - 1, f"general direction batch size mismatch {len(batch_general_dir_gt)}, {batch_size - 1}"
+                    assert len(
+                        batch_disp_gt) == batch_size - 1, f"displacement batch size mismatch {len(batch_disp_gt)}, {batch_size - 1}"
+                    assert len(
+                        batch_delta_heading_gt) == batch_size - 1, f"delta_heading batch size mismatch {len(batch_delta_heading_gt)}, {batch_size - 1}"
+
+            general_dir_gt_all.append(batch_general_dir_gt)
+            disp_gt_all.append(batch_disp_gt)
+            delta_heading_gt_all.append(batch_delta_heading_gt)
+            img_list_all.append(batch_img_list)
+            batch_general_dir_gt = []
+            batch_disp_gt = []
+            batch_delta_heading_gt = []
+            batch_img_list = []
+            prev_yaw = None
+            prev_translation = None
+            sample_count = 0
+
+    if video_out_dir != "":
+        img = cv2.imread(f"{nusc_dataset.img_filepaths[frame_i]}")
+        font = cv2.FONT_HERSHEY_SIMPLEX
+        cv2.putText(img, frame_text, (10, 30), font, fontScale=1, color=(0, 0, 255), thickness=2,
+                    lineType=cv2.LINE_AA)
+        out0.write(img)
+
+    example_list = []
+    problem_id_offset = 0
+    for batch_i in range(len(disp_gt_all)):
+        batch_general_dir_gt = general_dir_gt_all[batch_i]
+        batch_disp_gt = disp_gt_all[batch_i]
+        batch_delta_heading_gt = delta_heading_gt_all[batch_i]
+        batch_img_list = img_list_all[batch_i]
+
+        example_general_dir = {
+            "problem_id": batch_i + problem_id_offset,
+            "problem": f"I uploaded {len(batch_img_list)} frames from a vehicle dash cam video. \n"
+                       f"Determine the vehicle's movement direction between each frame and its previous frame.\n"
+                       f"Get your answer from the following options: {general_direction_options}.\n"
+                       f"Keep all answers in one list. "
+                       f"You should have {len(batch_general_dir_gt)} values in the list.\n",
+            "data_type": "video",
+            "problem_type": "list",
+            "problem_subject": "general direction",
+            "options": [],
+            "solution": f"<answer>{batch_general_dir_gt}</answer>",
+            "path": batch_img_list,
+            "reward": 1.0,
+            "select": True
+        }
+        problem_id_offset += 1
+
+        example_heading = {
+            "problem_id": batch_i + problem_id_offset,
+            "problem": f"I uploaded {len(batch_img_list)} frames from a vehicle dash cam video. \n"
+                       f"Determine the vehicle's change in heading direction between each frame and its previous frame.\n"
+                       f"Give your answer in degree values ranging between -180 and 180 degrees, with veer to the right "
+                       f"being positive degrees and to the left being negative degrees.\n"
+                       f"Keep all degree values in one list. "
+                       f"You should have {len(batch_delta_heading_gt)} values in the list.\n",
+            "data_type": "video",
+            "problem_type": "list",
+            "problem_subject": "heading",
+            "options": [],
+            "solution": f"<answer>{batch_delta_heading_gt}</answer>",
+            "path": batch_img_list,
+            "reward": 1.0,
+            "select": True
+        }
+        problem_id_offset += 1
+
+        example_disp = {
+            "problem_id": batch_i + problem_id_offset,
+            "problem": f"I uploaded {len(batch_img_list)} frames from a vehicle dash cam video. \n"
+                       f"Determine the vehicle's displacement between each frame and its previous frame.\n"
+                       f"Give your answer in numerical values in meter unit.\n"
+                       f"Keep all displacement values in one list. "
+                       f"You should have {len(batch_disp_gt)} values in the list.\n",
+            "data_type": "video",
+            "problem_type": "list",
+            "problem_subject": "displacement",
+            "options": [],
+            "solution": f"<answer>{batch_disp_gt}</answer>",
+            "path": batch_img_list,
+            "reward": 1.0,
+            "select": True
+        }
+
+        example_list.append(example_general_dir)
+        example_list.append(example_heading)
+        example_list.append(example_disp)
+
+    return example_list
+
 
 def prepare_dataset_nusc(example):
     if example["problem_type"] == 'multiple choice':
@@ -323,15 +573,10 @@ SYSTEM_PROMPT = (
 def main(script_args, training_args, model_args):
     # Get reward functions
     reward_funcs = [reward_funcs_registry[func] for func in script_args.reward_funcs]
-
-    # if script_args.dataset_name.endswith('.json') or script_args.dataset_name.endswith('.jsonl'):
-    #     dataset =  DatasetDict({"train": Dataset.from_json(script_args.dataset_name)})
-    # else:
-    #     # Load the dataset
-    #     dataset = load_dataset(script_args.dataset_name, name=script_args.dataset_config)
-
     # Load dataset
     num_cam = 1
+    batch_size = 4
+
     train_num_scene = int(os.getenv("NUM_TRAIN_SCENE"))
     test_num_scene = min(150, train_num_scene // 4)
     # sample_rate = 2
@@ -343,53 +588,73 @@ def main(script_args, training_args, model_args):
         test_scene_idx_list.append(i)
 
     root_path = script_args.dataset_name
-    example_json_path = f"{root_path}/examples/qwen_vllm_3q"
+    train_data_path = f"{root_path}/train_test"
+    test_data_path = f"{root_path}/train_test"
+    # example_json_path = f"{root_path}/examples/qwen_vllm_3q"
 
-    avail_train_example = os.listdir(f"{example_json_path}/train")
-    avail_test_example = os.listdir(f"{example_json_path}/test")
+    # avail_train_example = os.listdir(f"{example_json_path}/train")
+    # avail_test_example = os.listdir(f"{example_json_path}/test")
 
-    train_example_dict_list = []
-    end_scene_idx=0
-    for folder_name in avail_train_example:
-        end_scene_idx = int(folder_name.split("_")[1].split("-")[-1])
-        train_example_dict = json.load(open(f"{example_json_path}/train/{folder_name}/train_examples.json"))
-        train_example_dict_list.append(train_example_dict)
-        if train_num_scene <= end_scene_idx+1:
-            break
-    if end_scene_idx+1 < train_num_scene:
-        train_num_scene = end_scene_idx+1
-        print(f"Not enough scene to train, using {end_scene_idx+1} scenes that is available")
+    # train_example_dict_list = []
+    # end_scene_idx=0
+    # for folder_name in avail_train_example:
+    #     end_scene_idx = int(folder_name.split("_")[1].split("-")[-1])
+    #     train_example_dict = json.load(open(f"{example_json_path}/train/{folder_name}/train_examples.json"))
+    #     train_example_dict_list.append(train_example_dict)
+    #     if train_num_scene <= end_scene_idx+1:
+    #         break
+    # if end_scene_idx+1 < train_num_scene:
+    #     train_num_scene = end_scene_idx+1
+    #     print(f"Not enough scene to train, using {end_scene_idx+1} scenes that is available")
 
-    test_example_dict_list = []
-    end_scene_idx = 0
-    for folder_name in avail_test_example:
-        end_scene_idx = int(folder_name.split("_")[1].split("-")[-1])
-        test_example_dict = json.load(open(f"{example_json_path}/train/{folder_name}/train_examples.json"))
-        test_example_dict_list.append(test_example_dict)
-        if test_num_scene <= end_scene_idx + 1:
-            break
-    if end_scene_idx + 1 < test_num_scene:
-        test_num_scene = end_scene_idx+1
-        print(f"Not enough scene to test, using {end_scene_idx + 1} scenes that is available")
-
+    # test_example_dict_list = []
+    # end_scene_idx = 0
+    # for folder_name in avail_test_example:
+    #     end_scene_idx = int(folder_name.split("_")[1].split("-")[-1])
+    #     test_example_dict = json.load(open(f"{example_json_path}/train/{folder_name}/train_examples.json"))
+    #     test_example_dict_list.append(test_example_dict)
+    #     if test_num_scene <= end_scene_idx + 1:
+    #         break
+    # if end_scene_idx + 1 < test_num_scene:
+    #     test_num_scene = end_scene_idx+1
+    #     print(f"Not enough scene to test, using {end_scene_idx + 1} scenes that is available")
 
     train_example_list = []
     test_example_list = []
-    for example_dict in train_example_dict_list:
-        for scene in example_dict.keys():
-            examples = example_dict[scene]
-            train_example_list += examples
-    for example_dict in test_example_dict_list:
-        for scene in example_dict.keys():
-            examples = example_dict[scene]
-            test_example_list += examples
+    nusc_train = NuScenes(version="v1.0-trainval", dataroot=train_data_path, verbose=True)
+    nusc_test = NuScenes(version="v1.0-test", dataroot=test_data_path, verbose=True)
+
+    for scene_idx in train_scene_idx_list:
+        step_size = random.randint(1, 10)
+        print(f"step size: {step_size}")
+        dataset = NuScenesDataset(data_path=train_data_path,
+                                  meta_out_path="",
+                                  num_cams=num_cam,
+                                  nusc=nusc_train,
+                                  scene_idx=scene_idx,
+                                  save_meta=False)
+        scene_example_list = nusc_to_examples(nusc_dataset=dataset, step_size=step_size, batch_size=batch_size)
+        train_example_list += scene_example_list
+
+    test_example_json_dict = {}
+    print(f"Processing test dataset into examples...")
+    for scene_idx in test_scene_idx_list:
+        step_size = random.randint(1, 10)
+        print(f"step size: {step_size}")
+        dataset = NuScenesDataset(data_path=test_data_path,
+                                  meta_out_path="",
+                                  num_cams=num_cam,
+                                  nusc=nusc_test,
+                                  scene_idx=scene_idx,
+                                  save_meta=False)
+        scene_example_list = nusc_to_examples(nusc_dataset=dataset, step_size=step_size, batch_size=batch_size)
+        test_example_list += scene_example_list
 
     dataset = DatasetDict({
         "train": Dataset.from_list(train_example_list),
         "test": Dataset.from_list(test_example_list)
     })
     dataset = dataset.map(prepare_dataset_nusc)
-    
 
     trainer_cls = Qwen2VLGRPOTrainer if not training_args.use_vllm else Qwen2VLGRPOVLLMTrainerModified
     print("using: ", trainer_cls)

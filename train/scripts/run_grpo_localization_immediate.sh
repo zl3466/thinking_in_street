@@ -23,7 +23,7 @@ CUDA_VISIBLE_DEVICES=0,1 torchrun --nproc_per_node="2" \
     --node_rank="0" \
     --master_addr="127.0.0.1" \
     --master_port="12365" \
-    ./train/localization/grpo_new.py \
+    ./train/localization/grpo_new_immediate.py \
     --output_dir "./log/Qwen2.5-VL-3B-GRPO-3q" \
     --model_name_or_path "Qwen/Qwen2.5-VL-3B-Instruct" \
     --dataset_name "/scratch/zl3466/dataset/NuScenes" \
@@ -43,7 +43,7 @@ CUDA_VISIBLE_DEVICES=0,1 torchrun --nproc_per_node="2" \
     --attn_implementation sdpa \
     --max_pixels 100352 \
     --num_train_epochs 1 \
-    --run_name localization-3b-debug \
+    --run_name localization-3b-temporal-3q-debug \
     --save_steps 100 \
     --beta 0.04 \
     --max_grad_norm 5 \

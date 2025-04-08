@@ -80,7 +80,31 @@ def sigmoid(x, a=1, b=0):
     return 1 / (1 + math.exp(a * (-x + b)))
 
 
-def reverse_consistent_reward(ordered_completions, reversed_completions):
+def reverse_heading(heading_degree):
+    heading_degree += 180
+    if heading_degree > 180:
+        heading_degree -= 360
+    elif heading_degree < -180:
+        heading_degree += 360
+    return round(heading_degree, 3)
+
+direction_reverse_dict = {
+    "stationary": "stationary", 
+    "forward": "backward", 
+    "backward": "forward", 
+    "left": "back right", 
+    "slight left": "slight back right",
+    "right": "back left", 
+    "slight right": "slight back left",
+    "back left": "right", 
+    "slight back left": "slight right",
+    "back right": "left", 
+    "slight back right": "slight left"
+}
+
+''' compare outputs from ordered input and reversed input, return the sum of reward for all grpo groups '''
+# TODO: how to identify which type of question this is?
+def reverse_consistent_reward(ordered_completions, reversed_completions, subject):
     ordered_contents = [completion[0]["content"] for completion in ordered_completions]
     reversed_contents = [completion[0]["content"] for completion in reversed_completions]
     total_reward = 0
@@ -95,12 +119,30 @@ def reverse_consistent_reward(ordered_completions, reversed_completions):
             if len(ordered_output_ans_list) != len(reversed_output_ans_list):
                 reward = 0.0
             else:
-                ''' reward = 2 * sigmoid(rmse) -> range(0, 1). Use a = 0.2 to get steep sigmoid '''
-                squared_diffs = [(p - gt) ** 2 for p, gt in zip(reversed_output_ans_list, ordered_output_ans_list)]
-                rmse = math.sqrt(sum(squared_diffs) / len(squared_diffs))
-                reward = 2 * (1 - sigmoid(rmse, a=0.2, b=0))
-                ''' we ensure a minimum reward of 0.1 if the number of elements in the list is correct '''
-                reward = max(0.1, reward)
+                if subject == "displacement":
+                    # displacement can remain the same when video is played in reverse
+                    ordered_output_ans_list = ordered_output_ans_list
+                elif subject == "heading":
+                    # heading should be reversed when video is played in reverse
+                    ordered_output_ans_list = [reverse_heading(val) for val in ordered_output_ans_list]
+                else:
+                    # direction should be reversed when video is played in reverse
+                    ordered_output_ans_list = [direction_reverse_dict[val] for val in ordered_output_ans_list]
+
+                # calculate reward based on value difference if the answer is a list of values (displacement and heading)
+                if isinstance(ordered_output_ans_list[0], (int, float)):
+                    ''' reward = 2 * sigmoid(rmse) -> range(0, 1). Use a = 0.2 to get steep sigmoid '''
+                    squared_diffs = [(p - gt) ** 2 for p, gt in zip(reversed_output_ans_list, ordered_output_ans_list)]
+                    rmse = math.sqrt(sum(squared_diffs) / len(squared_diffs))
+                    reward = 2 * (1 - sigmoid(rmse, a=0.2, b=0))
+                    ''' we ensure a minimum reward of 0.1 if the number of elements in the list is correct '''
+                    reward = max(0.1, reward)
+                else:
+                    ''' the general_dir case where the list contains string keywords like forward, left, slight right, etc. '''
+                    reward = sum([a.lower() == b.lower() for a, b in
+                                  zip(reversed_output_ans_list, ordered_output_ans_list)]) / len(
+                        ordered_output_ans_list)
+                    reward = max(0.1, reward)
         except Exception as e:
             print(f"Error in reversed-input reward calc: {e}")
             reward = 0.0
@@ -457,6 +499,7 @@ class Qwen2VLGRPOTrainer(Trainer):
         # input_copy = self.remove_none_from_data(input_copy)
         # # print("\nfull input prompt len:", len(input_copy))
         # # print("\nfull input prompt:", input_copy)
+        problem_subject = inputs[0]["problem_subject"]
 
         prompts = [x["prompt"] for x in inputs]
         
@@ -482,9 +525,9 @@ class Qwen2VLGRPOTrainer(Trainer):
         #     image_inputs, video_inputs, video_kwargs = process_vision_info(input_copy, return_video_kwargs=True)
 
         if inputs[0]['data_type'] == 'image':
-            input_copy[0]['content'][0]['image'] = inputs[0]['path']
+            input_copy[0]['content'][0]['image'] = [f"{os.getenv('DATASET_DIR')}/{file_path}" for file_path in inputs[0]['path']]
         elif inputs[0]['data_type'] == 'video':
-            input_copy[0]['content'][0]['video'] = inputs[0]['path']
+            input_copy[0]['content'][0]['video'] = [f"{os.getenv('DATASET_DIR')}/{file_path}" for file_path in inputs[0]['path']]
 
         # try:
         #     image_inputs, video_inputs, video_kwargs = process_vision_info(input_copy, return_video_kwargs=True)
@@ -496,7 +539,7 @@ class Qwen2VLGRPOTrainer(Trainer):
         #         input_copy[0]['content'][0]['video'] = os.getcwd() + "/Video-R1-data" + '/LLaVA-Video-178K/liwei_youtube_videos/videos/youtube_video_2024/ytb_7nRmsEw7nsE.mp4'
                 
         #     image_inputs, video_inputs, video_kwargs = process_vision_info(input_copy, return_video_kwargs=True)
-
+        
         image_inputs, video_inputs, video_kwargs = process_vision_info(input_copy, return_video_kwargs=True)
 
         # Videos uploaded as a sequence of images will be returned as a list of list of images -- strip one layer of list in that case
@@ -533,7 +576,7 @@ class Qwen2VLGRPOTrainer(Trainer):
         if self.temporal and video_inputs is not None:
             # indices = torch.randperm(video_inputs[0].size(0))
             indices = torch.arange(video_inputs[0].size(0) - 1, -1, -1)  # reverse the video frames
-            reversed_video_inputs = [video_inputs[0][indices]]
+            # reversed_video_inputs = [video_inputs[0][indices]]
             shuffled_video_inputs = [video_inputs[0][indices]]
             shuffled_prompt_inputs = self.processing_class(
                 text=copy.deepcopy(prompts_text),
@@ -707,7 +750,7 @@ class Qwen2VLGRPOTrainer(Trainer):
             temporal_rewards_per_func = rewards_per_func.clone()
             if question_type == "list":
                 # sum of temporal reward for all groups
-                total_reward = reverse_consistent_reward(ordered_completions=completions, reversed_completions=shuffled_completions)
+                total_reward = reverse_consistent_reward(ordered_completions=completions, reversed_completions=shuffled_completions, subject=problem_subject)
                 # map total reward range (0, 4) to (0, 1), with slope 2 and center 1 to favor high total reward
                 reward = sigmoid(total_reward, a=2, b=1)
                 temporal_rewards = torch.tensor([reward]).to('cuda')
@@ -794,10 +837,11 @@ class Qwen2VLGRPOTrainer(Trainer):
         if self.temporal:
             temporal_rewards_list = self.accelerator.gather_for_metrics(temporal_rewards)
             self._metrics["temporal_rewards"].append(self.accelerator.gather_for_metrics(temporal_rewards_list).mean().item())
-        
-        self._metrics["reward"].append(self.accelerator.gather_for_metrics(rewards).mean().item())
+            self._metrics[f"{problem_subject}_temporal_rewards"].append(self.accelerator.gather_for_metrics(temporal_rewards_list).mean().item())
 
+        self._metrics["reward"].append(self.accelerator.gather_for_metrics(rewards).mean().item())
         self._metrics["reward_std"].append(self.accelerator.gather_for_metrics(std_grouped_rewards).mean().item())
+        self._metrics[f"{problem_subject}_rewards"].append(self.accelerator.gather_for_metrics(rewards).mean().item())
 
         mean_kl = ((per_token_kl * completion_mask).sum(dim=1) / completion_mask.sum(dim=1)).mean()
         self._metrics["kl"].append(self.accelerator.gather_for_metrics(mean_kl).mean().item())
