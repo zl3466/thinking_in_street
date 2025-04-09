@@ -1,7 +1,7 @@
 #!/bin/bash
 #
-#SBATCH --job-name=thinking_in_street_grpo
-#SBATCH --output=/scratch/zl3466/github/thinking_in_street/train_result/localization_grpo_test.out
+#SBATCH --job-name=thinking_in_street_qwen_data_gen_3q
+#SBATCH --output=/scratch/zl3466/github/thinking_in_street/train_result/localization_grpo_qwen_data_gen_3q.out
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=16

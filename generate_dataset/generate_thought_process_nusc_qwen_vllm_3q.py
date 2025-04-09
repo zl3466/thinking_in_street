@@ -586,7 +586,7 @@ if __name__ == "__main__":
         download_dir=model_path,
         tensor_parallel_size=torch.cuda.device_count(),
         max_model_len=4096,
-        gpu_memory_utilization=0.8,
+        gpu_memory_utilization=0.9,
         limit_mm_per_prompt={"image": 10, "video": 10},
         dtype="float16"
     )

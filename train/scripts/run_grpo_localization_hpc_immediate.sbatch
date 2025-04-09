@@ -1,12 +1,12 @@
 #!/bin/bash
 #
-#SBATCH --job-name=thinking_in_street_grpo
+#SBATCH --job-name=thinking_in_street_grpo_3q_40_scene
 #SBATCH --output=/scratch/zl3466/github/thinking_in_street/train_result/localization_grpo_test.out
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=64GB
-#SBATCH --time=20:00:00
+#SBATCH --time=24:00:00
 #SBATCH --gres=gpu:4
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=zl3466@nyu.edu
@@ -28,8 +28,8 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node="4" \
     --node_rank="0" \
     --master_addr="127.0.0.1" \
     --master_port="12365" \
-    ./train/localization/grpo_new.py \
-    --output_dir "./log/Qwen2.5-VL-3B-GRPO-sbatch-40" \
+    ./train/localization/grpo_new_immediate.py \
+    --output_dir "./log/Qwen2.5-VL-3B-GRPO-sbatch-3q-10" \
     --model_name_or_path "Qwen/Qwen2.5-VL-3B-Instruct" \
     --dataset_name "/scratch/zl3466/dataset/NuScenes" \
     --deepspeed "./train/local_scripts/zero3.json" \
@@ -48,7 +48,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node="4" \
     --attn_implementation sdpa \
     --max_pixels 200704 \
     --num_train_epochs 1 \
-    --run_name localization-3b-full \
+    --run_name localization-3b-3q-test \
     --save_steps 100 \
     --beta 0.04 \
     --max_grad_norm 5 \
