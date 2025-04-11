@@ -1,7 +1,7 @@
 #!/bin/bash
 #
-#SBATCH --job-name=thinking_in_street_qwen_data_gen_3q
-#SBATCH --output=/scratch/zl3466/github/thinking_in_street/train_result/localization_grpo_qwen_data_gen_3q.out
+#SBATCH --job-name=data_gen_3q
+#SBATCH --output=/scratch/zl3466/github/thinking_in_street/train_result/localization_qwen_data_gen_3q.out
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=16
@@ -21,7 +21,7 @@ cd /scratch/zl3466/github/thinking_in_street;
 export DATASET_DIR="/scratch/zl3466/dataset/NuScenes/train_test";
 export VLLM_WORKER_MULTIPROC_METHOD=spawn
 
-python ./generate_dataset/generate_thought_process_nusc_qwen_vllm_3q.py \
+python ./generate_dataset/NuScenes/generate_thought_process_nusc_qwen_vllm_3q.py \
     --num_cam 1 \
     --train_scene_start 0 \
     --train_scene_end 100 \

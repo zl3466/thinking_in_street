@@ -7,6 +7,7 @@ import torch
 from pyquaternion import Quaternion
 from torch import Tensor
 from utils.qwen_utils import NumpyEncoder
+# from generate_dataset.ScanNet.SensorData import SensorData
 
 logger = logging.getLogger()
 
@@ -17,8 +18,8 @@ class ScanNetDataset():
         self,
         data_path: str,
         meta_out_path: str,
-        num_cams: int = 1,
-        nusc: NuScenes = None,
+        # num_cams: int = 1,
+        # SensorData: SensorData = None,
         split: str = 'train',
         scene_idx: int = 0,
         start_timestep: int = 0,
@@ -29,67 +30,41 @@ class ScanNetDataset():
         logger.info("Loading new NuScenes dataset.")
         self.data_path = data_path
         self.meta_out_path = meta_out_path
-        self.num_cams = num_cams
+        self.num_cams = 1
         self.split = split
         self.start_timestep = start_timestep
         self.end_timestep = end_timestep
         self.save_meta = save_meta
 
-        self.nusc = nusc
+        # self.SensorData = SensorData
         self.scene_idx = scene_idx
         self.meta_dict = self.create_or_load_metas()
         self.create_all_filelist()
         self.load_calibrations()
 
 
-
     def create_or_load_metas(self):
         # ---- define camera list ---- #
-        if self.num_cams == 1:
-            self.camera_list = ["CAM_FRONT"]
-        elif self.num_cams == 3:
-            self.camera_list = ["CAM_FRONT_LEFT", "CAM_FRONT", "CAM_FRONT_RIGHT"]
-        elif self.num_cams == 6:
-            self.camera_list = [
-                "CAM_FRONT_LEFT",
-                "CAM_FRONT",
-                "CAM_FRONT_RIGHT",
-                "CAM_BACK_RIGHT",
-                "CAM_BACK",
-                "CAM_BACK_LEFT",
-            ]
-        else:
-            raise NotImplementedError(
-                f"num_cams: {self.num_cams} not supported for nuscenes dataset"
-            )
-
+        self.camera_list = ["CAM_FRONT"]
+        
         if os.path.exists(self.meta_out_path):
             # print(self.meta_out_path)
             with open(self.meta_out_path, "r") as f:
                 meta_dict = json.load(f)
-            logger.info(f"[Nuscenes] Loaded camera meta from {self.meta_out_path}")
+            logger.info(f"[ScanNet] Loaded camera meta from {self.meta_out_path}")
             return meta_dict
         else:
-            logger.info(f"[Nuscenes] Creating camera meta at {self.meta_out_path}")
+            logger.info(f"[ScanNet] Creating camera meta at {self.meta_out_path}")
 
-        if self.nusc is None:
-            if self.split == "train":
-                self.nusc = NuScenes(
-                    version="v1.0-trainval", dataroot=self.data_path, verbose=True
-                )
-            else:
-                self.nusc = NuScenes(
-                    version="v1.0-test", dataroot=self.data_path, verbose=True
-                )
-        self.scene = self.nusc.scene[self.scene_idx]
-        total_camera_list = [
-            "CAM_FRONT_LEFT",
-            "CAM_FRONT",
-            "CAM_FRONT_RIGHT",
-            "CAM_BACK_LEFT",
-            "CAM_BACK",
-            "CAM_BACK_RIGHT",
-        ]
+        # TODO: format the scene name correctly
+        scene_list = os.listdir(self.data_path)
+        scene_list.sort(key=lambda f: int(''.join(filter(str.isdigit, f))))
+        scene_name = scene_list[self.scene_idx]
+
+        # if self.SensorData is None:
+        #     self.SensorData = SensorData(self.data_path)
+
+        total_camera_list = ["CAM_FRONT"]
 
         meta_dict = {
             camera: {
@@ -97,63 +72,54 @@ class ScanNetDataset():
                 "filepath": [],
                 "ego_pose_original": [],
                 "ego_pose_matrix": [],
-                "cam_id": [],
+                "cam_id": [0],
                 "extrinsics": [],
                 "intrinsics": [],
             }
             for i, camera in enumerate(total_camera_list)
         }
 
-        # ---- get the first sample of each camera ---- #
-        current_camera_data_tokens = {camera: None for camera in total_camera_list}
-        first_sample = self.nusc.get("sample", self.scene["first_sample_token"])
-        for camera in total_camera_list:
-            current_camera_data_tokens[camera] = first_sample["data"][camera]
+        # start loading data into meta_dict
+        img_dir = f"{self.data_path}/{scene_name}/color"
+        pose_dir = f"{self.data_path}/{scene_name}/pose"
+        intrinsic_dir = f"{self.data_path}/intrinsic/intrinsic_color.txt"
+        extrinsic_dir = f"{self.data_path}/intrinsic/extrinsic_color.txt"
+        
 
-        while not all(token == "" for token in current_camera_data_tokens.values()):
-            for i, camera in enumerate(total_camera_list):
-                # skip if the current camera data token is empty
-                if current_camera_data_tokens[camera] == "":
-                    continue
+        img_filelist = os.listdir(img_dir)
+        img_filelist.sort(key=lambda f: int(''.join(filter(str.isdigit, f))))
+        pose_filelist = os.listdir(pose_dir)
+        pose_filelist.sort(key=lambda f: int(''.join(filter(str.isdigit, f))))
 
-                current_camera_data = self.nusc.get(
-                    "sample_data", current_camera_data_tokens[camera]
-                )
+        camera = "CAM_FRONT"
+        for i in range(len(img_filelist)):
+            img_filename = img_filelist[i]
+            img_path = f"{img_dir}/{img_filename}"
+            pose_filename = pose_filelist[i]
+            pose_path = f"{pose_dir}/{pose_filename}"
 
-                # ---- timestamp and cam_id ---- #
-                meta_dict[camera]["cam_id"].append(i)
-                meta_dict[camera]["timestamp"].append(current_camera_data["timestamp"])
-                meta_dict[camera]["filepath"].append(current_camera_data["filename"])
+            # ---- timestamp and cam_id ---- #
+            meta_dict[camera]["timestamp"].append(int(img_filename.split(".")[0]))
+            meta_dict[camera]["filepath"].append(f"{scene_name}/color/{img_filename}")
 
-                # ---- intrinsics and extrinsics ---- #
-                calibrated_sensor_record = self.nusc.get(
-                    "calibrated_sensor", current_camera_data["calibrated_sensor_token"]
-                )
-                # intrinsics
-                intrinsic = calibrated_sensor_record["camera_intrinsic"]
-                meta_dict[camera]["intrinsics"].append(np.array(intrinsic))
+            # ---- intrinsics and extrinsics ---- #
+            # intrinsics
+            intrinsic = np.loadtxt(intrinsic_dir)
+            meta_dict[camera]["intrinsics"].append(np.array(intrinsic))
 
-                # extrinsics
-                extrinsic = np.eye(4)
-                extrinsic[:3, :3] = Quaternion(
-                    calibrated_sensor_record["rotation"]
-                ).rotation_matrix
-                extrinsic[:3, 3] = np.array(calibrated_sensor_record["translation"])
-                meta_dict[camera]["extrinsics"].append(extrinsic)
+            # extrinsics
+            extrinsic = np.loadtxt(extrinsic_dir)
+            meta_dict[camera]["extrinsics"].append(extrinsic)
 
-                # ---- ego pose ---- #
-                ego_pose_record = self.nusc.get(
-                    "ego_pose", current_camera_data["ego_pose_token"]
-                )
-                ego_pose = np.eye(4)
-                ego_pose[:3, :3] = Quaternion(
-                    ego_pose_record["rotation"]
-                ).rotation_matrix
-                ego_pose[:3, 3] = np.array(ego_pose_record["translation"])
-                meta_dict[camera]["ego_pose_original"].append(ego_pose_record)
-                meta_dict[camera]["ego_pose_matrix"].append(ego_pose)
+            # ---- ego pose ---- #
+            ego_pose_matrix = np.loadtxt(pose_path)
+            rotation = ego_pose_matrix[:3, :3]
+            translation = ego_pose_matrix[:3, 3]
+            rotation_quat = Quaternion.from_rotation_matrix(rotation)
+            meta_dict[camera]["ego_pose_original"].append({"rotation": rotation_quat, "translation": translation})
+            meta_dict[camera]["ego_pose_matrix"].append(ego_pose_matrix)
 
-                current_camera_data_tokens[camera] = current_camera_data["next"]
+        
 
         if self.save_meta:
             with open(self.meta_out_path, "w") as f:
@@ -253,20 +219,6 @@ class ScanNetDataset():
                 )
 
         self.intrinsics = torch.from_numpy(np.stack(intrinsics, axis=0)).float()
-
-        # # scale the intrinsics according to the load size
-        # self.intrinsics[..., 0, 0] *= (
-        #     self.data_cfg.load_size[1] / self.ORIGINAL_SIZE[0][1]
-        # )
-        # self.intrinsics[..., 1, 1] *= (
-        #     self.data_cfg.load_size[0] / self.ORIGINAL_SIZE[0][0]
-        # )
-        # self.intrinsics[..., 0, 2] *= (
-        #     self.data_cfg.load_size[1] / self.ORIGINAL_SIZE[0][1]
-        # )
-        # self.intrinsics[..., 1, 2] *= (
-        #     self.data_cfg.load_size[0] / self.ORIGINAL_SIZE[0][0]
-        # )
 
         self.cam_to_worlds = torch.from_numpy(np.stack(cam_to_worlds, axis=0)).float()
         self.global_to_initial_ego = torch.from_numpy(global_to_initial_ego).float()

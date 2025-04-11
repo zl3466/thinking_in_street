@@ -6,7 +6,7 @@ export PATH=/scratch/zl3466/env/thinking-in-street/bin:$PATH;
 cd /scratch/zl3466/github/thinking_in_street;
 export DATASET_DIR="/scratch/zl3466/dataset/NuScenes/train_test";
 export VLLM_WORKER_MULTIPROC_METHOD=spawn
-python ./generate_dataset/generate_thought_process_nusc_qwen_vllm.py \
+python ./generate_dataset/NuScenes/generate_thought_process_nusc_qwen_vllm.py \
     --num_cam 1 \
     --train_num_scene 2 \
     --test_num_scene 1 \

@@ -9,7 +9,7 @@ export DATASET_DIR="/scratch/zl3466/dataset/NuScenes/train_test"
 
 cd /scratch/zl3466/github/thinking_in_street;
 
-python ./generate_dataset/generate_thought_process_nusc_gemini.py \
+python ./generate_dataset/NuScenes/generate_thought_process_nusc_gemini.py \
     --num_cam 1 \
     --train_num_scene 4 \
     --test_num_scene 1 \
