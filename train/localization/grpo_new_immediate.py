@@ -33,6 +33,7 @@ from datasets import Dataset, DatasetDict
 from rouge_score import rouge_scorer
 from nuscenes.nuscenes import LidarPointCloud, NuScenes
 from train.data_loader.nuscenes import NuScenesDataset
+from train.data_loader.scannet import ScanNetDataset
 import cv2
 import random
 import time
@@ -294,7 +295,7 @@ def calculate_delta_heading(yaw1, yaw2):
     # return delta
 
 
-def calc_general_dir(prev_translation, translation, prev_yaw, yaw):
+def calc_general_dir(prev_translation, translation, prev_yaw, yaw, mode="outdoor"):
     """
     Calculate the agent's general heading direction.
 
@@ -307,6 +308,26 @@ def calc_general_dir(prev_translation, translation, prev_yaw, yaw):
     Returns:
     - str: One of ["forward", "backward", "left", "slight left", "right", "slight right", "stationary"]
     """
+    if mode == "outdoor":
+        thresholds = {
+            "stationary_disp": 0.05,
+            "stationary_yaw": 0.00175,
+            "forward_degree": 1,
+            "slight_degree": 5,
+            "turn_degree": 90,
+            "back_turn_degree": 175,
+            "back_slight_degree": 179
+        }
+    else:
+        thresholds = {
+            "stationary_disp": 0.1,
+            "stationary_yaw": 0.005,
+            "forward_degree": 0.3,
+            "slight_degree": 3,
+            "turn_degree": 90,
+            "back_turn_degree": 175,
+            "back_slight_degree": 179
+        }
     # Calculate movement vector
     movement = np.array(translation) - np.array(prev_translation)
 
@@ -317,7 +338,7 @@ def calc_general_dir(prev_translation, translation, prev_yaw, yaw):
         yaw_diff = 2 * np.pi - yaw_diff
 
     # If there's almost no movement and minimal rotation, agent is stationary
-    if movement_magnitude < 0.05 and yaw_diff < 0.00175:
+    if movement_magnitude < thresholds["stationary_disp"] and yaw_diff < thresholds["stationary_yaw"]:
         return "stationary"
 
     # If there is rotation, use the rotation change
@@ -329,21 +350,23 @@ def calc_general_dir(prev_translation, translation, prev_yaw, yaw):
     angle_diff = math.degrees(yaw_diff)
     # Determine direction based on rotation
     # Note: Since yaw is clockwise positive, positive yaw_diff means turning right
-    if abs(angle_diff) < 1:  # 1 degree, Almost no rotation
+    if abs(angle_diff) < thresholds["forward_degree"]:  # 1 degree, Almost no rotation
         return "forward"
-    elif abs(angle_diff) < 5:  # Less than 5 degrees
+    elif abs(angle_diff) < thresholds["slight_degree"]:  # Less than 5 degrees
         return "slight right" if yaw_diff > 0 else "slight left"
-    elif abs(angle_diff) < 90:  # Less than 90 degrees
+    elif abs(angle_diff) < thresholds["turn_degree"]:  # Less than 90 degrees
         return "right" if yaw_diff > 0 else "left"
-    elif abs(angle_diff) < 175:  # Less than 175 degrees
+    elif abs(angle_diff) < thresholds["back_turn_degree"]:  # Less than 175 degrees
         return "back right" if yaw_diff > 0 else "back left"
-    elif abs(angle_diff) < 179:  # Less than 179 degrees
+    elif abs(angle_diff) < thresholds["back_slight_degree"]:  # Less than 179 degrees
         return "slight back right" if yaw_diff > 0 else "slight back left"
     else:
         return "backward"
 
 
-def nusc_to_examples(nusc_dataset, step_size=1, batch_size=4, video_out_dir=""):
+
+
+def nusc_to_examples(nusc_dataset, mode, step_size=1, batch_size=4, video_out_dir=""):
     if video_out_dir != "":
         ''' prepare video writer '''
         sample_img = cv2.imread(nusc_dataset.img_filepaths[0])
@@ -353,10 +376,10 @@ def nusc_to_examples(nusc_dataset, step_size=1, batch_size=4, video_out_dir=""):
         video_height = h
 
         fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-        out0 = cv2.VideoWriter(video_out_dir, fourcc, 10 // step_size, (video_width, video_height))
-        frame_text = ""
+        out0 = cv2.VideoWriter(video_out_dir, fourcc, 10//step_size, (video_width, video_height))
+        frame_text = "start of new sequence, no prev"
         ''' video writer code ends here '''
-
+        
     meta_dict = nusc_dataset.meta_dict
     cam_list = nusc_dataset.camera_list
     cam = cam_list[0]
@@ -366,7 +389,7 @@ def nusc_to_examples(nusc_dataset, step_size=1, batch_size=4, video_out_dir=""):
 
     prev_yaw = None
     prev_translation = None
-
+    
     general_dir_gt_all = []
     disp_gt_all = []
     delta_heading_gt_all = []
@@ -393,7 +416,7 @@ def nusc_to_examples(nusc_dataset, step_size=1, batch_size=4, video_out_dir=""):
 
         batch_img_list.append(nusc_dataset.rel_img_filepaths[frame_i])
         if prev_yaw is not None and prev_translation is not None:
-            general_dir = calc_general_dir(prev_translation, translation, prev_yaw, yaw)
+            general_dir = calc_general_dir(prev_translation, translation, prev_yaw, yaw, mode=mode)
             disp = calculate_displacement(prev_translation, translation)
             delta_heading = calculate_delta_heading(prev_yaw, yaw)
 
@@ -402,6 +425,8 @@ def nusc_to_examples(nusc_dataset, step_size=1, batch_size=4, video_out_dir=""):
             batch_delta_heading_gt.append(delta_heading)
             frame_text = f"dir: {general_dir}, delta heading: {delta_heading}, displacement: {disp}"
             sample_count += 1
+        else:
+            frame_text = "start of new sequence, no prev"
 
         prev_yaw = yaw
         prev_translation = translation
@@ -435,13 +460,14 @@ def nusc_to_examples(nusc_dataset, step_size=1, batch_size=4, video_out_dir=""):
             prev_translation = None
             sample_count = 0
 
-    if video_out_dir != "":
-        img = cv2.imread(f"{nusc_dataset.img_filepaths[frame_i]}")
-        font = cv2.FONT_HERSHEY_SIMPLEX
-        cv2.putText(img, frame_text, (10, 30), font, fontScale=1, color=(0, 0, 255), thickness=2,
-                    lineType=cv2.LINE_AA)
-        out0.write(img)
 
+        if video_out_dir != "":
+            img = cv2.imread(f"{nusc_dataset.img_filepaths[frame_i]}")
+            font = cv2.FONT_HERSHEY_SIMPLEX
+            cv2.putText(img, frame_text, (10, 30), font, fontScale=1, color=(0, 0, 255), thickness=2,
+                        lineType=cv2.LINE_AA)
+            out0.write(img)
+        
     example_list = []
     problem_id_offset = 0
     for batch_i in range(len(disp_gt_all)):
@@ -511,7 +537,18 @@ def nusc_to_examples(nusc_dataset, step_size=1, batch_size=4, video_out_dir=""):
     return example_list
 
 
-def prepare_dataset_nusc(example):
+def prepare_dataset_nusc(example, dataset_name):
+    '''
+    dataset_name: nusc or scannet
+    /NuScenes/train_test or /ScanNet/decoded
+    '''
+    if dataset_name == "nusc":
+        dataset_dir_specific = "/NuScenes/train_test"
+    elif dataset_name == "scannet":
+        dataset_dir_specific = "/ScanNet/decoded"
+    else:
+        return RuntimeError("dataset name not supported")
+    
     if example["problem_type"] == 'multiple choice':
         question = example['problem'] + "Options:\n"
         for op in example["options"]:
@@ -527,7 +564,7 @@ def prepare_dataset_nusc(example):
                     "content": [
                         {
                             "type": example['data_type'],
-                            example['data_type']: [f"{os.getenv('DATASET_DIR')}/{file_path}" for file_path in
+                            example['data_type']: [f"{os.getenv('DATASET_DIR')}/{dataset_dir_specific}/{file_path}" for file_path in
                                                    example['path']]
                         },
                         {
@@ -580,50 +617,32 @@ def main(script_args, training_args, model_args):
     train_num_scene = int(os.getenv("NUM_TRAIN_SCENE"))
     test_num_scene = min(150, train_num_scene // 4)
     # sample_rate = 2
+    nusc_train_num_scene = int(train_num_scene*3/4)
+    nusc_test_num_scene = int(test_num_scene*3/4)
+
+    scannet_train_num_scene = train_num_scene - nusc_train_num_scene
+    scannet_test_num_scene = test_num_scene - nusc_test_num_scene
+
+
+    ''' =========================== load NuScenes dataset ============================= '''
+    root_path = os.getenv('DATASET_DIR')
+    train_data_path = f"{root_path}/NuScenes/train_test"
+    test_data_path = f"{root_path}/NuScenes/train_test"
+
     train_scene_idx_list = []
     test_scene_idx_list = []
-    for i in range(train_num_scene):
+    for i in range(nusc_train_num_scene):
         train_scene_idx_list.append(i)
-    for i in range(test_num_scene):
+    for i in range(nusc_test_num_scene):
         test_scene_idx_list.append(i)
-
-    root_path = script_args.dataset_name
-    train_data_path = f"{root_path}/train_test"
-    test_data_path = f"{root_path}/train_test"
-    # example_json_path = f"{root_path}/examples/qwen_vllm_3q"
-
-    # avail_train_example = os.listdir(f"{example_json_path}/train")
-    # avail_test_example = os.listdir(f"{example_json_path}/test")
-
-    # train_example_dict_list = []
-    # end_scene_idx=0
-    # for folder_name in avail_train_example:
-    #     end_scene_idx = int(folder_name.split("_")[1].split("-")[-1])
-    #     train_example_dict = json.load(open(f"{example_json_path}/train/{folder_name}/train_examples.json"))
-    #     train_example_dict_list.append(train_example_dict)
-    #     if train_num_scene <= end_scene_idx+1:
-    #         break
-    # if end_scene_idx+1 < train_num_scene:
-    #     train_num_scene = end_scene_idx+1
-    #     print(f"Not enough scene to train, using {end_scene_idx+1} scenes that is available")
-
-    # test_example_dict_list = []
-    # end_scene_idx = 0
-    # for folder_name in avail_test_example:
-    #     end_scene_idx = int(folder_name.split("_")[1].split("-")[-1])
-    #     test_example_dict = json.load(open(f"{example_json_path}/train/{folder_name}/train_examples.json"))
-    #     test_example_dict_list.append(test_example_dict)
-    #     if test_num_scene <= end_scene_idx + 1:
-    #         break
-    # if end_scene_idx + 1 < test_num_scene:
-    #     test_num_scene = end_scene_idx+1
-    #     print(f"Not enough scene to test, using {end_scene_idx + 1} scenes that is available")
 
     train_example_list = []
     test_example_list = []
     nusc_train = NuScenes(version="v1.0-trainval", dataroot=train_data_path, verbose=True)
     nusc_test = NuScenes(version="v1.0-test", dataroot=test_data_path, verbose=True)
-
+    
+    ''' --------------------------- NuScenes train split --------------------------- '''
+    print(f"Processing NuScenes train dataset into examples...")
     for scene_idx in train_scene_idx_list:
         step_size = random.randint(1, 10)
         print(f"step size: {step_size}")
@@ -633,11 +652,11 @@ def main(script_args, training_args, model_args):
                                   nusc=nusc_train,
                                   scene_idx=scene_idx,
                                   save_meta=False)
-        scene_example_list = nusc_to_examples(nusc_dataset=dataset, step_size=step_size, batch_size=batch_size)
+        scene_example_list = nusc_to_examples(nusc_dataset=dataset, mode="outdoor", step_size=step_size, batch_size=batch_size)
         train_example_list += scene_example_list
 
-    test_example_json_dict = {}
-    print(f"Processing test dataset into examples...")
+    ''' --------------------------- NuScenes test split --------------------------- '''
+    print(f"Processing NuScenes test dataset into examples...")
     for scene_idx in test_scene_idx_list:
         step_size = random.randint(1, 10)
         print(f"step size: {step_size}")
@@ -647,15 +666,63 @@ def main(script_args, training_args, model_args):
                                   nusc=nusc_test,
                                   scene_idx=scene_idx,
                                   save_meta=False)
-        scene_example_list = nusc_to_examples(nusc_dataset=dataset, step_size=step_size, batch_size=batch_size)
+        scene_example_list = nusc_to_examples(nusc_dataset=dataset, mode="outdoor", step_size=step_size, batch_size=batch_size)
+        test_example_list += scene_example_list
+    
+    ''' =========================== load ScanNet dataset ============================= '''
+    train_data_path = f"{root_path}/ScanNet/decoded"
+
+    scannet_scene_idx_list = []
+
+    for i in range(scannet_train_num_scene + scannet_test_num_scene):
+        scannet_scene_idx_list.append(i)
+    split_idx = int(0.75 * len(scannet_scene_idx_list))
+    scannet_train_scene_idx_list = scannet_scene_idx_list[:split_idx]
+    scannet_test_scene_idx_list = scannet_scene_idx_list[split_idx:]
+
+    ''' --------------------------- ScanNet train split --------------------------- '''
+    print(f"Processing ScanNet train dataset into examples...")
+    for scene_idx in scannet_train_scene_idx_list:
+        step_size = random.randint(1, 10)
+        print(f"step size: {step_size}")
+        
+        dataset = ScanNetDataset(data_path=train_data_path,
+                                meta_out_path="",
+                                scene_idx=scene_idx,
+                                save_meta=False)
+        scene_example_list = nusc_to_examples(nusc_dataset=dataset, mode="indoor", step_size=step_size, batch_size=batch_size, video_out_dir="")
+        train_example_list += scene_example_list
+    
+    ''' --------------------------- ScanNet test split --------------------------- '''
+    print(f"Processing ScanNet test dataset into examples...")
+    for scene_idx in scannet_test_scene_idx_list:
+        step_size = random.randint(1, 10)
+        print(f"step size: {step_size}")
+        
+        dataset = ScanNetDataset(data_path=train_data_path,
+                                meta_out_path="",
+                                scene_idx=scene_idx,
+                                save_meta=False)
+        scene_example_list = nusc_to_examples(nusc_dataset=dataset, mode="indoor", step_size=step_size, batch_size=batch_size, video_out_dir="")
         test_example_list += scene_example_list
 
+
+
+
+    ''' =========================== shuffle train examples ============================= '''
+    random.shuffle(train_example_list)
+    random.shuffle(test_example_list)
+
+    ''' =========================== assemble into full dataset ============================= '''
     dataset = DatasetDict({
         "train": Dataset.from_list(train_example_list),
         "test": Dataset.from_list(test_example_list)
     })
+    ''' ------------------ convert examples into input messages for Qwen model ------------------ '''
     dataset = dataset.map(prepare_dataset_nusc)
 
+
+    ''' =========================== Start trainer ============================= '''
     trainer_cls = Qwen2VLGRPOTrainer if not training_args.use_vllm else Qwen2VLGRPOVLLMTrainerModified
     print("using: ", trainer_cls)
     print(f"train {train_num_scene} scenes, test {test_num_scene} scenes")

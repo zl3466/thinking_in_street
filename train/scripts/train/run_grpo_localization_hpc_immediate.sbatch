@@ -18,7 +18,7 @@ module load openmpi/intel/4.0.5;
 source /share/apps/anaconda3/2020.07/etc/profile.d/conda.sh;
 conda activate /scratch/zl3466/env/thinking-in-street/;
 export PATH=/scratch/zl3466/env/thinking-in-street/bin:$PATH;
-export DATASET_DIR="/scratch/zl3466/dataset/NuScenes/train_test"
+export DATASET_DIR="/vast/zl3466/dataset"
 cd /scratch/zl3466/github/thinking_in_street;
 
 export NUM_TRAIN_SCENE=40
@@ -31,7 +31,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node="4" \
     ./train/localization/grpo_new_immediate.py \
     --output_dir "./log/Qwen2.5-VL-3B-GRPO-sbatch-3q-10" \
     --model_name_or_path "Qwen/Qwen2.5-VL-3B-Instruct" \
-    --dataset_name "/scratch/zl3466/dataset/NuScenes" \
+    --dataset_name "/vast/zl3466/dataset/NuScenes" \
     --deepspeed "./train/local_scripts/zero3.json" \
     --max_prompt_length 16384 \
     --max_completion_length 768 \

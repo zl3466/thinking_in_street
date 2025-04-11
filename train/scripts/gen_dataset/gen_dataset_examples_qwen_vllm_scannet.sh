@@ -6,9 +6,9 @@ export PATH=/scratch/zl3466/env/thinking-in-street/bin:$PATH;
 cd /scratch/zl3466/github/thinking_in_street;
 export DATASET_DIR="/vast/zl3466/dataset/ScanNet/decoded";
 export VLLM_WORKER_MULTIPROC_METHOD=spawn
-python ./generate_dataset/ScanNet/generate_thought_process_scannet_qwen_vllm.py \
+python ./generate_dataset/ScanNet/generate_thought_process_scannet_qwen_vllm_3q.py \
     --num_cam 1 \
-    --train_num_scene 2 \
+    --train_num_scene 1 \
     --test_num_scene 1 \
     --step_size 2 \
     --batch_size 4 \

@@ -4,7 +4,7 @@ import sys
 
 import numpy as np
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 import torch
 
 import json
@@ -176,7 +176,7 @@ def calculate_delta_heading(yaw1, yaw2):
     # return delta
 
 
-def calc_general_dir(prev_translation, translation, prev_yaw, yaw):
+def calc_general_dir(prev_translation, translation, prev_yaw, yaw, mode="outdoor"):
     """
     Calculate the agent's general heading direction.
 
@@ -189,6 +189,26 @@ def calc_general_dir(prev_translation, translation, prev_yaw, yaw):
     Returns:
     - str: One of ["forward", "backward", "left", "slight left", "right", "slight right", "stationary"]
     """
+    if mode == "outdoor":
+        thresholds = {
+            "stationary_disp": 0.05,
+            "stationary_yaw": 0.00175,
+            "forward_degree": 1,
+            "slight_degree": 5,
+            "turn_degree": 90,
+            "back_turn_degree": 175,
+            "back_slight_degree": 179
+        }
+    else:
+        thresholds = {
+            "stationary_disp": 0.1,
+            "stationary_yaw": 0.005,
+            "forward_degree": 0.3,
+            "slight_degree": 3,
+            "turn_degree": 90,
+            "back_turn_degree": 175,
+            "back_slight_degree": 179
+        }
     # Calculate movement vector
     movement = np.array(translation) - np.array(prev_translation)
 
@@ -199,7 +219,7 @@ def calc_general_dir(prev_translation, translation, prev_yaw, yaw):
         yaw_diff = 2 * np.pi - yaw_diff
 
     # If there's almost no movement and minimal rotation, agent is stationary
-    if movement_magnitude < 0.05 and yaw_diff < 0.00175:
+    if movement_magnitude < thresholds["stationary_disp"] and yaw_diff < thresholds["stationary_yaw"]:
         return "stationary"
 
     # If there is rotation, use the rotation change
@@ -211,15 +231,15 @@ def calc_general_dir(prev_translation, translation, prev_yaw, yaw):
     angle_diff = math.degrees(yaw_diff)
     # Determine direction based on rotation
     # Note: Since yaw is clockwise positive, positive yaw_diff means turning right
-    if abs(angle_diff) < 1:  # 1 degree, Almost no rotation
+    if abs(angle_diff) < thresholds["forward_degree"]:  # 1 degree, Almost no rotation
         return "forward"
-    elif abs(angle_diff) < 5:  # Less than 5 degrees
+    elif abs(angle_diff) < thresholds["slight_degree"]:  # Less than 5 degrees
         return "slight right" if yaw_diff > 0 else "slight left"
-    elif abs(angle_diff) < 90:  # Less than 90 degrees
+    elif abs(angle_diff) < thresholds["turn_degree"]:  # Less than 90 degrees
         return "right" if yaw_diff > 0 else "left"
-    elif abs(angle_diff) < 175:  # Less than 175 degrees
+    elif abs(angle_diff) < thresholds["back_turn_degree"]:  # Less than 175 degrees
         return "back right" if yaw_diff > 0 else "back left"
-    elif abs(angle_diff) < 179:  # Less than 179 degrees
+    elif abs(angle_diff) < thresholds["back_slight_degree"]:  # Less than 179 degrees
         return "slight back right" if yaw_diff > 0 else "slight back left"
     else:
         return "backward"
@@ -227,7 +247,7 @@ def calc_general_dir(prev_translation, translation, prev_yaw, yaw):
 
 
 
-def nusc_to_examples(nusc_dataset, step_size=1, batch_size=4, video_out_dir=""):
+def nusc_to_examples(nusc_dataset, mode, step_size=1, batch_size=4, video_out_dir=""):
     if video_out_dir != "":
         ''' prepare video writer '''
         sample_img = cv2.imread(nusc_dataset.img_filepaths[0])
@@ -238,7 +258,7 @@ def nusc_to_examples(nusc_dataset, step_size=1, batch_size=4, video_out_dir=""):
 
         fourcc = cv2.VideoWriter_fourcc(*'mp4v')
         out0 = cv2.VideoWriter(video_out_dir, fourcc, 10//step_size, (video_width, video_height))
-        frame_text = ""
+        frame_text = "start of new sequence, no prev"
         ''' video writer code ends here '''
         
     meta_dict = nusc_dataset.meta_dict
@@ -277,7 +297,7 @@ def nusc_to_examples(nusc_dataset, step_size=1, batch_size=4, video_out_dir=""):
 
         batch_img_list.append(nusc_dataset.rel_img_filepaths[frame_i])
         if prev_yaw is not None and prev_translation is not None:
-            general_dir = calc_general_dir(prev_translation, translation, prev_yaw, yaw)
+            general_dir = calc_general_dir(prev_translation, translation, prev_yaw, yaw, mode=mode)
             disp = calculate_displacement(prev_translation, translation)
             delta_heading = calculate_delta_heading(prev_yaw, yaw)
 
@@ -286,6 +306,8 @@ def nusc_to_examples(nusc_dataset, step_size=1, batch_size=4, video_out_dir=""):
             batch_delta_heading_gt.append(delta_heading)
             frame_text = f"dir: {general_dir}, delta heading: {delta_heading}, displacement: {disp}"
             sample_count += 1
+        else:
+            frame_text = "start of new sequence, no prev"
 
         prev_yaw = yaw
         prev_translation = translation
@@ -319,12 +341,13 @@ def nusc_to_examples(nusc_dataset, step_size=1, batch_size=4, video_out_dir=""):
             prev_translation = None
             sample_count = 0
 
-    if video_out_dir != "":
-        img = cv2.imread(f"{nusc_dataset.img_filepaths[frame_i]}")
-        font = cv2.FONT_HERSHEY_SIMPLEX
-        cv2.putText(img, frame_text, (10, 30), font, fontScale=1, color=(0, 0, 255), thickness=2,
-                    lineType=cv2.LINE_AA)
-        out0.write(img)
+
+        if video_out_dir != "":
+            img = cv2.imread(f"{nusc_dataset.img_filepaths[frame_i]}")
+            font = cv2.FONT_HERSHEY_SIMPLEX
+            cv2.putText(img, frame_text, (10, 30), font, fontScale=1, color=(0, 0, 255), thickness=2,
+                        lineType=cv2.LINE_AA)
+            out0.write(img)
         
     example_list = []
     problem_id_offset = 0
@@ -539,7 +562,7 @@ def main(args):
                                   nusc=nusc_train,
                                   scene_idx=scene_idx,
                                   save_meta=False)
-        scene_example_list = nusc_to_examples(nusc_dataset=dataset, step_size=step_size, batch_size=batch_size)
+        scene_example_list = nusc_to_examples(nusc_dataset=dataset, mode="outdoor", step_size=step_size, batch_size=batch_size)
         train_example_json_dict[f'scene_{scene_idx}'] = gen_thought_process(scene_example_list, llm, sampling_params)
 
         with open(f"{train_out_path}/train_examples.json", 'w') as f:
@@ -556,7 +579,7 @@ def main(args):
                                   nusc=nusc_test,
                                   scene_idx=scene_idx,
                                   save_meta=False)
-        scene_example_list = nusc_to_examples(nusc_dataset=dataset, step_size=step_size, batch_size=batch_size)
+        scene_example_list = nusc_to_examples(nusc_dataset=dataset, mode="outdoor", step_size=step_size, batch_size=batch_size)
         test_example_json_dict[f'scene_{scene_idx}'] = gen_thought_process(scene_example_list, llm, sampling_params)
 
         with open(f"{test_out_path}/test_examples.json", 'w') as f:

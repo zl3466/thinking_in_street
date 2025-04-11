@@ -72,7 +72,7 @@ class ScanNetDataset():
                 "filepath": [],
                 "ego_pose_original": [],
                 "ego_pose_matrix": [],
-                "cam_id": [0],
+                "cam_id": [],
                 "extrinsics": [],
                 "intrinsics": [],
             }
@@ -82,8 +82,8 @@ class ScanNetDataset():
         # start loading data into meta_dict
         img_dir = f"{self.data_path}/{scene_name}/color"
         pose_dir = f"{self.data_path}/{scene_name}/pose"
-        intrinsic_dir = f"{self.data_path}/intrinsic/intrinsic_color.txt"
-        extrinsic_dir = f"{self.data_path}/intrinsic/extrinsic_color.txt"
+        intrinsic_dir = f"{self.data_path}/{scene_name}/intrinsic/intrinsic_color.txt"
+        extrinsic_dir = f"{self.data_path}/{scene_name}/intrinsic/extrinsic_color.txt"
         
 
         img_filelist = os.listdir(img_dir)
@@ -99,6 +99,7 @@ class ScanNetDataset():
             pose_path = f"{pose_dir}/{pose_filename}"
 
             # ---- timestamp and cam_id ---- #
+            meta_dict[camera]["cam_id"].append(0)
             meta_dict[camera]["timestamp"].append(int(img_filename.split(".")[0]))
             meta_dict[camera]["filepath"].append(f"{scene_name}/color/{img_filename}")
 
@@ -115,7 +116,15 @@ class ScanNetDataset():
             ego_pose_matrix = np.loadtxt(pose_path)
             rotation = ego_pose_matrix[:3, :3]
             translation = ego_pose_matrix[:3, 3]
-            rotation_quat = Quaternion.from_rotation_matrix(rotation)
+
+            # orthogonalize rotation matrix using svd
+            U, _, Vt = np.linalg.svd(rotation)
+            rotation = U @ Vt
+
+            q = Quaternion(matrix=rotation)
+
+            rotation_quat = np.array([q.w, q.x, q.y, q.z])
+            # rotation_quat = Quaternion.from_rotation_matrix(rotation)
             meta_dict[camera]["ego_pose_original"].append({"rotation": rotation_quat, "translation": translation})
             meta_dict[camera]["ego_pose_matrix"].append(ego_pose_matrix)
 
