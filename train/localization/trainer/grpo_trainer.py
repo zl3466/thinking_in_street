@@ -129,6 +129,9 @@ def reverse_consistent_reward(ordered_completions, reversed_completions, subject
                     # direction should be reversed when video is played in reverse
                     ordered_output_ans_list = [direction_reverse_dict[val] for val in ordered_output_ans_list]
 
+                # flip the element idx order
+                ordered_output_ans_list = ordered_output_ans_list[::-1]
+
                 # calculate reward based on value difference if the answer is a list of values (displacement and heading)
                 if isinstance(ordered_output_ans_list[0], (int, float)):
                     ''' reward = 2 * sigmoid(rmse) -> range(0, 1). Use a = 0.2 to get steep sigmoid '''
@@ -148,6 +151,57 @@ def reverse_consistent_reward(ordered_completions, reversed_completions, subject
             reward = 0.0
         total_reward += reward
     return total_reward
+
+
+def reverse_consistent_reward_dict(ordered_completions, reversed_completions):
+    ordered_contents = [completion[0]["content"] for completion in ordered_completions]
+    reversed_contents = [completion[0]["content"] for completion in reversed_completions]
+    total_reward = 0
+    for ordered_content, reversed_content in zip(ordered_contents, reversed_contents):
+        try:
+            ordered_output_ans = extract_answer(ordered_content)
+            reversed_output_ans = extract_answer(reversed_content)
+
+            ordered_output_ans_dict = ast.literal_eval(ordered_output_ans)
+            reversed_output_ans_dict = ast.literal_eval(reversed_output_ans)
+
+            # convert the gt into reversed order with reversed values
+            for key in ordered_output_ans_dict.keys():
+                # negate to revert x, y, z, roll, pitch, yaw values
+                ordered_list = [-val for val in ordered_output_ans_dict[key]]
+                 # flip the element idx order
+                ordered_list = ordered_list[::-1]
+                ordered_output_ans_dict[key] = ordered_list
+            
+            # compare dicts to calculate reward
+            reward = 0
+            for key in reversed_output_ans_dict.keys():
+                # the keys x, y, z, roll, pitch, yaw must all match
+                if key not in ordered_output_ans_dict.keys():
+                    sub_reward = 0
+                    break
+                else:
+                    output_ans_list = reversed_output_ans_dict[key]
+                    gt_list = ordered_output_ans_dict[key]
+                    if len(output_ans_list) != len(gt_list):
+                        sub_reward = 0.0
+                    else:
+                        squared_diffs = [(p - gt) ** 2 for p, gt in zip(output_ans_list, gt_list)]
+                        rmse = math.sqrt(sum(squared_diffs) / len(squared_diffs))
+                        sub_reward = 2 * (1 - sigmoid(rmse, a=0.2, b=0))
+                        ''' we ensure a minimum reward of 0.1 if the number of elements in the list is correct '''
+                        # reward range for each key is 0.1 to 1
+                        sub_reward = max(0.1, sub_reward)
+                reward += sub_reward
+            # normalize total reward for the dict to between 0 - 1
+            reward = reward / len(ordered_output_ans_dict.keys())
+
+        except Exception as e:
+            print(f"Error in reversed-input reward calc: {e}")
+            reward = 0.0
+        total_reward += reward
+    return total_reward
+
 
 
 class Qwen2VLGRPOTrainer(Trainer):
@@ -447,15 +501,7 @@ class Qwen2VLGRPOTrainer(Trainer):
         # Instead, we set them to the columns expected by the `training_step` method, hence the override.
         if self._signature_columns is None:
             self._signature_columns = ["prompt"]
-
-
-    # Get the per-token log probabilities for the completions for the model and the reference model
-    def _get_per_token_logps(self, model, input_ids, **kwargs):
-        # logits = model(input_ids, attention_mask=attention_mask, pixel_values=pixel_values, image_grid_thw=image_grid_thw).logits  # (B, L, V)
-        # import pdb
-        # pdb.set_trace()
-        logits = model(input_ids, **kwargs).logits
-        logits = logits[:, :-1, :]  # (B, L-1, V), exclude the last logit: it corresponds to the next token pred
+# map total reward range (0, 4) to (0, 1), with slope 2 and center 1 to favor high total rewardit corresponds to the next token pred
         input_ids = input_ids[:, 1:]  # (B, L-1), exclude the first input ID since we don't have logits for it
         # Compute the log probabilities for the input tokens. Use a loop to reduce memory peak.
         per_token_logps = []
@@ -500,6 +546,11 @@ class Qwen2VLGRPOTrainer(Trainer):
         # # print("\nfull input prompt len:", len(input_copy))
         # # print("\nfull input prompt:", input_copy)
         problem_subject = inputs[0]["problem_subject"]
+        dataset_name = inputs[0]["dataset_name"]
+        if dataset_name == "NuScenes":
+            dataset_dir_specific = "NuScenes/train_test"
+        elif dataset_name == "ScanNet":
+            dataset_dir_specific = "ScanNet/decoded"
 
         prompts = [x["prompt"] for x in inputs]
         
@@ -525,9 +576,9 @@ class Qwen2VLGRPOTrainer(Trainer):
         #     image_inputs, video_inputs, video_kwargs = process_vision_info(input_copy, return_video_kwargs=True)
 
         if inputs[0]['data_type'] == 'image':
-            input_copy[0]['content'][0]['image'] = [f"{os.getenv('DATASET_DIR')}/{file_path}" for file_path in inputs[0]['path']]
+            input_copy[0]['content'][0]['image'] = [f"{os.getenv('DATASET_DIR')}/{dataset_dir_specific}/{file_path}" for file_path in inputs[0]['path']]
         elif inputs[0]['data_type'] == 'video':
-            input_copy[0]['content'][0]['video'] = [f"{os.getenv('DATASET_DIR')}/{file_path}" for file_path in inputs[0]['path']]
+            input_copy[0]['content'][0]['video'] = [f"{os.getenv('DATASET_DIR')}/{dataset_dir_specific}/{file_path}" for file_path in inputs[0]['path']]
 
         # try:
         #     image_inputs, video_inputs, video_kwargs = process_vision_info(input_copy, return_video_kwargs=True)
@@ -539,7 +590,7 @@ class Qwen2VLGRPOTrainer(Trainer):
         #         input_copy[0]['content'][0]['video'] = os.getcwd() + "/Video-R1-data" + '/LLaVA-Video-178K/liwei_youtube_videos/videos/youtube_video_2024/ytb_7nRmsEw7nsE.mp4'
                 
         #     image_inputs, video_inputs, video_kwargs = process_vision_info(input_copy, return_video_kwargs=True)
-        
+
         image_inputs, video_inputs, video_kwargs = process_vision_info(input_copy, return_video_kwargs=True)
 
         # Videos uploaded as a sequence of images will be returned as a list of list of images -- strip one layer of list in that case
@@ -751,6 +802,12 @@ class Qwen2VLGRPOTrainer(Trainer):
             if question_type == "list":
                 # sum of temporal reward for all groups
                 total_reward = reverse_consistent_reward(ordered_completions=completions, reversed_completions=shuffled_completions, subject=problem_subject)
+                # map total reward range (0, 4) to (0, 1), with slope 2 and center 1 to favor high total reward
+                reward = sigmoid(total_reward, a=2, b=1)
+                temporal_rewards = torch.tensor([reward]).to('cuda')
+            elif question_type == "dict":
+                # sum of temporal reward for all groups
+                total_reward = reverse_consistent_reward_dict(ordered_completions=completions, reversed_completions=shuffled_completions)
                 # map total reward range (0, 4) to (0, 1), with slope 2 and center 1 to favor high total reward
                 reward = sigmoid(total_reward, a=2, b=1)
                 temporal_rewards = torch.tensor([reward]).to('cuda')

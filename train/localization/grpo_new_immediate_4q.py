@@ -38,6 +38,7 @@ import cv2
 import random
 import time
 import numpy as np
+from scipy.spatial.transform import Rotation as R
 
 QUESTION_TEMPLATE = (
     "{Question}\n"
@@ -53,7 +54,8 @@ TYPE_TEMPLATE = {
     "OCR": " Please transcribe text from the image/video clearly and provide your text answer within the <answer> </answer> tags.",
     "free-form": " Please provide your text answer within the <answer> </answer> tags.",
     "regression": " Please provide the numerical value (e.g., 42 or 3.14) within the <answer> </answer> tags.",
-    "list": " Please provide the list answer (e.g., [val, val, val, ...]) within the <answer> </answer> tags."
+    "list": " Please provide the list answer (e.g., [val, val, val, ...]) within the <answer> </answer> tags.",
+    "dict": " Please provide the dictionary answer (e.g. {key: val, key: val, ...}) within the <answer> </answer> tags."
 }
 general_direction_options = ["stationary", "forward", "backward", "left", "slight left", "back left", "slight back left", "right", "slight right", "back right", "slight back right"]
 
@@ -201,6 +203,31 @@ def accuracy_reward(completions, solution, **kwargs):
                         ''' the general_dir case where the list contains string keywords like forward, left, slight right, etc. '''
                         reward = sum([a.lower() == b.lower() for a, b in zip(output_ans_list, gt_list)]) / len(gt_list)
                         reward = max(0.1, reward)
+            elif question_type == "dict":
+                output_ans_dict = ast.literal_eval(output_ans)
+                gt_dict = ast.literal_eval(gt_ans)
+                # reward_unit = 1 / len(gt_dict.keys())
+                reward = 0
+                for key in output_ans_dict.keys():
+                    # the keys x, y, z, roll, pitch, yaw must all match
+                    if key not in gt_dict.keys():
+                        sub_reward = 0
+                        break
+                    else:
+                        output_ans_list = output_ans_dict[key]
+                        gt_list = gt_dict[key]
+                        if len(output_ans_list) != len(gt_list):
+                            sub_reward = 0.0
+                        else:
+                            squared_diffs = [(p - gt) ** 2 for p, gt in zip(output_ans_list, gt_list)]
+                            rmse = math.sqrt(sum(squared_diffs) / len(squared_diffs))
+                            sub_reward = 2 * (1 - sigmoid(rmse, a=0.2, b=0))
+                            ''' we ensure a minimum reward of 0.1 if the number of elements in the list is correct '''
+                            # reward range for each key is 0.1 to 1
+                            sub_reward = max(0.1, sub_reward)
+                    reward += sub_reward
+                # normalize total reward for the dict to between 0 - 1
+                reward = reward / len(gt_dict.keys())
             else:
                 reward = 0.0
         except Exception as e:
@@ -221,22 +248,10 @@ def accuracy_reward(completions, solution, **kwargs):
     return rewards
 
 
+
 def format_reward(completions, **kwargs):
-    """Reward function that checks if the completion has a specific format."""
-    pattern = r"<think>.*?</think>\s*<answer>.*?</answer>"
-    completion_contents = [completion[0]["content"] for completion in completions]
-    matches = [re.fullmatch(pattern, content, re.DOTALL) for content in completion_contents]
-    return [1.0 if match else 0.0 for match in matches]
 
-
-def format_reward_list(completions, **kwargs):
-    if kwargs['problem_type'][0] != "list":
-        """Reward function that checks if the completion has a specific format."""
-        pattern = r"<think>.*?</think>\s*<answer>.*?</answer>"
-        completion_contents = [completion[0]["content"] for completion in completions]
-        matches = [re.fullmatch(pattern, content, re.DOTALL) for content in completion_contents]
-        return [1.0 if match else 0.0 for match in matches]
-    else:
+    if kwargs['problem_type'][0] == "list":
         """
         Reward function for list answers.
         First we chech if answer has the <answer></anwswer> tag, reward=0.5
@@ -261,6 +276,43 @@ def format_reward_list(completions, **kwargs):
 
             all_rewards.append(reward)
         return all_rewards
+    elif kwargs['problem_type'][0] == "dict":
+        pattern = r"<think>.*?</think>\s*<answer>.*?</answer>"
+        completion_contents = [completion[0]["content"] for completion in completions]
+        all_rewards = []
+        for content in completion_contents:
+            match = re.fullmatch(pattern, content, re.DOTALL)
+            if match:
+                # if only the tag format is matched, rerward 0.4
+                reward = 0.4
+                try:
+                    output_ans = extract_answer(content)
+                    output_ans_dict = ast.literal_eval(output_ans)
+                    # if dict format is matched, rerward 0.7
+                    if isinstance(output_ans_dict, dict):
+                        reward = 0.7
+                        all_correct_flag = True
+                        # check if each val in dict is list
+                        for key in output_ans_dict.keys():
+                            if not isinstance(output_ans_dict[key], list):
+                                all_correct_flag = False
+                                break
+                        # give full reward 1 only if all elements in the dict are list, otherwise only reward 0.7
+                        if all_correct_flag:
+                            reward = 1
+                except Exception as e:
+                    reward = 0.4
+            else:
+                reward = 0
+
+            all_rewards.append(reward)
+        return all_rewards
+    else:
+        """Reward function that checks if the completion has a specific format."""
+        pattern = r"<think>.*?</think>\s*<answer>.*?</answer>"
+        completion_contents = [completion[0]["content"] for completion in completions]
+        matches = [re.fullmatch(pattern, content, re.DOTALL) for content in completion_contents]
+        return [1.0 if match else 0.0 for match in matches]
 
 
 def quaternion_to_yaw(q):
@@ -364,6 +416,28 @@ def calc_general_dir(prev_translation, translation, prev_yaw, yaw, mode="outdoor
         return "backward"
 
 
+def calc_transformation_dict(prev_translation, translation, prev_quat, quat):
+    movement = np.array(translation) - np.array(prev_translation)
+    x_diff = movement[0]
+    y_diff = movement[1]
+    z_diff = movement[2]
+
+    prev_q = [prev_quat[1], prev_quat[2], prev_quat[3], prev_quat[0]]
+    prev_r = R.from_quat(prev_q)
+    prev_roll, prev_pitch, prev_yaw = prev_r.as_euler('xyz', degrees=True)
+
+    q = [quat[1], quat[2], quat[3], quat[0]]
+    r = R.from_quat(q)
+    roll, pitch, yaw = r.as_euler('xyz', degrees=True)
+
+    roll_diff = roll - prev_roll
+    pitch_diff = pitch - prev_pitch
+    yaw_diff = yaw - prev_yaw
+    return {"x": x_diff, "y": y_diff, "z": z_diff, "roll": roll_diff, "pitch": pitch_diff, "yaw": yaw_diff}
+    # return x_diff, y_diff, z_diff, roll_diff, pitch_diff, yaw_diff
+
+
+
 def has_invalid_values(lst):
     return any(x is None or (isinstance(x, float) and math.isnan(x)) for x in lst)
 
@@ -392,17 +466,20 @@ def nusc_to_examples(nusc_dataset, mode, dataset_name, step_size=1, batch_size=4
     meta_data = meta_dict[cam]
     ego_pose_list = meta_data["ego_pose_original"]
 
+    prev_rotation = None
     prev_yaw = None
     prev_translation = None
     
     general_dir_gt_all = []
     disp_gt_all = []
     delta_heading_gt_all = []
+    transformation_gt_all = []
     img_list_all = []
 
     batch_general_dir_gt = []
     batch_disp_gt = []
     batch_delta_heading_gt = []
+    batch_transformation_gt = {"x": [], "y": [], "z": [], "roll": [], "pitch": [], "yaw": []}
     batch_img_list = []
     sample_count = 0
     batch_img_list = []
@@ -424,15 +501,20 @@ def nusc_to_examples(nusc_dataset, mode, dataset_name, step_size=1, batch_size=4
             general_dir = calc_general_dir(prev_translation, translation, prev_yaw, yaw, mode=mode)
             disp = calculate_displacement(prev_translation, translation)
             delta_heading = calculate_delta_heading(prev_yaw, yaw)
+            transformation_dict = calc_transformation_dict(prev_translation, translation, prev_rotation, rotation)
 
             batch_general_dir_gt.append(general_dir)
             batch_disp_gt.append(disp)
             batch_delta_heading_gt.append(delta_heading)
+            for key in transformation_dict.keys():
+                batch_transformation_gt[key].append(transformation_dict[key])
+
             frame_text = f"dir: {general_dir}, delta heading: {delta_heading}, displacement: {disp}"
             sample_count += 1
         else:
             frame_text = "start of new sequence, no prev"
 
+        prev_rotation = rotation
         prev_yaw = yaw
         prev_translation = translation
 
@@ -454,12 +536,14 @@ def nusc_to_examples(nusc_dataset, mode, dataset_name, step_size=1, batch_size=4
                         batch_delta_heading_gt) == batch_size - 1, f"delta_heading batch size mismatch {len(batch_delta_heading_gt)}, {batch_size - 1}"
             
             # if something is wrong in the dataset pose, causing Nan value in translation or rotation (observed in some ScanNet data), don't use this example
-            if has_invalid_values(batch_disp_gt) or has_invalid_values(batch_delta_heading_gt):
-                print(f"invalid example in {dataset_name}: batch_disp_gt: {batch_disp_gt}, batch_delta_heading_gt: {batch_delta_heading_gt}")
+            if has_invalid_values(batch_disp_gt) or has_invalid_values(batch_delta_heading_gt) or has_invalid_values(batch_transformation_gt):
+                print(f"invalid example in {dataset_name}: batch_disp_gt: {batch_disp_gt}, batch_delta_heading_gt: {batch_delta_heading_gt}, batch_transformation_gt: {batch_transformation_gt}")
                 batch_general_dir_gt = []
                 batch_disp_gt = []
                 batch_delta_heading_gt = []
+                batch_transformation_gt = {"x": [], "y": [], "z": [], "roll": [], "pitch": [], "yaw": []}
                 batch_img_list = []
+
                 prev_yaw = None
                 prev_translation = None
                 sample_count = 0
@@ -467,10 +551,13 @@ def nusc_to_examples(nusc_dataset, mode, dataset_name, step_size=1, batch_size=4
                 general_dir_gt_all.append(batch_general_dir_gt)
                 disp_gt_all.append(batch_disp_gt)
                 delta_heading_gt_all.append(batch_delta_heading_gt)
+                transformation_gt_all.append(batch_transformation_gt)
                 img_list_all.append(batch_img_list)
+
                 batch_general_dir_gt = []
                 batch_disp_gt = []
                 batch_delta_heading_gt = []
+                batch_transformation_gt = {"x": [], "y": [], "z": [], "roll": [], "pitch": [], "yaw": []}
                 batch_img_list = []
                 prev_yaw = None
                 prev_translation = None
@@ -490,8 +577,10 @@ def nusc_to_examples(nusc_dataset, mode, dataset_name, step_size=1, batch_size=4
         batch_general_dir_gt = general_dir_gt_all[batch_i]
         batch_disp_gt = disp_gt_all[batch_i]
         batch_delta_heading_gt = delta_heading_gt_all[batch_i]
-        batch_img_list = img_list_all[batch_i]
+        batch_transformation_gt = transformation_gt_all[batch_i]
 
+        batch_img_list = img_list_all[batch_i]
+        
         example_general_dir = {
             "problem_id": batch_i + problem_id_offset,
             "dataset_name": dataset_name,
@@ -549,9 +638,33 @@ def nusc_to_examples(nusc_dataset, mode, dataset_name, step_size=1, batch_size=4
             "select": True
         }
 
+        example_transformation = {
+            "problem_id": batch_i + problem_id_offset,
+            "dataset_name": dataset_name,
+            "problem": f"I uploaded {len(batch_img_list)} frames from an agent's dash cam video. The agent can be a vehicle or a person. \n"
+                       f"Determine the agent's exact translation (x, y, z) and rotation (roll, pitch yaw) values between each frame and its previous frame.\n"
+                       f"For translation, give your answer in numerical values in meter unit.\n"
+                       f"For rotation, give your answer in degree values ranging between -180 and 180 degrees, with veer to the right "
+                       f"being positive degrees and to the left being negative degrees.\n"
+                       f"Put your answer in a dictionary format. The dictionary sould have six keys: x, y, z, roll, pitch yaw. "
+                       f"For each key, the value should be a list of meter or degree values. for keys x, y, and z, the list should contain {len(batch_disp_gt)} meter values. "
+                       f"For keys roll, pitch and yaw, the list should contain {len(batch_disp_gt)} degree values. \n",
+            "data_type": "video",
+            "problem_type": "dict",
+            "problem_subject": "transformation",
+            "options": [],
+            "solution": f"<answer>{batch_transformation_gt}</answer>",
+            "path": batch_img_list,
+            "reward": 1.0,
+            "select": True
+        }
+
+
+
         example_list.append(example_general_dir)
         example_list.append(example_heading)
         example_list.append(example_disp)
+        example_list.append(example_transformation)
 
     return example_list
 

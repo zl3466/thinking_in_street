@@ -8,7 +8,7 @@ from pyquaternion import Quaternion
 from torch import Tensor
 from utils.qwen_utils import NumpyEncoder
 # from generate_dataset.ScanNet.SensorData import SensorData
-
+from scipy.spatial.transform import Rotation as R
 logger = logging.getLogger()
 
 class ScanNetDataset():
@@ -117,15 +117,17 @@ class ScanNetDataset():
             rotation = ego_pose_matrix[:3, :3]
             translation = ego_pose_matrix[:3, 3]
 
-            # orthogonalize rotation matrix using svd
-            U, _, Vt = np.linalg.svd(rotation)
-            rotation = U @ Vt
+            # # orthogonalize rotation matrix using svd
+            # U, _, Vt = np.linalg.svd(rotation)
+            # rotation = U @ Vt
 
-            q = Quaternion(matrix=rotation)
+            # q = Quaternion(matrix=rotation)
+            # rotation_quat = np.array([q.w, q.x, q.y, q.z])
+            r = R.from_matrix(rotation)
+            quat_xyzw = r.as_quat()
+            quat_wxyz = [quat_xyzw[3], *quat_xyzw[:3]]
 
-            rotation_quat = np.array([q.w, q.x, q.y, q.z])
-            # rotation_quat = Quaternion.from_rotation_matrix(rotation)
-            meta_dict[camera]["ego_pose_original"].append({"rotation": rotation_quat, "translation": translation})
+            meta_dict[camera]["ego_pose_original"].append({"rotation": quat_wxyz, "translation": translation})
             meta_dict[camera]["ego_pose_matrix"].append(ego_pose_matrix)
 
         

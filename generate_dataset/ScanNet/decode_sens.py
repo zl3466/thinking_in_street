@@ -36,25 +36,6 @@ def main():
         if not os.path.exists(scene_out_path):
             os.makedirs(scene_out_path, exist_ok=True)
 
-        # load the data
-        sys.stdout.write('loading %s...' % sens_file_path)
-        sd = SensorData(sens_file_path)
-        sys.stdout.write('loaded!\n')
-        if opt.export_depth_images:
-            sd.export_depth_images(os.path.join(scene_out_path, 'depth'), frame_skip=frame_skip)
-        if opt.export_color_images:
-            sd.export_color_images(os.path.join(scene_out_path, 'color'), frame_skip=frame_skip)
-        if opt.export_poses:
-            sd.export_poses(os.path.join(scene_out_path, 'pose'), frame_skip=frame_skip)
-        if opt.export_intrinsics:
-            sd.export_intrinsics(os.path.join(scene_out_path, 'intrinsic'))
-    else:
-        for i in tqdm(range(len(scene_list))):
-            scene_name = scene_list[i]
-            sens_file_path = f"{scannet_path}/{scene_name}/{scene_name}.sens"
-            scene_out_path = f"{opt.output_path}/{scene_name}"
-            if not os.path.exists(scene_out_path):
-                os.makedirs(scene_out_path, exist_ok=True)
             # load the data
             sys.stdout.write('loading %s...' % sens_file_path)
             sd = SensorData(sens_file_path)
@@ -67,6 +48,30 @@ def main():
                 sd.export_poses(os.path.join(scene_out_path, 'pose'), frame_skip=frame_skip)
             if opt.export_intrinsics:
                 sd.export_intrinsics(os.path.join(scene_out_path, 'intrinsic'))
+        else:
+                print(f"scene {scene_name} alread exists at {scene_out_path}")
+    else:
+        for i in tqdm(range(len(scene_list)), desc="total scenes"):
+            scene_name = scene_list[i]
+            print(f"\n=========== decoding scene {scene_name} ===========")
+            sens_file_path = f"{scannet_path}/{scene_name}/{scene_name}.sens"
+            scene_out_path = f"{opt.output_path}/{scene_name}"
+            if not os.path.exists(scene_out_path):
+                os.makedirs(scene_out_path, exist_ok=True)
+                # load the data
+                sys.stdout.write('loading %s...' % sens_file_path)
+                sd = SensorData(sens_file_path)
+                sys.stdout.write('loaded!\n')
+                if opt.export_depth_images:
+                    sd.export_depth_images(os.path.join(scene_out_path, 'depth'), frame_skip=frame_skip)
+                if opt.export_color_images:
+                    sd.export_color_images(os.path.join(scene_out_path, 'color'), frame_skip=frame_skip)
+                if opt.export_poses:
+                    sd.export_poses(os.path.join(scene_out_path, 'pose'), frame_skip=frame_skip)
+                if opt.export_intrinsics:
+                    sd.export_intrinsics(os.path.join(scene_out_path, 'intrinsic'))
+            else:
+                print(f"scene {scene_name} alread exists at {scene_out_path}")
 
 
 if __name__ == '__main__':
