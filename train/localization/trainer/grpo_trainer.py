@@ -501,7 +501,15 @@ class Qwen2VLGRPOTrainer(Trainer):
         # Instead, we set them to the columns expected by the `training_step` method, hence the override.
         if self._signature_columns is None:
             self._signature_columns = ["prompt"]
-# map total reward range (0, 4) to (0, 1), with slope 2 and center 1 to favor high total rewardit corresponds to the next token pred
+
+
+    # Get the per-token log probabilities for the completions for the model and the reference model
+    def _get_per_token_logps(self, model, input_ids, **kwargs):
+        # logits = model(input_ids, attention_mask=attention_mask, pixel_values=pixel_values, image_grid_thw=image_grid_thw).logits  # (B, L, V)
+        # import pdb
+        # pdb.set_trace()
+        logits = model(input_ids, **kwargs).logits
+        logits = logits[:, :-1, :]  # (B, L-1, V), exclude the last logit: it corresponds to the next token pred
         input_ids = input_ids[:, 1:]  # (B, L-1), exclude the first input ID since we don't have logits for it
         # Compute the log probabilities for the input tokens. Use a loop to reduce memory peak.
         per_token_logps = []
