@@ -13,18 +13,18 @@ module load openmpi/intel/4.0.5;
 source /share/apps/anaconda3/2020.07/etc/profile.d/conda.sh;
 conda activate /scratch/zl3466/env/thinking-in-street/;
 export PATH=/scratch/zl3466/env/thinking-in-street/bin:$PATH;
-export DATASET_DIR="/scratch/zl3466/dataset/NuScenes/train_test"
+export DATASET_DIR="/vast/zl3466/dataset"
 cd /scratch/zl3466/github/thinking_in_street;
 
 export NUM_TRAIN_SCENE=10
 
-CUDA_VISIBLE_DEVICES=0,1 torchrun --nproc_per_node="2" \
+CUDA_VISIBLE_DEVICES=0 torchrun --nproc_per_node="1" \
     --nnodes="1" \
     --node_rank="0" \
     --master_addr="127.0.0.1" \
     --master_port="12365" \
     ./train/localization/grpo_new_immediate.py \
-    --output_dir "./log/Qwen2.5-VL-3B-GRPO-3q" \
+    --output_dir "./log/Qwen2.5-VL-3B-GRPO-3q-srun" \
     --model_name_or_path "Qwen/Qwen2.5-VL-3B-Instruct" \
     --dataset_name "/scratch/zl3466/dataset/NuScenes" \
     --deepspeed "./train/local_scripts/zero3.json" \
@@ -43,7 +43,7 @@ CUDA_VISIBLE_DEVICES=0,1 torchrun --nproc_per_node="2" \
     --attn_implementation sdpa \
     --max_pixels 100352 \
     --num_train_epochs 1 \
-    --run_name localization-3b-temporal-3q-debug \
+    --run_name localization-3b-temporal-3q-srun-debug \
     --save_steps 100 \
     --beta 0.04 \
     --max_grad_norm 5 \
