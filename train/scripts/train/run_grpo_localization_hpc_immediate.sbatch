@@ -28,8 +28,8 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node="4" \
     --node_rank="0" \
     --master_addr="127.0.0.1" \
     --master_port="12365" \
-    ./train/localization/grpo_new_immediate.py \
-    --output_dir "./log/Qwen2.5-VL-3B-GRPO-sbatch-3q-10-rtx8000" \
+    ./train/localization/grpo_new_immediate_4q.py \
+    --output_dir "./log/Qwen2.5-VL-3B-GRPO-sbatch-40-rtx8000" \
     --model_name_or_path "Qwen/Qwen2.5-VL-3B-Instruct" \
     --dataset_name "/vast/zl3466/dataset/NuScenes" \
     --deepspeed "./train/local_scripts/zero3.json" \
@@ -43,12 +43,12 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node="4" \
     --bf16 \
     --logging_steps 1 \
     --gradient_checkpointing true \
-    --temporal false \
+    --temporal true \
     --len_control true \
     --attn_implementation sdpa \
     --max_pixels 200704 \
     --num_train_epochs 1 \
-    --run_name localization-3b-3q-rtx8000-sbatch \
+    --run_name localization-3b-rtx8000-sbatch-4q \
     --save_steps 100 \
     --beta 0.04 \
     --max_grad_norm 5 \

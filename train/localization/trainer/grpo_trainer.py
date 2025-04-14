@@ -105,6 +105,7 @@ direction_reverse_dict = {
 ''' compare outputs from ordered input and reversed input, return the sum of reward for all grpo groups '''
 # TODO: how to identify which type of question this is?
 def reverse_consistent_reward(ordered_completions, reversed_completions, subject):
+    # print(f"\n\nnum of completions, ordered and reversed: {len(ordered_completions)}, {len(reversed_completions)}\n\n")
     ordered_contents = [completion[0]["content"] for completion in ordered_completions]
     reversed_contents = [completion[0]["content"] for completion in reversed_completions]
     total_reward = 0
@@ -810,14 +811,14 @@ class Qwen2VLGRPOTrainer(Trainer):
             if question_type == "list":
                 # sum of temporal reward for all groups
                 total_reward = reverse_consistent_reward(ordered_completions=completions, reversed_completions=shuffled_completions, subject=problem_subject)
-                # map total reward range (0, 4) to (0, 1), with slope 2 and center 1 to favor high total reward
-                reward = sigmoid(total_reward, a=2, b=1)
+                # map total reward range (0, 4) to (0, 1), with slope 2 and center num_group * 1/4 to favor high total reward
+                reward = sigmoid(total_reward, a=2, b=len(shuffled_completions)/4)
                 temporal_rewards = torch.tensor([reward]).to('cuda')
             elif question_type == "dict":
                 # sum of temporal reward for all groups
                 total_reward = reverse_consistent_reward_dict(ordered_completions=completions, reversed_completions=shuffled_completions)
-                # map total reward range (0, 4) to (0, 1), with slope 2 and center 1 to favor high total reward
-                reward = sigmoid(total_reward, a=2, b=1)
+                # map total reward range (0, 4) to (0, 1), with slope 2 and center num_group * 1/4 to favor high total reward
+                reward = sigmoid(total_reward, a=2, b=len(shuffled_completions)/4)
                 temporal_rewards = torch.tensor([reward]).to('cuda')
             else:
                 acc_mean = temporal_rewards_per_func[:, 0].mean()
