@@ -450,24 +450,32 @@ def gen_thought_process(data, llm, sampling_params):
     input data: a list of examples
     '''
     messages = []
-    for x in data:
-        if x["problem_type"] == 'multiple choice':
-            question = x['problem'] + "Options:\n"
-            for op in x["options"]:
+    for example in data:
+        dataset_name = example["dataset_name"]
+        if dataset_name == "NuScenes":
+            dataset_dir_specific = "NuScenes/train_test"
+        elif dataset_name == "ScanNet":
+            dataset_dir_specific = "ScanNet/decoded"
+        else:
+            return RuntimeError("dataset name not supported")
+
+        if example["problem_type"] == 'multiple choice':
+            question = example['problem'] + "Options:\n"
+            for op in example["options"]:
                 question += op + "\n"
         else:
-            question = x['problem']
+            question = example['problem']
 
         msg = [{
             "role": "user",
             "content": [
                 {
-                    "type": x['data_type'],
-                    x['data_type']: [f"{os.getenv('DATASET_DIR')}/{file_path}" for file_path in x['path']]
+                    "type": example['data_type'],
+                    example['data_type']: [f"{os.getenv('DATASET_DIR')}/{dataset_dir_specific}/{file_path}" for file_path in example['path']]
                 },
                 {
                     "type": "text",
-                    "text": QUESTION_TEMPLATE.format(Question=question) + TYPE_TEMPLATE[x['problem_type']]
+                    "text": QUESTION_TEMPLATE.format(Question=question) + TYPE_TEMPLATE[example['problem_type']]
                 }
             ]
         }]
@@ -477,35 +485,35 @@ def gen_thought_process(data, llm, sampling_params):
                messages]
 
     image_inputs, video_inputs, video_kwargs = process_vision_info(messages, return_video_kwargs=True)
-    try:
-        image_idx = 0
-        video_idx = 0
-        llm_inputs = []
 
-        for idx, prompt in enumerate(prompts):
-            mm_type = messages[idx][0]['content'][0]['type']
-            sample_mm_data = {}
-            sample_video_kw = {}
-            if mm_type == 'image':
-                sample_mm_data["image"] = image_inputs[image_idx]
-                image_idx += 1
-            elif mm_type == 'video':
-                sample_mm_data["video"] = video_inputs[video_idx]
-                for key, value in video_kwargs.items():
-                    sample_video_kw[key] = value[video_idx]
-                video_idx += 1
+    image_idx = 0
+    video_idx = 0
+    llm_inputs = []
 
-            llm_inputs.append({
-                "prompt": prompt,
-                "multi_modal_data": sample_mm_data,
-                "mm_processor_kwargs": sample_video_kw,
-            })
+    for idx, prompt in enumerate(prompts):
+        mm_type = messages[idx][0]['content'][0]['type']
+        sample_mm_data = {}
+        sample_video_kw = {}
+        if mm_type == 'image':
+            sample_mm_data["image"] = image_inputs[image_idx]
+            image_idx += 1
+        elif mm_type == 'video':
+            sample_mm_data["video"] = video_inputs[video_idx]
+            for key, value in video_kwargs.items():
+                sample_video_kw[key] = value[video_idx]
+            video_idx += 1
 
-        outputs = llm.generate(llm_inputs, sampling_params=sampling_params)
-        output_text = [out.outputs[0].text for out in outputs]
+        llm_inputs.append({
+            "prompt": prompt,
+            "multi_modal_data": sample_mm_data,
+            "mm_processor_kwargs": sample_video_kw,
+        })
 
-    except Exception as e:
-        output_text = ['<answer>error</answer>']
+    outputs = llm.generate(llm_inputs, sampling_params=sampling_params)
+    output_text = [out.outputs[0].text for out in outputs]
+
+    # except Exception as e:
+    #     output_text = ['<answer>error</answer>']
 
     for i in tqdm(range(len(messages)), desc="generating thought processes for a scene"):
         think_chain = extract_think(output_text[i])

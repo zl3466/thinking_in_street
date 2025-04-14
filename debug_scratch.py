@@ -6,25 +6,12 @@ import numpy as np
 
 import transformers
 
-print("success")
-
-from transformers import (
-    AriaForConditionalGeneration,
-    AriaProcessor,
-    AutoModelForCausalLM,
-    AutoModelForSequenceClassification,
-    AutoProcessor,
-    AutoTokenizer,
-    GenerationConfig,
-    PreTrainedModel,
-    PreTrainedTokenizerBase,
-    Qwen2VLForConditionalGeneration,
-    Qwen2_5_VLForConditionalGeneration,
-    Trainer,
-    TrainerCallback,
-    is_wandb_available,
-)
-print("success2")
+def extract_answer(text):
+    pattern = r'<answer>\s*(.*?)\s*</answer>'
+    match = re.search(pattern, text, re.DOTALL)
+    if match:
+        return match.group(1).strip()
+    return ""
 
 def sigmoid(x, a=1, b=0):
     return 1 / (1 + math.exp(a*(-x-b)))
@@ -85,25 +72,40 @@ def cal_reward_list(output_ans, gt_ans, epsilon=0.1):
 # cal_reward_list(output, gt_list7)
 
 
-def format_reward(completions, **kwargs):
-    """Reward function that checks if the completion has a specific format."""
+def format_reward(completions):
+
     pattern = r"<answer>.*?</answer>"
     completion_contents = [completion[0]["content"] for completion in completions]
-    matches = [re.fullmatch(pattern, content, re.DOTALL) for content in completion_contents]
     all_rewards = []
     for content in completion_contents:
         match = re.fullmatch(pattern, content, re.DOTALL)
         if match:
-            reward = 0.5
-            list_pattern = r"<answer>\[.*?\]</answer>"
-            list_match = re.fullmatch(list_pattern, content, re.DOTALL)
-            if list_match:
-                reward = 1.0
+            # if only the tag format is matched, rerward 0.4
+            reward = 0.4
+            try:
+                output_ans = extract_answer(content)
+                output_ans_dict = ast.literal_eval(output_ans)
+                # if dict format is matched, rerward 0.7
+                if isinstance(output_ans_dict, dict):
+                    reward = 0.7
+                    all_correct_flag = True
+                    # check if each val in dict is list
+                    for key in output_ans_dict.keys():
+                        if not isinstance(output_ans_dict[key], list):
+                            all_correct_flag = False
+                            break
+                    # give full reward 1 only if all elements in the dict are list, otherwise only reward 0.7
+                    if all_correct_flag:
+                        reward = 1
+            except Exception as e:
+                reward = 0.4
         else:
             reward = 0
 
         all_rewards.append(reward)
     return all_rewards
+
+
 
 
 # completions = [
@@ -113,4 +115,20 @@ def format_reward(completions, **kwargs):
 #     [{"content": "<answer>['a', 'b', 'c']</answer>"}], # Valid list of strings
 #     [{"content": "No answer tag"}]                     # No answer tag
 # ]
+
+# completions = [
+#     [{"content": "<answer>{'x': [1.2, 2.4, 3.6], 'y': [-0.5, 0.0, 0.5], 'z': [0.0, 1.0, 2.0], 'roll': [5.0, 10.0, 15.0], 'pitch': [0.0, -5.0, -10.0], 'yaw': [90.0, 180.0, 270.0]}</answer>"}],      # Valid list
+#     [{"content": "<answer>{x: [3.3, 3.2, 3.1], y: [0.0, -0.1, -0.2], z: [1.0, 0.9, 0.8], roll: [180.0, 170.0, 160.0], 'pitch': [0.0, 10.0, 20.0], 'yaw': [270.0, 280.0, 290.0]}</answer>"}],              # Not a list
+#     [{"content": "<answer>{}</answer>"}],               # Empty list
+#     [{"content": "<answer>{'x': [0.0, 1.0, 2.0, 3.0], 'y': [1.0, 1.5, 2.0, 2.5], 'z': [0.0, -0.1, -0.2, -0.3], 'roll': [0.0, 45.0, 90.0, 135.0], 'pitch': [10.0, 5.0, 0.0, -5.0], 'yaw': [0.0, 90.0, 180.0, 270.0]}</answer>"}], # Valid list of strings
+#     [{"content": "No answer tag"}] ,                    # No answer tag
+#     [{"content": "<answer>{'x': 0.0, 1.0, 2.0, 3.0, 'y': 1.0, 1.5, 2.0, 2.5, 'z': 0.0, -0.1, -0.2, -0.3, roll: [0.0, 45.0, 90.0, 135.0], 'pitch': [10.0, 5.0, 0.0, -5.0], 'yaw': [0.0, 90.0, 180.0, 270.0]}</answer>"}],
+#     # Valid list of strings
+# ]
+
+
+def sigmoid(x, a=1, b=0):
+    return 1 / (1 + math.exp(a * (-x + b)))
 # print(format_reward(completions))
+for val in [0.1, 0.2, 0.5, 1, 2, 2.5, 3, 4]:
+    print(sigmoid(val, a=2, b=2/4))

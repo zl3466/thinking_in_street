@@ -11,6 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import argparse
 import ast
 import math
 import os
@@ -19,14 +20,17 @@ import json
 
 from tqdm import tqdm
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
+
+import torch
+from transformers import Qwen2_5_VLForConditionalGeneration, AutoProcessor, AutoTokenizer
+from vllm import LLM, SamplingParams
 import re
 from datetime import datetime
 from dataclasses import dataclass, field
 from typing import Optional
 
-from trainer import Qwen2VLGRPOTrainer, Qwen2VLGRPOVLLMTrainerModified
 from trl import GRPOConfig, GRPOTrainer, ModelConfig, ScriptArguments, TrlParser, get_peft_config
 from datasets import Dataset, DatasetDict
 
@@ -39,6 +43,7 @@ import random
 import time
 import numpy as np
 from scipy.spatial.transform import Rotation as R
+from utils.qwen_utils import *
 
 QUESTION_TEMPLATE = (
     "{Question}\n"
@@ -139,180 +144,145 @@ def sigmoid(x, a=1, b=0):
     return 1 / (1 + math.exp(a * (-x + b)))
 
 
-def accuracy_reward(completions, solution, **kwargs):
-    question_type = kwargs['problem_type'][0]
-
-    contents = [completion[0]["content"] for completion in completions]
-    current_time = datetime.now().strftime("%d-%H-%M-%S-%f")
-    rewards = []
-
-    for content, sol in zip(contents, solution):
-
-        try:
-            # print("content: ", content)
-            output_ans = extract_answer(content)
-            # print("output_ans: ", output_ans)
-            gt_ans = extract_answer(sol)
-            # print("gt_ans: ", gt_ans)
-            if question_type == "multiple choice":
-                reward = 1.0 if output_ans.strip() == gt_ans.strip() else 0.0
-            elif question_type == "numerical":
-                gt_has_decimal = ("." in gt_ans) or ("," in gt_ans)
-                out_has_decimal = ("." in output_ans) or ("," in output_ans)
-                if gt_has_decimal != out_has_decimal:
-                    reward = 0.0
-                else:
-                    gt_number = normalize_number(gt_ans)
-                    out_number = normalize_number(output_ans)
-                    if gt_number is None or out_number is None:
-                        reward = 0.0
-                    else:
-                        reward = 1.0 if round(gt_number, 2) == round(out_number, 2) else 0.0
-            elif question_type == "OCR":
-                error_rate = wer(gt_ans, output_ans)
-                reward = 1 - error_rate
-                reward = max(0.0, min(1.0, reward))
-            elif question_type == "free-form":
-                score = compute_rouge_score(gt_ans, output_ans)
-                reward = max(0.0, min(1.0, score))
-            elif question_type == "regression":
+def calc_accuracy_score(output_text, gt, question_type):
+    try:
+        # print("content: ", content)
+        output_ans = extract_answer(output_text)
+        # print("output_ans: ", output_ans)
+        gt_ans = extract_answer(gt)
+        # print("gt_ans: ", gt_ans)
+        if question_type == "multiple choice":
+            reward = 1.0 if output_ans.strip() == gt_ans.strip() else 0.0
+        elif question_type == "numerical":
+            gt_has_decimal = ("." in gt_ans) or ("," in gt_ans)
+            out_has_decimal = ("." in output_ans) or ("," in output_ans)
+            if gt_has_decimal != out_has_decimal:
+                reward = 0.0
+            else:
                 gt_number = normalize_number(gt_ans)
                 out_number = normalize_number(output_ans)
                 if gt_number is None or out_number is None:
                     reward = 0.0
-                rel_diff = (abs(out_number - gt_number) + 1e-9) / (abs(gt_number) + 1e-9)
-                rel_diff = min(1.0, max(0.0, rel_diff))
-                reward = 1 - rel_diff
-            elif question_type == "list":
-                # print("output_ans: ", output_ans)
-                output_ans_list = ast.literal_eval(output_ans)
-                gt_list = ast.literal_eval(gt_ans)
-                if len(output_ans_list) != len(gt_list):
-                    reward = 0.0
                 else:
-                    if isinstance(gt_list[0], (int, float)):
-                        # print(f"========================== Val output_ans_list: {output_ans_list} ")
-                        ''' reward = 2 * sigmoid(rmse) -> range(0, 1). Use a = 0.2 to get steep sigmoid '''
+                    reward = 1.0 if round(gt_number, 2) == round(out_number, 2) else 0.0
+        elif question_type == "OCR":
+            error_rate = wer(gt_ans, output_ans)
+            reward = 1 - error_rate
+            reward = max(0.0, min(1.0, reward))
+        elif question_type == "free-form":
+            score = compute_rouge_score(gt_ans, output_ans)
+            reward = max(0.0, min(1.0, score))
+        elif question_type == "regression":
+            gt_number = normalize_number(gt_ans)
+            out_number = normalize_number(output_ans)
+            if gt_number is None or out_number is None:
+                reward = 0.0
+            rel_diff = (abs(out_number - gt_number) + 1e-9) / (abs(gt_number) + 1e-9)
+            rel_diff = min(1.0, max(0.0, rel_diff))
+            reward = 1 - rel_diff
+        elif question_type == "list":
+            # print("output_ans: ", output_ans)
+            output_ans_list = ast.literal_eval(output_ans)
+            gt_list = ast.literal_eval(gt_ans)
+            if len(output_ans_list) != len(gt_list):
+                reward = 0.0
+            else:
+                if isinstance(gt_list[0], (int, float)):
+                    # print(f"========================== Val output_ans_list: {output_ans_list} ")
+                    ''' reward = 2 * sigmoid(rmse) -> range(0, 1). Use a = 0.2 to get steep sigmoid '''
+                    squared_diffs = [(p - gt) ** 2 for p, gt in zip(output_ans_list, gt_list)]
+                    rmse = math.sqrt(sum(squared_diffs) / len(squared_diffs))
+                    reward = 2 * (1 - sigmoid(rmse, a=0.2, b=0))
+                    ''' we ensure a minimum reward of 0.1 if the number of elements in the list is correct '''
+                    reward = max(0.1, reward)
+                else:
+                    # print(f"========================== String output_ans_list: {output_ans_list} ")
+                    ''' the general_dir case where the list contains string keywords like forward, left, slight right, etc. '''
+                    reward = sum([a.lower() == b.lower() for a, b in zip(output_ans_list, gt_list)]) / len(gt_list)
+                    reward = max(0.1, reward)
+        elif question_type == "dict":
+            output_ans_dict = ast.literal_eval(output_ans)
+            gt_dict = ast.literal_eval(gt_ans)
+            # reward_unit = 1 / len(gt_dict.keys())
+            reward = 0
+            for key in output_ans_dict.keys():
+                # the keys x, y, z, roll, pitch, yaw must all match
+                if key not in gt_dict.keys():
+                    sub_reward = 0
+                    break
+                else:
+                    output_ans_list = output_ans_dict[key]
+                    gt_list = gt_dict[key]
+                    if len(output_ans_list) != len(gt_list):
+                        sub_reward = 0.0
+                    else:
                         squared_diffs = [(p - gt) ** 2 for p, gt in zip(output_ans_list, gt_list)]
                         rmse = math.sqrt(sum(squared_diffs) / len(squared_diffs))
-                        reward = 2 * (1 - sigmoid(rmse, a=0.2, b=0))
+                        sub_reward = 2 * (1 - sigmoid(rmse, a=0.2, b=0))
                         ''' we ensure a minimum reward of 0.1 if the number of elements in the list is correct '''
-                        reward = max(0.1, reward)
-                    else:
-                        # print(f"========================== String output_ans_list: {output_ans_list} ")
-                        ''' the general_dir case where the list contains string keywords like forward, left, slight right, etc. '''
-                        reward = sum([a.lower() == b.lower() for a, b in zip(output_ans_list, gt_list)]) / len(gt_list)
-                        reward = max(0.1, reward)
-            elif question_type == "dict":
-                output_ans_dict = ast.literal_eval(output_ans)
-                gt_dict = ast.literal_eval(gt_ans)
-                # reward_unit = 1 / len(gt_dict.keys())
-                reward = 0
-                for key in output_ans_dict.keys():
-                    # the keys x, y, z, roll, pitch, yaw must all match
-                    if key not in gt_dict.keys():
-                        sub_reward = 0
-                        break
-                    else:
-                        output_ans_list = output_ans_dict[key]
-                        gt_list = gt_dict[key]
-                        if len(output_ans_list) != len(gt_list):
-                            sub_reward = 0.0
-                        else:
-                            squared_diffs = [(p - gt) ** 2 for p, gt in zip(output_ans_list, gt_list)]
-                            rmse = math.sqrt(sum(squared_diffs) / len(squared_diffs))
-                            sub_reward = 2 * (1 - sigmoid(rmse, a=0.2, b=0))
-                            ''' we ensure a minimum reward of 0.1 if the number of elements in the list is correct '''
-                            # reward range for each key is 0.1 to 1
-                            sub_reward = max(0.1, sub_reward)
-                    reward += sub_reward
-                # normalize total reward for the dict to between 0 - 1
-                reward = reward / len(gt_dict.keys())
-            else:
-                reward = 0.0
-        except Exception as e:
-            print(f"Error in reward_fn for question_type '{question_type}': {e}")
+                        # reward range for each key is 0.1 to 1
+                        sub_reward = max(0.1, sub_reward)
+                reward += sub_reward
+            # normalize total reward for the dict to between 0 - 1
+            reward = reward / len(gt_dict.keys())
+        else:
             reward = 0.0
+    except Exception as e:
+        print(f"Error in calc_accuracy_score for question_type '{question_type}': {e}")
+        reward = 0.0
 
-        rewards.append(reward)
-
-        if os.getenv("DEBUG_MODE") == "true":
-            log_path = os.getenv("LOG_PATH")
-            # local_rank = int(os.getenv("LOCAL_RANK", 0))
-            # print(f"logging to {log_path}")
-            with open(log_path, "a", encoding="utf-8") as f:
-                f.write(f"------------- {current_time} Accuracy reward: {reward} -------------\n")
-                f.write(f"Content: {content}\n")
-                f.write(f"Solution: {sol}\n")
-    # print(f"\n========\nbatch rewards: {rewards}\n========\n")
-    return rewards
+    return reward
 
 
-
-def format_reward(completions, **kwargs):
-
-    if kwargs['problem_type'][0] == "list":
+def calc_format_score(output_text, problem_type):
+    if problem_type == "list":
         """
         Reward function for list answers.
         First we chech if answer has the <answer></anwswer> tag, reward=0.5
         Then we check if the answer tag contains a list
         """
         pattern = r"<think>.*?</think>\s*<answer>.*?</answer>"
-        completion_contents = [completion[0]["content"] for completion in completions]
-        all_rewards = []
-        for content in completion_contents:
-            match = re.fullmatch(pattern, content, re.DOTALL)
-            if match:
+        match = re.fullmatch(pattern, output_text, re.DOTALL)
+        if match:
+            reward = 0.5
+            try:
+                output_ans = extract_answer(output_text)
+                output_ans_list = ast.literal_eval(output_ans)
+                if isinstance(output_ans_list, list):
+                    reward = 1.0
+            except Exception as e:
                 reward = 0.5
-                try:
-                    output_ans = extract_answer(content)
-                    output_ans_list = ast.literal_eval(output_ans)
-                    if isinstance(output_ans_list, list):
-                        reward = 1.0
-                except Exception as e:
-                    reward = 0.5
-            else:
-                reward = 0
-
-            all_rewards.append(reward)
-        return all_rewards
-    elif kwargs['problem_type'][0] == "dict":
+        else:
+            reward = 0
+        return reward
+    elif problem_type == "dict":
         pattern = r"<think>.*?</think>\s*<answer>.*?</answer>"
-        completion_contents = [completion[0]["content"] for completion in completions]
-        all_rewards = []
-        for content in completion_contents:
-            match = re.fullmatch(pattern, content, re.DOTALL)
-            if match:
-                # if only the tag format is matched, rerward 0.4
+        match = re.fullmatch(pattern, output_text, re.DOTALL)
+        if match:
+            # if only the tag format is matched, rerward 0.4
+            reward = 0.4
+            try:
+                output_ans = extract_answer(output_text)
+                output_ans_dict = ast.literal_eval(output_ans)
+                # if dict format is matched, rerward 0.7
+                if isinstance(output_ans_dict, dict):
+                    reward = 0.7
+                    all_correct_flag = True
+                    # check if each val in dict is list
+                    for key in output_ans_dict.keys():
+                        if not isinstance(output_ans_dict[key], list):
+                            all_correct_flag = False
+                            break
+                    # give full reward 1 only if all elements in the dict are list, otherwise only reward 0.7
+                    if all_correct_flag:
+                        reward = 1
+            except Exception as e:
                 reward = 0.4
-                try:
-                    output_ans = extract_answer(content)
-                    output_ans_dict = ast.literal_eval(output_ans)
-                    # if dict format is matched, rerward 0.7
-                    if isinstance(output_ans_dict, dict):
-                        reward = 0.7
-                        all_correct_flag = True
-                        # check if each val in dict is list
-                        for key in output_ans_dict.keys():
-                            if not isinstance(output_ans_dict[key], list):
-                                all_correct_flag = False
-                                break
-                        # give full reward 1 only if all elements in the dict are list, otherwise only reward 0.7
-                        if all_correct_flag:
-                            reward = 1
-                except Exception as e:
-                    reward = 0.4
-            else:
-                reward = 0
+        else:
+            reward = 0
 
-            all_rewards.append(reward)
-        return all_rewards
-    else:
-        """Reward function that checks if the completion has a specific format."""
-        pattern = r"<think>.*?</think>\s*<answer>.*?</answer>"
-        completion_contents = [completion[0]["content"] for completion in completions]
-        matches = [re.fullmatch(pattern, content, re.DOTALL) for content in completion_contents]
-        return [1.0 if match else 0.0 for match in matches]
+        return reward
+
 
 
 def quaternion_to_yaw(q):
@@ -711,10 +681,138 @@ def prepare_dataset_nusc(example):
     return msg
 
 
-reward_funcs_registry = {
-    "accuracy": accuracy_reward,
-    "format": format_reward,
-}
+
+def eval_qwen(data, llm, sampling_params):
+    '''
+    input data: a list of examples
+    this func evaluates examples in batches
+    '''
+    messages = []
+    gt_list = []
+    q_type_list = []
+
+    for example in data:
+
+        dataset_name = example["dataset_name"]
+        if dataset_name == "NuScenes":
+            dataset_dir_specific = "NuScenes/train_test"
+        elif dataset_name == "ScanNet":
+            dataset_dir_specific = "ScanNet/decoded"
+        else:
+            return RuntimeError("dataset name not supported")
+
+        if example["problem_type"] == 'multiple choice':
+            question = example['problem'] + "Options:\n"
+            for op in example["options"]:
+                question += op + "\n"
+        else:
+            question = example['problem']
+
+        msg = [{
+            "role": "user",
+            "content": [
+                {
+                    "type": example['data_type'],
+                    example['data_type']: [f"{os.getenv('DATASET_DIR')}/{dataset_dir_specific}/{file_path}" for file_path in example['path']]
+                },
+                {
+                    "type": "text",
+                    "text": QUESTION_TEMPLATE.format(Question=question) + TYPE_TEMPLATE[example['problem_type']]
+                }
+            ]
+        }]
+        messages.append(msg)
+        gt_list.append(example["solution"])
+        q_type_list.append(example["problem_type"])
+
+        # gt_text = example["solution"]
+        #
+        # prompt = processor.apply_chat_template(msg, tokenize=False, add_generation_prompt=True)
+        # image_inputs, video_inputs, video_kwargs = process_vision_info([msg], return_video_kwargs=True)
+        # try:
+        #     image_idx = 0
+        #     video_idx = 0
+        #     llm_inputs = []
+        #     mm_type = msg[0]['content'][0]['type']
+        #
+        #     sample_mm_data = {}
+        #     sample_video_kw = {}
+        #     if mm_type == 'image':
+        #         sample_mm_data["image"] = image_inputs[image_idx]
+        #         image_idx += 1
+        #     elif mm_type == 'video':
+        #         sample_mm_data["video"] = video_inputs[video_idx]
+        #         for key, value in video_kwargs.items():
+        #             sample_video_kw[key] = value[video_idx]
+        #         video_idx += 1
+        #
+        #     llm_inputs.append({
+        #         "prompt": prompt,
+        #         "multi_modal_data": sample_mm_data,
+        #         "mm_processor_kwargs": sample_video_kw,
+        #     })
+        #
+        #     outputs = llm.generate(llm_inputs, sampling_params=sampling_params)
+        #     output_text = outputs[0].outputs[0].text
+        #
+        # except Exception as e:
+        #     output_text = ['<answer>error</answer>']
+        #
+        # format_score = calc_format_score(output_text, example["problem_type"])
+        # accuracy_score = calc_accuracy_score(output_text, gt_text, example["problem_type"])
+
+
+    prompts = [processor.apply_chat_template(msg, tokenize=False, add_generation_prompt=True) for msg in
+               messages]
+
+    image_inputs, video_inputs, video_kwargs = process_vision_info(messages, return_video_kwargs=True)
+
+    image_idx = 0
+    video_idx = 0
+    llm_inputs = []
+
+    for idx, prompt in enumerate(prompts):
+        mm_type = messages[idx][0]['content'][0]['type']
+
+        sample_mm_data = {}
+        sample_video_kw = {}
+        if mm_type == 'image':
+            sample_mm_data["image"] = image_inputs[image_idx]
+            image_idx += 1
+        elif mm_type == 'video':
+            sample_mm_data["video"] = video_inputs[video_idx]
+            for key, value in video_kwargs.items():
+                sample_video_kw[key] = value[video_idx]
+            video_idx += 1
+
+        llm_inputs.append({
+            "prompt": prompt,
+            "multi_modal_data": sample_mm_data,
+            "mm_processor_kwargs": sample_video_kw,
+        })
+
+    outputs = llm.generate(llm_inputs, sampling_params=sampling_params)
+    output_text = [out.outputs[0].text for out in outputs]
+
+    format_score_list = []
+    accuracy_score_list = []
+    for i in tqdm(range(len(messages)), desc="generating thought processes for a scene"):
+        ans_text = extract_answer(output_text[i])
+        gt_text = gt_list[i]
+        q_type = q_type_list[i]
+
+        format_score = calc_format_score(output_text[i], q_type)
+        accuracy_score = calc_accuracy_score(output_text[i], gt_text, q_type)
+
+        format_score_list.append(format_score)
+        accuracy_score_list.append(accuracy_score)
+
+    final_format_score = sum(format_score_list) / len(format_score_list)
+    final_accuracy_score = sum(accuracy_score_list) / len(format_score_list)
+
+    return final_format_score, final_accuracy_score
+
+
 
 SYSTEM_PROMPT = (
     "A conversation between User and Assistant. The user asks a question, and the Assistant solves it. The assistant "
@@ -724,152 +822,97 @@ SYSTEM_PROMPT = (
 )
 
 
-def main(script_args, training_args, model_args):
-    # Get reward functions
-    reward_funcs = [reward_funcs_registry[func] for func in script_args.reward_funcs]
+def main(args):
     # Load dataset
-    num_cam = 1
-    batch_size = 4
+    num_cam = args.num_cam
+    batch_size = args.batch_size
+    eval_scene_start = args.eval_scene_start
+    eval_scene_end = args.eval_scene_end
+    root_path = os.getenv('DATASET_DIR')
 
-    train_num_scene = int(os.getenv("NUM_TRAIN_SCENE"))
-    test_num_scene = min(150, train_num_scene // 4)
-    # sample_rate = 2
-    nusc_train_num_scene = int(train_num_scene*3/4)
-    nusc_test_num_scene = int(test_num_scene*3/4)
-
-    scannet_train_num_scene = train_num_scene - nusc_train_num_scene
-    scannet_test_num_scene = test_num_scene - nusc_test_num_scene
-
+    eval_example_list = []
 
     ''' =========================== load NuScenes dataset ============================= '''
-    root_path = os.getenv('DATASET_DIR')
-    train_data_path = f"{root_path}/NuScenes/train_test"
-    test_data_path = f"{root_path}/NuScenes/train_test"
-
-    train_scene_idx_list = []
-    test_scene_idx_list = []
-    for i in range(nusc_train_num_scene):
-        train_scene_idx_list.append(i)
-    for i in range(nusc_test_num_scene):
-        test_scene_idx_list.append(i)
-
-    train_example_list = []
-    test_example_list = []
-    nusc_train = NuScenes(version="v1.0-trainval", dataroot=train_data_path, verbose=True)
-    nusc_test = NuScenes(version="v1.0-test", dataroot=test_data_path, verbose=True)
-    
+    nusc_data_path = f"{root_path}/NuScenes/train_test"
+    nusc_scene_idx_list = []
+    for i in range(eval_scene_start, eval_scene_end):
+        nusc_scene_idx_list.append(i)
+    nusc_eval = NuScenes(version="v1.0-trainval", dataroot=nusc_data_path, verbose=True)
     ''' --------------------------- NuScenes train split --------------------------- '''
     print(f"Processing NuScenes train dataset into examples...")
-    for scene_idx in train_scene_idx_list:
+    for scene_idx in nusc_scene_idx_list:
         step_size = random.randint(1, 10)
         print(f"NUSC, step size: {step_size}")
-        dataset = NuScenesDataset(data_path=train_data_path,
+        dataset = NuScenesDataset(data_path=nusc_data_path,
                                   meta_out_path="",
                                   num_cams=num_cam,
-                                  nusc=nusc_train,
+                                  nusc=nusc_eval,
                                   scene_idx=scene_idx,
                                   save_meta=False)
         scene_example_list = nusc_to_examples(nusc_dataset=dataset, mode="outdoor", dataset_name="NuScenes", step_size=step_size, batch_size=batch_size)
-        train_example_list += scene_example_list
+        eval_example_list += scene_example_list
 
-    ''' --------------------------- NuScenes test split --------------------------- '''
-    print(f"Processing NuScenes test dataset into examples...")
-    for scene_idx in test_scene_idx_list:
-        step_size = random.randint(1, 10)
-        print(f"NUSC, step size: {step_size}")
-        dataset = NuScenesDataset(data_path=test_data_path,
-                                  meta_out_path="",
-                                  num_cams=num_cam,
-                                  nusc=nusc_test,
-                                  scene_idx=scene_idx,
-                                  save_meta=False)
-        scene_example_list = nusc_to_examples(nusc_dataset=dataset, mode="outdoor", dataset_name="NuScenes", step_size=step_size, batch_size=batch_size)
-        test_example_list += scene_example_list
-    
     ''' =========================== load ScanNet dataset ============================= '''
-    train_data_path = f"{root_path}/ScanNet/decoded"
-
+    scannet_data_path = f"{root_path}/ScanNet/decoded"
     scannet_scene_idx_list = []
-
-    for i in range(scannet_train_num_scene + scannet_test_num_scene):
-        scannet_scene_idx_list.append(i)
-    split_idx = int(0.75 * len(scannet_scene_idx_list))
-    scannet_train_scene_idx_list = scannet_scene_idx_list[:split_idx]
-    scannet_test_scene_idx_list = scannet_scene_idx_list[split_idx:]
-
+    for i in range(eval_scene_start, eval_scene_end):
+        nusc_scene_idx_list.append(i)
     ''' --------------------------- ScanNet train split --------------------------- '''
     print(f"Processing ScanNet train dataset into examples...")
-    for scene_idx in scannet_train_scene_idx_list:
+    for scene_idx in scannet_scene_idx_list:
         step_size = random.randint(1, 10)
         print(f"ScanNet, step size: {step_size}")
-        
-        dataset = ScanNetDataset(data_path=train_data_path,
+        dataset = ScanNetDataset(data_path=scannet_data_path,
                                 meta_out_path="",
                                 scene_idx=scene_idx,
                                 save_meta=False)
         scene_example_list = nusc_to_examples(nusc_dataset=dataset, mode="indoor", dataset_name="ScanNet", step_size=step_size, batch_size=batch_size, video_out_dir="")
-        train_example_list += scene_example_list
-    
-    ''' --------------------------- ScanNet test split --------------------------- '''
-    print(f"Processing ScanNet test dataset into examples...")
-    for scene_idx in scannet_test_scene_idx_list:
-        step_size = random.randint(1, 10)
-        print(f"ScanNet, step size: {step_size}")
-        
-        dataset = ScanNetDataset(data_path=train_data_path,
-                                meta_out_path="",
-                                scene_idx=scene_idx,
-                                save_meta=False)
-        scene_example_list = nusc_to_examples(nusc_dataset=dataset, mode="indoor", dataset_name="ScanNet", step_size=step_size, batch_size=batch_size, video_out_dir="")
-        test_example_list += scene_example_list
-
-
+        eval_example_list += scene_example_list
 
     ''' =========================== shuffle train examples ============================= '''
-    random.shuffle(train_example_list)
-    random.shuffle(test_example_list)
-
-    ''' =========================== assemble into full dataset ============================= '''
-    dataset = DatasetDict({
-        "train": Dataset.from_list(train_example_list),
-        "test": Dataset.from_list(test_example_list)
-    })
-    ''' ------------------ convert examples into input messages for Qwen model ------------------ '''
-    dataset = dataset.map(prepare_dataset_nusc)
+    random.shuffle(eval_example_list)
+    final_format_score, final_accuracy_score = eval_qwen(eval_example_list, llm, sampling_params)
+    print(f"evaluated {eval_scene_end - eval_scene_start} scenes with {len(eval_example_list)} examples (questions).")
+    print(f"format score: {final_format_score}, accuracy score: {final_accuracy_score}")
 
 
-    ''' =========================== Start trainer ============================= '''
-    trainer_cls = Qwen2VLGRPOTrainer if not training_args.use_vllm else Qwen2VLGRPOVLLMTrainerModified
-    print("using: ", trainer_cls)
-    print(f"train {train_num_scene} scenes, test {test_num_scene} scenes")
-    # Initialize the GRPO trainer
-    print(model_args.model_name_or_path)
-    trainer = trainer_cls(
-        model=model_args.model_name_or_path,
-        reward_funcs=reward_funcs,
-        args=training_args,
-        script_args=script_args,
-        train_dataset=dataset["train"],
-        eval_dataset=dataset["test"] if training_args.eval_strategy != "no" else None,
-        peft_config=get_peft_config(model_args),
-        attn_implementation=model_args.attn_implementation,
-        max_pixels=script_args.max_pixels,
-        min_pixels=script_args.min_pixels,
-    )
-
-    if training_args.resume_from_checkpoint is not None:
-        checkpoint = training_args.resume_from_checkpoint
-        trainer.train(resume_from_checkpoint=checkpoint)
-    else:
-        trainer.train()
-
-    # Save and push to hub
-    trainer.save_model(training_args.output_dir)
-    # if training_args.push_to_hub:
-    #     trainer.push_to_hub(dataset_name=script_args.dataset_name)
 
 
 if __name__ == "__main__":
-    parser = TrlParser((GRPOScriptArguments, GRPOConfig, ModelConfig))
-    script_args, training_args, model_args = parser.parse_args_and_config()
-    main(script_args, training_args, model_args)
+    parser = argparse.ArgumentParser(description="Generate thought process from NuScenes with Gemini.")
+    parser.add_argument("--num_cam", type=int, default=1)
+    parser.add_argument("--eval_scene_start", type=int, default=0)
+    parser.add_argument("--eval_scene_end", type=int, default=10)
+    parser.add_argument("--batch_size", type=int, default=4)
+    parser.add_argument("--model", type=str, default="Qwen/Qwen2.5-VL-7B-Instruct")
+    parser.add_argument("--model_path", type=str, default="/scratch/zl3466/github/thinking_in_street/model/Qwen")
+
+    args = parser.parse_args()
+
+    # MODEL_PATH = "Qwen/Qwen2.5-VL-7B-Instruct"
+    model_name = args.model
+    model_path = args.model_path
+
+    llm = LLM(
+        model=model_name,
+        download_dir=model_path,
+        tensor_parallel_size=torch.cuda.device_count(),
+        max_model_len=4096,
+        gpu_memory_utilization=0.8,
+        limit_mm_per_prompt={"image": 10, "video": 10},
+        dtype="float16"
+    )
+
+    sampling_params = SamplingParams(
+        temperature=1.0,
+        top_p=0.95,
+        max_tokens=1024,
+        stop_token_ids=[],
+    )
+
+    processor = AutoProcessor.from_pretrained(model_name, cache_dir=args.model_path)
+    tokenizer = AutoTokenizer.from_pretrained(model_name, cache_dir=args.model_path)
+    tokenizer.padding_side = "left"
+    processor.tokenizer = tokenizer
+
+    main(args)
