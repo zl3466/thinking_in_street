@@ -811,14 +811,20 @@ class Qwen2VLGRPOTrainer(Trainer):
             if question_type == "list":
                 # sum of temporal reward for all groups
                 total_reward = reverse_consistent_reward(ordered_completions=completions, reversed_completions=shuffled_completions, subject=problem_subject)
-                # map total reward range (0, 4) to (0, 1), with slope 2 and center num_group * 1/4 to favor high total reward
-                reward = sigmoid(total_reward, a=2, b=len(shuffled_completions)/4)
+                # # map total reward range (0, 4) to (0, 1), with slope 2 and center num_group * 1/4 to favor high total reward
+                # reward = sigmoid(total_reward, a=2, b=len(shuffled_completions)/4)
+
+                # final reward is the average of rewards from all groups
+                reward = total_reward / self.shuffled_num_generations
                 temporal_rewards = torch.tensor([reward]).to('cuda')
             elif question_type == "dict":
                 # sum of temporal reward for all groups
                 total_reward = reverse_consistent_reward_dict(ordered_completions=completions, reversed_completions=shuffled_completions)
-                # map total reward range (0, 4) to (0, 1), with slope 2 and center num_group * 1/4 to favor high total reward
-                reward = sigmoid(total_reward, a=2, b=len(shuffled_completions)/4)
+                # # map total reward range (0, 4) to (0, 1), with slope 2 and center num_group * 1/4 to favor high total reward
+                # reward = sigmoid(total_reward, a=2, b=len(shuffled_completions)/4)
+
+                # final reward is the average of rewards from all groups
+                reward = total_reward / self.shuffled_num_generations
                 temporal_rewards = torch.tensor([reward]).to('cuda')
             else:
                 acc_mean = temporal_rewards_per_func[:, 0].mean()
@@ -841,13 +847,13 @@ class Qwen2VLGRPOTrainer(Trainer):
         else:
             rewards = rewards_per_func.sum(dim=1)
     
-        
+        # if reward is already > 0.1 and answer is within our length control, reward += 0.2
         if self.len_control:
             mem_rewards = [0] * self.num_generations
             mask = rewards_per_func[:, 0] > 0.1
             lenth_list = completion_mask.sum(1)
             selected_indices = torch.nonzero(mask, as_tuple=True)[0].tolist()
-                    
+            
             if len(selected_indices) > 1:     
                 for idx in selected_indices:
                     if 320 <= lenth_list[idx] <= 512:

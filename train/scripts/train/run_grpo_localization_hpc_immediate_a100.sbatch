@@ -1,13 +1,13 @@
 #!/bin/bash
 #
-#SBATCH --job-name=thinking_in_street_grpo_3q_100_scene
-#SBATCH --output=/scratch/zl3466/github/thinking_in_street/train_result/localization_grpo_test_immediate_rtx8000.out
+#SBATCH --job-name=grpo_a100_100scene-16frames
+#SBATCH --output=/scratch/zl3466/github/thinking_in_street/train_result/grpo_immediate_a100-16frames.out
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=16
-#SBATCH --mem=64GB
+#SBATCH --cpus-per-task=32
+#SBATCH --mem=256GB
 #SBATCH --time=48:00:00
-#SBATCH --gres=gpu:rtx8000:4
+#SBATCH --gres=gpu:a100:4
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=zl3466@nyu.edu
 #SBATCH --account=pr_116_tandon_priority
@@ -22,6 +22,7 @@ export DATASET_DIR="/vast/zl3466/dataset"
 cd /scratch/zl3466/github/thinking_in_street;
 
 export NUM_TRAIN_SCENE=100
+export VIDEO_LENGTH=16
 
 CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node="4" \
     --nnodes="1" \
@@ -29,8 +30,8 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node="4" \
     --master_addr="127.0.0.1" \
     --master_port="12365" \
     ./train/localization/grpo_new_immediate_4q.py \
-    --output_dir "./log/Qwen2.5-VL-3B-GRPO-100-rtx8000-sbatch" \
-    --model_name_or_path "Qwen/Qwen2.5-VL-3B-Instruct" \
+    --output_dir "./log/Qwen2.5-VL-7B-GRPO-100-a100-16frames-sbatch" \
+    --model_name_or_path "Qwen/Qwen2.5-VL-7B-Instruct" \
     --dataset_name "/vast/zl3466/dataset/NuScenes" \
     --deepspeed "./train/local_scripts/zero3.json" \
     --max_prompt_length 16384 \
@@ -45,12 +46,12 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node="4" \
     --gradient_checkpointing true \
     --temporal true \
     --len_control true \
-    --attn_implementation sdpa \
-    --max_pixels 200704 \
+    --attn_implementation flash_attention_2 \
+    --max_pixels 401408 \
     --num_train_epochs 1 \
-    --run_name localization-3b-rtx8000-sbatch-4q-100scene \
-    --save_steps 100 \
+    --run_name sbatch-7b-a100-4q-100scene-16frames \
+    --save_steps 300 \
     --beta 0.04 \
     --max_grad_norm 5 \
     --save_only_model false \
-    --num_generations 4  # number of outputs G in grpo, reduce it would lead to faster training and smaller memory cost but higher variance  
+    --num_generations 8  # number of outputs G in grpo, reduce it would lead to faster training and smaller memory cost but higher variance  

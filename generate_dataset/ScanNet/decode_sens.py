@@ -9,6 +9,8 @@ parser = argparse.ArgumentParser()
 # data paths
 parser.add_argument('--dataset_path', required=True, help='path to sens file to read')
 parser.add_argument('--output_path', required=True, help='path to output folder')
+parser.add_argument('--scene_start', default=0)
+parser.add_argument('--scene_end', default=1)
 parser.add_argument('--scene_idx', default=-1)
 parser.add_argument('--frame_skip', default=5)
 parser.add_argument('--export_depth_images', dest='export_depth_images', action='store_true')
@@ -25,6 +27,8 @@ def main():
     scannet_path = opt.dataset_path
     scene_list = os.listdir(scannet_path)
     scene_list.sort(key=lambda f: int(''.join(filter(str.isdigit, f))))
+    scene_start_idx = int(opt.scene_start)
+    scene_end_idx = int(opt.scene_end)
     scene_idx = int(opt.scene_idx)
 
     frame_skip = int(opt.frame_skip)
@@ -51,8 +55,9 @@ def main():
         else:
                 print(f"scene {scene_name} alread exists at {scene_out_path}")
     else:
-        for i in tqdm(range(len(scene_list)), desc="total scenes"):
-            scene_name = scene_list[i]
+        target_scene_list = scene_list[scene_start_idx:scene_end_idx]
+        for i in tqdm(range(len(target_scene_list)), desc="total scenes"):
+            scene_name = target_scene_list[i]
             print(f"\n=========== decoding scene {scene_name} ===========")
             sens_file_path = f"{scannet_path}/{scene_name}/{scene_name}.sens"
             scene_out_path = f"{opt.output_path}/{scene_name}"

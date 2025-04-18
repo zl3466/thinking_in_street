@@ -729,7 +729,7 @@ def main(script_args, training_args, model_args):
     reward_funcs = [reward_funcs_registry[func] for func in script_args.reward_funcs]
     # Load dataset
     num_cam = 1
-    batch_size = 4
+    batch_size = int(os.getenv("VIDEO_LENGTH"))
 
     train_num_scene = int(os.getenv("NUM_TRAIN_SCENE"))
     test_num_scene = min(150, train_num_scene // 4)
