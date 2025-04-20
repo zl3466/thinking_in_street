@@ -1,7 +1,7 @@
 #!/bin/bash
 #
-#SBATCH --job-name=grpo_a100_100scene-16frames
-#SBATCH --output=/scratch/zl3466/github/thinking_in_street/train_result/grpo_immediate_a100-16frames.out
+#SBATCH --job-name=grpo_a100_100scene-8frames
+#SBATCH --output=/scratch/zl3466/github/thinking_in_street/train_result/grpo_immediate_a100-8frames.out
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=32
@@ -30,7 +30,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node="4" \
     --master_addr="127.0.0.1" \
     --master_port="12365" \
     ./train/localization/grpo_new_immediate_4q.py \
-    --output_dir "./log/Qwen2.5-VL-7B-GRPO-100-a100-16frames-sbatch" \
+    --output_dir "./log/Qwen2.5-VL-7B-GRPO-300-a100-8frames-sbatch" \
     --model_name_or_path "Qwen/Qwen2.5-VL-7B-Instruct" \
     --dataset_name "/vast/zl3466/dataset/NuScenes" \
     --deepspeed "./train/local_scripts/zero3.json" \
@@ -49,7 +49,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node="4" \
     --attn_implementation flash_attention_2 \
     --max_pixels 401408 \
     --num_train_epochs 1 \
-    --run_name sbatch-7b-a100-4q-100scene-16frames \
+    --run_name sbatch-7b-a100-4q-100scene-8frames \
     --save_steps 300 \
     --beta 0.04 \
     --max_grad_norm 5 \

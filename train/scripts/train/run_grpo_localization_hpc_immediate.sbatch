@@ -1,7 +1,7 @@
 #!/bin/bash
 #
-#SBATCH --job-name=thinking_in_street_grpo_3q_100_scene
-#SBATCH --output=/scratch/zl3466/github/thinking_in_street/train_result/localization_grpo_test_immediate_rtx8000.out
+#SBATCH --job-name=grpo_immediate_rtx8000
+#SBATCH --output=/scratch/zl3466/github/thinking_in_street/train_result/grpo_immediate_rtx8000.out
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=16
@@ -22,6 +22,7 @@ export DATASET_DIR="/vast/zl3466/dataset"
 cd /scratch/zl3466/github/thinking_in_street;
 
 export NUM_TRAIN_SCENE=100
+export VIDEO_LENGTH=4
 
 CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node="4" \
     --nnodes="1" \
@@ -48,7 +49,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node="4" \
     --attn_implementation sdpa \
     --max_pixels 200704 \
     --num_train_epochs 1 \
-    --run_name localization-3b-rtx8000-sbatch-4q-100scene \
+    --run_name grpo_immediate_rtx8000-100scene \
     --save_steps 100 \
     --beta 0.04 \
     --max_grad_norm 5 \

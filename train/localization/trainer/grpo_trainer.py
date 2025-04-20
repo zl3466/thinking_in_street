@@ -805,6 +805,7 @@ class Qwen2VLGRPOTrainer(Trainer):
         #         temporal_rewards = torch.tensor([0.0]).to('cuda')
         # else:
         #     temporal_rewards =  torch.tensor([0.5]).to('cuda')
+        print(f"rewards_per_func: {rewards_per_func}")
         if self.temporal and video_inputs is not None:
             question_type = reward_kwargs['problem_type'][0]
             temporal_rewards_per_func = rewards_per_func.clone()
@@ -826,16 +827,8 @@ class Qwen2VLGRPOTrainer(Trainer):
                 # final reward is the average of rewards from all groups
                 reward = total_reward / self.shuffled_num_generations
                 temporal_rewards = torch.tensor([reward]).to('cuda')
-            else:
-                acc_mean = temporal_rewards_per_func[:, 0].mean()
-                shuffled_acc_mean = shuffled_rewards_per_func[:, 0].mean()
-
-                if acc_mean >= 0.8 * shuffled_acc_mean:
-                    mask = temporal_rewards_per_func[:, 0] > 0.1
-                    temporal_rewards_per_func[mask, 0] = temporal_rewards_per_func[mask, 0] + 0.3
-                    temporal_rewards = torch.tensor([1.0]).to('cuda')
-                else:
-                    temporal_rewards = torch.tensor([0.0]).to('cuda')
+            mask = temporal_rewards_per_func[:, 0] > 0.1
+            temporal_rewards_per_func[mask, 0] = temporal_rewards_per_func[mask, 0] + reward
         else:
             temporal_rewards =  torch.tensor([0.5]).to('cuda')
         
