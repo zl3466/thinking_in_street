@@ -1,48 +1,27 @@
-# Copyright 2025 The HuggingFace Team. All rights reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-import argparse
+
 import ast
 import math
 import os
 import sys
 import json
-
+import matplotlib.pyplot as plt
 from tqdm import tqdm
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-import torch
-from transformers import Qwen2_5_VLForConditionalGeneration, AutoProcessor, AutoTokenizer
-from vllm import LLM, SamplingParams
 import re
 from datetime import datetime
 from dataclasses import dataclass, field
 from typing import Optional
 
-from trl import GRPOConfig, GRPOTrainer, ModelConfig, ScriptArguments, TrlParser, get_peft_config
-from datasets import Dataset, DatasetDict
-
 from rouge_score import rouge_scorer
-from nuscenes.nuscenes import LidarPointCloud, NuScenes
 from train.data_loader.nuscenes import NuScenesDataset
 from train.data_loader.scannet import ScanNetDataset
 import cv2
-import random
-import time
+
 import numpy as np
 from scipy.spatial.transform import Rotation as R
-from utils.qwen_utils import *
+
 
 QUESTION_TEMPLATE = (
     "{Question}\n"
@@ -61,40 +40,31 @@ TYPE_TEMPLATE = {
     "list": " Please provide the list answer (e.g., [val, val, val, ...]) within the <answer> </answer> tags.",
     "dict": " Please provide the dictionary answer (e.g. {key: val, key: val, ...}) within the <answer> </answer> tags."
 }
+
+
+SYSTEM_PROMPT = (
+    "A conversation between User and Assistant. The user asks a question, and the Assistant solves it. The assistant "
+    "first thinks about the reasoning process in the mind and then provides the user with the answer. The reasoning "
+    "process and answer are enclosed within <think> </think> and <answer> </answer> tags, respectively, i.e., "
+    "<think> reasoning process here </think><answer> answer here </answer>"
+)
+
 general_direction_options = ["stationary", "forward", "backward", "left", "slight left", "back left",
                              "slight back left", "right", "slight right", "back right", "slight back right"]
 
-
-@dataclass
-class GRPOScriptArguments(ScriptArguments):
-    """
-    Script arguments for the GRPO training script.
-
-    Args:
-        reward_funcs (`list[str]`):
-            List of reward functions. Possible values: 'accuracy', 'format'.
-    """
-
-    reward_funcs: list[str] = field(
-        default_factory=lambda: ["accuracy", "format"],
-        metadata={"help": "List of reward functions. Possible values: 'accuracy', 'format'"},
-    )
-    max_pixels: Optional[int] = field(
-        default=12845056,
-        metadata={"help": "Maximum number of pixels for the image"},
-    )
-    min_pixels: Optional[int] = field(
-        default=3136,
-        metadata={"help": "Minimum number of pixels for the image"},
-    )
-    temporal: Optional[bool] = field(
-        default=True,
-        metadata={"help": "whether using temporal GRPO"},
-    )
-    len_control: Optional[bool] = field(
-        default=True,
-        metadata={"help": "whether using length reward"},
-    )
+direction_reverse_dict = {
+    "stationary": "stationary",
+    "forward": "backward",
+    "backward": "forward",
+    "left": "back right",
+    "slight left": "slight back right",
+    "right": "back left",
+    "slight right": "slight back left",
+    "back left": "right",
+    "slight back left": "slight right",
+    "back right": "left",
+    "slight back right": "slight left"
+}
 
 
 def extract_answer(text):
@@ -146,7 +116,7 @@ def sigmoid(x, a=1, b=0):
 
 def calc_accuracy_score(output_text, gt, question_type):
     try:
-        # print("content: ", content)
+        # print("content: ", output_text)
         output_ans = extract_answer(output_text)
         # print("output_ans: ", output_ans)
         gt_ans = extract_answer(gt)
@@ -181,7 +151,7 @@ def calc_accuracy_score(output_text, gt, question_type):
             rel_diff = min(1.0, max(0.0, rel_diff))
             reward = 1 - rel_diff
         elif question_type == "list":
-            # print("output_ans: ", output_ans)
+            # print("output_ans list: ", output_ans)
             output_ans_list = ast.literal_eval(output_ans)
             gt_list = ast.literal_eval(gt_ans)
             if len(output_ans_list) != len(gt_list):
@@ -201,6 +171,7 @@ def calc_accuracy_score(output_text, gt, question_type):
                     reward = sum([a.lower() == b.lower() for a, b in zip(output_ans_list, gt_list)]) / len(gt_list)
                     reward = max(0.1, reward)
         elif question_type == "dict":
+            # print("output_ans dict: ", output_ans)
             output_ans_dict = ast.literal_eval(output_ans)
             gt_dict = ast.literal_eval(gt_ans)
             # reward_unit = 1 / len(gt_dict.keys())
@@ -228,7 +199,7 @@ def calc_accuracy_score(output_text, gt, question_type):
         else:
             reward = 0.0
     except Exception as e:
-        print(f"Error in calc_accuracy_score for question_type '{question_type}': {e}")
+        # print(f"Error in calc_accuracy_score for question_type '{question_type}': {e}")
         reward = 0.0
 
     return reward
@@ -316,7 +287,7 @@ def calculate_delta_heading(yaw1, yaw2):
     # return delta
 
 
-def calc_general_dir(prev_translation, translation, prev_yaw, yaw, mode="outdoor"):
+def calc_general_dir(prev_translation, translation, prev_yaw, yaw, mode="outdoor", reverse=False):
     """
     Calculate the agent's general heading direction.
 
@@ -372,18 +343,21 @@ def calc_general_dir(prev_translation, translation, prev_yaw, yaw, mode="outdoor
     # Determine direction based on rotation
     # Note: Since yaw is clockwise positive, positive yaw_diff means turning right
     if abs(angle_diff) < thresholds["forward_degree"]:  # 1 degree, Almost no rotation
-        return "forward"
+        ans = "forward"
     elif abs(angle_diff) < thresholds["slight_degree"]:  # Less than 5 degrees
-        return "slight right" if yaw_diff > 0 else "slight left"
+        ans = "slight right" if yaw_diff > 0 else "slight left"
     elif abs(angle_diff) < thresholds["turn_degree"]:  # Less than 90 degrees
-        return "right" if yaw_diff > 0 else "left"
+        ans = "right" if yaw_diff > 0 else "left"
     elif abs(angle_diff) < thresholds["back_turn_degree"]:  # Less than 175 degrees
-        return "back right" if yaw_diff > 0 else "back left"
+        ans = "back right" if yaw_diff > 0 else "back left"
     elif abs(angle_diff) < thresholds["back_slight_degree"]:  # Less than 179 degrees
-        return "slight back right" if yaw_diff > 0 else "slight back left"
+        ans = "slight back right" if yaw_diff > 0 else "slight back left"
     else:
-        return "backward"
+        ans = "backward"
 
+    if reverse:
+        ans = direction_reverse_dict[ans]
+    return ans
 
 def calc_transformation_dict(prev_translation, translation, prev_quat, quat):
     movement = np.array(translation) - np.array(prev_translation)
@@ -414,235 +388,8 @@ def calc_transformation_dict(prev_translation, translation, prev_quat, quat):
 def has_invalid_values(lst):
     return any(x is None or (isinstance(x, float) and math.isnan(x)) for x in lst)
 
-    # def nusc_to_examples(nusc_dataset, mode, dataset_name, step_size=1, batch_size=4, video_out_dir=""):
-    '''
-        dataset_name: nusc or scannet
-        /NuScenes/train_test or /ScanNet/decoded
-    '''
-    if video_out_dir != "":
-        ''' prepare video writer '''
-        sample_img = cv2.imread(nusc_dataset.img_filepaths[0])
-        w = sample_img.shape[1]
-        h = sample_img.shape[0]
-        video_width = w
-        video_height = h
 
-        fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-        out0 = cv2.VideoWriter(video_out_dir, fourcc, 10 // step_size, (video_width, video_height))
-        frame_text = "start of new sequence, no prev"
-        ''' video writer code ends here '''
-
-    meta_dict = nusc_dataset.meta_dict
-    cam_list = nusc_dataset.camera_list
-    cam = cam_list[0]
-
-    meta_data = meta_dict[cam]
-    ego_pose_list = meta_data["ego_pose_original"]
-
-    prev_rotation = None
-    prev_yaw = None
-    prev_translation = None
-
-    general_dir_gt_all = []
-    disp_gt_all = []
-    delta_heading_gt_all = []
-    transformation_gt_all = []
-    img_list_all = []
-
-    batch_general_dir_gt = []
-    batch_disp_gt = []
-    batch_delta_heading_gt = []
-    batch_transformation_gt = {"x": [], "y": [], "z": [], "roll": [], "pitch": [], "yaw": []}
-    batch_img_list = []
-    sample_count = 0
-    batch_img_list = []
-    sample_count = 0
-
-    for frame_i in range(len(ego_pose_list)):
-        if frame_i % step_size != 0:
-            continue
-        ego_pose = ego_pose_list[frame_i]
-
-        # Note that NuScenes's Ego Pose rotation is in (w, x, y, z) quat format
-        # translation is (x, y, z=0) in meters
-        translation = ego_pose["translation"]
-        rotation = ego_pose["rotation"]
-        yaw = quaternion_to_yaw(rotation)
-
-        batch_img_list.append(nusc_dataset.rel_img_filepaths[frame_i])
-        if prev_yaw is not None and prev_translation is not None:
-            general_dir = calc_general_dir(prev_translation, translation, prev_yaw, yaw, mode=mode)
-            disp = calculate_displacement(prev_translation, translation)
-            delta_heading = calculate_delta_heading(prev_yaw, yaw)
-            transformation_dict = calc_transformation_dict(prev_translation, translation, prev_rotation, rotation)
-
-            batch_general_dir_gt.append(general_dir)
-            batch_disp_gt.append(disp)
-            batch_delta_heading_gt.append(delta_heading)
-            for key in transformation_dict.keys():
-                batch_transformation_gt[key].append(transformation_dict[key])
-
-            frame_text = f"dir: {general_dir}, delta heading: {delta_heading}, displacement: {disp}"
-            sample_count += 1
-        else:
-            frame_text = "start of new sequence, no prev"
-
-        prev_rotation = rotation
-        prev_yaw = yaw
-        prev_translation = translation
-
-        if sample_count != 0 and sample_count % (batch_size - 1) == 0:
-            if len(batch_general_dir_gt) != batch_size - 1 or len(batch_disp_gt) != batch_size - 1 or len(
-                    batch_delta_heading_gt) != batch_size - 1 or len(
-                    batch_img_list) != batch_size:
-
-                # if this is residue at the end of a scene, don't use it
-                if frame_i == len(ego_pose_list) - 1:
-                    break
-                else:
-                    assert len(
-                        batch_img_list) == batch_size, f"image path batch size mismatch {len(batch_img_list)}, {batch_size}"
-                    assert len(
-                        batch_general_dir_gt) == batch_size - 1, f"general direction batch size mismatch {len(batch_general_dir_gt)}, {batch_size - 1}"
-                    assert len(
-                        batch_disp_gt) == batch_size - 1, f"displacement batch size mismatch {len(batch_disp_gt)}, {batch_size - 1}"
-                    assert len(
-                        batch_delta_heading_gt) == batch_size - 1, f"delta_heading batch size mismatch {len(batch_delta_heading_gt)}, {batch_size - 1}"
-
-            # if something is wrong in the dataset pose, causing Nan value in translation or rotation (observed in some ScanNet data), don't use this example
-            if has_invalid_values(batch_disp_gt) or has_invalid_values(batch_delta_heading_gt) or has_invalid_values(
-                    batch_transformation_gt):
-                print(
-                    f"Skipping invalid example in {dataset_name}: batch_disp_gt: {batch_disp_gt}, batch_delta_heading_gt: {batch_delta_heading_gt}, batch_transformation_gt: {batch_transformation_gt}")
-                batch_general_dir_gt = []
-                batch_disp_gt = []
-                batch_delta_heading_gt = []
-                batch_transformation_gt = {"x": [], "y": [], "z": [], "roll": [], "pitch": [], "yaw": []}
-                batch_img_list = []
-
-                prev_yaw = None
-                prev_translation = None
-                sample_count = 0
-            else:
-                general_dir_gt_all.append(batch_general_dir_gt)
-                disp_gt_all.append(batch_disp_gt)
-                delta_heading_gt_all.append(batch_delta_heading_gt)
-                transformation_gt_all.append(batch_transformation_gt)
-                img_list_all.append(batch_img_list)
-
-                batch_general_dir_gt = []
-                batch_disp_gt = []
-                batch_delta_heading_gt = []
-                batch_transformation_gt = {"x": [], "y": [], "z": [], "roll": [], "pitch": [], "yaw": []}
-                batch_img_list = []
-                prev_yaw = None
-                prev_translation = None
-                sample_count = 0
-
-        if video_out_dir != "":
-            img = cv2.imread(f"{nusc_dataset.img_filepaths[frame_i]}")
-            font = cv2.FONT_HERSHEY_SIMPLEX
-            cv2.putText(img, frame_text, (10, 30), font, fontScale=1, color=(0, 0, 255), thickness=2,
-                        lineType=cv2.LINE_AA)
-            out0.write(img)
-
-    example_list = []
-    problem_id_offset = 0
-    for batch_i in range(len(disp_gt_all)):
-        batch_general_dir_gt = general_dir_gt_all[batch_i]
-        batch_disp_gt = disp_gt_all[batch_i]
-        batch_delta_heading_gt = delta_heading_gt_all[batch_i]
-        batch_transformation_gt = transformation_gt_all[batch_i]
-
-        batch_img_list = img_list_all[batch_i]
-
-        example_general_dir = {
-            "problem_id": batch_i + problem_id_offset,
-            "dataset_name": dataset_name,
-            "problem": f"I uploaded {len(batch_img_list)} frames from an agent's dash cam video. The agent can be a vehicle or a person. \n"
-                       f"Determine the agent's movement direction between each frame and its previous frame.\n"
-                       f"Get your answer from the following options: {general_direction_options}.\n"
-                       f"Keep all answers in one list. "
-                       f"You should have {len(batch_general_dir_gt)} values in the list.\n",
-            "data_type": "video",
-            "problem_type": "list",
-            "problem_subject": "general direction",
-            "options": [],
-            "solution": f"<answer>{batch_general_dir_gt}</answer>",
-            "path": batch_img_list,
-            "reward": 1.0,
-            "select": True
-        }
-        problem_id_offset += 1
-
-        example_heading = {
-            "problem_id": batch_i + problem_id_offset,
-            "dataset_name": dataset_name,
-            "problem": f"I uploaded {len(batch_img_list)} frames from an agent's dash cam video. The agent can be a vehicle or a person. \n"
-                       f"Determine the agent's change in heading direction (yaw) between each frame and its previous frame.\n"
-                       f"Give your answer in degree values ranging between -180 and 180 degrees, with veer to the right "
-                       f"being positive degrees and to the left being negative degrees.\n"
-                       f"Keep all degree values in one list. "
-                       f"You should have {len(batch_delta_heading_gt)} values in the list.\n",
-            "data_type": "video",
-            "problem_type": "list",
-            "problem_subject": "heading",
-            "options": [],
-            "solution": f"<answer>{batch_delta_heading_gt}</answer>",
-            "path": batch_img_list,
-            "reward": 1.0,
-            "select": True
-        }
-        problem_id_offset += 1
-
-        example_disp = {
-            "problem_id": batch_i + problem_id_offset,
-            "dataset_name": dataset_name,
-            "problem": f"I uploaded {len(batch_img_list)} frames from an agent's dash cam video. The agent can be a vehicle or a person. \n"
-                       f"Determine the agent's displacement between each frame and its previous frame.\n"
-                       f"Give your answer in numerical values in meter unit.\n"
-                       f"Keep all displacement values in one list. "
-                       f"You should have {len(batch_disp_gt)} values in the list.\n",
-            "data_type": "video",
-            "problem_type": "list",
-            "problem_subject": "displacement",
-            "options": [],
-            "solution": f"<answer>{batch_disp_gt}</answer>",
-            "path": batch_img_list,
-            "reward": 1.0,
-            "select": True
-        }
-
-        example_transformation = {
-            "problem_id": batch_i + problem_id_offset,
-            "dataset_name": dataset_name,
-            "problem": f"I uploaded {len(batch_img_list)} frames from an agent's dash cam video. The agent can be a vehicle or a person. \n"
-                       f"Determine the agent's exact translation (x, y, z) and rotation (roll, pitch yaw) values between each frame and its previous frame.\n"
-                       f"For translation, give your answer in numerical values in meter unit.\n"
-                       f"For rotation, give your answer in degree values ranging between -180 and 180 degrees, with veer to the right "
-                       f"being positive degrees and to the left being negative degrees.\n"
-                       f"Put your answer in a dictionary format. The dictionary sould have six keys: x, y, z, roll, pitch yaw. "
-                       f"For each key, the value should be a list of meter or degree values. for keys x, y, and z, the list should contain {len(batch_disp_gt)} meter values. "
-                       f"For keys roll, pitch and yaw, the list should contain {len(batch_disp_gt)} degree values. \n",
-            "data_type": "video",
-            "problem_type": "dict",
-            "problem_subject": "transformation",
-            "options": [],
-            "solution": f"<answer>{batch_transformation_gt}</answer>",
-            "path": batch_img_list,
-            "reward": 1.0,
-            "select": True
-        }
-
-        example_list.append(example_general_dir)
-        example_list.append(example_heading)
-        example_list.append(example_disp)
-        example_list.append(example_transformation)
-
-    return example_list
-
-
-def nusc_to_examples(nusc_dataset, mode, dataset_name, step_size=1, batch_size=4, video_out_dir="", reverse=False):
+def nusc_to_examples(nusc_dataset, mode, dataset_name, scene_idx, step_size=1, batch_size=4, video_out_dir="", reverse=False):
     '''
         dataset_name: nusc or scannet
         /NuScenes/train_test or /ScanNet/decoded
@@ -669,8 +416,11 @@ def nusc_to_examples(nusc_dataset, mode, dataset_name, step_size=1, batch_size=4
 
     # if reverse input, we reverse the ego pose list and image list
     if reverse:
+        # print(nusc_dataset.rel_img_filepaths)
         ego_pose_list.reverse()
-        nusc_dataset.rel_img_filepaths.reverse()
+        nusc_dataset.rel_img_filepaths = nusc_dataset.rel_img_filepaths[::-1]
+        nusc_dataset.img_filepaths = nusc_dataset.img_filepaths[::-1]
+        # print(nusc_dataset.rel_img_filepaths)
 
     prev_rotation = None
     prev_yaw = None
@@ -704,7 +454,7 @@ def nusc_to_examples(nusc_dataset, mode, dataset_name, step_size=1, batch_size=4
 
         batch_img_list.append(nusc_dataset.rel_img_filepaths[frame_i])
         if prev_yaw is not None and prev_translation is not None:
-            general_dir = calc_general_dir(prev_translation, translation, prev_yaw, yaw, mode=mode)
+            general_dir = calc_general_dir(prev_translation, translation, prev_yaw, yaw, mode=mode, reverse=reverse)
             disp = calculate_displacement(prev_translation, translation)
             delta_heading = calculate_delta_heading(prev_yaw, yaw)
             transformation_dict = calc_transformation_dict(prev_translation, translation, prev_rotation, rotation)
@@ -715,7 +465,7 @@ def nusc_to_examples(nusc_dataset, mode, dataset_name, step_size=1, batch_size=4
             for key in transformation_dict.keys():
                 batch_transformation_gt[key].append(transformation_dict[key])
 
-            frame_text = f"dir: {general_dir}, delta heading: {delta_heading}, displacement: {disp}"
+            frame_text = f"dir: {general_dir}, delta heading: {delta_heading}, displacement: {disp}, step: {step_size}, batch size: {batch_size}"
             sample_count += 1
         else:
             frame_text = "start of new sequence, no prev"
@@ -790,7 +540,7 @@ def nusc_to_examples(nusc_dataset, mode, dataset_name, step_size=1, batch_size=4
         batch_img_list = img_list_all[batch_i]
 
         example_general_dir = {
-            "problem_id": batch_i + problem_id_offset,
+            "problem_id": scene_idx,
             "dataset_name": dataset_name,
             "problem": f"I uploaded {len(batch_img_list)} frames from an agent's dash cam video. The agent can be a vehicle or a person. \n"
                        f"Determine the agent's movement direction between each frame and its previous frame.\n"
@@ -809,7 +559,7 @@ def nusc_to_examples(nusc_dataset, mode, dataset_name, step_size=1, batch_size=4
         problem_id_offset += 1
 
         example_heading = {
-            "problem_id": batch_i + problem_id_offset,
+            "problem_id": scene_idx,
             "dataset_name": dataset_name,
             "problem": f"I uploaded {len(batch_img_list)} frames from an agent's dash cam video. The agent can be a vehicle or a person. \n"
                        f"Determine the agent's change in heading direction (yaw) between each frame and its previous frame.\n"
@@ -829,7 +579,7 @@ def nusc_to_examples(nusc_dataset, mode, dataset_name, step_size=1, batch_size=4
         problem_id_offset += 1
 
         example_disp = {
-            "problem_id": batch_i + problem_id_offset,
+            "problem_id": scene_idx,
             "dataset_name": dataset_name,
             "problem": f"I uploaded {len(batch_img_list)} frames from an agent's dash cam video. The agent can be a vehicle or a person. \n"
                        f"Determine the agent's displacement between each frame and its previous frame.\n"
@@ -847,7 +597,7 @@ def nusc_to_examples(nusc_dataset, mode, dataset_name, step_size=1, batch_size=4
         }
 
         example_transformation = {
-            "problem_id": batch_i + problem_id_offset,
+            "problem_id": scene_idx,
             "dataset_name": dataset_name,
             "problem": f"I uploaded {len(batch_img_list)} frames from an agent's dash cam video. The agent can be a vehicle or a person. \n"
                        f"Determine the agent's exact translation (x, y, z) and rotation (roll, pitch yaw) values between each frame and its previous frame.\n"
@@ -957,41 +707,6 @@ def eval_qwen(data, llm, sampling_params):
         gt_list.append(example["solution"])
         q_type_list.append(example["problem_type"])
 
-        # gt_text = example["solution"]
-        #
-        # prompt = processor.apply_chat_template(msg, tokenize=False, add_generation_prompt=True)
-        # image_inputs, video_inputs, video_kwargs = process_vision_info([msg], return_video_kwargs=True)
-        # try:
-        #     image_idx = 0
-        #     video_idx = 0
-        #     llm_inputs = []
-        #     mm_type = msg[0]['content'][0]['type']
-        #
-        #     sample_mm_data = {}
-        #     sample_video_kw = {}
-        #     if mm_type == 'image':
-        #         sample_mm_data["image"] = image_inputs[image_idx]
-        #         image_idx += 1
-        #     elif mm_type == 'video':
-        #         sample_mm_data["video"] = video_inputs[video_idx]
-        #         for key, value in video_kwargs.items():
-        #             sample_video_kw[key] = value[video_idx]
-        #         video_idx += 1
-        #
-        #     llm_inputs.append({
-        #         "prompt": prompt,
-        #         "multi_modal_data": sample_mm_data,
-        #         "mm_processor_kwargs": sample_video_kw,
-        #     })
-        #
-        #     outputs = llm.generate(llm_inputs, sampling_params=sampling_params)
-        #     output_text = outputs[0].outputs[0].text
-        #
-        # except Exception as e:
-        #     output_text = ['<answer>error</answer>']
-        #
-        # format_score = calc_format_score(output_text, example["problem_type"])
-        # accuracy_score = calc_accuracy_score(output_text, gt_text, example["problem_type"])
 
     prompts = [processor.apply_chat_template(msg, tokenize=False, add_generation_prompt=True) for msg in
                messages]
@@ -1027,8 +742,8 @@ def eval_qwen(data, llm, sampling_params):
 
     format_score_list = []
     accuracy_score_list = []
-    for i in tqdm(range(len(messages)), desc="generating thought processes for a scene"):
-        ans_text = extract_answer(output_text[i])
+    # for i in tqdm(range(len(messages)), desc="generating thought processes for a scene"):
+    for i in range(len(messages)):
         gt_text = gt_list[i]
         q_type = q_type_list[i]
 
@@ -1044,143 +759,102 @@ def eval_qwen(data, llm, sampling_params):
     return final_format_score, final_accuracy_score
 
 
-SYSTEM_PROMPT = (
-    "A conversation between User and Assistant. The user asks a question, and the Assistant solves it. The assistant "
-    "first thinks about the reasoning process in the mind and then provides the user with the answer. The reasoning "
-    "process and answer are enclosed within <think> </think> and <answer> </answer> tags, respectively, i.e., "
-    "<think> reasoning process here </think><answer> answer here </answer>"
-)
 
 
-def main(args):
-    # Load dataset
-    num_cam = args.num_cam
-    batch_size = args.batch_size
-    eval_scene_start = args.eval_scene_start
-    eval_scene_end = args.eval_scene_end
-    root_path = os.getenv('DATASET_DIR')
+def plot_all_scores_vs_step_size(step_eval_example_dict, save_dir):
+    """
+    Plots:
+      1. Forward format & accuracy scores vs step size
+      2. Random video length format score list
+      3. Random video length accuracy score list
+      4. Reverse format & accuracy scores vs step size
 
-    eval_example_list = []
-    reverse_eval_example_list = []
-    random_length_eval_example_list = []
+    Args:
+        step_eval_example_dict (dict): Dict with step size keys and score dicts.
+        save_dir (str): Directory where plots will be saved.
+    """
+    os.makedirs(save_dir, exist_ok=True)
 
-    ''' =========================== load NuScenes dataset ============================= '''
-    nusc_data_path = f"{root_path}/NuScenes/train_test"
-    nusc_scene_idx_list = []
-    for i in range(eval_scene_start, eval_scene_end):
-        nusc_scene_idx_list.append(i)
-    nusc_eval = NuScenes(version="v1.0-trainval", dataroot=nusc_data_path, verbose=True)
-    ''' --------------------------- NuScenes train split --------------------------- '''
-    print(f"Processing NuScenes train dataset into examples...")
-    for scene_idx in nusc_scene_idx_list:
-        step_size = random.randint(1, 10)
-        print(f"NUSC, step size: {step_size}")
-        dataset = NuScenesDataset(data_path=nusc_data_path,
-                                  meta_out_path="",
-                                  num_cams=num_cam,
-                                  nusc=nusc_eval,
-                                  scene_idx=scene_idx,
-                                  save_meta=False)
-        scene_example_list = nusc_to_examples(nusc_dataset=dataset, mode="outdoor", dataset_name="NuScenes",
-                                              step_size=step_size, batch_size=batch_size)
-        reverse_scene_example_list = nusc_to_examples(nusc_dataset=dataset, mode="outdoor", dataset_name="NuScenes",
-                                                      step_size=step_size, batch_size=batch_size, reverse=True)
-        random_length_scene_example_list = nusc_to_examples(nusc_dataset=dataset, mode="outdoor",
-                                                            dataset_name="NuScenes", step_size=step_size,
-                                                            batch_size=random.randint(2, 16))
+    step_sizes = sorted([int(k) for k in step_eval_example_dict.keys()])
 
-        eval_example_list += scene_example_list
-        reverse_eval_example_list += reverse_scene_example_list
-        random_length_eval_example_list += random_length_scene_example_list
+    forward_format_scores = []
+    forward_accuracy_scores = []
+    reverse_format_scores = []
+    reverse_accuracy_scores = []
+    random_format_score_lists = []
+    random_accuracy_score_lists = []
 
-    ''' =========================== load ScanNet dataset ============================= '''
-    scannet_data_path = f"{root_path}/ScanNet/decoded"
-    scannet_scene_idx_list = []
-    for i in range(eval_scene_start, eval_scene_end):
-        nusc_scene_idx_list.append(i)
-    ''' --------------------------- ScanNet train split --------------------------- '''
-    print(f"Processing ScanNet train dataset into examples...")
-    for scene_idx in scannet_scene_idx_list:
-        step_size = random.randint(1, 10)
-        print(f"ScanNet, step size: {step_size}")
-        dataset = ScanNetDataset(data_path=scannet_data_path,
-                                 meta_out_path="",
-                                 scene_idx=scene_idx,
-                                 save_meta=False)
-        scene_example_list = nusc_to_examples(nusc_dataset=dataset, mode="indoor", dataset_name="ScanNet",
-                                              step_size=step_size, batch_size=batch_size)
-        reverse_scene_example_list = nusc_to_examples(nusc_dataset=dataset, mode="indoor", dataset_name="ScanNet",
-                                                      step_size=step_size, batch_size=batch_size, reverse=True)
-        random_length_scene_example_list = nusc_to_examples(nusc_dataset=dataset, mode="indoor", dataset_name="ScanNet",
-                                                            step_size=step_size, batch_size=random.randint(2, 16))
+    for step in step_sizes:
+        step_key = str(step)
+        scores = step_eval_example_dict[step_key]
 
-        eval_example_list += scene_example_list
-        reverse_scene_example_list += reverse_scene_example_list
-        random_length_eval_example_list += random_length_scene_example_list
+        forward_format_scores.append(scores["forward"][0])
+        forward_accuracy_scores.append(scores["forward"][1])
 
-    ''' =========================== shuffle examples ============================= '''
-    random.shuffle(eval_example_list)
-    random.shuffle(reverse_scene_example_list)
-    random.shuffle(random_length_eval_example_list)
+        reverse_format_scores.append(scores["reverse"][0])
+        reverse_accuracy_scores.append(scores["reverse"][1])
 
-    ''' =========================== eval regular examples ============================= '''
-    print(f"Forward video with length = {batch_size} frames per video")
-    final_format_score, final_accuracy_score = eval_qwen(eval_example_list, llm, sampling_params)
-    print(f"evaluated {eval_scene_end - eval_scene_start} scenes with {len(eval_example_list)} examples (questions).")
-    print(f"format score: {final_format_score}, accuracy score: {final_accuracy_score}")
+        random_format_score_lists.append(scores["random_video_length"][0])
+        random_accuracy_score_lists.append(scores["random_video_length"][1])
 
-    ''' =========================== eval reversed examples ============================= '''
-    print(f"Reversed video with length = {batch_size} frames per video")
-    final_format_score, final_accuracy_score = eval_qwen(reverse_scene_example_list, llm, sampling_params)
-    print(
-        f"evaluated {eval_scene_end - eval_scene_start} reversed scenes with {len(reverse_scene_example_list)} examples (questions).")
-    print(f"format score: {final_format_score}, accuracy score: {final_accuracy_score}")
+    # === Plot 1: Forward ===
+    plt.figure(figsize=(10, 5))
+    plt.plot(step_sizes, forward_format_scores, marker='o', label='Forward Format Score')
+    plt.plot(step_sizes, forward_accuracy_scores, marker='s', label='Forward Accuracy Score')
+    plt.title('Forward Format & Accuracy Score vs Step Size')
+    plt.xlabel('Step Size')
+    plt.ylabel('Score')
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    path1 = os.path.join(save_dir, 'forward_scores_vs_step_size.png')
+    plt.savefig(path1)
+    plt.close()
 
-    ''' =========================== eval random length examples ============================= '''
-    print(f"Forward video with random length ranging between 2 to 16 frames per video")
-    final_format_score, final_accuracy_score = eval_qwen(random_length_eval_example_list, llm, sampling_params)
-    print(
-        f"evaluated {eval_scene_end - eval_scene_start} scenes with {len(random_length_eval_example_list)} examples (questions).")
-    print(f"format score: {final_format_score}, accuracy score: {final_accuracy_score}")
+    # === Plot 2: Random Video Length Format ===
+    plt.figure(figsize=(10, 5))
+    for step, score_list in zip(step_sizes, random_format_score_lists):
+        plt.plot(range(len(score_list)), score_list, marker='o', label=f'Step {step}')
+    plt.title('Random Video Length Format Scores')
+    plt.xlabel('Batch Size Index')
+    plt.ylabel('Format Score')
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    path2 = os.path.join(save_dir, 'random_format_scores_vs_batch_index.png')
+    plt.savefig(path2)
+    plt.close()
+
+    # === Plot 3: Random Video Length Accuracy ===
+    plt.figure(figsize=(10, 5))
+    for step, score_list in zip(step_sizes, random_accuracy_score_lists):
+        plt.plot(range(len(score_list)), score_list, marker='s', label=f'Step {step}')
+    plt.title('Random Video Length Accuracy Scores')
+    plt.xlabel('Batch Size Index')
+    plt.ylabel('Accuracy Score')
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    path3 = os.path.join(save_dir, 'random_accuracy_scores_vs_batch_index.png')
+    plt.savefig(path3)
+    plt.close()
+
+    # === Plot 4: Reverse ===
+    plt.figure(figsize=(10, 5))
+    plt.plot(step_sizes, reverse_format_scores, marker='^', label='Reverse Format Score')
+    plt.plot(step_sizes, reverse_accuracy_scores, marker='x', label='Reverse Accuracy Score')
+    plt.title('Reverse Format & Accuracy Score vs Step Size')
+    plt.xlabel('Step Size')
+    plt.ylabel('Score')
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    path4 = os.path.join(save_dir, 'reverse_scores_vs_step_size.png')
+    plt.savefig(path4)
+    plt.close()
+
+    print("Saved plots:")
+    for path in [path1, path2, path3, path4]:
+        print(f" - {path}")
 
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Generate thought process from NuScenes with Gemini.")
-    parser.add_argument("--num_cam", type=int, default=1)
-    parser.add_argument("--eval_scene_start", type=int, default=0)
-    parser.add_argument("--eval_scene_end", type=int, default=10)
-    parser.add_argument("--batch_size", type=int, default=4)
-    parser.add_argument("--base_model", type=str, default="Qwen/Qwen2.5-VL-7B-Instruct")
-    parser.add_argument("--finetuned_model", type=str, default="Qwen/Qwen2.5-VL-7B-Instruct")
-    parser.add_argument("--model_path", type=str, default="/scratch/zl3466/github/thinking_in_street/model/Qwen")
-
-    args = parser.parse_args()
-
-    # MODEL_PATH = "Qwen/Qwen2.5-VL-7B-Instruct"
-    base_model_name = args.base_model
-    model_path = args.model_path
-    finetuned_model_name = f"{args.model_path}/{args.finetuned_model}"
-
-    llm = LLM(
-        model=base_model_name,
-        download_dir=model_path,
-        tensor_parallel_size=torch.cuda.device_count(),
-        max_model_len=4096,
-        gpu_memory_utilization=0.8,
-        limit_mm_per_prompt={"image": 10, "video": 10},
-        dtype="float16"
-    )
-
-    sampling_params = SamplingParams(
-        temperature=1.0,
-        top_p=0.95,
-        max_tokens=1024,
-        stop_token_ids=[],
-    )
-
-    processor = AutoProcessor.from_pretrained(base_model_name, cache_dir=args.model_path)
-    tokenizer = AutoTokenizer.from_pretrained(finetuned_model_name, cache_dir=args.model_path)
-    tokenizer.padding_side = "left"
-    processor.tokenizer = tokenizer
-
-    main(args)
