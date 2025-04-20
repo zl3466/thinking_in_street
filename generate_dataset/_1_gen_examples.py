@@ -32,7 +32,7 @@ def main(args):
         scannet_scene_idx_list.append(i)
 
     ''' =========================== generate examples for both datasets ============================= '''
-    for step_size in range(1, 10):
+    for step_size in range(1, 11):
         step_out_dir = f"{out_root}/step_{step_size}"
         os.makedirs(step_out_dir, exist_ok=True)
 
@@ -40,15 +40,15 @@ def main(args):
         nusc_out_json = f"{step_out_dir}/nusc_examples.json"
         scannet_out_json = f"{step_out_dir}/scannet_examples.json"
         if os.path.exists(nusc_out_json):
-            nusc_example_dict = json.load(nusc_out_json)
+            nusc_example_dict = json.load(open(nusc_out_json))
         else:
-            nusc_example_dict = {"forward": {"NuScenes": {}, "ScanNet": {}}, 
-                                          "backward": {"NuScenes": {}, "ScanNet": {}}}
+            nusc_example_dict = {"forward": {}, 
+                                 "backward": {}}
         if os.path.exists(scannet_out_json):
-            scannet_example_dict = json.load(scannet_out_json)
+            scannet_example_dict = json.load(open(scannet_out_json))
         else:
-            scannet_example_dict = {"forward": {"NuScenes": {}, "ScanNet": {}}, 
-                                          "backward": {"NuScenes": {}, "ScanNet": {}}}
+            scannet_example_dict = {"forward": {}, 
+                                    "backward": {}}
 
 
         ''' --------------------------- NuScenes --------------------------- '''
@@ -64,18 +64,30 @@ def main(args):
 
             for video_length in video_length_list:
                 ''' generate forward examples '''
-                forward_example_list = nusc_to_examples(nusc_dataset=dataset, mode="outdoor", dataset_name="NuScenes", scene_idx=scene_idx, step_size=step_size, batch_size=video_length)
+                forward_example_list = dataset_to_examples(dataset=dataset, mode="outdoor", dataset_name="NuScenes", scene_idx=scene_idx, step_size=step_size, batch_size=video_length)
                 if str(video_length) not in nusc_example_dict["forward"].keys():
-                    nusc_example_dict["forward"][str(video_length)] = forward_example_list
+                    # nusc_example_dict["forward"][str(video_length)] = forward_example_list
+                    nusc_example_dict["forward"][str(video_length)] = {f"scene_{scene_idx}": forward_example_list}
                 else:
-                    nusc_example_dict["forward"][str(video_length)] += forward_example_list
+                    # if this is a new scene
+                    if f"scene_{scene_idx}" not in nusc_example_dict["forward"][str(video_length)].keys():
+                        nusc_example_dict["forward"][str(video_length)][f"scene_{scene_idx}"] = forward_example_list
+                    # if this scene is already in the dict
+                    else:
+                        nusc_example_dict["forward"][str(video_length)][f"scene_{scene_idx}"] += forward_example_list
 
                 ''' generate reversed examples '''
-                backward_example_list = nusc_to_examples(nusc_dataset=dataset, mode="outdoor", dataset_name="NuScenes", scene_idx=scene_idx, step_size=step_size, batch_size=video_length, reverse=True)
+                backward_example_list = dataset_to_examples(dataset=dataset, mode="outdoor", dataset_name="NuScenes", scene_idx=scene_idx, step_size=step_size, batch_size=video_length, reverse=True)
                 if str(video_length) not in nusc_example_dict["backward"].keys():
-                    nusc_example_dict["backward"][str(video_length)] = backward_example_list
+                    nusc_example_dict["backward"][str(video_length)] = {f"scene_{scene_idx}": backward_example_list}
                 else:
-                    nusc_example_dict["backward"][str(video_length)] += backward_example_list
+                    # if this is a new scene
+                    if f"scene_{scene_idx}" not in nusc_example_dict["backward"][str(video_length)].keys():
+                        nusc_example_dict["backward"][str(video_length)][f"scene_{scene_idx}"] = backward_example_list
+                    # if this scene is already in the dict
+                    else:
+                        nusc_example_dict["backward"][str(video_length)][f"scene_{scene_idx}"] += backward_example_list
+
                     
         # ''' =========================== save NuScenes examples for this step size ============================= '''
         with open(nusc_out_json, "w") as outfile:
@@ -93,18 +105,29 @@ def main(args):
             # Generate datasets for different batch size (video length)
             for video_length in video_length_list:
                 ''' generate forward examples '''
-                forward_example_list = nusc_to_examples(nusc_dataset=dataset, mode="indoor", dataset_name="ScanNet", scene_idx=scene_idx, step_size=step_size, batch_size=video_length)
+                forward_example_list = dataset_to_examples(dataset=dataset, mode="indoor", dataset_name="ScanNet", scene_idx=scene_idx, step_size=step_size, batch_size=video_length)
                 if str(video_length) not in scannet_example_dict["forward"].keys():
-                    scannet_example_dict["forward"][str(video_length)] = forward_example_list
+                    # nusc_example_dict["forward"][str(video_length)] = forward_example_list
+                    scannet_example_dict["forward"][str(video_length)] = {f"scene_{scene_idx}": forward_example_list}
                 else:
-                    scannet_example_dict["forward"][str(video_length)] += forward_example_list
+                    # if this is a new scene
+                    if f"scene_{scene_idx}" not in scannet_example_dict["forward"][str(video_length)].keys():
+                        scannet_example_dict["forward"][str(video_length)][f"scene_{scene_idx}"] = forward_example_list
+                    # if this scene is already in the dict
+                    else:
+                        scannet_example_dict["forward"][str(video_length)][f"scene_{scene_idx}"] += forward_example_list
 
                 ''' generate reversed examples '''
-                backward_example_list = nusc_to_examples(nusc_dataset=dataset, mode="indoor", dataset_name="ScanNet", scene_idx=scene_idx, step_size=step_size, batch_size=video_length, reverse=True)
+                backward_example_list = dataset_to_examples(dataset=dataset, mode="indoor", dataset_name="ScanNet", scene_idx=scene_idx, step_size=step_size, batch_size=video_length, reverse=True)
                 if str(video_length) not in scannet_example_dict["backward"].keys():
-                    scannet_example_dict["backward"][str(video_length)] = backward_example_list
+                    scannet_example_dict["backward"][str(video_length)] = {f"scene_{scene_idx}": backward_example_list}
                 else:
-                    scannet_example_dict["backward"][str(video_length)] += backward_example_list
+                    # if this is a new scene
+                    if f"scene_{scene_idx}" not in scannet_example_dict["backward"][str(video_length)].keys():
+                        scannet_example_dict["backward"][str(video_length)][f"scene_{scene_idx}"] = backward_example_list
+                    # if this scene is already in the dict
+                    else:
+                        scannet_example_dict["backward"][str(video_length)][f"scene_{scene_idx}"] += backward_example_list
 
         # ''' =========================== save ScanNet examples for this step size ============================= '''
         with open(scannet_out_json, "w") as outfile:
