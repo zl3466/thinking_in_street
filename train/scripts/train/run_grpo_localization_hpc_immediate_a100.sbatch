@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-#SBATCH --job-name=grpo_a100_100scene-8frames
+#SBATCH --job-name=a100_immediate
 #SBATCH --output=/scratch/zl3466/github/thinking_in_street/train_result/grpo_immediate_a100-8frames.out
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1

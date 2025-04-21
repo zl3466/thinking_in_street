@@ -22,8 +22,8 @@ cd /scratch/zl3466/github/thinking_in_street/generate_dataset/ScanNet;
 python ./decode_sens.py \
     --dataset_path "/scratch/zl3466/dataset/ScanNet/scans" \
     --output_path "/vast/zl3466/dataset/ScanNet/decoded" \
-    --scene_start 0 \
-    --scene_end 500 \
+    --scene_start 500 \
+    --scene_end 600 \
     --scene_idx -1 \
     --frame_skip 6 \
     --export_color_images \

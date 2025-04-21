@@ -83,11 +83,11 @@ def main(script_args, training_args, model_args):
     test_full_data_dict = {"NuScenes": {}, "ScanNet": {}}
     for step_size in range(1, 11):
 
-        train_full_data_dict["NuScenes"][str(step_size)] = json.load(open(f"{example_dir}/train/step_{step_size}/ScanNet.json"))
-        train_full_data_dict["ScanNet"][str(step_size)] = json.load(open(f"{example_dir}/train/step_{step_size}/ScanNet.json"))
+        train_full_data_dict["NuScenes"][str(step_size)] = json.load(open(f"{example_dir}/train/step_{step_size}/nusc_examples.json"))
+        train_full_data_dict["ScanNet"][str(step_size)] = json.load(open(f"{example_dir}/train/step_{step_size}/scannet_examples.json"))
 
-        test_full_data_dict["NuScenes"][str(step_size)] = json.load(open(f"{example_dir}/test/step_{step_size}/ScanNet.json"))
-        test_full_data_dict["ScanNet"][str(step_size)] = json.load(open(f"{example_dir}/test/step_{step_size}/ScanNet.json"))
+        test_full_data_dict["NuScenes"][str(step_size)] = json.load(open(f"{example_dir}/test/step_{step_size}/nusc_examples.json"))
+        test_full_data_dict["ScanNet"][str(step_size)] = json.load(open(f"{example_dir}/test/step_{step_size}/scannet_examples.json"))
 
     # get same number of scenes for NuScenes and ScanNet
     num_train_scene = int(os.getenv("NUM_TRAIN_SCENE"))
@@ -103,23 +103,33 @@ def main(script_args, training_args, model_args):
     video_length = int(os.getenv("VIDEO_LENGTH"))
     ''' Train split: for each scene, choose a random step_size (frame rate) '''
     train_example_list = []
-    for scene_idx in nusc_num_train_scene:
+    for scene_idx in range(nusc_num_train_scene):
         step_size = random.randint(1, 10)
+        nusc_scene_list = list(train_full_data_dict["NuScenes"][str(step_size)]["forward"][str(video_length)].keys())
+        scannet_scene_list = list(train_full_data_dict["ScanNet"][str(step_size)]["forward"][str(video_length)].keys())
+
+        nusc_scene = nusc_scene_list[scene_idx]
+        scannet_scene = scannet_scene_list[scene_idx]
 
         # get the set of examples for specified video length
-        nusc_example_list = train_full_data_dict["NuScenes"][str(step_size)]["forward"][str(video_length)][f"scene_{scene_idx}"]
-        scannet_example_list = train_full_data_dict["ScanNet"][str(step_size)]["forward"][str(video_length)][f"scene_{scene_idx}"]
+        nusc_example_list = train_full_data_dict["NuScenes"][str(step_size)]["forward"][str(video_length)][nusc_scene]
+        scannet_example_list = train_full_data_dict["ScanNet"][str(step_size)]["forward"][str(video_length)][scannet_scene]
         train_example_list += nusc_example_list 
         train_example_list += scannet_example_list
 
     ''' Test split: for each scene, choose a random step_size (frame rate) '''
     test_example_list = []
-    for scene_idx in nusc_num_test_scene:
+    for scene_idx in range(nusc_num_test_scene):
         step_size = random.randint(1, 10)
+        nusc_scene_list = list(test_full_data_dict["NuScenes"][str(step_size)]["forward"][str(video_length)].keys())
+        scannet_scene_list = list(test_full_data_dict["ScanNet"][str(step_size)]["forward"][str(video_length)].keys())
+
+        nusc_scene = nusc_scene_list[scene_idx]
+        scannet_scene = scannet_scene_list[scene_idx]
 
         # get the set of examples for specified video length
-        nusc_example_list = test_full_data_dict["NuScenes"]["forward"][str(video_length)][f"scene_{scene_idx}"]
-        scannet_example_list = test_full_data_dict["ScanNet"]["forward"][str(video_length)][f"scene_{scene_idx}"]
+        nusc_example_list = test_full_data_dict["NuScenes"][str(step_size)]["forward"][str(video_length)][nusc_scene]
+        scannet_example_list = test_full_data_dict["ScanNet"][str(step_size)]["forward"][str(video_length)][scannet_scene]
         test_example_list += nusc_example_list 
         test_example_list += scannet_example_list
     

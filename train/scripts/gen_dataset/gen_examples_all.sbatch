@@ -18,10 +18,10 @@ conda activate /scratch/zl3466/env/thinking-in-street/;
 export PATH=/scratch/zl3466/env/thinking-in-street/bin:$PATH;
 cd /scratch/zl3466/github/thinking_in_street/generate_dataset;
 
-export DATASET_DIR="/vast/zl3466/dataset"
+export DATASET_DIR="/vast/zl3466/dataset";
 
 python ./_1_gen_examples.py \
     --num_cam 1 \
-    --scene_start 400 \
-    --scene_end 500 \
-    --out_dir "/scratch/zl3466/github/thinking_in_street/dataset/examples/test"
+    --scene_start 500 \
+    --scene_end 600 \
+    --out_dir "/scratch/zl3466/github/thinking_in_street/dataset/examples/cold_start"

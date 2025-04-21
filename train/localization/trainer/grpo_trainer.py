@@ -790,21 +790,7 @@ class Qwen2VLGRPOTrainer(Trainer):
         
                 
         # Calculate temporal reward: 
-        # reward = 1 if ordered answer accuracy > 0.8 shuffled answer accuracy
-        # if self.temporal and video_inputs is not None:
-        #     temporal_rewards_per_func = rewards_per_func.clone()
-            
-        #     acc_mean = temporal_rewards_per_func[:, 0].mean()
-        #     shuffled_acc_mean = shuffled_rewards_per_func[:, 0].mean()
-
-        #     if acc_mean >= 0.8 * shuffled_acc_mean:
-        #         mask = temporal_rewards_per_func[:, 0] > 0.1
-        #         temporal_rewards_per_func[mask, 0] = temporal_rewards_per_func[mask, 0] + 0.3
-        #         temporal_rewards = torch.tensor([1.0]).to('cuda')
-        #     else:
-        #         temporal_rewards = torch.tensor([0.0]).to('cuda')
-        # else:
-        #     temporal_rewards =  torch.tensor([0.5]).to('cuda')
+        # if temporal is set and accuracy_reward is already > 0.1, accuracy_reward += temporal reward
         print(f"rewards_per_func: {rewards_per_func}")
         if self.temporal and video_inputs is not None:
             question_type = reward_kwargs['problem_type'][0]

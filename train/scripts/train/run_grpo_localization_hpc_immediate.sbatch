@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-#SBATCH --job-name=grpo_immediate_rtx8000
+#SBATCH --job-name=rtx8000_immediate
 #SBATCH --output=/scratch/zl3466/github/thinking_in_street/train_result/grpo_immediate_rtx8000.out
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
