@@ -14,6 +14,7 @@ from datetime import datetime
 from dataclasses import dataclass, field
 from typing import Optional
 
+from trl import GRPOConfig, GRPOTrainer, ModelConfig, ScriptArguments, TrlParser, get_peft_config
 from rouge_score import rouge_scorer
 from train.data_loader.nuscenes import NuScenesDataset
 from train.data_loader.scannet import ScanNetDataset
@@ -66,6 +67,39 @@ direction_reverse_dict = {
     "slight back right": "slight left"
 }
 
+video_length_list = [2, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32]
+
+@dataclass
+class GRPOScriptArguments(ScriptArguments):
+    """
+    Script arguments for the GRPO training script.
+
+    Args:
+        reward_funcs (`list[str]`):
+            List of reward functions. Possible values: 'accuracy', 'format'.
+    """
+
+    reward_funcs: list[str] = field(
+        default_factory=lambda: ["accuracy", "format"],
+        metadata={"help": "List of reward functions. Possible values: 'accuracy', 'format'"},
+    )
+    max_pixels: Optional[int] = field(
+        default=12845056,
+        metadata={"help": "Maximum number of pixels for the image"},
+    )
+    min_pixels: Optional[int] = field(
+        default=3136,
+        metadata={"help": "Minimum number of pixels for the image"},
+    )
+    temporal: Optional[bool] = field(
+        default=True,
+        metadata={"help": "whether using temporal GRPO"},
+    )
+    len_control: Optional[bool] = field(
+        default=True,
+        metadata={"help": "whether using length reward"},
+    )
+
 
 def extract_answer(text):
     pattern = r'<answer>\s*(.*?)\s*</answer>'
@@ -73,6 +107,14 @@ def extract_answer(text):
     if match:
         return match.group(1).strip()
     return ""
+
+def extract_think(output_str):
+    pattern = r'<think>\s*(.*?)\s*</think>'
+    match = re.search(pattern, output_str, re.DOTALL)
+    if match:
+        return match.group(1).strip()
+    return ""
+
 
 
 def normalize_number(num_str):
@@ -112,6 +154,183 @@ def compute_rouge_score(reference, hypothesis, use_stemmer=True):
 
 def sigmoid(x, a=1, b=0):
     return 1 / (1 + math.exp(a * (-x + b)))
+
+
+
+def accuracy_reward(completions, solution, **kwargs):
+    question_type = kwargs['problem_type'][0]
+
+    contents = [completion[0]["content"] for completion in completions]
+    current_time = datetime.now().strftime("%d-%H-%M-%S-%f")
+    rewards = []
+
+    for content, sol in zip(contents, solution):
+
+        try:
+            # print("content: ", content)
+            output_ans = extract_answer(content)
+            # print("output_ans: ", output_ans)
+            gt_ans = extract_answer(sol)
+            # print("gt_ans: ", gt_ans)
+            if question_type == "multiple choice":
+                reward = 1.0 if output_ans.strip() == gt_ans.strip() else 0.0
+            elif question_type == "numerical":
+                gt_has_decimal = ("." in gt_ans) or ("," in gt_ans)
+                out_has_decimal = ("." in output_ans) or ("," in output_ans)
+                if gt_has_decimal != out_has_decimal:
+                    reward = 0.0
+                else:
+                    gt_number = normalize_number(gt_ans)
+                    out_number = normalize_number(output_ans)
+                    if gt_number is None or out_number is None:
+                        reward = 0.0
+                    else:
+                        reward = 1.0 if round(gt_number, 2) == round(out_number, 2) else 0.0
+            elif question_type == "OCR":
+                error_rate = wer(gt_ans, output_ans)
+                reward = 1 - error_rate
+                reward = max(0.0, min(1.0, reward))
+            elif question_type == "free-form":
+                score = compute_rouge_score(gt_ans, output_ans)
+                reward = max(0.0, min(1.0, score))
+            elif question_type == "regression":
+                gt_number = normalize_number(gt_ans)
+                out_number = normalize_number(output_ans)
+                if gt_number is None or out_number is None:
+                    reward = 0.0
+                rel_diff = (abs(out_number - gt_number) + 1e-9) / (abs(gt_number) + 1e-9)
+                rel_diff = min(1.0, max(0.0, rel_diff))
+                reward = 1 - rel_diff
+            elif question_type == "list":
+                # print("output_ans: ", output_ans)
+                output_ans_list = ast.literal_eval(output_ans)
+                gt_list = ast.literal_eval(gt_ans)
+                if len(output_ans_list) != len(gt_list):
+                    reward = 0.0
+                else:
+                    if isinstance(gt_list[0], (int, float)):
+                        # print(f"========================== Val output_ans_list: {output_ans_list} ")
+                        ''' reward = 2 * sigmoid(rmse) -> range(0, 1). Use a = 0.2 to get steep sigmoid '''
+                        squared_diffs = [(p - gt) ** 2 for p, gt in zip(output_ans_list, gt_list)]
+                        rmse = math.sqrt(sum(squared_diffs) / len(squared_diffs))
+                        reward = 2 * (1 - sigmoid(rmse, a=0.2, b=0))
+                        ''' we ensure a minimum reward of 0.1 if the number of elements in the list is correct '''
+                        reward = max(0.1, reward)
+                    else:
+                        # print(f"========================== String output_ans_list: {output_ans_list} ")
+                        ''' the general_dir case where the list contains string keywords like forward, left, slight right, etc. '''
+                        reward = sum([a.lower() == b.lower() for a, b in zip(output_ans_list, gt_list)]) / len(gt_list)
+                        reward = max(0.1, reward)
+            elif question_type == "dict":
+                output_ans_dict = ast.literal_eval(output_ans)
+                gt_dict = ast.literal_eval(gt_ans)
+                # reward_unit = 1 / len(gt_dict.keys())
+                reward = 0
+                for key in output_ans_dict.keys():
+                    # the keys x, y, z, roll, pitch, yaw must all match
+                    if key not in gt_dict.keys():
+                        sub_reward = 0
+                        break
+                    else:
+                        output_ans_list = output_ans_dict[key]
+                        gt_list = gt_dict[key]
+                        if len(output_ans_list) != len(gt_list):
+                            sub_reward = 0.0
+                        else:
+                            squared_diffs = [(p - gt) ** 2 for p, gt in zip(output_ans_list, gt_list)]
+                            rmse = math.sqrt(sum(squared_diffs) / len(squared_diffs))
+                            sub_reward = 2 * (1 - sigmoid(rmse, a=0.2, b=0))
+                            ''' we ensure a minimum reward of 0.1 if the number of elements in the list is correct '''
+                            # reward range for each key is 0.1 to 1
+                            sub_reward = max(0.1, sub_reward)
+                    reward += sub_reward
+                # normalize total reward for the dict to between 0 - 1
+                reward = reward / len(gt_dict.keys())
+            else:
+                reward = 0.0
+        except Exception as e:
+            print(f"Error in reward_fn for question_type '{question_type}': {e}")
+            reward = 0.0
+
+        rewards.append(reward)
+
+        if os.getenv("DEBUG_MODE") == "true":
+            log_path = os.getenv("LOG_PATH")
+            # local_rank = int(os.getenv("LOCAL_RANK", 0))
+            # print(f"logging to {log_path}")
+            with open(log_path, "a", encoding="utf-8") as f:
+                f.write(f"------------- {current_time} Accuracy reward: {reward} -------------\n")
+                f.write(f"Content: {content}\n")
+                f.write(f"Solution: {sol}\n")
+    # print(f"\n========\nbatch rewards: {rewards}\n========\n")
+    return rewards
+
+
+
+def format_reward(completions, **kwargs):
+
+    if kwargs['problem_type'][0] == "list":
+        """
+        Reward function for list answers.
+        First we chech if answer has the <answer></anwswer> tag, reward=0.5
+        Then we check if the answer tag contains a list
+        """
+        pattern = r"<think>.*?</think>\s*<answer>.*?</answer>"
+        completion_contents = [completion[0]["content"] for completion in completions]
+        all_rewards = []
+        for content in completion_contents:
+            match = re.fullmatch(pattern, content, re.DOTALL)
+            if match:
+                reward = 0.5
+                try:
+                    output_ans = extract_answer(content)
+                    output_ans_list = ast.literal_eval(output_ans)
+                    if isinstance(output_ans_list, list):
+                        reward = 1.0
+                except Exception as e:
+                    reward = 0.5
+            else:
+                reward = 0
+
+            all_rewards.append(reward)
+        return all_rewards
+    elif kwargs['problem_type'][0] == "dict":
+        pattern = r"<think>.*?</think>\s*<answer>.*?</answer>"
+        completion_contents = [completion[0]["content"] for completion in completions]
+        all_rewards = []
+        for content in completion_contents:
+            match = re.fullmatch(pattern, content, re.DOTALL)
+            if match:
+                # if only the tag format is matched, rerward 0.4
+                reward = 0.4
+                try:
+                    output_ans = extract_answer(content)
+                    output_ans_dict = ast.literal_eval(output_ans)
+                    # if dict format is matched, rerward 0.7
+                    if isinstance(output_ans_dict, dict):
+                        reward = 0.7
+                        all_correct_flag = True
+                        # check if each val in dict is list
+                        for key in output_ans_dict.keys():
+                            if not isinstance(output_ans_dict[key], list):
+                                all_correct_flag = False
+                                break
+                        # give full reward 1 only if all elements in the dict are list, otherwise only reward 0.7
+                        if all_correct_flag:
+                            reward = 1
+                except Exception as e:
+                    reward = 0.4
+            else:
+                reward = 0
+
+            all_rewards.append(reward)
+        return all_rewards
+    else:
+        """Reward function that checks if the completion has a specific format."""
+        pattern = r"<think>.*?</think>\s*<answer>.*?</answer>"
+        completion_contents = [completion[0]["content"] for completion in completions]
+        matches = [re.fullmatch(pattern, content, re.DOTALL) for content in completion_contents]
+        return [1.0 if match else 0.0 for match in matches]
 
 
 def calc_accuracy_score(output_text, gt, question_type):
@@ -389,14 +608,14 @@ def has_invalid_values(lst):
     return any(x is None or (isinstance(x, float) and math.isnan(x)) for x in lst)
 
 
-def nusc_to_examples(nusc_dataset, mode, dataset_name, scene_idx, step_size=1, batch_size=4, video_out_dir="", reverse=False):
+def dataset_to_examples(dataset, mode, dataset_name, scene_idx, step_size=1, batch_size=4, video_out_dir="", reverse=False):
     '''
         dataset_name: nusc or scannet
         /NuScenes/train_test or /ScanNet/decoded
     '''
     if video_out_dir != "":
         ''' prepare video writer '''
-        sample_img = cv2.imread(nusc_dataset.img_filepaths[0])
+        sample_img = cv2.imread(dataset.img_filepaths[0])
         w = sample_img.shape[1]
         h = sample_img.shape[0]
         video_width = w
@@ -407,8 +626,8 @@ def nusc_to_examples(nusc_dataset, mode, dataset_name, scene_idx, step_size=1, b
         frame_text = "start of new sequence, no prev"
         ''' video writer code ends here '''
 
-    meta_dict = nusc_dataset.meta_dict
-    cam_list = nusc_dataset.camera_list
+    meta_dict = dataset.meta_dict
+    cam_list = dataset.camera_list
     cam = cam_list[0]
 
     meta_data = meta_dict[cam]
@@ -418,8 +637,8 @@ def nusc_to_examples(nusc_dataset, mode, dataset_name, scene_idx, step_size=1, b
     if reverse:
         # print(nusc_dataset.rel_img_filepaths)
         ego_pose_list.reverse()
-        nusc_dataset.rel_img_filepaths = nusc_dataset.rel_img_filepaths[::-1]
-        nusc_dataset.img_filepaths = nusc_dataset.img_filepaths[::-1]
+        dataset.rel_img_filepaths = dataset.rel_img_filepaths[::-1]
+        dataset.img_filepaths = dataset.img_filepaths[::-1]
         # print(nusc_dataset.rel_img_filepaths)
 
     prev_rotation = None
@@ -452,7 +671,7 @@ def nusc_to_examples(nusc_dataset, mode, dataset_name, scene_idx, step_size=1, b
         rotation = ego_pose["rotation"]
         yaw = quaternion_to_yaw(rotation)
 
-        batch_img_list.append(nusc_dataset.rel_img_filepaths[frame_i])
+        batch_img_list.append(dataset.rel_img_filepaths[frame_i])
         if prev_yaw is not None and prev_translation is not None:
             general_dir = calc_general_dir(prev_translation, translation, prev_yaw, yaw, mode=mode, reverse=reverse)
             disp = calculate_displacement(prev_translation, translation)
@@ -495,8 +714,8 @@ def nusc_to_examples(nusc_dataset, mode, dataset_name, scene_idx, step_size=1, b
             # if something is wrong in the dataset pose, causing Nan value in translation or rotation (observed in some ScanNet data), don't use this example
             if has_invalid_values(batch_disp_gt) or has_invalid_values(batch_delta_heading_gt) or has_invalid_values(
                     batch_transformation_gt):
-                print(
-                    f"Skipping invalid example in {dataset_name}: batch_disp_gt: {batch_disp_gt}, batch_delta_heading_gt: {batch_delta_heading_gt}, batch_transformation_gt: {batch_transformation_gt}")
+                # print(
+                #     f"Skipping invalid example in {dataset_name}: batch_disp_gt: {batch_disp_gt}, batch_delta_heading_gt: {batch_delta_heading_gt}, batch_transformation_gt: {batch_transformation_gt}")
                 batch_general_dir_gt = []
                 batch_disp_gt = []
                 batch_delta_heading_gt = []
@@ -523,7 +742,7 @@ def nusc_to_examples(nusc_dataset, mode, dataset_name, scene_idx, step_size=1, b
                 sample_count = 0
 
         if video_out_dir != "":
-            img = cv2.imread(f"{nusc_dataset.img_filepaths[frame_i]}")
+            img = cv2.imread(f"{dataset.img_filepaths[frame_i]}")
             font = cv2.FONT_HERSHEY_SIMPLEX
             cv2.putText(img, frame_text, (10, 30), font, fontScale=1, color=(0, 0, 255), thickness=2,
                         lineType=cv2.LINE_AA)
@@ -540,7 +759,7 @@ def nusc_to_examples(nusc_dataset, mode, dataset_name, scene_idx, step_size=1, b
         batch_img_list = img_list_all[batch_i]
 
         example_general_dir = {
-            "problem_id": scene_idx,
+            "problem_id": f"{scene_idx}_{batch_i + problem_id_offset}",
             "dataset_name": dataset_name,
             "problem": f"I uploaded {len(batch_img_list)} frames from an agent's dash cam video. The agent can be a vehicle or a person. \n"
                        f"Determine the agent's movement direction between each frame and its previous frame.\n"
@@ -559,7 +778,7 @@ def nusc_to_examples(nusc_dataset, mode, dataset_name, scene_idx, step_size=1, b
         problem_id_offset += 1
 
         example_heading = {
-            "problem_id": scene_idx,
+            "problem_id": f"{scene_idx}_{batch_i + problem_id_offset}",
             "dataset_name": dataset_name,
             "problem": f"I uploaded {len(batch_img_list)} frames from an agent's dash cam video. The agent can be a vehicle or a person. \n"
                        f"Determine the agent's change in heading direction (yaw) between each frame and its previous frame.\n"
@@ -579,7 +798,7 @@ def nusc_to_examples(nusc_dataset, mode, dataset_name, scene_idx, step_size=1, b
         problem_id_offset += 1
 
         example_disp = {
-            "problem_id": scene_idx,
+            "problem_id": f"{scene_idx}_{batch_i + problem_id_offset}",
             "dataset_name": dataset_name,
             "problem": f"I uploaded {len(batch_img_list)} frames from an agent's dash cam video. The agent can be a vehicle or a person. \n"
                        f"Determine the agent's displacement between each frame and its previous frame.\n"
@@ -595,9 +814,10 @@ def nusc_to_examples(nusc_dataset, mode, dataset_name, scene_idx, step_size=1, b
             "reward": 1.0,
             "select": True
         }
+        problem_id_offset += 1
 
         example_transformation = {
-            "problem_id": scene_idx,
+            "problem_id": f"{scene_idx}_{batch_i + problem_id_offset}",
             "dataset_name": dataset_name,
             "problem": f"I uploaded {len(batch_img_list)} frames from an agent's dash cam video. The agent can be a vehicle or a person. \n"
                        f"Determine the agent's exact translation (x, y, z) and rotation (roll, pitch yaw) values between each frame and its previous frame.\n"
