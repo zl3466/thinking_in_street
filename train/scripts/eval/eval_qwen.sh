@@ -10,11 +10,11 @@ export VLLM_WORKER_MULTIPROC_METHOD=spawn
 python ./eval/eval_qwen_immediate_4q_plot.py \
   --num_cam 1 \
   --eval_scene_start 110 \
-  --eval_scene_end 120 \
+  --eval_scene_end 115 \
   --batch_size 4 \
   --base_model "Qwen2.5-VL-7B-Instruct" \
-  --finetuned_model "checkpoint-1800" \
-  --model_path "/scratch/zl3466/github/thinking_in_street/log/Qwen2.5-VL-7B-GRPO-100-a100-sbatch-4frame"
+  --finetuned_model "checkpoint-600" \
+  --model_path "/scratch/zl3466/github/thinking_in_street/log/Qwen2.5-VL-7B-GRPO-200-a100-16frames-sbatch"
 
    
 #  cd /home/zl3466/Documents/github/thinking_in_street;

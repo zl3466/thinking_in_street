@@ -170,10 +170,9 @@ def main(args):
         video_length = random.choice(video_length_list)
 
         print(f"using scene {scene_idx}, step {step_size}, video len {video_length}")
-        print(full_data_dict["NuScenes"][str(step_size)]["forward"][str(video_length)])
+        # print(full_data_dict["NuScenes"][str(step_size)]["forward"][str(video_length)])
         # forward examples
         nusc_example_list = full_data_dict["NuScenes"][str(step_size)]["forward"][str(video_length)][f"scene_{scene_idx}"]
-        print(nusc_example_list)
         scannet_example_list = full_data_dict["ScanNet"][str(step_size)]["forward"][str(video_length)][f"scene_{scene_idx}"]
         # backward examples
         nusc_backward_example_list = full_data_dict["NuScenes"][str(step_size)]["backward"][str(video_length)][f"scene_{scene_idx}"]
@@ -218,8 +217,7 @@ if __name__ == "__main__":
         tensor_parallel_size=torch.cuda.device_count(),
         max_model_len=4096,
         gpu_memory_utilization=0.8,
-        limit_mm_per_prompt={"image": 10, "video": 10},
-        dtype="float16"
+        limit_mm_per_prompt={"image": 10, "video": 10}
     )
 
     sampling_params = SamplingParams(
