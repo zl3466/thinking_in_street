@@ -4,7 +4,7 @@ import sys
 
 import numpy as np
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import torch
 
 import json
@@ -89,7 +89,8 @@ def gen_thought_process(data, llm, sampling_params):
 
     prompts = [processor.apply_chat_template(msg, tokenize=False, add_generation_prompt=True) for msg in
                messages]
-
+    # print(f"messages: \n{messages}\n")
+    # print(f"Prompts: \n{prompts}\n")
     image_inputs, video_inputs, video_kwargs = process_vision_info(messages, return_video_kwargs=True)
 
     image_idx = 0
@@ -167,8 +168,12 @@ def main(args):
         # random step size (frame rate) and video length (number of frames)
         step_size = random.randint(1, 10)
         video_length = random.choice(video_length_list)
+
+        print(f"using scene {scene_idx}, step {step_size}, video len {video_length}")
+        print(full_data_dict["NuScenes"][str(step_size)]["forward"][str(video_length)])
         # forward examples
         nusc_example_list = full_data_dict["NuScenes"][str(step_size)]["forward"][str(video_length)][f"scene_{scene_idx}"]
+        print(nusc_example_list)
         scannet_example_list = full_data_dict["ScanNet"][str(step_size)]["forward"][str(video_length)][f"scene_{scene_idx}"]
         # backward examples
         nusc_backward_example_list = full_data_dict["NuScenes"][str(step_size)]["backward"][str(video_length)][f"scene_{scene_idx}"]
@@ -198,11 +203,13 @@ if __name__ == "__main__":
     parser.add_argument("--out_dir", type=str)
     parser.add_argument("--scene_start", type=int, default=500)
     parser.add_argument("--scene_end", type=int, default=600)
-
+    parser.add_argument("--model_name", type=str)
+    parser.add_argument("--model_path", type=str)
+    
     args = parser.parse_args()
 
     # MODEL_PATH = "Qwen/Qwen2.5-VL-7B-Instruct"
-    model_name = args.model
+    model_name = args.model_name
     model_path = args.model_path
 
     llm = LLM(
