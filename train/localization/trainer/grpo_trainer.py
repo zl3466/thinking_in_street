@@ -80,13 +80,6 @@ def sigmoid(x, a=1, b=0):
     return 1 / (1 + math.exp(a * (-x + b)))
 
 
-def reverse_heading(heading_degree):
-    heading_degree += 180
-    if heading_degree > 180:
-        heading_degree -= 360
-    elif heading_degree < -180:
-        heading_degree += 360
-    return round(heading_degree, 3)
 
 direction_reverse_dict = {
     "stationary": "stationary", 
@@ -124,10 +117,10 @@ def reverse_consistent_reward(ordered_completions, reversed_completions, subject
                     # displacement can remain the same when video is played in reverse
                     ordered_output_ans_list = ordered_output_ans_list
                 elif subject == "heading":
-                    # heading should be reversed when video is played in reverse
-                    ordered_output_ans_list = [reverse_heading(val) for val in ordered_output_ans_list]
+                    # delta heading (change in yaw) should be negated when video is played in reverse
+                    ordered_output_ans_list = [-val for val in ordered_output_ans_list]
                 else:
-                    # direction should be reversed when video is played in reverse
+                    # general direction should be reversed when video is played in reverse
                     ordered_output_ans_list = [direction_reverse_dict[val] for val in ordered_output_ans_list]
 
                 # flip the element idx order
@@ -790,7 +783,8 @@ class Qwen2VLGRPOTrainer(Trainer):
         
                 
         # Calculate temporal reward: 
-        # if temporal is set and accuracy_reward is already > 0.1, accuracy_reward += temporal reward
+        # if temporal is set and accuracy_reward is already > 0.1, accuracy_reward += min(temporal_reward, 0.3)
+        # that is, add maximum of 0.3 to curb too much tuning toward temporal consistency
         print(f"rewards_per_func: {rewards_per_func}")
         if self.temporal and video_inputs is not None:
             question_type = reward_kwargs['problem_type'][0]
@@ -802,8 +796,8 @@ class Qwen2VLGRPOTrainer(Trainer):
                 # reward = sigmoid(total_reward, a=2, b=len(shuffled_completions)/4)
 
                 # final reward is the average of rewards from all groups
-                reward = total_reward / self.shuffled_num_generations
-                temporal_rewards = torch.tensor([reward]).to('cuda')
+                temporal_reward_avg = total_reward / self.shuffled_num_generations
+                temporal_rewards = torch.tensor([temporal_reward_avg]).to('cuda')
             elif question_type == "dict":
                 # sum of temporal reward for all groups
                 total_reward = reverse_consistent_reward_dict(ordered_completions=completions, reversed_completions=shuffled_completions)
@@ -811,10 +805,11 @@ class Qwen2VLGRPOTrainer(Trainer):
                 # reward = sigmoid(total_reward, a=2, b=len(shuffled_completions)/4)
 
                 # final reward is the average of rewards from all groups
-                reward = total_reward / self.shuffled_num_generations
-                temporal_rewards = torch.tensor([reward]).to('cuda')
+                temporal_reward_avg = total_reward / self.shuffled_num_generations
+                temporal_rewards = torch.tensor([temporal_reward_avg]).to('cuda')
             mask = temporal_rewards_per_func[:, 0] > 0.1
-            temporal_rewards_per_func[mask, 0] = temporal_rewards_per_func[mask, 0] + reward
+            # temporal_rewards_per_func[mask, 0] = temporal_rewards_per_func[mask, 0] + min(temporal_reward_avg, 0.3)
+            temporal_rewards_per_func[mask, 0] = temporal_rewards_per_func[mask, 0] + temporal_reward_avg
         else:
             temporal_rewards =  torch.tensor([0.5]).to('cuda')
         
@@ -879,7 +874,10 @@ class Qwen2VLGRPOTrainer(Trainer):
         wrong_devices = (rewards_per_device <= 1).all(dim=1)
         wrong_ratio = wrong_devices.sum().item() / num_devices
         
-        correct_devices = (rewards_per_device >= 2).all(dim=1)
+        if self.temporal:
+            correct_devices = (rewards_per_device >= 3).all(dim=1)
+        else:
+            correct_devices = (rewards_per_device >= 2).all(dim=1)
         correct_ratio = correct_devices.sum().item() / num_devices
         
         self._metrics["all_wrong"].append(wrong_ratio)
