@@ -7,7 +7,7 @@
 #SBATCH --cpus-per-task=32
 #SBATCH --mem=256GB
 #SBATCH --time=48:00:00
-#SBATCH --gres=gpu:a100:3
+#SBATCH --gres=gpu:a100:4
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=zl3466@nyu.edu
 #SBATCH --account=pr_116_tandon_priority

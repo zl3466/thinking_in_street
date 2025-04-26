@@ -44,6 +44,7 @@ import numpy as np
 from scipy.spatial.transform import Rotation as R
 from utils.qwen_utils import *
 from utils.train_utils import *
+from collections import defaultdict
 
 QUESTION_TEMPLATE = (
     "{Question}\n"
@@ -909,97 +910,140 @@ def plot_all_scores_vs_step_size(step_eval_example_dict, save_dir):
         print(f" - {path}")
 
 
-def plot_scores(result_dict, save_dir):
+def plot_scores_vs_step_size(data_dict, output_filename='scores_vs_step_size.png',
+                             figsize=(16, 12), dpi=300, colormap='viridis',
+                             legend_loc='lower right', grid=True):
     """
-    Generate four plots from a dictionary of scores.
-    
-    Parameters:
-    - result_dict: Dictionary with the structure:
-      {"step_size": {"forward": {"video_length": [format_score, accuracy_score], ...}, 
-                     "reverse": {"video_length": [format_score, accuracy_score], ...}}, ...}
-    - save_dir: Directory to save the generated plot
-    
-    Returns:
-    - Path to the saved plot file
-    """
-    # Create save directory if it doesn't exist
-    os.makedirs(save_dir, exist_ok=True)
-    
-    # Get all step sizes and video lengths
-    step_sizes = sorted([int(k) for k in result_dict.keys()])
-    video_lengths = sorted(set([int(v) for k in result_dict for d in result_dict[k] for v in result_dict[k][d]]))
+    Generate four plots visualizing relationships between scores and step sizes
+    for different video lengths.
 
-    # Create a figure with 2x2 subplots
-    fig, axs = plt.subplots(2, 2, figsize=(14, 10))
+    Parameters:
+    -----------
+    data_dict : dict
+        Dictionary containing the score data in the specified format.
+    output_filename : str, optional
+        Filename to save the generated plot. Default is 'scores_vs_step_size.png'.
+    figsize : tuple, optional
+        Size of the figure (width, height) in inches. Default is (16, 12).
+    dpi : int, optional
+        Resolution of the output image in dots per inch. Default is 300.
+    colormap : str, optional
+        Matplotlib colormap name to use for plot colors. Default is 'viridis'.
+    legend_loc : str, optional
+        Location of the legend in the plots. Default is 'lower right'.
+    grid : bool, optional
+        Whether to display grid lines in the plots. Default is True.
+
+    Returns:
+    --------
+    fig : matplotlib.figure.Figure
+        The figure object containing the plots.
+    """
+    # Get all unique step sizes and sort them numerically
+    step_sizes = sorted([int(x) for x in data_dict['full_score_dict'].keys()])
+
+    # Initialize dictionaries to store the extracted data
+    forward_accuracy = defaultdict(list)
+    forward_format = defaultdict(list)
+    reverse_accuracy = defaultdict(list)
+    reverse_format = defaultdict(list)
+    video_length_to_steps = defaultdict(list)
+
+    # Extract data for each video length and step size
+    for step_size_str in data_dict['full_score_dict']:
+        step_size = int(step_size_str)
+
+        # Process forward direction
+        for video_length_str in data_dict['full_score_dict'][step_size_str]['forward']:
+            video_length = int(video_length_str)
+            scores = data_dict['full_score_dict'][step_size_str]['forward'][video_length_str]
+
+            # Store the data
+            video_length_to_steps[video_length].append(step_size)
+            forward_accuracy[video_length].append((step_size, scores[0]))
+            forward_format[video_length].append((step_size, scores[1]))
+
+        # Process reverse direction
+        for video_length_str in data_dict['full_score_dict'][step_size_str]['reverse']:
+            video_length = int(video_length_str)
+            scores = data_dict['full_score_dict'][step_size_str]['reverse'][video_length_str]
+
+            # Store the data
+            reverse_accuracy[video_length].append((step_size, scores[0]))
+            reverse_format[video_length].append((step_size, scores[1]))
+
+    # Sort the data by step size for each video length
+    for video_length in video_length_to_steps:
+        forward_accuracy[video_length].sort(key=lambda x: x[0])
+        forward_format[video_length].sort(key=lambda x: x[0])
+        reverse_accuracy[video_length].sort(key=lambda x: x[0])
+        reverse_format[video_length].sort(key=lambda x: x[0])
+
+    # Get all unique video lengths
+    video_lengths = sorted(video_length_to_steps.keys())
+
+    # Create a colormap for different video lengths
+    colors = plt.cm.get_cmap(colormap)(np.linspace(0, 1, len(video_lengths)))
+
+    # Create the four plots
+    fig, axs = plt.subplots(2, 2, figsize=figsize)
     fig.suptitle('Scores vs Step Size for Different Video Lengths', fontsize=16)
 
-    # Plot titles and labels
-    titles = [
-        'Forward Accuracy Score vs Step Size',
-        'Forward Format Score vs Step Size',
-        'Reverse Accuracy Score vs Step Size',
-        'Reverse Format Score vs Step Size'
-    ]
+    # Plot 1: Forward Accuracy vs Step Size
+    axs[0, 0].set_title('Forward Accuracy vs Step Size')
+    axs[0, 0].set_xlabel('Step Size')
+    axs[0, 0].set_ylabel('Accuracy Score')
+    for i, video_length in enumerate(video_lengths):
+        if video_length_to_steps[video_length]:  # Only plot if we have data for this video length
+            x = [item[0] for item in forward_accuracy[video_length]]
+            y = [item[1] for item in forward_accuracy[video_length]]
+            axs[0, 0].plot(x, y, 'o-', color=colors[i], label=f'Video Length: {video_length}')
+    axs[0, 0].legend(loc=legend_loc)
+    axs[0, 0].grid(grid)
 
-    directions = ['forward', 'forward', 'reverse', 'reverse']
-    score_types = [1, 0, 1, 0]  # 0 for format score, 1 for accuracy score
+    # Plot 2: Forward Format vs Step Size
+    axs[0, 1].set_title('Forward Format Score vs Step Size')
+    axs[0, 1].set_xlabel('Step Size')
+    axs[0, 1].set_ylabel('Format Score')
+    for i, video_length in enumerate(video_lengths):
+        if video_length_to_steps[video_length]:  # Only plot if we have data for this video length
+            x = [item[0] for item in forward_format[video_length]]
+            y = [item[1] for item in forward_format[video_length]]
+            axs[0, 1].plot(x, y, 'o-', color=colors[i], label=f'Video Length: {video_length}')
+    axs[0, 1].legend(loc=legend_loc)
+    axs[0, 1].grid(grid)
 
-    # Colors for different video lengths
-    colors = plt.cm.viridis(np.linspace(0, 1, len(video_lengths)))
+    # Plot 3: Reverse Accuracy vs Step Size
+    axs[1, 0].set_title('Reverse Accuracy vs Step Size')
+    axs[1, 0].set_xlabel('Step Size')
+    axs[1, 0].set_ylabel('Accuracy Score')
+    for i, video_length in enumerate(video_lengths):
+        if video_length_to_steps[video_length]:  # Only plot if we have data for this video length
+            x = [item[0] for item in reverse_accuracy[video_length]]
+            y = [item[1] for item in reverse_accuracy[video_length]]
+            axs[1, 0].plot(x, y, 'o-', color=colors[i], label=f'Video Length: {video_length}')
+    axs[1, 0].legend(loc=legend_loc)
+    axs[1, 0].grid(grid)
 
-    # Plot each subplot
-    for i, (ax, title, direction, score_idx) in enumerate(zip(axs.flat, titles, directions, score_types)):
-        ax.set_title(title)
-        ax.set_xlabel('Step Size')
-        ax.set_ylabel('Score Value')
-        
-        # Plot a line for each video length
-        for j, video_len in enumerate(video_lengths):
-            video_len_str = str(video_len)
-            
-            # Collect data points for this video length
-            x_values = []
-            y_values = []
-            
-            for step_size in step_sizes:
-                step_size_str = str(step_size)
-                if video_len_str in result_dict[step_size_str][direction]:
-                    x_values.append(step_size)
-                    y_values.append(result_dict[step_size_str][direction][video_len_str][score_idx])
-            
-            # Plot the line
-            ax.plot(x_values, y_values, 'o-', color=colors[j], label=f'Video Length {video_len}')
-        
-        # Set axis limits with some padding
-        ax.set_xlim(min(step_sizes) - 0.2, max(step_sizes) + 0.2)
-        y_values = [result_dict[str(s)][direction][str(v)][score_idx] 
-                    for s in step_sizes 
-                    for v in video_lengths 
-                    if str(v) in result_dict[str(s)][direction]]
-        if y_values:  # Check if there are any values to plot
-            y_min = min(y_values)
-            y_max = max(y_values)
-            padding = 0.05 * (y_max - y_min) if y_max > y_min else 0.05
-            ax.set_ylim(y_min - padding, y_max + padding)
-        
-        # Set integer ticks for step sizes
-        ax.set_xticks(step_sizes)
-        
-        # Add grid and legend
-        ax.grid(True, linestyle='--', alpha=0.7)
-        ax.legend()
+    # Plot 4: Reverse Format vs Step Size
+    axs[1, 1].set_title('Reverse Format Score vs Step Size')
+    axs[1, 1].set_xlabel('Step Size')
+    axs[1, 1].set_ylabel('Format Score')
+    for i, video_length in enumerate(video_lengths):
+        if video_length_to_steps[video_length]:  # Only plot if we have data for this video length
+            x = [item[0] for item in reverse_format[video_length]]
+            y = [item[1] for item in reverse_format[video_length]]
+            axs[1, 1].plot(x, y, 'o-', color=colors[i], label=f'Video Length: {video_length}')
+    axs[1, 1].legend(loc=legend_loc)
+    axs[1, 1].grid(grid)
 
-    # Adjust layout
-    plt.tight_layout()
-    plt.subplots_adjust(top=0.92)
+    # Adjust layout to make room for legends
+    plt.tight_layout(rect=[0, 0, 1, 0.96])
 
     # Save the figure
-    save_path = os.path.join(save_dir, 'scores_vs_step_size.png')
-    plt.savefig(save_path, dpi=300)
-    
-    return save_path
+    plt.savefig(output_filename, dpi=dpi)
 
-
+    return fig
 
 
 def main(args):
@@ -1010,8 +1054,8 @@ def main(args):
     full_data_dict = {"NuScenes": {}, "ScanNet": {}}
     for step_size in range(1, 11):
 
-        full_data_dict["NuScenes"][str(step_size)] = json.load(open(f"{example_dir}/cold_start/step_{step_size}/nusc_examples.json"))
-        full_data_dict["ScanNet"][str(step_size)] = json.load(open(f"{example_dir}/cold_start/step_{step_size}/scannet_examples.json"))
+        full_data_dict["NuScenes"][str(step_size)] = json.load(open(f"{example_dir}/test/step_{step_size}/nusc_examples.json"))
+        full_data_dict["ScanNet"][str(step_size)] = json.load(open(f"{example_dir}/test/step_{step_size}/scannet_examples.json"))
 
     scene_start = args.eval_scene_start
     scene_end = args.eval_scene_end
@@ -1020,92 +1064,110 @@ def main(args):
     full_score_dict = {}
  
     total_score_dict = {"forward": [], "reverse": []}
-    for scene_idx in range(scene_start, scene_end):
-        forward_example_list = []
-        reverse_example_list = []
+    for step_size in range(1, 11, 2):
+        for scene_idx in tqdm(range(scene_start, scene_end), desc="Evaluating each scene"):
+            forward_example_list = []
+            reverse_example_list = []
+            for video_length in video_length_list:
+                # random step size (frame rate) and video length (number of frames)
+                # step_size = random.randint(1, 10)
+                # video_length = random.choice(video_length_list)
 
-        # random step size (frame rate) and video length (number of frames)
-        step_size = random.randint(1, 10)
-        video_length = random.choice(video_length_list)
+                print(f"using scene {scene_idx}, step {step_size}, video len {video_length}")
+                # use try except as some short scenes may not exist under the step_size * video_len compo (e.g. scene only have 300 imgs in total, not enough for step_size = 10 * video_len = 32 )
+                # forward examples
+                try:
+                    forward_example_list += full_data_dict["NuScenes"][str(step_size)]["forward"][str(video_length)][f"scene_{scene_idx}"]
+                except:
+                    pass
+                try:
+                    forward_example_list += full_data_dict["ScanNet"][str(step_size)]["forward"][str(video_length)][f"scene_{scene_idx}"]
+                except:
+                    pass
+                # backward examples
+                try:
+                    reverse_example_list += full_data_dict["NuScenes"][str(step_size)]["backward"][str(video_length)][f"scene_{scene_idx}"]
+                except:
+                    pass
+                try:
+                    reverse_example_list += full_data_dict["ScanNet"][str(step_size)]["backward"][str(video_length)][f"scene_{scene_idx}"]
+                except:
+                    pass
+                
+                if len(forward_example_list) == 0 or len(reverse_example_list) == 0:
+                    print(f"scene {scene_idx} is not long enough for step {step_size}, video len {video_length} combo. Skipping this scene...")
+                    continue
 
-        print(f"using scene {scene_idx}, step {step_size}, video len {video_length}")
-        # forward examples
-        forward_example_list += full_data_dict["NuScenes"][str(step_size)]["forward"][str(video_length)][f"scene_{scene_idx}"]
-        forward_example_list += full_data_dict["ScanNet"][str(step_size)]["forward"][str(video_length)][f"scene_{scene_idx}"]
-        # backward examples
-        reverse_example_list += full_data_dict["NuScenes"][str(step_size)]["backward"][str(video_length)][f"scene_{scene_idx}"]
-        reverse_example_list += full_data_dict["ScanNet"][str(step_size)]["backward"][str(video_length)][f"scene_{scene_idx}"]
+                # shuffle examples
+                random.shuffle(forward_example_list)
+                random.shuffle(reverse_example_list)
 
-        # shuffle examples
-        random.shuffle(forward_example_list)
-        random.shuffle(reverse_example_list)
+                # evaluate this scene
+                forward_format_score, forward_accuracy_score = eval_qwen(forward_example_list, llm, sampling_params)
+                reverse_format_score, reverse_accuracy_score = eval_qwen(reverse_example_list, llm, sampling_params)
 
-        # evaluate this scene
-        forward_format_score, forward_accuracy_score = eval_qwen(forward_example_list, llm, sampling_params)
-        reverse_format_score, reverse_accuracy_score = eval_qwen(reverse_example_list, llm, sampling_params)
+                # save scores according to the step_size used
+                if str(step_size) not in step_eval_score_dict.keys():
+                    step_eval_score_dict[str(step_size)] = {
+                        "forward": [[forward_format_score, forward_accuracy_score]],
+                        "reverse": [[reverse_format_score, reverse_accuracy_score]]
+                    }
+                else:
+                    step_eval_score_dict[str(step_size)]["forward"].append([forward_format_score, forward_accuracy_score])
+                    step_eval_score_dict[str(step_size)]["reverse"].append([reverse_format_score, reverse_accuracy_score])
 
-        # save scores according to the step_size used
-        if str(step_size) not in step_eval_score_dict.keys():
-            step_eval_score_dict[str(step_size)] = {
-                "forward": [[forward_format_score, forward_accuracy_score]],
-                "reverse": [[reverse_format_score, reverse_accuracy_score]]
-            }
-        else:
-            step_eval_score_dict[str(step_size)]["forward"].append([forward_format_score, forward_accuracy_score])
-            step_eval_score_dict[str(step_size)]["reverse"].append([reverse_format_score, reverse_accuracy_score])
+                # save scores according to the video_length used
+                if str(video_length) not in len_eval_score_dict.keys():
+                    len_eval_score_dict[str(video_length)] = {
+                        "forward": [[forward_format_score, forward_accuracy_score]],
+                        "reverse": [[reverse_format_score, reverse_accuracy_score]]
+                    }
+                else:
+                    len_eval_score_dict[str(video_length)]["forward"].append([forward_format_score, forward_accuracy_score])
+                    len_eval_score_dict[str(video_length)]["reverse"].append([reverse_format_score, reverse_accuracy_score])
+                
 
-        # save scores according to the video_length used
-        if str(video_length) not in len_eval_score_dict.keys():
-            len_eval_score_dict[str(video_length)] = {
-                "forward": [[forward_format_score, forward_accuracy_score]],
-                "reverse": [[reverse_format_score, reverse_accuracy_score]]
-            }
-        else:
-            len_eval_score_dict[str(video_length)]["forward"].append([forward_format_score, forward_accuracy_score])
-            len_eval_score_dict[str(video_length)]["reverse"].append([reverse_format_score, reverse_accuracy_score])
+                # save scores according to the step_size used
+                if str(step_size) not in full_score_dict.keys():
+                    full_score_dict[str(step_size)] = {
+                        "forward": {str(video_length): [[forward_format_score, forward_accuracy_score]]},
+                        "reverse": {str(video_length): [[reverse_format_score, reverse_accuracy_score]]}
+                    }
+                else:
+                    if str(video_length) not in full_score_dict[str(step_size)]["forward"].keys():
+                        full_score_dict[str(step_size)]["forward"][str(video_length)] = [[forward_format_score, forward_accuracy_score]]
+                        full_score_dict[str(step_size)]["reverse"][str(video_length)] = [[reverse_format_score, reverse_accuracy_score]]
+                    else:
+                        full_score_dict[str(step_size)]["forward"][str(video_length)].append([forward_format_score, forward_accuracy_score])
+                        full_score_dict[str(step_size)]["reverse"][str(video_length)].append([reverse_format_score, reverse_accuracy_score])
+
+                # save to total score
+                total_score_dict["forward"].append([forward_format_score, forward_accuracy_score])
+                total_score_dict["reverse"].append([reverse_format_score, reverse_accuracy_score])
         
-
-        # save scores according to the step_size used
-        if str(step_size) not in full_score_dict.keys():
-            full_score_dict[str(step_size)] = {
-                "forward": {str(video_length): [[forward_format_score, forward_accuracy_score]]},
-                "reverse": {str(video_length): [[reverse_format_score, reverse_accuracy_score]]}
-            }
-        else:
-            if str(video_length) not in full_score_dict[str(step_size)]["forward"].keys():
-                full_score_dict[str(step_size)]["forward"][str(video_length)] = [[forward_format_score, forward_accuracy_score]]
-                full_score_dict[str(step_size)]["reverse"][str(video_length)] = [[reverse_format_score, reverse_accuracy_score]]
-            else:
-                full_score_dict[str(step_size)]["forward"][str(video_length)].append([forward_format_score, forward_accuracy_score])
-                full_score_dict[str(step_size)]["reverse"][str(video_length)].append([reverse_format_score, reverse_accuracy_score])
-
-        # save to total score
-        total_score_dict["forward"] += [forward_format_score, forward_accuracy_score]
-        total_score_dict["reverse"] += [reverse_format_score, reverse_accuracy_score]
-    
     for str_step_size in step_eval_score_dict.keys():
         forward_scores_arr = np.array(step_eval_score_dict[str_step_size]["forward"])
         reverse_scores_arr = np.array(step_eval_score_dict[str_step_size]["reverse"])
 
-        step_eval_score_dict[str_step_size]["forward"] = np.mean(forward_scores_arr, axis=0)
-        step_eval_score_dict[str_step_size]["reverse"] = np.mean(reverse_scores_arr, axis=0)
+        step_eval_score_dict[str_step_size]["forward"] = np.mean(forward_scores_arr, axis=0).tolist()
+        step_eval_score_dict[str_step_size]["reverse"] = np.mean(reverse_scores_arr, axis=0).tolist()
     
     for str_video_len in len_eval_score_dict.keys():
         forward_scores_arr = np.array(len_eval_score_dict[str_video_len]["forward"])
         reverse_scores_arr = np.array(len_eval_score_dict[str_video_len]["reverse"])
 
-        len_eval_score_dict[str_video_len]["forward"] = np.mean(forward_scores_arr, axis=0)
-        len_eval_score_dict[str_video_len]["reverse"] = np.mean(reverse_scores_arr, axis=0)
+        len_eval_score_dict[str_video_len]["forward"] = np.mean(forward_scores_arr, axis=0).tolist()
+        len_eval_score_dict[str_video_len]["reverse"] = np.mean(reverse_scores_arr, axis=0).tolist()
 
     for str_step_size in full_score_dict.keys():
         for str_video_len in full_score_dict[str_step_size]["forward"].keys():
-            full_score_dict[str_step_size]["forward"][str_video_len] = np.mean(np.array(full_score_dict[str_step_size]["forward"][str_video_len]), axis=0)
+            full_score_dict[str_step_size]["forward"][str_video_len] = np.mean(np.array(full_score_dict[str_step_size]["forward"][str_video_len]), axis=0).tolist()
         for str_video_len in full_score_dict[str_step_size]["reverse"].keys():
-            full_score_dict[str_step_size]["reverse"][str_video_len] = np.mean(np.array(full_score_dict[str_step_size]["reverse"][str_video_len]), axis=0)
+            full_score_dict[str_step_size]["reverse"][str_video_len] = np.mean(np.array(full_score_dict[str_step_size]["reverse"][str_video_len]), axis=0).tolist()
 
 
-    total_score_dict["forward"] = np.mean(np.array(total_score_dict["forward"]), axis=0)
-    total_score_dict["reverse"] = np.mean(np.array(total_score_dict["reverse"]), axis=0)
+    total_score_dict["forward"] = np.mean(np.array(total_score_dict["forward"]), axis=0).tolist()
+    total_score_dict["reverse"] = np.mean(np.array(total_score_dict["reverse"]), axis=0).tolist()
 
     result_dict = {
         "total_score": total_score_dict,
@@ -1114,12 +1176,12 @@ def main(args):
         "random_video_length": len_eval_score_dict
     }
     
-    print(f"forward average score: {total_score_dict["forward"]}; reverse average score: {total_score_dict["reverse"]}")
+    print(f"forward average score: {total_score_dict['forward']}; reverse average score: {total_score_dict['reverse']}")
 
     os.makedirs("./tmp", exist_ok=True)
     with open("./tmp/step_eval_example_dict.json", "w") as outfile:
         json.dump(result_dict, outfile, indent=4)
-    plot_scores(result_dict, save_dir=f"./tmp/figures")
+    plot_scores_vs_step_size(result_dict, output_filename=f"./tmp/figure.png")
 
 
 if __name__ == "__main__":
@@ -1131,6 +1193,7 @@ if __name__ == "__main__":
     parser.add_argument("--base_model", type=str, default="Qwen/Qwen2.5-VL-7B-Instruct")
     parser.add_argument("--finetuned_model", type=str, default="Qwen/Qwen2.5-VL-7B-Instruct")
     parser.add_argument("--model_path", type=str, default="/scratch/zl3466/github/thinking_in_street/model/Qwen")
+    parser.add_argument("--example_dir", type=str, default="/scratch/zl3466/github/thinking_in_street/dataset/examples")
 
     args = parser.parse_args()
 

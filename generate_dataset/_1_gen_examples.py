@@ -53,8 +53,8 @@ def main(args):
 
         ''' --------------------------- NuScenes --------------------------- '''
         print(f"Processing NuScenes train dataset into examples...")
-        for scene_idx in nusc_scene_idx_list:
-            print(f"NUSC, step size: {step_size}")
+        for scene_idx in tqdm(nusc_scene_idx_list, desc=f"Processing nusc scenes, step_sze {step_size}"):
+            # print(f"NUSC, step size: {step_size}")
             dataset = NuScenesDataset(data_path=nusc_data_path,
                                       meta_out_path="",
                                       num_cams=num_cam,
@@ -65,6 +65,9 @@ def main(args):
             for video_length in video_length_list:
                 ''' generate forward examples '''
                 forward_example_list = dataset_to_examples(dataset=dataset, mode="outdoor", dataset_name="NuScenes", scene_idx=scene_idx, step_size=step_size, batch_size=video_length)
+                # sometimes a scene may not have enough images for the stepsize * video length combo (e.g. scene only has 300 images, not enough for step_size = 10 * video_len = 32)
+                if len(forward_example_list) == 0:
+                    continue
                 if str(video_length) not in nusc_example_dict["forward"].keys():
                     # nusc_example_dict["forward"][str(video_length)] = forward_example_list
                     nusc_example_dict["forward"][str(video_length)] = {f"scene_{scene_idx}": forward_example_list}
@@ -96,8 +99,8 @@ def main(args):
 
         ''' --------------------------- ScanNet --------------------------- '''
         print(f"Processing ScanNet train dataset into examples...")
-        for scene_idx in scannet_scene_idx_list:
-            print(f"ScanNet, step size: {step_size}")
+        for scene_idx in tqdm(scannet_scene_idx_list, desc=f"Processing scannet scenes, step_sze {step_size}"):
+            # print(f"ScanNet, step size: {step_size}")
             dataset = ScanNetDataset(data_path=scannet_data_path,
                                      meta_out_path="",
                                      scene_idx=scene_idx,
@@ -106,6 +109,8 @@ def main(args):
             for video_length in video_length_list:
                 ''' generate forward examples '''
                 forward_example_list = dataset_to_examples(dataset=dataset, mode="indoor", dataset_name="ScanNet", scene_idx=scene_idx, step_size=step_size, batch_size=video_length)
+                if len(forward_example_list) == 0:
+                    continue
                 if str(video_length) not in scannet_example_dict["forward"].keys():
                     # nusc_example_dict["forward"][str(video_length)] = forward_example_list
                     scannet_example_dict["forward"][str(video_length)] = {f"scene_{scene_idx}": forward_example_list}

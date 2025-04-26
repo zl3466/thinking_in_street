@@ -120,6 +120,12 @@ class ScanNetDataset():
             # # orthogonalize rotation matrix using svd
             # U, _, Vt = np.linalg.svd(rotation)
             # rotation = U @ Vt
+            try:
+                U, _, Vt = np.linalg.svd(rotation + np.eye(3) * 1e-10)
+                rotation = U @ Vt
+            except np.linalg.LinAlgError:
+                # If SVD fails, keep rotation as it is
+                pass
 
             # q = Quaternion(matrix=rotation)
             # rotation_quat = np.array([q.w, q.x, q.y, q.z])

@@ -22,6 +22,6 @@ export DATASET_DIR="/vast/zl3466/dataset";
 
 python ./_1_gen_examples.py \
     --num_cam 1 \
-    --scene_start 500 \
-    --scene_end 600 \
-    --out_dir "/scratch/zl3466/github/thinking_in_street/dataset/examples/cold_start"
+    --scene_start 400 \
+    --scene_end 404 \
+    --out_dir "/scratch/zl3466/github/thinking_in_street/dataset/examples/test"
