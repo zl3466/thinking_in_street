@@ -165,18 +165,30 @@ def main(args):
         scannet_result_dict = {"forward": {}, "backward": {}}
     
     for scene_idx in range(scene_start, scene_end):
-        # random step size (frame rate) and video length (number of frames)
-        step_size = random.randint(1, 10)
-        video_length = random.choice(video_length_list)
+        success = False
+        while not success:
+            # random step size (frame rate) and video length (number of frames)
+            step_size = random.randint(1, 10)
+            video_length = random.choice(video_length_list)
 
-        print(f"using scene {scene_idx}, step {step_size}, video len {video_length}")
-        # print(full_data_dict["NuScenes"][str(step_size)]["forward"][str(video_length)])
-        # forward examples
-        nusc_example_list = full_data_dict["NuScenes"][str(step_size)]["forward"][str(video_length)][f"scene_{scene_idx}"]
-        scannet_example_list = full_data_dict["ScanNet"][str(step_size)]["forward"][str(video_length)][f"scene_{scene_idx}"]
-        # backward examples
-        nusc_backward_example_list = full_data_dict["NuScenes"][str(step_size)]["backward"][str(video_length)][f"scene_{scene_idx}"]
-        scannet_backward_example_list = full_data_dict["ScanNet"][str(step_size)]["backward"][str(video_length)][f"scene_{scene_idx}"]
+            print(f"Try using scene {scene_idx}, step {step_size}, video len {video_length}")
+            # print(full_data_dict["NuScenes"][str(step_size)]["forward"][str(video_length)])
+            
+            try:
+                # forward examples
+                nusc_example_list = full_data_dict["NuScenes"][str(step_size)]["forward"][str(video_length)][f"scene_{scene_idx}"]
+                scannet_example_list = full_data_dict["ScanNet"][str(step_size)]["forward"][str(video_length)][f"scene_{scene_idx}"]
+
+                # backward examples
+                nusc_backward_example_list = full_data_dict["NuScenes"][str(step_size)]["backward"][str(video_length)][f"scene_{scene_idx}"]
+                scannet_backward_example_list = full_data_dict["ScanNet"][str(step_size)]["backward"][str(video_length)][f"scene_{scene_idx}"]
+
+                success = True
+            except:
+                print(f"Data load failed, nusc or scannet not enough image for step {step_size} len {video_length} combo")
+                continue
+
+        
 
         # generate thought process for forward examples
         filled_example_list = gen_thought_process(nusc_example_list, llm, sampling_params)

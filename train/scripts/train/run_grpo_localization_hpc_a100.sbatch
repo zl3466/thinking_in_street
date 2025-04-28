@@ -24,7 +24,7 @@ export DATASET_DIR="/vast/zl3466/dataset"
 export EXAMPLE_DIR="/scratch/zl3466/github/thinking_in_street/dataset/examples"
 # export NUM_TRAIN_SCENE=50
 export TRAIN_SCENE_START=0
-export TRRAIN_SCENE_END=50
+export TRAIN_SCENE_END=50
 export VIDEO_LENGTH=16
 
 CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node="4" \

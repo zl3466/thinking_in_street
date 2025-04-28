@@ -96,12 +96,12 @@ def main(script_args, training_args, model_args):
     test_scene_start = train_scene_start // 5
     test_scene_end = train_scene_end // 5
 
-    num_test_scene = min(150, num_train_scene // 5)
+    # num_test_scene = min(150, num_train_scene // 5)
     
-    nusc_num_train_scene = int(num_train_scene // 2)
-    nusc_num_test_scene = int(num_test_scene // 2)
-    scannet_num_train_scene = nusc_num_train_scene
-    scannet_num_test_scene = nusc_num_test_scene
+    # nusc_num_train_scene = int(num_train_scene // 2)
+    # nusc_num_test_scene = int(num_test_scene // 2)
+    # scannet_num_train_scene = nusc_num_train_scene
+    # scannet_num_test_scene = nusc_num_test_scene
 
     # Collect train and test data with random step size but fixed video length
     # Put NuScenes and ScanNet data together
@@ -144,6 +144,9 @@ def main(script_args, training_args, model_args):
         nusc_scene_list = list(train_full_data_dict["NuScenes"][str(step_size)]["forward"][str(video_length)].keys())
         scannet_scene_list = list(train_full_data_dict["ScanNet"][str(step_size)]["forward"][str(video_length)].keys())
 
+        nusc_scene_list.sort(key=lambda f: int(''.join(filter(str.isdigit, f))))
+        scannet_scene_list.sort(key=lambda f: int(''.join(filter(str.isdigit, f))))
+
         # get the set of examples for specified video length
         try:
             nusc_scene = nusc_scene_list[scene_idx]
@@ -165,6 +168,9 @@ def main(script_args, training_args, model_args):
         step_size = random.randint(1, 11)
         nusc_scene_list = list(test_full_data_dict["NuScenes"][str(step_size)]["forward"][str(video_length)].keys())
         scannet_scene_list = list(test_full_data_dict["ScanNet"][str(step_size)]["forward"][str(video_length)].keys())
+
+        nusc_scene_list.sort(key=lambda f: int(''.join(filter(str.isdigit, f))))
+        scannet_scene_list.sort(key=lambda f: int(''.join(filter(str.isdigit, f))))
 
         # get the set of examples for specified video length
         try:
@@ -198,7 +204,7 @@ def main(script_args, training_args, model_args):
     ''' =========================== Start trainer ============================= '''
     trainer_cls = Qwen2VLGRPOTrainer if not training_args.use_vllm else Qwen2VLGRPOVLLMTrainerModified
     print("using: ", trainer_cls)
-    print(f"\n====== train {num_train_scene} scenes, test {num_test_scene} scenes ======\n")
+    print(f"\n====== train {train_scene_start}-{train_scene_end} scenes, test {test_scene_start}-{test_scene_end} scenes ======\n")
     # Initialize the GRPO trainer
     print(model_args.model_name_or_path)
     trainer = trainer_cls(

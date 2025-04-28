@@ -960,8 +960,8 @@ def plot_scores_vs_step_size(data_dict, output_filename='scores_vs_step_size.png
 
             # Store the data
             video_length_to_steps[video_length].append(step_size)
-            forward_accuracy[video_length].append((step_size, scores[0]))
-            forward_format[video_length].append((step_size, scores[1]))
+            forward_format[video_length].append((step_size, scores[0]))
+            forward_accuracy[video_length].append((step_size, scores[1]))
 
         # Process reverse direction
         for video_length_str in data_dict['full_score_dict'][step_size_str]['reverse']:
@@ -969,8 +969,8 @@ def plot_scores_vs_step_size(data_dict, output_filename='scores_vs_step_size.png
             scores = data_dict['full_score_dict'][step_size_str]['reverse'][video_length_str]
 
             # Store the data
-            reverse_accuracy[video_length].append((step_size, scores[0]))
-            reverse_format[video_length].append((step_size, scores[1]))
+            reverse_format[video_length].append((step_size, scores[0]))
+            reverse_accuracy[video_length].append((step_size, scores[1]))
 
     # Sort the data by step size for each video length
     for video_length in video_length_to_steps:
@@ -1068,6 +1068,8 @@ def main(args):
         for scene_idx in tqdm(range(scene_start, scene_end), desc="Evaluating each scene"):
             forward_example_list = []
             reverse_example_list = []
+            
+            # for video_length in random.sample(video_length_list, len(video_length_list)//2):
             for video_length in video_length_list:
                 # random step size (frame rate) and video length (number of frames)
                 # step_size = random.randint(1, 10)
@@ -1076,21 +1078,34 @@ def main(args):
                 print(f"using scene {scene_idx}, step {step_size}, video len {video_length}")
                 # use try except as some short scenes may not exist under the step_size * video_len compo (e.g. scene only have 300 imgs in total, not enough for step_size = 10 * video_len = 32 )
                 # forward examples
+                # we only use at most 5 forward + 5 reverse videos for each dataset for each step_size-video_length combo
                 try:
-                    forward_example_list += full_data_dict["NuScenes"][str(step_size)]["forward"][str(video_length)][f"scene_{scene_idx}"]
+                    example_list_tmp = full_data_dict["NuScenes"][str(step_size)]["forward"][str(video_length)][f"scene_{scene_idx}"]
+                    random.shuffle(example_list_tmp)
+                    forward_example_list += example_list_tmp[:min(len(example_list_tmp), 5)]
+                    # forward_example_list += full_data_dict["NuScenes"][str(step_size)]["forward"][str(video_length)][f"scene_{scene_idx}"]
                 except:
                     pass
                 try:
-                    forward_example_list += full_data_dict["ScanNet"][str(step_size)]["forward"][str(video_length)][f"scene_{scene_idx}"]
+                    example_list_tmp = full_data_dict["ScanNet"][str(step_size)]["forward"][str(video_length)][f"scene_{scene_idx}"]
+                    random.shuffle(example_list_tmp)
+                    forward_example_list += example_list_tmp[:min(len(example_list_tmp), 5)]
+                    # forward_example_list += full_data_dict["ScanNet"][str(step_size)]["forward"][str(video_length)][f"scene_{scene_idx}"]
                 except:
                     pass
                 # backward examples
                 try:
-                    reverse_example_list += full_data_dict["NuScenes"][str(step_size)]["backward"][str(video_length)][f"scene_{scene_idx}"]
+                    example_list_tmp = full_data_dict["NuScenes"][str(step_size)]["backward"][str(video_length)][f"scene_{scene_idx}"]
+                    random.shuffle(example_list_tmp)
+                    reverse_example_list += example_list_tmp[:min(len(example_list_tmp), 5)]
+                    # reverse_example_list += full_data_dict["NuScenes"][str(step_size)]["backward"][str(video_length)][f"scene_{scene_idx}"]
                 except:
                     pass
                 try:
-                    reverse_example_list += full_data_dict["ScanNet"][str(step_size)]["backward"][str(video_length)][f"scene_{scene_idx}"]
+                    example_list_tmp = full_data_dict["ScanNet"][str(step_size)]["backward"][str(video_length)][f"scene_{scene_idx}"]
+                    random.shuffle(example_list_tmp)
+                    reverse_example_list += example_list_tmp[:min(len(example_list_tmp), 5)]
+                    # reverse_example_list += full_data_dict["ScanNet"][str(step_size)]["backward"][str(video_length)][f"scene_{scene_idx}"]
                 except:
                     pass
                 
@@ -1207,9 +1222,8 @@ if __name__ == "__main__":
         download_dir=model_path,
         tensor_parallel_size=torch.cuda.device_count(),
         max_model_len=4096,
-        gpu_memory_utilization=0.8,
-        limit_mm_per_prompt={"image": 10, "video": 10},
-        dtype="float16"
+        gpu_memory_utilization=0.85,
+        limit_mm_per_prompt={"image": 10, "video": 10}
     )
 
     sampling_params = SamplingParams(
