@@ -41,8 +41,46 @@ def ask_qwen(model, processor, messages):
 
     return output_text
 
+
+def downsample_num_frames(image_dirs, max_num_frames):
+    """
+    Downsample a list of image directories to meet max_num_frames requirement.
+
+    Args:
+        image_dirs (list): List of image directory paths
+        max_num_frames (int): Maximum number of frames to include
+
+    Returns:
+        list: Downsampled list of image directories
+    """
+    total_images = len(image_dirs)
+
+    # If we already have fewer images than the max, return the original list
+    if total_images <= max_num_frames:
+        return image_dirs
+
+    # Calculate the sampling interval
+    # We use float division and then take ceiling to ensure we don't exceed max_num_frames
+    interval = total_images / max_num_frames
+
+    # Use numpy for more precise indexing if available
+    try:
+        # Generate indices using linspace for even distribution
+        indices = np.linspace(0, total_images - 1, max_num_frames, dtype=int)
+        downsampled = [image_dirs[i] for i in indices]
+    except ImportError:
+        # Fallback method if numpy isn't available
+        downsampled = []
+        for i in range(max_num_frames):
+            # Calculate the index to sample
+            idx = min(int(i * interval), total_images - 1)
+            downsampled.append(image_dirs[idx])
+
+    return downsampled
+
+
 def analyze_street_view_qwen(image_directory, question_list, surround=False, total_length=-1, batches=None,
-                             min_pixels=256*28*28, max_pixels=1280*28*28):
+                             min_pixels=256*28*28, max_pixels=1280*28*28, max_num_frames=64):
     """Analyze street view images in a directory and generate spatial data"""
     # Get and sort image paths from frames directory
     if surround and os.path.exists(f"{image_directory}/frames_surround"):
@@ -68,7 +106,8 @@ def analyze_street_view_qwen(image_directory, question_list, surround=False, tot
     image_paths = sorted(image_paths, key=lambda x: int(re.search(r'(\d+)', os.path.basename(x)).group(0)), reverse=True)
     if total_length != -1:
         image_paths = image_paths[:total_length]
-    print(f"\nFound {len(image_paths)} images in {image_directory}")
+    print(f"\nFound {len(image_paths)} images in {image_directory}, downsampling to {max_num_frames} frames for Qwen")
+    image_paths = downsample_num_frames(image_paths, max_num_frames=max_num_frames)
 
     try:
         # Initialize model and tokenizer
