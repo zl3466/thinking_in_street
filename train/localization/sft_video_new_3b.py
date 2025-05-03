@@ -209,7 +209,7 @@ if __name__ == "__main__":
 
     # Collect train and test data with random step size but fixed video length
     # Put NuScenes and ScanNet data together
-    max_video_length = int(os.getenv("MAX_VIDEO_LENGTH"))
+    # video_length = int(os.getenv("VIDEO_LENGTH"))
     ''' Train split: for each scene, choose a random step_size (frame rate) '''
     train_example_list = []
     nusc_scene_count = 0
@@ -225,15 +225,15 @@ if __name__ == "__main__":
             nusc_scene = nusc_scene_list[scene_idx]
             nusc_example_list_forward = train_full_data_dict["NuScenes"]["forward"][nusc_scene]
             nusc_example_list_backward = train_full_data_dict["NuScenes"]["backward"][nusc_scene]
+
             example_video_len = len(nusc_example_list_forward[0]["path"])
-            # only use examples with video length < max_video_length (32 frames for 80g A100 gpu)
-            if example_video_len <= max_video_length:
+            # print(f"nusc scene {scene_idx} video_len: {example_video_len}")
+            if example_video_len <= int(os.getenv("VIDEO_LENGTH")):
                 train_example_list += nusc_example_list_forward 
                 train_example_list += nusc_example_list_backward 
                 nusc_scene_count += 1
                 print(f"nusc scene {scene_idx} video_len: {example_video_len}")
-            # train_example_list += nusc_example_list_forward 
-            # train_example_list += nusc_example_list_backward 
+            
         except:
             print(f"there is a total of {len(nusc_scene_list)} scenes in nusc train dataset, requesting {scene_idx}th, does not exist")
             
@@ -241,14 +241,16 @@ if __name__ == "__main__":
             scannet_scene = scannet_scene_list[scene_idx]
             scannet_example_list_forward = train_full_data_dict["ScanNet"]["forward"][scannet_scene]
             scannet_example_list_backward = train_full_data_dict["ScanNet"]["backward"][scannet_scene]
-            # only use examples with video length < max_video_length (32 frames for 80g A100 gpu)
-            if example_video_len <= max_video_length:
+
+            example_video_len = len(scannet_example_list_forward[0]["path"])
+            # print(f"scannet scene {scene_idx} video_len: {example_video_len}")
+            if example_video_len <= int(os.getenv("VIDEO_LENGTH")):
                 train_example_list += scannet_example_list_forward
                 train_example_list += scannet_example_list_backward
                 scannet_scene_count += 1
                 print(f"scannet scene {scene_idx} video_len: {example_video_len}")
-            # train_example_list += scannet_example_list_forward
-            # train_example_list += scannet_example_list_backward
+
+            
         except:
             print(f"there is a total of {len(scannet_scene_list)} scenes in scannet train dataset, requesting {scene_idx}th, does not exist")
 

@@ -1,16 +1,3 @@
-#!/bin/bash
-#
-#SBATCH --job-name=sft_4
-#SBATCH --output=/scratch/zl3466/github/thinking_in_street/train_result/sft_4.out
-#SBATCH --nodes=1
-#SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=32
-#SBATCH --mem=256GB
-#SBATCH --time=48:00:00
-#SBATCH --gres=gpu:a100:4
-#SBATCH --mail-type=ALL
-#SBATCH --mail-user=zl3466@nyu.edu
-#SBATCH --account=pr_116_tandon_priority
 
 module purge;
 module load anaconda3/2020.07;
@@ -27,27 +14,27 @@ export DATASET_DIR="/vast/zl3466/dataset"
 export EXAMPLE_DIR="/scratch/zl3466/github/thinking_in_street/dataset/examples"
 export TRAIN_SCENE_START=0
 export TRAIN_SCENE_END=100
-export MAX_VIDEO_LENGTH=32
+export VIDEO_LENGTH=4
 
 
-CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node="4" \
+CUDA_VISIBLE_DEVICES=0,1 torchrun --nproc_per_node="2" \
     --nnodes="1" \
     --node_rank="0" \
     --master_addr="127.0.0.1" \
     --master_port="12365" \
-    ./train/localization/sft_video_new.py \
-    --output_dir "./log/Qwen2.5-VL-7B-sft_4" \
-    --model_name_or_path "Qwen/Qwen2.5-VL-7B-Instruct" \
-    --dataset_name "./Video-R1-data/Video-R1-COT-165k.json" \
+    ./train/localization/sft_video_new_3b.py \
+    --output_dir "./log/Qwen2.5-VL-3B-sft" \
+    --model_name_or_path "Qwen/Qwen2.5-VL-3B-Instruct" \
+    --dataset_name "./dataset/examples/sft" \
     --per_device_train_batch_size 1 \
     --gradient_accumulation_steps 2 \
     --learning_rate 1e-6 \
     --logging_steps 1 \
     --bf16 \
     --gradient_checkpointing true \
-    --attn_implementation flash_attention_2 \
+    --attn_implementation sdpa \
     --num_train_epochs 1 \
-    --run_name Qwen2.5-VL-7B-sft_4 \
+    --run_name Qwen2.5-VL-3B-sft \
     --save_steps 300 \
     --max_grad_norm 5 \
     --save_only_model true

@@ -1,7 +1,7 @@
 #!/bin/bash
 #
-#SBATCH --job-name=a100_prepared_0-50
-#SBATCH --output=/scratch/zl3466/github/thinking_in_street/train_result/grpo_a100-16frames_0-50.out
+#SBATCH --job-name=nt_a100_prepared_0-400
+#SBATCH --output=/scratch/zl3466/github/thinking_in_street/train_result/grpo_a100-16frames_0-400_nt.out
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=32
@@ -24,7 +24,7 @@ export DATASET_DIR="/vast/zl3466/dataset"
 export EXAMPLE_DIR="/scratch/zl3466/github/thinking_in_street/dataset/examples"
 # export NUM_TRAIN_SCENE=50
 export TRAIN_SCENE_START=0
-export TRAIN_SCENE_END=50
+export TRAIN_SCENE_END=400
 export VIDEO_LENGTH=16
 
 CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node="4" \
@@ -33,7 +33,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node="4" \
     --master_addr="127.0.0.1" \
     --master_port="12365" \
     ./train/localization/grpo_new_4q.py \
-    --output_dir "./log/Qwen2.5-VL-7B-GRPO-a100-16frames_0-50" \
+    --output_dir "./log/Qwen2.5-VL-7B-GRPO-a100-16frames_0-400_nt" \
     --model_name_or_path "Qwen/Qwen2.5-VL-7B-Instruct" \
     --dataset_name "/vast/zl3466/dataset/NuScenes" \
     --deepspeed "./train/local_scripts/zero3.json" \
@@ -47,13 +47,13 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node="4" \
     --bf16 \
     --logging_steps 1 \
     --gradient_checkpointing true \
-    --temporal true \
+    --temporal false \
     --len_control true \
     --attn_implementation flash_attention_2 \
     --max_pixels 401408 \
     --num_train_epochs 1 \
-    --run_name 7b-a100-4q-16frames_0-50 \
-    --save_steps 200 \
+    --run_name 7b-a100-4q-16frames_0-400_nt \
+    --save_steps 300 \
     --beta 0.04 \
     --max_grad_norm 5 \
     --save_only_model false \

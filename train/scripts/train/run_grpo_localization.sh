@@ -1,32 +1,27 @@
-export DEBUG_MODE="false" # Enable Debug if you want to see the rollout of model during RL
-export LOG_PATH="/scratch/zl3466/github/thinking_in_street/debug_log_3b.txt"
-
-
-# For resume training:  --resume_from_checkpoint Model_Path \
-# Set temporal to choose between T-GRPO and GRPO, and len_control to enable or disable the length control reward.
-
-# Qwen/Qwen2.5-VL-7B-Instruct
-
 module purge;
 module load anaconda3/2020.07;
 module load openmpi/intel/4.0.5;
 source /share/apps/anaconda3/2020.07/etc/profile.d/conda.sh;
 conda activate /scratch/zl3466/env/thinking-in-street/;
 export PATH=/scratch/zl3466/env/thinking-in-street/bin:$PATH;
-export DATASET_DIR="/scratch/zl3466/dataset/NuScenes/train_test"
 cd /scratch/zl3466/github/thinking_in_street;
 
-export NUM_TRAIN_SCENE=10
+export DATASET_DIR="/vast/zl3466/dataset"
+export EXAMPLE_DIR="/scratch/zl3466/github/thinking_in_street/dataset/examples"
+# export NUM_TRAIN_SCENE=50
+export TRAIN_SCENE_START=200
+export TRAIN_SCENE_END=400
+export VIDEO_LENGTH=4
 
 CUDA_VISIBLE_DEVICES=0,1 torchrun --nproc_per_node="2" \
     --nnodes="1" \
     --node_rank="0" \
     --master_addr="127.0.0.1" \
     --master_port="12365" \
-    ./train/localization/grpo_new.py \
-    --output_dir "./log/Qwen2.5-VL-3B-GRPO-3q" \
+    ./train/localization/grpo_new_4q.py \
+    --output_dir "./log/Qwen2.5-VL-3B-GRPO-a100-16frames_0-50" \
     --model_name_or_path "Qwen/Qwen2.5-VL-3B-Instruct" \
-    --dataset_name "/scratch/zl3466/dataset/NuScenes" \
+    --dataset_name "/vast/zl3466/dataset/NuScenes" \
     --deepspeed "./train/local_scripts/zero3.json" \
     --max_prompt_length 16384 \
     --max_completion_length 768 \
@@ -41,11 +36,13 @@ CUDA_VISIBLE_DEVICES=0,1 torchrun --nproc_per_node="2" \
     --temporal true \
     --len_control true \
     --attn_implementation sdpa \
-    --max_pixels 100352 \
+    --max_pixels 200704 \
     --num_train_epochs 1 \
-    --run_name localization-3b-debug \
-    --save_steps 100 \
+    --run_name 3b-a100-4q-16frames_0-50 \
+    --save_steps 200 \
     --beta 0.04 \
     --max_grad_norm 5 \
     --save_only_model false \
+    --resume_from_checkpoint "/scratch/zl3466/github/thinking_in_street/log/Qwen2.5-VL-3B-GRPO-100-rtx8000-sbatch/checkpoint-600" \
     --num_generations 4  # number of outputs G in grpo, reduce it would lead to faster training and smaller memory cost but higher variance  
+    

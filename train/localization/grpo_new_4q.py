@@ -91,10 +91,12 @@ def main(script_args, training_args, model_args):
 
     # get same number of scenes for NuScenes and ScanNet
     # num_train_scene = int(os.getenv("NUM_TRAIN_SCENE"))
+    # train_scene is scene 0-400
     train_scene_start = int(os.getenv("TRAIN_SCENE_START"))
     train_scene_end = int(os.getenv("TRAIN_SCENE_END"))
-    test_scene_start = train_scene_start // 5
-    test_scene_end = train_scene_end // 5
+    # test_scene is scene 400-500
+    test_scene_start = train_scene_start // 4
+    test_scene_end = train_scene_end // 4
 
     # num_test_scene = min(150, num_train_scene // 5)
     
@@ -139,33 +141,44 @@ def main(script_args, training_args, model_args):
     #     test_example_list += scannet_example_list
 
     train_example_list = []
+    step_size = 1
     for scene_idx in range(train_scene_start, train_scene_end):
-        step_size = random.randint(1, 11)
+        if step_size > 10:
+            step_size = 1
+
+        # step_size = random.randint(1, 10)
         nusc_scene_list = list(train_full_data_dict["NuScenes"][str(step_size)]["forward"][str(video_length)].keys())
         scannet_scene_list = list(train_full_data_dict["ScanNet"][str(step_size)]["forward"][str(video_length)].keys())
 
         nusc_scene_list.sort(key=lambda f: int(''.join(filter(str.isdigit, f))))
         scannet_scene_list.sort(key=lambda f: int(''.join(filter(str.isdigit, f))))
 
-        # get the set of examples for specified video length
+        # get the set of examples for specified video length, we keep max 20 examples for each scene
         try:
             nusc_scene = nusc_scene_list[scene_idx]
             nusc_example_list = train_full_data_dict["NuScenes"][str(step_size)]["forward"][str(video_length)][nusc_scene]
-            train_example_list += nusc_example_list 
+            print(f"NUSC scene {scene_idx} step_size {step_size}: {len(nusc_example_list)}")
+            train_example_list += nusc_example_list[:min(len(nusc_example_list), 30)] 
         except:
             print(f"there is a total of {nusc_scene_list} scenes in nusc train dataset, requesting {scene_idx}th, does not exist")
             
         try:
             scannet_scene = scannet_scene_list[scene_idx]
             scannet_example_list = train_full_data_dict["ScanNet"][str(step_size)]["forward"][str(video_length)][scannet_scene]
-            train_example_list += scannet_example_list
+            train_example_list += scannet_example_list[:min(len(scannet_example_list), 30)]
+            
+            print(f"ScanNet scene {scene_idx} step_size {step_size}: {len(scannet_example_list)}")
         except:
             print(f"there is a total of {scannet_scene_list} scenes in scannet train dataset, requesting {scene_idx}th, does not exist")
+        step_size += 1
 
     ''' Test split: for each scene, choose a random step_size (frame rate) '''
     test_example_list = []
+    step_size = 1
     for scene_idx in range(test_scene_start, test_scene_end):
-        step_size = random.randint(1, 11)
+        if step_size > 10:
+            step_size = 1
+        # step_size = random.randint(1, 10)
         nusc_scene_list = list(test_full_data_dict["NuScenes"][str(step_size)]["forward"][str(video_length)].keys())
         scannet_scene_list = list(test_full_data_dict["ScanNet"][str(step_size)]["forward"][str(video_length)].keys())
 
@@ -176,19 +189,21 @@ def main(script_args, training_args, model_args):
         try:
             nusc_scene = nusc_scene_list[scene_idx]
             nusc_example_list = test_full_data_dict["NuScenes"][str(step_size)]["forward"][str(video_length)][nusc_scene]
-            test_example_list += nusc_example_list 
+            test_example_list += nusc_example_list[:min(len(nusc_example_list), 30)]
         except:
             print(f"there is a total of {nusc_scene_list} scenes in nusc test dataset, requesting {scene_idx}th, does not exist")
 
         try:
             scannet_scene = scannet_scene_list[scene_idx]
             scannet_example_list = test_full_data_dict["ScanNet"][str(step_size)]["forward"][str(video_length)][scannet_scene]
-            test_example_list += scannet_example_list
+            test_example_list += scannet_example_list[:min(len(scannet_example_list), 30)]
         except:
             print(f"there is a total of {scannet_scene_list} scenes in scannet test dataset, requesting {scene_idx}th, does not exist")
+        step_size += 1
 
 
     ''' =========================== shuffle train and test examples ============================= '''
+    print(f"using {len(train_example_list)} train examples, {len(test_example_list)} test examples")
     random.shuffle(train_example_list)
     random.shuffle(test_example_list)
 
@@ -221,6 +236,7 @@ def main(script_args, training_args, model_args):
     )
 
     if training_args.resume_from_checkpoint is not None:
+        print(f"resuming from checkpoint {training_args.resume_from_checkpoint}")
         checkpoint = training_args.resume_from_checkpoint
         trainer.train(resume_from_checkpoint=checkpoint)
     else:
