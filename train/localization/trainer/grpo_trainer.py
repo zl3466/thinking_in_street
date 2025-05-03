@@ -70,11 +70,11 @@ RewardFunc = Union[str, PreTrainedModel, Callable[[list, list], list[float]]]
 
 # helper funcs for calculating the reverse-play reward
 def extract_answer(text):
-            pattern = r'<answer>\s*(.*?)\s*</answer>'
-            match = re.search(pattern, text, re.DOTALL)
-            if match:
-                return match.group(1).strip()
-            return ""
+    pattern = r'<answer>\s*(.*?)\s*</answer>'
+    match = re.search(pattern, text, re.DOTALL)
+    if match:
+        return match.group(1).strip()
+    return ""
 
 def sigmoid(x, a=1, b=0):
     return 1 / (1 + math.exp(a * (-x + b)))
