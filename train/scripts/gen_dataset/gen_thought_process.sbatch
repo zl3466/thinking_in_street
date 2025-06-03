@@ -6,7 +6,7 @@
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=32
 #SBATCH --mem=256GB
-#SBATCH --time=48:00:00
+#SBATCH --time=12:00:00
 #SBATCH --gres=gpu:a100:4
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=zl3466@nyu.edu
@@ -23,8 +23,8 @@ export VLLM_WORKER_MULTIPROC_METHOD=spawn
 
 python ./generate_dataset/_2_generate_thought_process.py \
     --example_dir "/scratch/zl3466/github/thinking_in_street/dataset/examples" \
-    --out_dir "/scratch/zl3466/github/thinking_in_street/dataset/examples/cold_start" \
+    --out_dir "/scratch/zl3466/github/thinking_in_street/dataset/examples/sft_200" \
     --scene_start 500 \
-    --scene_end 600 \
+    --scene_end 700 \
     --model_name "Qwen/Qwen2.5-VL-72B-Instruct" \
     --model_path "/scratch/zl3466/github/thinking_in_street/model/Qwen"

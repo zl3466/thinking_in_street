@@ -869,16 +869,32 @@ class Qwen2VLGRPOTrainer(Trainer):
         
         gathered_rewards = self.accelerator.gather_for_metrics(rewards)
         
-        num_devices = gathered_rewards.size(0) // self.num_generations 
-        rewards_per_device = gathered_rewards.view(num_devices, self.num_generations)
-        wrong_devices = (rewards_per_device <= 1).all(dim=1)
-        wrong_ratio = wrong_devices.sum().item() / num_devices
+        # num_devices = gathered_rewards.size(0) // self.num_generations 
+        # rewards_per_device = gathered_rewards.view(num_devices, self.num_generations)
+        # wrong_devices = (rewards_per_device <= 1).all(dim=1)
+        # wrong_ratio = wrong_devices.sum().item() / num_devices
         
-        if self.temporal:
-            correct_devices = (rewards_per_device >= 3).all(dim=1)
+        # if self.temporal:
+        #     correct_devices = (rewards_per_device >= 3).all(dim=1)
+        # else:
+        #     correct_devices = (rewards_per_device >= 2).all(dim=1)
+        # correct_ratio = correct_devices.sum().item() / num_devices
+        num_devices = gathered_rewards.size(0) // self.num_generations
+        if num_devices == 0:
+            # Not enough samples for a full batch, handle specially
+            wrong_ratio = 0.0
+            correct_ratio = 0.0
         else:
-            correct_devices = (rewards_per_device >= 2).all(dim=1)
-        correct_ratio = correct_devices.sum().item() / num_devices
+            rewards_per_device = gathered_rewards.view(num_devices, self.num_generations)
+            wrong_devices = (rewards_per_device <= 1).all(dim=1)
+            wrong_ratio = wrong_devices.sum().item() / max(num_devices, 1)  # Avoid division by zero
+            
+            if self.temporal:
+                correct_devices = (rewards_per_device >= 3).all(dim=1)
+            else:
+                correct_devices = (rewards_per_device >= 2).all(dim=1)
+            correct_ratio = correct_devices.sum().item() / max(num_devices, 1)  # Avoid division by zero
+ 
         
         self._metrics["all_wrong"].append(wrong_ratio)
         self._metrics["all_correct"].append(correct_ratio)

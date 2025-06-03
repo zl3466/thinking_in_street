@@ -6,7 +6,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import random
 from utils.train_utils import *
 import argparse
-from nuscenes.nuscenes import NuScenes
+
 
 def main(args):
     # Load dataset
@@ -19,11 +19,11 @@ def main(args):
 
     video_length_list = [2, 4, 6, 8, 10, 12, 16, 20, 24, 28, 32]
 
-    ''' =========================== load NuScenes dataset ============================= '''
-    nusc_data_path = f"{root_path}/NuScenes/train_test"
-    nusc_scene_idx_list = []
+    ''' =========================== load Waymo dataset ============================= '''
+    waymo_data_path = f"{root_path}/Waymo"
+    waymo_scene_idx_list = []
     for i in range(scene_start, scene_end):
-        nusc_scene_idx_list.append(i)
+        waymo_scene_idx_list.append(i)
     if "test" in split:
         nusc = NuScenes(version="v1.0-test", dataroot=nusc_data_path, verbose=True)
     else:
@@ -59,7 +59,7 @@ def main(args):
         print(f"Processing NuScenes train dataset into examples...")
         for scene_idx in tqdm(nusc_scene_idx_list, desc=f"Processing nusc scenes, step_sze {step_size}"):
             # print(f"NUSC, step size: {step_size}")
-            dataset = NuScenesDataset(data_path=nusc_data_path,
+            dataset = NuScenesDataset(data_path=waymo_data_path,
                                       meta_out_path="",
                                       num_cams=num_cam,
                                       nusc=nusc,

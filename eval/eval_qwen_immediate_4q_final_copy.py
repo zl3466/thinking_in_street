@@ -717,7 +717,7 @@ def eval_qwen(data, llm, sampling_params):
     messages = []
     gt_list = []
     q_type_list = []
-
+    q_sub_list = []
     for example in data:
 
         dataset_name = example["dataset_name"]
@@ -752,6 +752,7 @@ def eval_qwen(data, llm, sampling_params):
         messages.append(msg)
         gt_list.append(example["solution"])
         q_type_list.append(example["problem_type"])
+        q_sub_list.append(example["problem_subject"])
 
 
     prompts = [processor.apply_chat_template(msg, tokenize=False, add_generation_prompt=True) for msg in
@@ -788,6 +789,8 @@ def eval_qwen(data, llm, sampling_params):
 
     format_score_list = []
     accuracy_score_list = []
+    format_score_dict = {"general direction": [], "heading": [], "displacement": [], "transformation": []}
+    accuracy_score_dict = {"general direction": [], "heading": [], "displacement": [], "transformation": []}
     # for i in tqdm(range(len(messages)), desc="generating thought processes for a scene"):
     for i in range(len(messages)):
         gt_text = gt_list[i]
@@ -799,10 +802,23 @@ def eval_qwen(data, llm, sampling_params):
         format_score_list.append(format_score)
         accuracy_score_list.append(accuracy_score)
 
+        format_score_dict[q_sub_list[i]].append(format_score)
+        accuracy_score_dict[q_sub_list[i]].append(accuracy_score)
+
+    print(accuracy_score_dict)
     final_format_score = sum(format_score_list) / len(format_score_list)
     final_accuracy_score = sum(accuracy_score_list) / len(format_score_list)
+    for subject in accuracy_score_dict.keys():
+        if len(format_score_dict[subject]) > 0:
+            format_score_dict[subject] = sum(format_score_dict[subject]) / len(format_score_dict[subject])
+        else:
+            format_score_dict[subject] = -1
+        if len(accuracy_score_dict[subject]) > 0:
+            accuracy_score_dict[subject] = sum(accuracy_score_dict[subject]) / len(accuracy_score_dict[subject])
+        else:
+            accuracy_score_dict[subject] = -1
 
-    return final_format_score, final_accuracy_score
+    return final_format_score, final_accuracy_score, format_score_dict, accuracy_score_dict
 
 
 SYSTEM_PROMPT = (
@@ -1063,7 +1079,7 @@ def main(args):
     len_eval_score_dict = {}
     full_score_dict = {}
  
-    total_score_dict = {"forward": [], "reverse": []}
+    total_score_dict = {"forward": [], "reverse": [], "general direction": [], "heading": [], "displacement": [], "transformation": []}
     for step_size in range(1, 11, 2):
         for scene_idx in tqdm(range(scene_start, scene_end), desc="Evaluating each scene"):
             forward_example_list = []
@@ -1114,12 +1130,13 @@ def main(args):
                     continue
 
                 # shuffle examples
-                random.shuffle(forward_example_list)
-                random.shuffle(reverse_example_list)
+                # random.shuffle(forward_example_list)
+                # random.shuffle(reverse_example_list)
+                print(f"evaluating {len(forward_example_list)} forward examples, {len(reverse_example_list)} reverse examples")
 
                 # evaluate this scene
-                forward_format_score, forward_accuracy_score = eval_qwen(forward_example_list, llm, sampling_params)
-                reverse_format_score, reverse_accuracy_score = eval_qwen(reverse_example_list, llm, sampling_params)
+                forward_format_score, forward_accuracy_score, format_score_dict, accuracy_score_dict = eval_qwen(forward_example_list, llm, sampling_params)
+                reverse_format_score, reverse_accuracy_score, rev_format_score_dict, rev_accuracy_score_dict = eval_qwen(reverse_example_list, llm, sampling_params)
 
                 # save scores according to the step_size used
                 if str(step_size) not in step_eval_score_dict.keys():
@@ -1159,6 +1176,12 @@ def main(args):
                 # save to total score
                 total_score_dict["forward"].append([forward_format_score, forward_accuracy_score])
                 total_score_dict["reverse"].append([reverse_format_score, reverse_accuracy_score])
+                for subject in format_score_dict.keys():
+                    if format_score_dict[subject] != -1:
+                        total_score_dict[subject].append([format_score_dict[subject], accuracy_score_dict[subject]])
+                    if rev_format_score_dict[subject] != -1:
+                        total_score_dict[subject].append([rev_format_score_dict[subject], rev_accuracy_score_dict[subject]])
+
         
     for str_step_size in step_eval_score_dict.keys():
         forward_scores_arr = np.array(step_eval_score_dict[str_step_size]["forward"])
@@ -1183,6 +1206,8 @@ def main(args):
 
     total_score_dict["forward"] = np.mean(np.array(total_score_dict["forward"]), axis=0).tolist()
     total_score_dict["reverse"] = np.mean(np.array(total_score_dict["reverse"]), axis=0).tolist()
+    for subject in format_score_dict.keys():
+        total_score_dict[subject] = np.mean(np.array(total_score_dict[subject]), axis=0).tolist()
 
     result_dict = {
         "total_score": total_score_dict,
@@ -1192,9 +1217,10 @@ def main(args):
     }
     
     print(f"forward average score: {total_score_dict['forward']}; reverse average score: {total_score_dict['reverse']}")
+    print(f"total score subjects: {total_score_dict}")
 
-    os.makedirs("./tmp", exist_ok=True)
-    with open("./tmp/step_eval_example_dict.json", "w") as outfile:
+    os.makedirs(f"./tmp/{args.model_path.split('/')[-2]}", exist_ok=True)
+    with open(f"./tmp/{args.model_path.split('/')[-2]}/step_eval_example_dict.json", "w") as outfile:
         json.dump(result_dict, outfile, indent=4)
     plot_scores_vs_step_size(result_dict, output_filename=f"./tmp/figure.png")
 
@@ -1215,15 +1241,28 @@ if __name__ == "__main__":
     # MODEL_PATH = "Qwen/Qwen2.5-VL-7B-Instruct"
     base_model_name = args.base_model
     model_path = args.model_path
-    finetuned_model_name = f"{args.model_path}/{args.finetuned_model}"
+    if args.finetuned_model == args.base_model:
+        finetuned_model_name = f"Qwen/{args.finetuned_model}"
+    else:
+        finetuned_model_name = f"{args.model_path}/{args.finetuned_model}"
 
+    # llm = LLM(
+    #     model=finetuned_model_name,
+    #     download_dir=model_path,
+    #     tensor_parallel_size=torch.cuda.device_count(),
+    #     max_model_len=4096,
+    #     gpu_memory_utilization=0.85,
+    #     limit_mm_per_prompt={"image": 10, "video": 10},
+    #     dtype="float16"
+    # )
     llm = LLM(
         model=finetuned_model_name,
         download_dir=model_path,
         tensor_parallel_size=torch.cuda.device_count(),
         max_model_len=4096,
         gpu_memory_utilization=0.85,
-        limit_mm_per_prompt={"image": 10, "video": 10}
+        limit_mm_per_prompt={"image": 10, "video": 10},
+        dtype="float16"
     )
 
     sampling_params = SamplingParams(

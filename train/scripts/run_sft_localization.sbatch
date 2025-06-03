@@ -1,7 +1,7 @@
 #!/bin/bash
 #
-#SBATCH --job-name=sft_4
-#SBATCH --output=/scratch/zl3466/github/thinking_in_street/train_result/sft_4.out
+#SBATCH --job-name=sft
+#SBATCH --output=/scratch/zl3466/github/thinking_in_street/train_result/sft.out
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=32
@@ -26,8 +26,8 @@ export LOG_PATH="./debug_log_2b.txt"
 export DATASET_DIR="/vast/zl3466/dataset"
 export EXAMPLE_DIR="/scratch/zl3466/github/thinking_in_street/dataset/examples"
 export TRAIN_SCENE_START=0
-export TRAIN_SCENE_END=100
-export MAX_VIDEO_LENGTH=32
+export TRAIN_SCENE_END=200
+export MAX_VIDEO_LENGTH=16
 
 
 CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node="4" \
@@ -36,18 +36,20 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node="4" \
     --master_addr="127.0.0.1" \
     --master_port="12365" \
     ./train/localization/sft_video_new.py \
-    --output_dir "./log/Qwen2.5-VL-7B-sft_4" \
+    --output_dir "./log/Qwen2.5-VL-7B-sft" \
     --model_name_or_path "Qwen/Qwen2.5-VL-7B-Instruct" \
     --dataset_name "./Video-R1-data/Video-R1-COT-165k.json" \
+    --deepspeed "./train/local_scripts/zero2.json" \
     --per_device_train_batch_size 1 \
     --gradient_accumulation_steps 2 \
     --learning_rate 1e-6 \
     --logging_steps 1 \
     --bf16 \
+    --report_to wandb \
     --gradient_checkpointing true \
     --attn_implementation flash_attention_2 \
     --num_train_epochs 1 \
-    --run_name Qwen2.5-VL-7B-sft_4 \
-    --save_steps 300 \
+    --run_name Qwen2.5-VL-7B-sft \
+    --save_steps 500 \
     --max_grad_norm 5 \
-    --save_only_model true
+    --save_only_model false

@@ -258,7 +258,12 @@ if __name__ == "__main__":
     dataset = DatasetDict({
         "train": Dataset.from_list(train_example_list)
     })
-    prepared_dataset = [prepare_dataset_sft(example) for example in dataset['train']]
+
+    prepared_dataset = []
+    for example in dataset['train']:
+        if example["select"]:
+            prepared_dataset.append(prepare_dataset_sft(example))
+    # prepared_dataset = [prepare_dataset_sft(example) for example in dataset['train']]
     
     ''' ========================= setup model ========================= '''
     torch_dtype = (

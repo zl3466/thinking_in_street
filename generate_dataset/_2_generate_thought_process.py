@@ -89,7 +89,7 @@ def gen_thought_process(data, llm, sampling_params):
 
     prompts = [processor.apply_chat_template(msg, tokenize=False, add_generation_prompt=True) for msg in
                messages]
-    # print(f"messages: \n{messages}\n")
+    print(f"messages: \n{messages}\n")
     # print(f"Prompts: \n{prompts}\n")
     image_inputs, video_inputs, video_kwargs = process_vision_info(messages, return_video_kwargs=True)
 
@@ -122,7 +122,7 @@ def gen_thought_process(data, llm, sampling_params):
     # except Exception as e:
     #     output_text = ['<answer>error</answer>']
 
-    for i in tqdm(range(len(messages)), desc="generating thought processes for a scene"):
+    for i in range(len(messages)):
         think_chain = extract_think(output_text[i])
         if think_chain:
             data[i]["process"] = f"<think>{think_chain}</think>"
@@ -143,8 +143,8 @@ def main(args):
     full_data_dict = {"NuScenes": {}, "ScanNet": {}}
     for step_size in range(1, 11):
 
-        full_data_dict["NuScenes"][str(step_size)] = json.load(open(f"{example_dir}/cold_start/step_{step_size}/nusc_examples.json"))
-        full_data_dict["ScanNet"][str(step_size)] = json.load(open(f"{example_dir}/cold_start/step_{step_size}/scannet_examples.json"))
+        full_data_dict["NuScenes"][str(step_size)] = json.load(open(f"{example_dir}/sft/step_{step_size}/nusc_examples.json"))
+        full_data_dict["ScanNet"][str(step_size)] = json.load(open(f"{example_dir}/sft/step_{step_size}/scannet_examples.json"))
 
     scene_start = args.scene_start
     scene_end = args.scene_end
@@ -164,7 +164,7 @@ def main(args):
     else:
         scannet_result_dict = {"forward": {}, "backward": {}}
     
-    for scene_idx in range(scene_start, scene_end):
+    for scene_idx in tqdm(range(scene_start, scene_end)):
         success = False
         while not success:
             # random step size (frame rate) and video length (number of frames)
