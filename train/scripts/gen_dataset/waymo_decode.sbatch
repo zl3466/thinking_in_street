@@ -1,12 +1,12 @@
 #!/bin/bash
 #
 #SBATCH --job-name=decode_scannet
-#SBATCH --output=/scratch/zl3466/github/thinking_in_street/train_result/download_waymo.out
+#SBATCH --output=/scratch/zl3466/github/thinking_in_street/train_result/waymo_decode.out
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=32
 #SBATCH --mem=64GB
-#SBATCH --time=48:00:00
+#SBATCH --time=8:00:00
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=zl3466@nyu.edu
 #SBATCH --account=pr_116_tandon_priority

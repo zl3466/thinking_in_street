@@ -62,6 +62,8 @@ def gen_thought_process(data, llm, sampling_params):
             dataset_dir_specific = "NuScenes/train_test"
         elif dataset_name == "ScanNet":
             dataset_dir_specific = "ScanNet/decoded"
+        elif dataset_name == "Waymo":
+            dataset_dir_specific = "Waymo"
         else:
             return RuntimeError("dataset name not supported")
 
@@ -118,7 +120,6 @@ def gen_thought_process(data, llm, sampling_params):
 
     outputs = llm.generate(llm_inputs, sampling_params=sampling_params)
     output_text = [out.outputs[0].text for out in outputs]
-
     # except Exception as e:
     #     output_text = ['<answer>error</answer>']
 
@@ -140,80 +141,140 @@ def main(args):
     out_dir = args.out_dir
     os.makedirs(out_dir, exist_ok=True)
 
-    full_data_dict = {"NuScenes": {}, "ScanNet": {}}
-    for step_size in range(1, 11):
+    full_data_dict = {"NuScenes": {}, "ScanNet": {}, "Waymo": {}}
 
+    
+    for step_size in range(1, 11):
         full_data_dict["NuScenes"][str(step_size)] = json.load(open(f"{example_dir}/sft/step_{step_size}/nusc_examples.json"))
         full_data_dict["ScanNet"][str(step_size)] = json.load(open(f"{example_dir}/sft/step_{step_size}/scannet_examples.json"))
+        full_data_dict["Waymo"][str(step_size)] = json.load(open(f"{example_dir}/sft/step_{step_size}/waymo_examples.json"))
 
-    scene_start = args.scene_start
-    scene_end = args.scene_end
+    # scene_start = args.scene_start
+    # scene_end = args.scene_end
+    nusc_sft_idx_list = list(range(0, 100))
+    scannet_sft_idx_list = list(range(0, 150))
+    waymo_sft_idx_list = list(range(0, 100))
 
     # json file to save the examples with thought process filled
     nusc_json = f"{out_dir}/nusc_thought_process.json"
     scannet_json = f"{out_dir}/scannet_thought_process.json"
+    waymo_json = f"{out_dir}/waymo_thought_process.json"
 
     # add to existing json if the json already exists
-    if os.path.exists(nusc_json):
-        nusc_result_dict = json.load(open(nusc_json))
-    else:
-        nusc_result_dict = {"forward": {}, "backward": {}}
+    # if os.path.exists(nusc_json):
+    #     nusc_result_dict = json.load(open(nusc_json))
+    # else:
+    #     nusc_result_dict = {"forward": {}, "backward": {}}
 
-    if os.path.exists(nusc_json):
-        scannet_result_dict = json.load(open(scannet_json))
-    else:
-        scannet_result_dict = {"forward": {}, "backward": {}}
+    # if os.path.exists(scannet_json):
+    #     scannet_result_dict = json.load(open(scannet_json))
+    # else:
+    #     scannet_result_dict = {"forward": {}, "backward": {}}
+
+    nusc_result_dict = {"forward": {}, "backward": {}}
+    scannet_result_dict = {"forward": {}, "backward": {}}
+    waymo_result_dict = {"forward": {}, "backward": {}}
     
-    for scene_idx in tqdm(range(scene_start, scene_end)):
+    # ==================================== NuScenes set ====================================
+    for scene_idx in tqdm(nusc_sft_idx_list, desc="NuScenes"):
         success = False
         while not success:
-            # random step size (frame rate) and video length (number of frames)
+            # random step size (frame rate) and video length (number of frames) for each scene
             step_size = random.randint(1, 10)
             video_length = random.choice(video_length_list)
 
             print(f"Try using scene {scene_idx}, step {step_size}, video len {video_length}")
-            # print(full_data_dict["NuScenes"][str(step_size)]["forward"][str(video_length)])
             
             try:
                 # forward examples
                 nusc_example_list = full_data_dict["NuScenes"][str(step_size)]["forward"][str(video_length)][f"scene_{scene_idx}"]
-                scannet_example_list = full_data_dict["ScanNet"][str(step_size)]["forward"][str(video_length)][f"scene_{scene_idx}"]
-
                 # backward examples
                 nusc_backward_example_list = full_data_dict["NuScenes"][str(step_size)]["backward"][str(video_length)][f"scene_{scene_idx}"]
-                scannet_backward_example_list = full_data_dict["ScanNet"][str(step_size)]["backward"][str(video_length)][f"scene_{scene_idx}"]
-
                 success = True
             except:
-                print(f"Data load failed, nusc or scannet not enough image for step {step_size} len {video_length} combo")
+                print(f"Data load failed, nusc not enough image for step {step_size} len {video_length} combo")
                 continue
-
-        
 
         # generate thought process for forward examples
         filled_example_list = gen_thought_process(nusc_example_list, llm, sampling_params)
         nusc_result_dict["forward"][f"scene_{scene_idx}"] = filled_example_list
-        filled_example_list = gen_thought_process(scannet_example_list, llm, sampling_params)
-        scannet_result_dict["forward"][f"scene_{scene_idx}"] = filled_example_list
         # generate thought process for backward examples
         filled_example_list = gen_thought_process(nusc_backward_example_list, llm, sampling_params)
         nusc_result_dict["backward"][f"scene_{scene_idx}"] = filled_example_list
-        filled_example_list = gen_thought_process(scannet_backward_example_list, llm, sampling_params)
-        scannet_result_dict["backward"][f"scene_{scene_idx}"] = filled_example_list
 
         # save results for this scene
         with open(nusc_json, 'w') as f:
             json.dump(nusc_result_dict, f, indent=4)
+
+    # ==================================== ScanNet set ====================================
+    for scene_idx in tqdm(scannet_sft_idx_list, desc="ScanNet"):
+        success = False
+        while not success:
+            # random step size (frame rate) and video length (number of frames) for each scene
+            step_size = random.randint(1, 10)
+            video_length = random.choice(video_length_list)
+
+            print(f"Try using scene {scene_idx}, step {step_size}, video len {video_length}")
+            
+            try:
+                # forward examples
+                scannet_example_list = full_data_dict["ScanNet"][str(step_size)]["forward"][str(video_length)][f"scene_{scene_idx}"]
+                # backward examples
+                scannet_backward_example_list = full_data_dict["ScanNet"][str(step_size)]["backward"][str(video_length)][f"scene_{scene_idx}"]
+                success = True
+            except:
+                print(f"Data load failed, scannet not enough image for step {step_size} len {video_length} combo")
+                continue
+
+        # generate thought process for forward examples
+        filled_example_list = gen_thought_process(scannet_example_list, llm, sampling_params)
+        scannet_result_dict["forward"][f"scene_{scene_idx}"] = filled_example_list
+        # generate thought process for backward examples
+        filled_example_list = gen_thought_process(scannet_backward_example_list, llm, sampling_params)
+        scannet_result_dict["backward"][f"scene_{scene_idx}"] = filled_example_list
+
+        # save results for this scene
         with open(scannet_json, 'w') as f:
             json.dump(scannet_result_dict, f, indent=4)
 
+    # ==================================== Waymo set ====================================
+    for scene_idx in tqdm(waymo_sft_idx_list, desc="Waymo"):
+        success = False
+        while not success:
+            # random step size (frame rate) and video length (number of frames) for each scene
+            step_size = random.randint(1, 10)
+            video_length = random.choice(video_length_list)
 
+            print(f"Try using scene {scene_idx}, step {step_size}, video len {video_length}")
+            
+            try:
+                # forward examples
+                waymo_example_list = full_data_dict["Waymo"][str(step_size)]["forward"][str(video_length)][f"scene_{scene_idx}"]
+                # backward examples
+                waymo_backward_example_list = full_data_dict["Waymo"][str(step_size)]["backward"][str(video_length)][f"scene_{scene_idx}"]
+                success = True
+            except:
+                print(f"Data load failed, waymo not enough image for step {step_size} len {video_length} combo")
+                continue
+
+        # generate thought process for forward examples
+        filled_example_list = gen_thought_process(waymo_example_list, llm, sampling_params)
+        waymo_result_dict["forward"][f"scene_{scene_idx}"] = filled_example_list
+        # generate thought process for backward examples
+        filled_example_list = gen_thought_process(waymo_backward_example_list, llm, sampling_params)
+        waymo_result_dict["backward"][f"scene_{scene_idx}"] = filled_example_list
+
+        # save results for this scene
+        with open(waymo_json, 'w') as f:
+            json.dump(waymo_result_dict, f, indent=4)
+
+        
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generate thought process from NuScenes with Gemini.")
     parser.add_argument("--example_dir", type=str)
     parser.add_argument("--out_dir", type=str)
-    parser.add_argument("--scene_start", type=int, default=500)
-    parser.add_argument("--scene_end", type=int, default=600)
+    # parser.add_argument("--scene_start", type=int, default=500)
+    # parser.add_argument("--scene_end", type=int, default=600)
     parser.add_argument("--model_name", type=str)
     parser.add_argument("--model_path", type=str)
     
@@ -227,7 +288,7 @@ if __name__ == "__main__":
         model=model_name,
         download_dir=model_path,
         tensor_parallel_size=torch.cuda.device_count(),
-        max_model_len=4096,
+        max_model_len=8192,
         gpu_memory_utilization=0.8,
         limit_mm_per_prompt={"image": 10, "video": 10}
     )

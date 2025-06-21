@@ -632,6 +632,7 @@ class WaymoProcessor(object):
         ]
 
         self.load_dir = load_dir
+        self.prefix = prefix
         self.save_dir = f"{save_dir}/{prefix}"
         self.workers = int(workers)
         self.tfrecord_pathnames = [
@@ -642,7 +643,7 @@ class WaymoProcessor(object):
 
     def convert(self):
         """Convert action."""
-        print("Start converting ...")
+        print(f"Start converting {len(self)} {self.prefix} scenes ...")
         if self.process_id_list is None:
             id_list = range(len(self))
         else:
@@ -660,7 +661,7 @@ class WaymoProcessor(object):
         dataset = tf.data.TFRecordDataset(pathname, compression_type="")
         num_frames = sum(1 for _ in dataset)
         for frame_idx, data in enumerate(
-            tqdm(dataset, desc=f"File {file_idx}", total=num_frames, dynamic_ncols=True)
+            tqdm(dataset, desc=f"{self.prefix} File {file_idx}", total=num_frames, dynamic_ncols=True)
         ):
             frame = dataset_pb2.Frame()
             frame.ParseFromString(bytes(data.numpy()))
@@ -867,7 +868,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--num_scenes",
         type=int,
-        default=200,
+        default=None,
         help="number of scenes to be processed",
     )
     parser.add_argument(

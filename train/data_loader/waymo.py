@@ -6,9 +6,9 @@ import numpy as np
 import torch
 import json
 
-from datasets.base.scene_dataset import SceneDataset
 from scipy.spatial.transform import Rotation as R
 from utils.qwen_utils import NumpyEncoder
+
 logger = logging.getLogger()
 
 
@@ -19,18 +19,19 @@ class WaymoDataset():
     )
 
     def __init__(
-        self,
-        data_path: str,
-        meta_out_path: str,
-        num_cams: int = 1,
-        split: str = 'training',
-        scene_idx: int = 0,
-        start_timestep: int = 0,
-        end_timestep: int = -1,
-        save_meta=True
+            self,
+            data_path: str,
+            meta_out_path: str,
+            num_cams: int = 1,
+            split: str = 'training',
+            scene_idx: int = 0,
+            start_timestep: int = 0,
+            end_timestep: int = -1,
+            save_meta=True
     ):
         logger.info("Loading new Waymo dataset.")
-        self.data_path = data_path
+        self.data_path_base = data_path
+        self.data_path = f"{data_path}/{split}"
         self.meta_out_path = meta_out_path
         self.num_cams = num_cams
         self.split = split
@@ -43,11 +44,10 @@ class WaymoDataset():
         self.create_all_filelist()
         self.load_calibrations()
 
-
     def create_or_load_metas(self):
         # ---- define `camera list ---- #
         self.camera_list = ["CAM_FRONT"]
-        
+
         if os.path.exists(self.meta_out_path):
             # print(self.meta_out_path)
             with open(self.meta_out_path, "r") as f:
@@ -135,13 +135,11 @@ class WaymoDataset():
             meta_dict[camera]["ego_pose_original"].append({"rotation": quat_wxyz, "translation": translation})
             meta_dict[camera]["ego_pose_matrix"].append(ego_pose_matrix)
 
-
         if self.save_meta:
             with open(self.meta_out_path, "w") as f:
                 json.dump(meta_dict, f, cls=NumpyEncoder)
             logger.info(f"[Pixel] Saved camera meta to {self.meta_out_path}")
         return meta_dict
-
 
     def create_all_filelist(self):
         # ---- find the minimum shared scene length ---- #
@@ -165,19 +163,18 @@ class WaymoDataset():
         logger.info(f"[Pixel] End timestep: {self.end_timestep}")
 
         img_filepaths, rel_img_filepaths, feat_filepaths, sky_mask_filepaths = [], [], [], []
-        # TODO: support dynamic masks
-
+        
         for t in range(self.start_timestep, self.end_timestep):
             for cam_idx in self.camera_list:
+                # print(len(self.meta_dict[cam_idx]["filepath"]))
                 img_filepath = os.path.join(
-                    self.data_path, self.meta_dict[cam_idx]["filepath"][t]
+                    self.data_path_base, self.meta_dict[cam_idx]["filepath"][t]
                 )
                 img_filepaths.append(img_filepath)
                 rel_img_filepaths.append(self.meta_dict[cam_idx]["filepath"][t])
 
         self.img_filepaths = np.array(img_filepaths)
         self.rel_img_filepaths = np.array(rel_img_filepaths)
-
 
     def load_calibrations(self):
         # compute per-image poses and intrinsics

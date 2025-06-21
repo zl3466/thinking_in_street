@@ -55,7 +55,10 @@ def main():
         else:
                 print(f"scene {scene_name} alread exists at {scene_out_path}")
     else:
-        target_scene_list = scene_list[scene_start_idx:scene_end_idx]
+        if scene_end_idx is None:
+            target_scene_list = scene_list[scene_start_idx:]
+        else:
+            target_scene_list = scene_list[scene_start_idx:scene_end_idx]
         for i in tqdm(range(len(target_scene_list)), desc="total scenes"):
             scene_name = target_scene_list[i]
             print(f"\n=========== decoding scene {scene_name} ===========")

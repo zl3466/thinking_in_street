@@ -671,43 +671,6 @@ def nusc_to_examples(nusc_dataset, mode, dataset_name, step_size=1, batch_size=4
     return example_list
 
 
-def prepare_dataset_nusc(example):
-    dataset_name = example["dataset_name"]
-    if dataset_name == "NuScenes":
-        dataset_dir_specific = "NuScenes/train_test"
-    elif dataset_name == "ScanNet":
-        dataset_dir_specific = "ScanNet/decoded"
-    else:
-        return RuntimeError("dataset name not supported")
-
-    if example["problem_type"] == 'multiple choice':
-        question = example['problem'] + "Options:\n"
-        for op in example["options"]:
-            question += op + "\n"
-    else:
-        question = example['problem']
-
-    if example["problem_type"] == 'list' or example["problem_type"] == 'dict':
-        msg = {
-            "prompt":
-                [{
-                    "role": "user",
-                    "content": [
-                        {
-                            "type": example['data_type'],
-                            example['data_type']: [f"{os.getenv('DATASET_DIR')}/{dataset_dir_specific}/{file_path}" for
-                                                   file_path in
-                                                   example['path']]
-                        },
-                        {
-                            "type": "text",
-                            "text": QUESTION_TEMPLATE.format(Question=question) + TYPE_TEMPLATE[example['problem_type']]
-                        }
-                    ]
-                }]
-        }
-    return msg
-
 
 def eval_qwen(data, llm, sampling_params):
     '''
@@ -725,6 +688,8 @@ def eval_qwen(data, llm, sampling_params):
             dataset_dir_specific = "NuScenes/train_test"
         elif dataset_name == "ScanNet":
             dataset_dir_specific = "ScanNet/decoded"
+        elif dataset_name == "Waymo":
+            dataset_dir_specific = "Waymo"
         else:
             return RuntimeError("dataset name not supported")
 

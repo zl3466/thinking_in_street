@@ -97,8 +97,6 @@ def prepare_dataset_sft(example: Dict[str, Any]) -> Dict[str, List[Dict[str, Any
         dataset_dir_specific = "NuScenes/train_test"
     elif dataset_name == "ScanNet":
         dataset_dir_specific = "ScanNet/decoded"
-    elif dataset_name == "Waymo":
-        dataset_dir_specific = "Waymo"
     else:
         return RuntimeError("dataset name not supported")
 
@@ -196,70 +194,67 @@ if __name__ == "__main__":
     # train - test split = 5:1
     # test split is only used if the transformer.training_args has eval_strategy set to not "no". We keep it no for now.
     example_dir = os.getenv("EXAMPLE_DIR")
-    train_full_data_dict = {"NuScenes": {}, "ScanNet": {}, "Waymo": {}}
-    train_full_data_dict["NuScenes"] = json.load(open(f"{example_dir}/sft_300/nusc_thought_process.json"))
-    train_full_data_dict["ScanNet"] = json.load(open(f"{example_dir}/sft_300/scannet_thought_process.json"))
-    train_full_data_dict["Waymo"] = json.load(open(f"{example_dir}/sft_300/waymo_thought_process.json"))
+    train_full_data_dict = {"NuScenes": {}, "ScanNet": {}}
+    train_full_data_dict["NuScenes"] = json.load(open(f"{example_dir}/sft/nusc_thought_process.json"))
+    train_full_data_dict["ScanNet"] = json.load(open(f"{example_dir}/sft/scannet_thought_process.json"))
+    # for step_size in range(1, 11):
+    #     train_full_data_dict["NuScenes"][str(step_size)] = json.load(open(f"{example_dir}/sft/step_{step_size}/nusc_examples.json"))
+    #     train_full_data_dict["ScanNet"][str(step_size)] = json.load(open(f"{example_dir}/sft/step_{step_size}/scannet_examples.json"))
 
-    # Collect examples with a max video length limit
+    # get same number of scenes for NuScenes and ScanNet
+    # num_train_scene = int(os.getenv("NUM_TRAIN_SCENE"))
+    train_scene_start = int(os.getenv("TRAIN_SCENE_START"))
+    train_scene_end = int(os.getenv("TRAIN_SCENE_END"))
+
+
+    # Collect train and test data with random step size but fixed video length
+    # Put NuScenes and ScanNet data together
     max_video_length = int(os.getenv("MAX_VIDEO_LENGTH"))
+    ''' Train split: for each scene, choose a random step_size (frame rate) '''
     train_example_list = []
+    nusc_scene_count = 0
+    scannet_scene_count = 0
+    for scene_idx in range(train_scene_start, train_scene_end):
+        nusc_scene_list = list(train_full_data_dict["NuScenes"]["forward"].keys())
+        scannet_scene_list = list(train_full_data_dict["ScanNet"]["forward"].keys())
 
-    # ======================= load NuScenes =======================
-    nusc_scene_list = list(train_full_data_dict["NuScenes"]["forward"].keys())
-    scannet_scene_list = list(train_full_data_dict["ScanNet"]["forward"].keys())
-    waymo_scene_list = list(train_full_data_dict["Waymo"]["forward"].keys())
-
-    nusc_example_count = 0
-    scannet_example_count = 0
-    waymo_example_count = 0
-    for scene_idx in range(len(nusc_scene_list)):
-        nusc_scene = nusc_scene_list[scene_idx]
-        nusc_example_list_forward = train_full_data_dict["NuScenes"]["forward"][nusc_scene]
-        nusc_example_list_backward = train_full_data_dict["NuScenes"]["backward"][nusc_scene]
-        example_video_len = len(nusc_example_list_forward[0]["path"])
-        # only use examples with video length < max_video_length (32 frames for 80g A100 gpu)
-        if example_video_len <= max_video_length:
-            train_example_list += nusc_example_list_forward 
-            train_example_list += nusc_example_list_backward 
-            print(f"nusc scene {scene_idx} video_len: {example_video_len}")
-        
-            nusc_example_count += len(nusc_example_list_forward)
-            nusc_example_count += len(nusc_example_list_backward)
+        nusc_scene_list.sort(key=lambda f: int(''.join(filter(str.isdigit, f))))
+        scannet_scene_list.sort(key=lambda f: int(''.join(filter(str.isdigit, f))))
+        # get the set of examples for specified video length
+        try:
+            nusc_scene = nusc_scene_list[scene_idx]
+            nusc_example_list_forward = train_full_data_dict["NuScenes"]["forward"][nusc_scene]
+            nusc_example_list_backward = train_full_data_dict["NuScenes"]["backward"][nusc_scene]
+            example_video_len = len(nusc_example_list_forward[0]["path"])
+            # only use examples with video length < max_video_length (32 frames for 80g A100 gpu)
+            if example_video_len <= max_video_length:
+                train_example_list += nusc_example_list_forward 
+                train_example_list += nusc_example_list_backward 
+                nusc_scene_count += 1
+                print(f"nusc scene {scene_idx} video_len: {example_video_len}")
+            # train_example_list += nusc_example_list_forward 
+            # train_example_list += nusc_example_list_backward 
+        except:
+            print(f"there is a total of {len(nusc_scene_list)} scenes in nusc train dataset, requesting {scene_idx}th, does not exist")
+            
+        try:
+            scannet_scene = scannet_scene_list[scene_idx]
+            scannet_example_list_forward = train_full_data_dict["ScanNet"]["forward"][scannet_scene]
+            scannet_example_list_backward = train_full_data_dict["ScanNet"]["backward"][scannet_scene]
+            # only use examples with video length < max_video_length (32 frames for 80g A100 gpu)
+            if example_video_len <= max_video_length:
+                train_example_list += scannet_example_list_forward
+                train_example_list += scannet_example_list_backward
+                scannet_scene_count += 1
+                print(f"scannet scene {scene_idx} video_len: {example_video_len}")
+            # train_example_list += scannet_example_list_forward
+            # train_example_list += scannet_example_list_backward
+        except:
+            print(f"there is a total of {len(scannet_scene_list)} scenes in scannet train dataset, requesting {scene_idx}th, does not exist")
     
-     # ======================= load ScanNet =======================
-    for scene_idx in range(len(scannet_scene_list)):
-        scannet_scene = scannet_scene_list[scene_idx]
-        scannet_example_list_forward = train_full_data_dict["ScanNet"]["forward"][scannet_scene]
-        scannet_example_list_backward = train_full_data_dict["ScanNet"]["backward"][scannet_scene]
-        example_video_len = len(scannet_example_list_forward[0]["path"])
-        # only use examples with video length < max_video_length (32 frames for 80g A100 gpu)
-        if example_video_len <= max_video_length:
-            train_example_list += scannet_example_list_forward 
-            train_example_list += scannet_example_list_backward 
-            print(f"scannet scene {scene_idx} video_len: {example_video_len}")
-            scannet_example_count += len(scannet_example_list_forward)
-            scannet_example_count += len(scannet_example_list_backward)
-    
-     # ======================= load Waymo =======================
-    for scene_idx in range(len(waymo_scene_list)):
-        waymo_scene = scannet_scene_list[scene_idx]
-        waymo_example_list_forward = train_full_data_dict["Waymo"]["forward"][waymo_scene]
-        waymo_example_list_backward = train_full_data_dict["Waymo"]["backward"][waymo_scene]
-        example_video_len = len(waymo_example_list_forward[0]["path"])
-        # only use examples with video length < max_video_length (32 frames for 80g A100 gpu)
-        if example_video_len <= max_video_length:
-            train_example_list += waymo_example_list_forward 
-            train_example_list += waymo_example_list_backward 
-            print(f"waymo scene {scene_idx} video_len: {example_video_len}")
-            waymo_example_count += len(waymo_example_list_forward)
-            waymo_example_count += len(waymo_example_list_backward)
-        
     random.shuffle(train_example_list)
-    print(f"Using {len(nusc_scene_list)} NUSC scenes, {len(scannet_scene_list)} ScanNet scenes, {len(waymo_scene_list)} Waymo scenes for training")
-    print(f"Using {nusc_example_count} NUSC examples, {scannet_example_count} ScanNet examples, {waymo_example_count} Waymo examples for training")
-    print(f"total {len(train_example_list)} examples")
 
+    print(f"Using {len(nusc_scene_count)} NUSC scenes, {len(scannet_scene_count)} ScanNet scenes for training")
     ''' ========================= Prepare dataset (process examples into messages) ========================= '''
     dataset = DatasetDict({
         "train": Dataset.from_list(train_example_list)
@@ -270,7 +265,6 @@ if __name__ == "__main__":
         if example["select"]:
             prepared_dataset.append(prepare_dataset_sft(example))
     # prepared_dataset = [prepare_dataset_sft(example) for example in dataset['train']]
-    print(f"total {len(prepared_dataset)} prepared examples")
     
     ''' ========================= setup model ========================= '''
     torch_dtype = (
@@ -299,6 +293,8 @@ if __name__ == "__main__":
         model_config.model_name_or_path,
         trust_remote_code=model_config.trust_remote_code
     )
+
+    
 
     # Initialize wandb if specified
     if training_args.report_to == "wandb":

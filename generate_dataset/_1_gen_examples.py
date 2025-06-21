@@ -146,11 +146,11 @@ def main(args):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Generate thought process from NuScenes with Gemini.")
+    parser = argparse.ArgumentParser(description="Generate examples for all")
     parser.add_argument("--num_cam", type=int, default=1)
     parser.add_argument("--scene_start", type=int, default=0)
     parser.add_argument("--scene_end", type=int, default=10)
-    parser.add_argument("--train", type=str)
+    parser.add_argument("--split", type=str)
     parser.add_argument("--out_dir", type=str)
 
     args = parser.parse_args()

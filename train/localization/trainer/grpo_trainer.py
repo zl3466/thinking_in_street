@@ -536,10 +536,10 @@ class Qwen2VLGRPOTrainer(Trainer):
     
         # prompts = [x["prompt"] for x in inputs]
         # prompts_text = [maybe_apply_chat_template(example, self.processing_class)["prompt"] for example in inputs]
-        # # print("\nfull prompt len:", len(prompts))
-        # # print("\nfull prompt:", prompts)
-        # # print("\nfull prompt_text len", len(prompts_text))
-        # # print("\nfull prompt_text:", prompts_text)
+        # print("\nfull prompt len:", len(prompts))
+        # print("\nfull prompt:", prompts)
+        # print("\nfull prompt_text len", len(prompts_text))
+        # print("\nfull prompt_text:", prompts_text)
         
         # # print("\nfull input:", inputs)
         # input_copy = copy.deepcopy(inputs[0]['prompt'])
@@ -553,6 +553,10 @@ class Qwen2VLGRPOTrainer(Trainer):
             dataset_dir_specific = "NuScenes/train_test"
         elif dataset_name == "ScanNet":
             dataset_dir_specific = "ScanNet/decoded"
+        elif dataset_name == "Waymo":
+            dataset_dir_specific = "Waymo"
+        else:
+            return RuntimeError(f"dataset {dataset_name} not supported")
 
         prompts = [x["prompt"] for x in inputs]
         
@@ -610,7 +614,10 @@ class Qwen2VLGRPOTrainer(Trainer):
         )
 
         # image_inputs = np.array(image_inputs)
-        video_inputs = np.array(video_inputs)
+        # print(video_inputs)
+        # video_inputs = np.array(video_inputs)
+        video_inputs = np.array([[np.array(img) for img in video_inputs[0]]])
+        # print(video_inputs)
         video_inputs = torch.from_numpy(video_inputs)
         prompt_inputs = super()._prepare_inputs(prompt_inputs)
 
@@ -707,8 +714,6 @@ class Qwen2VLGRPOTrainer(Trainer):
             if 'second_per_grid_ts' in prompt_inputs:
                 del prompt_inputs["second_per_grid_ts"]
                 # prompt_inputs["second_per_grid_ts"] = torch.tensor(prompt_inputs["second_per_grid_ts"]).repeat(len(prompt_completion_ids), 1)
-        
-        
         
         
         try:

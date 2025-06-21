@@ -101,7 +101,7 @@ class ScanNetDataset():
             # ---- timestamp and cam_id ---- #
             meta_dict[camera]["cam_id"].append(0)
             meta_dict[camera]["timestamp"].append(int(img_filename.split(".")[0]))
-            meta_dict[camera]["filepath"].append(f"{scene_name}/color/{img_filename}")
+            meta_dict[camera]["filepath"].append(f"{self.split}/{scene_name}/color/{img_filename}")
 
             # ---- intrinsics and extrinsics ---- #
             # intrinsics
@@ -178,7 +178,7 @@ class ScanNetDataset():
                     self.data_path, self.meta_dict[cam_idx]["filepath"][t]
                 )
                 img_filepaths.append(img_filepath)
-                rel_img_filepaths.append(self.meta_dict[cam_idx]["filepath"][t])
+                rel_img_filepaths.append(self.meta_dict[cam_idx]['filepath'][t])
 
         self.img_filepaths = np.array(img_filepaths)
         self.rel_img_filepaths = np.array(rel_img_filepaths)
