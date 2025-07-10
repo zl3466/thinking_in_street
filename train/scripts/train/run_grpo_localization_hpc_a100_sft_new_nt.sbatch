@@ -85,10 +85,10 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node="4" \
     --attn_implementation flash_attention_2 \
     --max_pixels 401408 \
     --num_train_epochs 1 \
-    --run_name 7b-16frames-sft-all \
+    --run_name 7b-16frames-sft-nt \
     --save_steps 1000 \
     --beta 0.04 \
     --max_grad_norm 5 \
     --save_only_model false \
-    --resume_from_checkpoint "/scratch/zl3466/github/thinking_in_street/log/3_dataset/7B+sft+grpo/checkpoint-6000" \
+    --resume_from_checkpoint "/scratch/zl3466/github/thinking_in_street/log/3_dataset/7B+sft+grpo/checkpoint-9000" \
     --num_generations 8  # number of outputs G in grpo, reduce it would lead to faster training and smaller memory cost but higher variance  
