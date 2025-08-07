@@ -281,7 +281,7 @@ def format_reward(completions, **kwargs):
         completion_contents = [completion[0]["content"] for completion in completions]
         all_rewards = []
         for content in completion_contents:
-            print(f"list content: {content}")
+            # print(f"list content: {content}")
             match = re.fullmatch(pattern, content, re.DOTALL)
             if match:
                 reward = 0.5
@@ -302,7 +302,7 @@ def format_reward(completions, **kwargs):
         completion_contents = [completion[0]["content"] for completion in completions]
         all_rewards = []
         for content in completion_contents:
-            print(f"dict content: {content}")
+            # print(f"dict content: {content}")
             match = re.fullmatch(pattern, content, re.DOTALL)
             if match:
                 # if only the tag format is matched, rerward 0.4
@@ -641,9 +641,12 @@ def dataset_to_examples(dataset, mode, dataset_name, scene_idx, step_size=1, bat
     if reverse:
         # print(nusc_dataset.rel_img_filepaths)
         ego_pose_list.reverse()
-        dataset.rel_img_filepaths = dataset.rel_img_filepaths[::-1]
-        dataset.img_filepaths = dataset.img_filepaths[::-1]
+        rel_img_filepaths = dataset.rel_img_filepaths[::-1]
+        img_filepaths = dataset.img_filepaths[::-1]
         # print(nusc_dataset.rel_img_filepaths)
+    else:
+        rel_img_filepaths = dataset.rel_img_filepaths
+        img_filepaths = dataset.img_filepaths
 
     prev_rotation = None
     prev_yaw = None
@@ -675,7 +678,7 @@ def dataset_to_examples(dataset, mode, dataset_name, scene_idx, step_size=1, bat
         rotation = ego_pose["rotation"]
         yaw = quaternion_to_yaw(rotation)
 
-        batch_img_list.append(dataset.rel_img_filepaths[frame_i])
+        batch_img_list.append(rel_img_filepaths[frame_i])
         if prev_yaw is not None and prev_translation is not None:
             general_dir = calc_general_dir(prev_translation, translation, prev_yaw, yaw, mode=mode, reverse=reverse)
             disp = calculate_displacement(prev_translation, translation)
@@ -748,7 +751,7 @@ def dataset_to_examples(dataset, mode, dataset_name, scene_idx, step_size=1, bat
                 sample_count = 0
 
         if video_out_dir != "":
-            img = cv2.imread(f"{dataset.img_filepaths[frame_i]}")
+            img = cv2.imread(f"{img_filepaths[frame_i]}")
             font = cv2.FONT_HERSHEY_SIMPLEX
             cv2.putText(img, frame_text, (10, 30), font, fontScale=1, color=(0, 0, 255), thickness=2,
                         lineType=cv2.LINE_AA)
@@ -857,6 +860,8 @@ def prepare_dataset_nusc(example):
         dataset_dir_specific = "NuScenes/train_test"
     elif dataset_name == "ScanNet":
         dataset_dir_specific = "ScanNet/decoded"
+    elif dataset_name == "Waymo":
+        dataset_dir_specific = "Waymo"
     else:
         return RuntimeError("dataset name not supported")
 
@@ -905,6 +910,8 @@ def eval_qwen(data, llm, sampling_params):
             dataset_dir_specific = "NuScenes/train_test"
         elif dataset_name == "ScanNet":
             dataset_dir_specific = "ScanNet/decoded"
+        elif dataset_name == "Waymo":
+            dataset_dir_specific = "Waymo"
         else:
             return RuntimeError("dataset name not supported")
 

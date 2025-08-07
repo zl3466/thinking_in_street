@@ -1,3 +1,12 @@
+du -h --max-depth=1
+module load anaconda3/2020.07;
+conda create -p /scratch/zl3466/env/omnispatial python=3.12 -y
+rsync -avz --progress /media/zl3466/新加卷/dataset/egoexo_4d/takes/ zl3466@greene.hpc.nyu.edu:/vast/zl3466/dataset/All-Angles-Bench/
+
+scp zl3466@greene.hpc.nyu.edu:/scratch/zl3466/github/thinking_in_street/dataset/examples.tar.gz $local_path
+scp zl3466@greene.hpc.nyu.edu:/vast/zl3466/dataset.tar.gz $local_path
+
+
 cd /scratch/zl3466/github/thinking_in_street
 
 conda activate /scratch/zl3466/env/thinking-in-street/
@@ -5,9 +14,55 @@ export PATH=/scratch/zl3466/env/thinking-in-street/bin:$PATH
 
 cd ./train/scripts
 
-sbatch run_grpo_localization_hpc.sbatch
-sbatch run_grpo_localization_hpc_a100.sbatch
 
 bash run_grpo_localization.sh
+bash run_grpo_localization_immediate.sh
+bash gen_dataset_examples_gemini.sh
+bash gen_dataset_examples_qwen_vllm.sh
+bash scannet_decode_sens.sh 
 
-srun --cpus-per-task=16 --mem=64GB --time=2:00:00 --gres=gpu:4 --pty /bin/bash
+# generate dataset
+sbatch gen_dataset_examples_qwen_vllm.sbatch
+sbatch scannet_decode_sens.sbatch 
+sbatch gen_examples_all.sbatch 
+sbatch gen_thought_process.sbatch
+
+# train
+sbatch run_grpo_localization_hpc.sbatch
+sbatch run_grpo_localization_hpc_immediate.sbatch
+sbatch run_grpo_localization_hpc_immediate_a100.sbatch
+sbatch run_grpo_localization_hpc_a100.sbatch
+sbatch run_grpo_localization_hpc_h100.sbatch
+
+sbatch run_sft_localization.sbatch
+
+# eval
+sbatch eval_qwen.sbatch
+
+
+srun --cpus-per-task=16 --mem=64GB --time=2:00:00 --gres=gpu:2 --pty /bin/bash
+
+
+
+
+
+
+
+# ScanNet
+python download_scannet.py -o /scratch/zl3466/dataset/ScanNet/ --type .sens
+
+# Waymo
+cd /scratch/zl3466/github/thinking_in_street/generate_dataset/Waymo
+python download_perception.py --output_path "/scratch/zl3466/dataset/Waymo/perception_tf"
+python decode_tf.py \
+    --data_root /scratch/zl3466/dataset/Waymo/perception_tf \
+    --target_dir /vast/zl3466/dataset/Waymo/ \
+    --split validation \
+    --process_keys images calib pose \
+    --workers 16
+
+
+tar -czvf dataset.tar.gz ./dataset
+tar -czvf nusc.tar.gz ./NuScenes
+tar -czvf scannet.tar.gz ./ScanNet
+tar -czvf waymo.tar.gz ./Waymo

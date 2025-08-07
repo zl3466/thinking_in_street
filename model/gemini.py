@@ -21,10 +21,10 @@ def check_uploaded_file(file_path):
     # Check if the file is older than 2 days (2 * 24 * 60 * 60 seconds)
     if (current_time - creation_time) > (2 * 86400):
         os.remove(file_path)
-        print(f"The images have been uploaded but already expired, removing existing filename records: {file_path}")
+        # print(f"The images have been uploaded but already expired, removing existing filename records: {file_path}")
         return False
     else:
-        print(f"The images have been uploaded and are still valid on Gemini: {file_path}")
+        # print(f"The images have been uploaded and are still valid on Gemini: {file_path}")
         return True
 
 class GeminiModel:
@@ -134,6 +134,204 @@ class GeminiModel:
         except Exception as e:
             print(f"Error in Gemini analysis: {str(e)}")
             return None
+
+    def analyze_images_thought_process(self, image_paths, prompt_list, out_dir, scene_idx, example_idx, batches=None):
+        """Analyze multiple images with a given prompt."""
+        filename_output_json = out_dir
+
+        # file_dict = {}
+        upload_filelist = []
+        upload_filename_list = []
+        failed_images = []
+        if os.path.exists(filename_output_json):
+            valid = check_uploaded_file(filename_output_json)
+            if valid:
+                upload_filename_dict = json.load(open(filename_output_json))
+            else:
+                upload_filename_dict = {}
+        else:
+            upload_filename_dict = {}
+
+        if f"scene_{scene_idx}" in upload_filename_dict.keys():
+            if (f"example_{example_idx}" in upload_filename_dict[f"scene_{scene_idx}"].keys() and
+                    len(upload_filename_dict[f"scene_{scene_idx}"][f"example_{example_idx}"]) == len(image_paths)):
+                for filename in upload_filename_dict[f"scene_{scene_idx}"][f"example_{example_idx}"]:
+                    myfile = self.client.files.get(name=filename)
+                    upload_filelist.append(myfile)
+            else:
+                for path in image_paths:
+                    try:
+                        if not os.path.exists(path):
+                            failed_images.append((path, "File not found"))
+                            continue
+
+                        myfile = self.client.files.upload(file=path)
+                        upload_filelist.append(myfile)
+                        upload_filename_list.append(myfile.name)
+                    except Exception as e:
+                        failed_images.append((path, str(e)))
+                upload_filename_dict[f"scene_{scene_idx}"][f"example_{example_idx}"] = upload_filename_list
+        else:
+            for path in image_paths:
+                try:
+                    if not os.path.exists(path):
+                        failed_images.append((path, "File not found"))
+                        continue
+                    myfile = self.client.files.upload(file=path)
+                    upload_filelist.append(myfile)
+                    upload_filename_list.append(myfile.name)
+                except Exception as e:
+                    failed_images.append((path, str(e)))
+            upload_filename_dict[f"scene_{scene_idx}"] = {f"example_{example_idx}": upload_filename_list}
+
+        ''' files uploaded to gemini have a new token-like filename, save these to local to access later '''
+        # print(f"saving uploaded filenames to {filename_output_json}")
+        with open(filename_output_json, 'w') as f:
+            json.dump(upload_filename_dict, f, indent=2)
+
+        if failed_images:
+            print("\nFailed to process images:")
+            for path, error in failed_images:
+                print(f"✗ {os.path.basename(path)}: {error}")
+
+        if not upload_filelist:
+            raise ValueError("No images were successfully processed")
+
+        # print(f"\nAnalyzing {len(upload_filelist)} images...")
+
+        # Generate content with specific configuration
+        result = {}
+        if batches is not None:
+            for batch_idx_pair in batches:
+                filelist = upload_filelist[batch_idx_pair[0]:batch_idx_pair[1]]
+                print(filelist)
+                for prompt_idx in range(len(prompt_list)):
+                    prompt = prompt_list[prompt_idx]
+                    print(
+                        f"analyzing prompt {prompt_idx}/{len(prompt_list)} with images {batch_idx_pair[0]}:{batch_idx_pair[1]}...")
+                    response = self.model.generate_content(
+                        model=GEMINI_MODEL,
+                        contents=[
+                            filelist,
+                            prompt
+                        ]
+                    )
+                    if prompt not in result.keys():
+                        result[prompt] = [response.text]
+                    else:
+                        result[prompt].append(response.text)
+        else:
+            for prompt_idx in range(len(prompt_list)):
+                prompt = prompt_list[prompt_idx]
+                # print(f"analyzing prompt {prompt_idx}/{len(prompt_list)} with the full set...")
+                response = self.model.generate_content(
+                    model=GEMINI_MODEL,
+                    contents=[
+                        upload_filelist,
+                        prompt
+                    ]
+                )
+                result[prompt] = response.text
+            # print(f"Done analyzing, waiting for 20s to avoid exhausting gemini api quota per minute")
+            # for remaining in range(20, 0, -1):
+            #     sys.stdout.write(f"\rWaiting: {remaining} seconds...")  # This line is updated
+            #     sys.stdout.flush()  # Only flushes this line
+            #     time.sleep(1)
+            # sys.stdout.write("\rDone!                           \n")  # Clear the line and print 'Done!'
+
+        return result
+
+
+
+    def analyze_images_thought_process_new(self, image_paths, prompt_list, out_dir, scene_idx, example_idx, batches=None):
+        """Analyze multiple images with a given prompt."""
+        filename_output_json = out_dir
+
+        # file_dict = {}
+        upload_filelist = []
+        upload_filename_list = []
+        failed_images = []
+        if os.path.exists(filename_output_json):
+            valid = check_uploaded_file(filename_output_json)
+            if valid:
+                upload_filename_dict = json.load(open(filename_output_json))
+            else:
+                upload_filename_dict = {}
+        else:
+            upload_filename_dict = {}
+        
+
+        for path in image_paths:
+            filename = os.path.basename(path)
+            if f"scene_{scene_idx}" in upload_filename_dict.keys() and filename in upload_filename_dict[f"scene_{scene_idx}"].keys():
+                myfile = self.client.files.get(name=upload_filename_dict[f"scene_{scene_idx}"][filename])
+                upload_filelist.append(myfile)
+            elif f"scene_{scene_idx}" in upload_filename_dict.keys() and filename not in upload_filename_dict[f"scene_{scene_idx}"].keys():
+                myfile = self.client.files.upload(file=path)
+                upload_filelist.append(myfile)
+                upload_filename_dict[f"scene_{scene_idx}"] = {filename: myfile.name}
+            else:
+                myfile = self.client.files.upload(file=path)
+                upload_filelist.append(myfile)
+                upload_filename_dict = {f"scene_{scene_idx}": {filename: myfile.name}}
+
+        ''' files uploaded to gemini have a new token-like filename, save these to local to access later '''
+        # print(f"saving uploaded filenames to {filename_output_json}")
+        with open(filename_output_json, 'w') as f:
+            json.dump(upload_filename_dict, f, indent=2)
+
+        if failed_images:
+            print("\nFailed to process images:")
+            for path, error in failed_images:
+                print(f"✗ {os.path.basename(path)}: {error}")
+
+        if not upload_filelist:
+            raise ValueError("No images were successfully processed")
+
+        # print(f"\nAnalyzing {len(upload_filelist)} images...")
+
+        # Generate content with specific configuration
+        result = {}
+        if batches is not None:
+            for batch_idx_pair in batches:
+                filelist = upload_filelist[batch_idx_pair[0]:batch_idx_pair[1]]
+                print(filelist)
+                for prompt_idx in range(len(prompt_list)):
+                    prompt = prompt_list[prompt_idx]
+                    print(
+                        f"analyzing prompt {prompt_idx}/{len(prompt_list)} with images {batch_idx_pair[0]}:{batch_idx_pair[1]}...")
+                    response = self.model.generate_content(
+                        model=GEMINI_MODEL,
+                        contents=[
+                            filelist,
+                            prompt
+                        ]
+                    )
+                    if prompt not in result.keys():
+                        result[prompt] = [response.text]
+                    else:
+                        result[prompt].append(response.text)
+        else:
+            for prompt_idx in range(len(prompt_list)):
+                prompt = prompt_list[prompt_idx]
+                # print(f"analyzing prompt {prompt_idx}/{len(prompt_list)} with the full set...")
+                response = self.model.generate_content(
+                    model=GEMINI_MODEL,
+                    contents=[
+                        upload_filelist,
+                        prompt
+                    ]
+                )
+                result[prompt] = response.text
+            # print(f"Done analyzing, waiting for 20s to avoid exhausting gemini api quota per minute")
+            # for remaining in range(20, 0, -1):
+            #     sys.stdout.write(f"\rWaiting: {remaining} seconds...")  # This line is updated
+            #     sys.stdout.flush()  # Only flushes this line
+            #     time.sleep(1)
+            # sys.stdout.write("\rDone!                           \n")  # Clear the line and print 'Done!'
+
+        return result
+
 
 
     @staticmethod

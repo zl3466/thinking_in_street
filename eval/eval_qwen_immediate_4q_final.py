@@ -1186,7 +1186,7 @@ def main(args):
     os.makedirs(f"./tmp/{args.model_path.split('/')[-2]}", exist_ok=True)
     with open(f"./tmp/{args.model_path.split('/')[-2]}/step_eval_example_dict.json", "w") as outfile:
         json.dump(result_dict, outfile, indent=4)
-    plot_scores_vs_step_size(result_dict, output_filename=f"./tmp/figure.png")
+    plot_scores_vs_step_size(result_dict, output_filename=f"./tmp/{args.model_path.split('/')[-2]}/figure.png")
 
 
 if __name__ == "__main__":
