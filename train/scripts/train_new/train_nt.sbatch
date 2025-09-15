@@ -3,11 +3,11 @@
 # Generate timestamp for unique folder names
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 RUN_NAME="7B+grpo_${TIMESTAMP}"
-makedirs /scratch/zl3466/log/volm/${RUN_NAME}/script_log
-makedirs /scratch/zl3466/log/volm/${RUN_NAME}/ckpt
+mkdir -p /scratch/zl3466/log/volm/script_log
+mkdir -p /scratch/zl3466/log/volm/${RUN_NAME}/ckpt
 #
 #SBATCH --job-name=gr
-#SBATCH --output=/scratch/zl3466/log/volm/${RUN_NAME}/script_log/train.out
+#SBATCH --output=/scratch/zl3466/log/volm/script_log/%x_%j.out
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=32
