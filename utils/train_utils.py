@@ -212,21 +212,24 @@ def accuracy_reward(completions, solution, **kwargs):
                 else:
                     if isinstance(gt_list[0], (int, float)):
                         # print(f"========================== Val output_ans_list: {output_ans_list} ")
-                        ''' reward = 2 * sigmoid(rmse) -> range(0, 1). Use a = 0.2 to get steep sigmoid '''
+                        ''' reward = sum(squared_diffs) -> range(0, len(gt_list)). '''
                         squared_diffs = [(p - gt) ** 2 for p, gt in zip(output_ans_list, gt_list)]
-                        rmse = math.sqrt(sum(squared_diffs) / len(squared_diffs))
-                        reward = 2 * (1 - sigmoid(rmse, a=0.2, b=0))
-                        ''' we ensure a minimum reward of 0.1 if the number of elements in the list is correct '''
-                        reward = max(0.1, reward)
+                        reward = sum(squared_diffs)
+                        # rmse = math.sqrt(sum(squared_diffs) / len(squared_diffs))
+                        # reward = 2 * (1 - sigmoid(rmse, a=0.2, b=0))
+                        ''' we ensure a minimum reward of 0.2 if the number of elements in the list is correct '''
+                        reward = max(0.2, reward)
                     else:
                         # print(f"========================== String output_ans_list: {output_ans_list} ")
                         ''' the general_dir case where the list contains string keywords like forward, left, slight right, etc. '''
-                        reward = sum([a.lower() == b.lower() for a, b in zip(output_ans_list, gt_list)]) / len(gt_list)
-                        reward = max(0.1, reward)
+                        # reward = sum([a.lower() == b.lower() for a, b in zip(output_ans_list, gt_list)]) / len(gt_list)
+                        reward = sum([a.lower() == b.lower() for a, b in zip(output_ans_list, gt_list)])
+                        reward = max(0.2, reward)
             elif question_type == "dict":
                 output_ans_dict = ast.literal_eval(output_ans)
                 gt_dict = ast.literal_eval(gt_ans)
-                # reward_unit = 1 / len(gt_dict.keys())
+                
+                # reward range is 0 to num_keys * len(gt_list)
                 reward = 0
                 for key in output_ans_dict.keys():
                     # the keys x, y, z, roll, pitch, yaw must all match
@@ -240,14 +243,13 @@ def accuracy_reward(completions, solution, **kwargs):
                             sub_reward = 0.0
                         else:
                             squared_diffs = [(p - gt) ** 2 for p, gt in zip(output_ans_list, gt_list)]
-                            rmse = math.sqrt(sum(squared_diffs) / len(squared_diffs))
-                            sub_reward = 2 * (1 - sigmoid(rmse, a=0.2, b=0))
+                            # rmse = math.sqrt(sum(squared_diffs) / len(squared_diffs))
+                            # sub_reward = 2 * (1 - sigmoid(rmse, a=0.2, b=0))
+                            sub_reward = sum(squared_diffs)
                             ''' we ensure a minimum reward of 0.1 if the number of elements in the list is correct '''
-                            # reward range for each key is 0.1 to 1
-                            sub_reward = max(0.1, sub_reward)
+                            # reward range for each key is 0.2 to len(gt_list)
+                            sub_reward = max(0.2, sub_reward)
                     reward += sub_reward
-                # normalize total reward for the dict to between 0 - 1
-                reward = reward / len(gt_dict.keys())
             else:
                 reward = 0.0
         except Exception as e:
@@ -384,15 +386,14 @@ def calc_accuracy_score(output_text, gt, question_type):
                     # print(f"========================== Val output_ans_list: {output_ans_list} ")
                     ''' reward = 2 * sigmoid(rmse) -> range(0, 1). Use a = 0.2 to get steep sigmoid '''
                     squared_diffs = [(p - gt) ** 2 for p, gt in zip(output_ans_list, gt_list)]
-                    rmse = math.sqrt(sum(squared_diffs) / len(squared_diffs))
-                    reward = 2 * (1 - sigmoid(rmse, a=0.2, b=0))
+                    reward = sum(squared_diffs)
                     ''' we ensure a minimum reward of 0.1 if the number of elements in the list is correct '''
-                    reward = max(0.1, reward)
+                    reward = max(0.2, reward)
                 else:
                     # print(f"========================== String output_ans_list: {output_ans_list} ")
                     ''' the general_dir case where the list contains string keywords like forward, left, slight right, etc. '''
-                    reward = sum([a.lower() == b.lower() for a, b in zip(output_ans_list, gt_list)]) / len(gt_list)
-                    reward = max(0.1, reward)
+                    reward = sum([a.lower() == b.lower() for a, b in zip(output_ans_list, gt_list)])
+                    reward = max(0.2, reward)
         elif question_type == "dict":
             # print("output_ans dict: ", output_ans)
             output_ans_dict = ast.literal_eval(output_ans)
@@ -411,14 +412,13 @@ def calc_accuracy_score(output_text, gt, question_type):
                         sub_reward = 0.0
                     else:
                         squared_diffs = [(p - gt) ** 2 for p, gt in zip(output_ans_list, gt_list)]
-                        rmse = math.sqrt(sum(squared_diffs) / len(squared_diffs))
-                        sub_reward = 2 * (1 - sigmoid(rmse, a=0.2, b=0))
+                        sub_reward = sum(squared_diffs)
                         ''' we ensure a minimum reward of 0.1 if the number of elements in the list is correct '''
                         # reward range for each key is 0.1 to 1
-                        sub_reward = max(0.1, sub_reward)
+                        sub_reward = max(0.2, sub_reward)
                 reward += sub_reward
             # normalize total reward for the dict to between 0 - 1
-            reward = reward / len(gt_dict.keys())
+            reward = reward
         else:
             reward = 0.0
     except Exception as e:
