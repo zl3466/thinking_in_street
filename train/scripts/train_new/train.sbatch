@@ -1,14 +1,6 @@
-#
-# Generate timestamp for unique folder names
-TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
-RUN_NAME="7B+grpo+temporal_${TIMESTAMP}"
-mkdir -p /scratch/zl3466/log/volm/${RUN_NAME}/script_log
-mkdir -p /scratch/zl3466/log/volm/${RUN_NAME}/ckpt
-
 #!/bin/bash
-#
 #SBATCH --job-name=gr+tp
-#SBATCH --output=/scratch/zl3466/github/thinking_in_street/train_result/grpo-16frames_0-400.out
+#SBATCH --output=/scratch/zl3466/log/volm/script_log/%x_%j.out
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=32
@@ -18,6 +10,12 @@ mkdir -p /scratch/zl3466/log/volm/${RUN_NAME}/ckpt
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=zl3466@nyu.edu
 #SBATCH --account=pr_116_tandon_priority
+
+# Generate timestamp for unique folder names
+TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
+RUN_NAME="7B+grpo+temporal_${TIMESTAMP}"
+mkdir -p /scratch/zl3466/log/volm/script_log
+mkdir -p /scratch/zl3466/log/volm/${RUN_NAME}/ckpt
 
 module purge;
 module load anaconda3/2020.07;
