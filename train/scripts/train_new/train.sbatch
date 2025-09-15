@@ -1,13 +1,13 @@
 #!/bin/bash
 #
 # Generate timestamp for unique folder names
-TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
-RUN_NAME="7B+grpo+temporal_${TIMESTAMP}"
-mkdir -p /scratch/zl3466/log/volm/script_log
+# TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
+RUN_NAME="7B+grpo+temporal_%Y%m%d_%H%M%S"
+mkdir -p /scratch/zl3466/log/volm/${RUN_NAME}/script_log
 mkdir -p /scratch/zl3466/log/volm/${RUN_NAME}/ckpt
 #
 #SBATCH --job-name=gr+tp
-#SBATCH --output=/scratch/zl3466/log/volm/script_log/%x_%j.out
+#SBATCH --output=/scratch/zl3466/log/volm/7B+grpo+temporal_%Y%m%d_%H%M%S/script_log/train.out
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=32
