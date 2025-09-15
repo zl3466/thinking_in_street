@@ -3,6 +3,8 @@
 # Generate timestamp for unique folder names
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 RUN_NAME="7B+grpo+temporal_${TIMESTAMP}"
+makedirs /scratch/zl3466/log/volm/${RUN_NAME}/script_log
+makedirs /scratch/zl3466/log/volm/${RUN_NAME}/ckpt
 #
 #SBATCH --job-name=gr+tp
 #SBATCH --output=/scratch/zl3466/log/volm/${RUN_NAME}/script_log/train.out
