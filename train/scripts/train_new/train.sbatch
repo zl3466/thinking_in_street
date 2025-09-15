@@ -1,10 +1,11 @@
-#!/bin/bash
 #
 # Generate timestamp for unique folder names
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 RUN_NAME="7B+grpo+temporal_${TIMESTAMP}"
 mkdir -p /scratch/zl3466/log/volm/${RUN_NAME}/script_log
 mkdir -p /scratch/zl3466/log/volm/${RUN_NAME}/ckpt
+
+#!/bin/bash
 #
 #SBATCH --job-name=gr+tp
 #SBATCH --output=/scratch/zl3466/github/thinking_in_street/train_result/grpo-16frames_0-400.out
