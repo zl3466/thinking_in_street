@@ -7,7 +7,7 @@ mkdir -p /scratch/zl3466/log/volm/${RUN_NAME}/script_log
 mkdir -p /scratch/zl3466/log/volm/${RUN_NAME}/ckpt
 #
 #SBATCH --job-name=gr+tp
-#SBATCH --output=/scratch/zl3466/log/volm/7B+grpo+temporal_%Y%m%d_%H%M%S/script_log/train.out
+#SBATCH --output=/scratch/zl3466/log/volm/train.out
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=32
